@@ -16,7 +16,7 @@ public class EvaluationValidation extends Validation<Evaluation> {
             throw new Exception();
         }
 
-        if(evaluation.getDt_store() == null ){
+        if(evaluation.getDtStore() == null ){
             throw new Exception();
         }
     }

@@ -7,19 +7,21 @@ import com.gaj2l.eventtus.lib.Entity;
  */
 
 public class PreferenceUser extends Entity {
-    private boolean fl_notification;
+    private boolean flNotification;
     private User user;
 
     public PreferenceUser() {}
 
-    public boolean isFl_notification() {
-        return this.fl_notification;
+    public boolean isFlNotification() {
+        return flNotification;
     }
 
-    public void setFl_notification(boolean fl_notification) { this.fl_notification = fl_notification; }
+    public void setFlNotification(boolean flNotification) {
+        this.flNotification = flNotification;
+    }
 
     public User getUser() {
-        return this.user;
+        return user;
     }
 
     public void setUser(User user) {
@@ -28,6 +30,6 @@ public class PreferenceUser extends Entity {
 
     @Override
     public String toString() {
-        return String.valueOf(this.fl_notification);
+        return String.valueOf(this.flNotification);
     }
 }

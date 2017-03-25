@@ -2,6 +2,8 @@ package com.gaj2l.eventtus.models;
 
 import com.gaj2l.eventtus.lib.Entity;
 
+import org.threeten.bp.OffsetDateTime;
+
 import java.sql.Timestamp;
 
 /**
@@ -10,39 +12,39 @@ import java.sql.Timestamp;
 
 public class Message extends Entity {
     private String content;
-    private Timestamp dt_store;
-    private Timestamp dt_send;
+    private OffsetDateTime dtStore;
+    private OffsetDateTime dtSend;
     private User user;
     private Activity activity;
 
     public Message() {}
 
     public String getContent() {
-        return this.content;
+        return content;
     }
 
     public void setContent(String content) {
         this.content = content;
     }
 
-    public Timestamp getDt_store() {
-        return this.dt_store;
+    public OffsetDateTime getDtStore() {
+        return dtStore;
     }
 
-    public void setDt_store(Timestamp dt_store) {
-        this.dt_store = dt_store;
+    public void setDtStore(OffsetDateTime dtStore) {
+        this.dtStore = dtStore;
     }
 
-    public Timestamp getDt_send() {
-        return this.dt_send;
+    public OffsetDateTime getDtSend() {
+        return dtSend;
     }
 
-    public void setDt_send(Timestamp dt_send) {
-        this.dt_send = dt_send;
+    public void setDtSend(OffsetDateTime dtSend) {
+        this.dtSend = dtSend;
     }
 
     public User getUser() {
-        return this.user;
+        return user;
     }
 
     public void setUser(User user) {
@@ -50,7 +52,7 @@ public class Message extends Entity {
     }
 
     public Activity getActivity() {
-        return this.activity;
+        return activity;
     }
 
     public void setActivity(Activity activity) {

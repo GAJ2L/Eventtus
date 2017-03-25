@@ -2,6 +2,8 @@ package com.gaj2l.eventtus.models;
 
 import com.gaj2l.eventtus.lib.Entity;
 
+import org.threeten.bp.OffsetDateTime;
+
 import java.sql.Timestamp;
 
 /**
@@ -9,43 +11,44 @@ import java.sql.Timestamp;
  */
 
 public class Evaluation extends Entity {
-    private double stars;
+    private float stars;
     private String comment;
-    private Timestamp dt_store;
-    private Timestamp dt_send;
+    private OffsetDateTime dtStore;
+    private OffsetDateTime dtSend;
 
-    public Evaluation() {}
-
-    public double getStars() {
-        return this.stars;
+    public Evaluation() {
     }
 
-    public void setStars(double stars) {
+    public float getStars() {
+        return stars;
+    }
+
+    public void setStars(float stars) {
         this.stars = stars;
     }
 
     public String getComment() {
-        return this.comment;
+        return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
     }
 
-    public Timestamp getDt_send() {
-        return this.dt_send;
+    public OffsetDateTime getDtStore() {
+        return dtStore;
     }
 
-    public void setDt_send(Timestamp dt_send) {
-        this.dt_send = dt_send;
+    public void setDtStore(OffsetDateTime dtStore) {
+        this.dtStore = dtStore;
     }
 
-    public Timestamp getDt_store() {
-        return this.dt_store;
+    public OffsetDateTime getDtSend() {
+        return dtSend;
     }
 
-    public void setDt_store(Timestamp dt_store) {
-        this.dt_store = dt_store;
+    public void setDtSend(OffsetDateTime dtSend) {
+        this.dtSend = dtSend;
     }
 
     @Override

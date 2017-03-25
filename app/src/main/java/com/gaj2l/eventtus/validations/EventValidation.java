@@ -20,23 +20,23 @@ public class EventValidation extends Validation<Event> {
             throw new Exception();
         }
 
-        if(event.getDt_start() == null ){
+        if(event.getDtStart() == null ){
             throw new Exception();
         }
 
-        if(event.getDt_end() == null ){
+        if(event.getDtEnd() == null ){
             throw new Exception();
         }
 
-        if(event.getContact_name() == null || event.getContact_name().equals("")){
+        if(event.getContactName() == null || event.getContactName().equals("")){
             throw new Exception();
         }
 
-        if(event.getContact_phone() == null || event.getContact_phone().equals("")){
+        if(event.getContactPhone() == null || event.getContactPhone().equals("")){
             throw new Exception();
         }
 
-        if(event.getContact_mail() == null || event.getContact_mail().equals("")){
+        if(event.getContactMail() == null || event.getContactMail().equals("")){
             throw new Exception();
         }
     }

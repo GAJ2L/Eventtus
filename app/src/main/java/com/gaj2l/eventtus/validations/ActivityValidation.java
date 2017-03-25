@@ -16,15 +16,15 @@ public class ActivityValidation extends Validation<Activity> {
             throw new Exception();
         }
 
-        if(activity.getDt_start() == null){
+        if(activity.getDtStart() == null){
             throw new Exception();
         }
 
-        if(activity.getDt_end() == null){
+        if(activity.getDtEnd() == null){
             throw new Exception();
         }
 
-        if(activity.getLocal_name() == null || activity.getName().equals("")){
+        if(activity.getLocalName() == null || activity.getName().equals("")){
             throw new Exception();
         }
 

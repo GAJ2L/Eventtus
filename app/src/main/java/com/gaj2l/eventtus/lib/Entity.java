@@ -7,9 +7,9 @@ package com.gaj2l.eventtus.lib;
 public class Entity {
     private int id;
 
-    public int get_id() { return id; }
+    public int getId() { return id; }
 
-    public void set_id(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

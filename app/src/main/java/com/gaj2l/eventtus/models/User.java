@@ -10,9 +10,10 @@ public class User extends Entity {
 
     private String name;
     private String mail;
-    private String method_autentication;
+    private String methodAutentication;
 
-    public User() {}
+    public User() {
+    }
 
     public String getName() {
         return this.name;
@@ -30,11 +31,13 @@ public class User extends Entity {
         this.mail = mail;
     }
 
-    public String getMethod_autentication() {
-        return this.method_autentication;
+    public String getMethodAutentication() {
+        return methodAutentication;
     }
 
-    public void setMethod_autentication(String method_autentication) { this.method_autentication = method_autentication; }
+    public void setMethodAutentication(String methodAutentication) {
+        this.methodAutentication = methodAutentication;
+    }
 
     @Override
     public String toString() {

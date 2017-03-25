@@ -15,7 +15,7 @@ public class MessageValidation extends Validation<Message> {
             throw new Exception();
         }
 
-        if(message.getDt_store() == null ){
+        if(message.getDtStore() == null ){
             throw new Exception();
         }
 

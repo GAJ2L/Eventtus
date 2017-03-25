@@ -20,7 +20,7 @@ public class UserValidation extends Validation<User> {
             throw new Exception();
         }
 
-        if(user.getMethod_autentication() == null || user.getMethod_autentication().equals("")){
+        if(user.getMethodAutentication() == null || user.getMethodAutentication().equals("")){
             throw new Exception();
         }
     }

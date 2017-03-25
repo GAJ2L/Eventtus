@@ -1,12 +1,14 @@
 package com.example.jacksonmajolo.app.models;
 
+import com.example.jacksonmajolo.app.lib.Entity;
+
 import java.sql.Timestamp;
 
 /**
  * Created by Jackson Majolo on 24/03/2017.
  */
 
-public class Activity {
+public class Activity extends Entity{
     private String name;
     private Timestamp dt_start;
     private Timestamp dt_end;

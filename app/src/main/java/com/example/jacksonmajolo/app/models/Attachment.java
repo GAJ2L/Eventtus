@@ -1,10 +1,12 @@
 package com.example.jacksonmajolo.app.models;
 
+import com.example.jacksonmajolo.app.lib.Entity;
+
 /**
  * Created by Jackson Majolo on 24/03/2017.
  */
 
-public class Attachment {
+public class Attachment extends Entity {
     private String name;
     private String local;
     private Activity activity;

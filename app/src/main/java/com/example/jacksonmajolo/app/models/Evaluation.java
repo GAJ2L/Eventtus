@@ -1,12 +1,14 @@
 package com.example.jacksonmajolo.app.models;
 
+import com.example.jacksonmajolo.app.lib.Entity;
+
 import java.sql.Timestamp;
 
 /**
  * Created by Jackson Majolo on 24/03/2017.
  */
 
-public class Evaluation {
+public class Evaluation extends Entity {
     private double stars;
     private String comment;
     private Timestamp dt_store;

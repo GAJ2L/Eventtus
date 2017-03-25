@@ -11,6 +11,9 @@ import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.temporal.TemporalAccessor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
@@ -25,10 +28,58 @@ public abstract class Controller<T extends Entity> {
         this.table = table;
     }
 
-    public void insert(T entity) throws Exception{
+    private void insert(T entity) throws Exception {
         ContentValues contentValues = this.entityToValues(entity);
+        this.database.insert(this.table, null, contentValues);
+    }
 
-        this.database.insert(table, null, contentValues);
+    private void update(T entity) throws Exception {
+        ContentValues contentValues = this.entityToValues(entity);
+        String[] args = {String.valueOf(entity.getId())};
+
+        this.database.update(this.table, contentValues, "id=?", args);
+    }
+
+    public void store(T entity) throws Exception {
+        try {
+            this.database.beginTransaction();
+
+            if (entity.isNew()) {
+                insert(entity);
+            } else {
+                update(entity);
+            }
+
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            throw e;
+        }
+
+        this.database.endTransaction();
+    }
+
+
+    public void delete(T entity) throws Exception {
+        String[] args = {String.valueOf(entity.getId())};
+        this.database.delete(this.table, "id=?", args);
+    }
+
+    public T get(int id) {
+        String[] args = {String.valueOf(id)};
+
+//        Cursor cursor = this.database.query(this.table, , "id=?", args, null, null, null, "1");
+//
+//        if (cursor.moveToNext()) {
+//
+//        }
+
+        return null;
+    }
+
+    public List<T> list() {
+        ArrayList<T> list = null;
+
+        return list;
     }
 
     protected abstract ContentValues entityToValues(T entity);

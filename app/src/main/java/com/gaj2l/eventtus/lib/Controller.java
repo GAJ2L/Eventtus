@@ -53,9 +53,9 @@ public abstract class Controller<T extends Entity> {
             database.setTransactionSuccessful();
         } catch (Exception e) {
             throw e;
+        } finally {
+            this.database.endTransaction();
         }
-
-        this.database.endTransaction();
     }
 
 

@@ -2,8 +2,10 @@ package com.gaj2l.eventtus.controllers;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.gaj2l.eventtus.lib.Controller;
 import com.gaj2l.eventtus.models.Message;
+import com.gaj2l.eventtus.validations.MessageValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
@@ -27,5 +29,11 @@ public class MessageController extends Controller<Message> {
         putDate(contentValues, "dt_send", entity.getDtSend());
 
         return contentValues;
+    }
+
+    @Override
+    protected void validate(Message entity) throws Exception {
+        MessageValidation messageValidation = new MessageValidation();
+        messageValidation.validate(entity);
     }
 }

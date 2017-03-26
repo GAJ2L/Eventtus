@@ -37,19 +37,20 @@ public abstract class Controller<T extends Entity> {
         ContentValues contentValues = this.entityToValues(entity);
         String[] args = {String.valueOf(entity.getId())};
 
-        this.database.update(this.table, contentValues, "id=?", args);
+        this.database.update(this.table, contentValues, "_id=?", args);
     }
 
     public void store(T entity) throws Exception {
         try {
             this.database.beginTransaction();
 
+            this.validate(entity);
+
             if (entity.isNew()) {
                 insert(entity);
             } else {
                 update(entity);
             }
-
             database.setTransactionSuccessful();
         } catch (Exception e) {
             throw e;
@@ -57,17 +58,16 @@ public abstract class Controller<T extends Entity> {
             this.database.endTransaction();
         }
     }
-
-
+    
     public void delete(T entity) throws Exception {
         String[] args = {String.valueOf(entity.getId())};
-        this.database.delete(this.table, "id=?", args);
+        this.database.delete(this.table, "_id=?", args);
     }
 
     public T get(int id) {
         String[] args = {String.valueOf(id)};
 
-//        Cursor cursor = this.database.query(this.table, , "id=?", args, null, null, null, "1");
+//        Cursor cursor = this.database.query(this.table, , "_id=?", args, null, null, null, "1");
 //
 //        if (cursor.moveToNext()) {
 //
@@ -83,6 +83,8 @@ public abstract class Controller<T extends Entity> {
     }
 
     protected abstract ContentValues entityToValues(T entity);
+
+    protected abstract void validate(T entity) throws Exception;
 
     protected void putDate(ContentValues values, String columnName, OffsetDateTime data) {
         if (data == null) {

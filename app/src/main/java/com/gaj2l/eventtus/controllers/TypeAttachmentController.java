@@ -2,8 +2,10 @@ package com.gaj2l.eventtus.controllers;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.gaj2l.eventtus.lib.Controller;
 import com.gaj2l.eventtus.models.TypeAttachment;
+import com.gaj2l.eventtus.validations.TypeAttachmentValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
@@ -23,5 +25,11 @@ public class TypeAttachmentController extends Controller<TypeAttachment> {
         contentValues.put("image", entity.getImage());
 
         return contentValues;
+    }
+
+    @Override
+    protected void validate(TypeAttachment entity) throws Exception {
+        TypeAttachmentValidation typeAttachmentValidation = new TypeAttachmentValidation();
+        typeAttachmentValidation.validate(entity);
     }
 }

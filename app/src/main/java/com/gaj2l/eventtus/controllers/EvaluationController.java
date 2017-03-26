@@ -2,8 +2,10 @@ package com.gaj2l.eventtus.controllers;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.gaj2l.eventtus.lib.Controller;
 import com.gaj2l.eventtus.models.Evaluation;
+import com.gaj2l.eventtus.validations.EvaluationValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
@@ -26,5 +28,11 @@ public class EvaluationController extends Controller<Evaluation> {
         putDate(contentValues, "dt_store", entity.getDtStore());
 
         return contentValues;
+    }
+
+    @Override
+    protected void validate(Evaluation entity) throws Exception {
+        EvaluationValidation evaluationValidation = new EvaluationValidation();
+        evaluationValidation.validate(entity);
     }
 }

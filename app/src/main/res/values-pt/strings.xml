@@ -1,8 +1,30 @@
 <resources>
     <string name="app_name">Eventtus</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir menu de navegação</string>
+    <string name="navigation_drawer_close">Fechar menu de navegação</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
+
+    <!-- START VALIDATIONS FIELDS-->
+    <string name="exception_field_name">Campo nome não informado.</string>
+    <string name="exception_field_dt_start">Campo data inicial não informado.</string>
+    <string name="exception_field_dt_end">Campo data final não informado.</string>
+    <string name="exception_field_local_name">Campo nome do local não informado.</string>
+    <string name="exception_field_event">Campo evento não informado.</string>
+    <string name="exception_field_evaluation">Campo avaliação não informado.</string>
+    <string name="exception_field_local">Campo local não informado.</string>
+    <string name="exception_field_activity">Campo atividade não informado.</string>
+    <string name="exception_field_type_attachment">Campo tipo de anexo não informado.</string>
+    <string name="exception_field_stars">Campo estrelas não informado.</string>
+    <string name="exception_field_dt_store">Campo data de salvamento não informado.</string>
+    <string name="exception_field_description">Campo descrição não informado.</string>
+    <string name="exception_field_contact_mail">Campo e-mail do contato não informado.</string>
+    <string name="exception_field_contact_name">Campo nome do contato não informado.</string>
+    <string name="exception_field_contact_phone">Campo telefone de contato não informado.</string>
+    <string name="exception_field_content">Campo conteúdo não informado.</string>
+    <string name="exception_field_user">Campo usuário não informado.</string>
+    <string name="exception_field_mail">Campo e-mail não informado.</string>
+    <string name="exception_field_method_autentication">Campo metodo de autenticação não informado.</string>
+    <!-- END VALIDATIONS FIELDS -->
 </resources>

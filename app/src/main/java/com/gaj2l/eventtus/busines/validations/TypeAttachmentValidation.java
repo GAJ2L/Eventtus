@@ -1,5 +1,7 @@
-package com.gaj2l.eventtus.validations;
+package com.gaj2l.eventtus.busines.validations;
 
+import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.busines.exceptions.ValidationException;
 import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.TypeAttachment;
 
@@ -10,10 +12,10 @@ import com.gaj2l.eventtus.models.TypeAttachment;
 public class TypeAttachmentValidation extends Validation<TypeAttachment> {
 
     @Override
-    public void validate(TypeAttachment typeAttachment) throws Exception{
+    public void validate(TypeAttachment typeAttachment) throws ValidationException {
 
         if(typeAttachment.getName() == null || typeAttachment.getName().equals("")){
-            throw new Exception();
+            throw new ValidationException(R.string.exception_field_name);
         }
     }
 }

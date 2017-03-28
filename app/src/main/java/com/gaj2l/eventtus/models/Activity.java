@@ -14,8 +14,8 @@ public class Activity extends Entity {
     private OffsetDateTime dtEnd;
     private String localName;
     private String localGeolocation;
-    private Event event;
-    private Evaluation evaluation;
+    private int eventId;
+    private int evaluationId;
 
     public Activity() {
     }
@@ -60,20 +60,20 @@ public class Activity extends Entity {
         this.localGeolocation = localGeolocation;
     }
 
-    public Event getEvent() {
-        return event;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
-    public Evaluation getEvaluation() {
-        return evaluation;
+    public int getEvaluationId() {
+        return evaluationId;
     }
 
-    public void setEvaluation(Evaluation evaluation) {
-        this.evaluation = evaluation;
+    public void setEvaluationId(int evaluationId) {
+        this.evaluationId = evaluationId;
     }
 
     @Override

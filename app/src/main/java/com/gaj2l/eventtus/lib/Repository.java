@@ -18,23 +18,28 @@ import java.util.List;
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public abstract class Controller<T extends Entity> {
+public abstract class Repository<T extends Entity> {
 
     private final SQLiteDatabase database;
     private final String table;
+    private final Class<T> entityClass;
+    private int columnIndexId;
 
-    protected Controller(SQLiteDatabase database, String table) {
+    protected Repository(Class<T> entity, SQLiteDatabase database, String table) {
         this.database = database;
         this.table = table;
+        this.entityClass = entity;
+
+        this.mapColumnsInternal();
     }
 
     private void insert(T entity) throws Exception {
-        ContentValues contentValues = this.entityToValues(entity);
+        ContentValues contentValues = this.entityToValues(entity, true);
         this.database.insert(this.table, null, contentValues);
     }
 
     private void update(T entity) throws Exception {
-        ContentValues contentValues = this.entityToValues(entity);
+        ContentValues contentValues = this.entityToValues(entity, false);
         String[] args = {String.valueOf(entity.getId())};
 
         this.database.update(this.table, contentValues, "_id=?", args);
@@ -43,8 +48,6 @@ public abstract class Controller<T extends Entity> {
     public void store(T entity) throws Exception {
         try {
             this.database.beginTransaction();
-
-            this.validate(entity);
 
             if (entity.isNew()) {
                 insert(entity);
@@ -58,7 +61,7 @@ public abstract class Controller<T extends Entity> {
             this.database.endTransaction();
         }
     }
-    
+
     public void delete(T entity) throws Exception {
         String[] args = {String.valueOf(entity.getId())};
         this.database.delete(this.table, "_id=?", args);
@@ -67,22 +70,60 @@ public abstract class Controller<T extends Entity> {
     public T get(int id) {
         String[] args = {String.valueOf(id)};
 
-//        Cursor cursor = this.database.query(this.table, , "_id=?", args, null, null, null, "1");
-//
-//        if (cursor.moveToNext()) {
-//
-//        }
+        Cursor cursor = this.database.query(this.table, null, "_id=?", args, null, null, null, null);
 
-        return null;
+        T entity = this.cursorToEntity(cursor);
+
+        cursor.close();
+
+        return entity;
     }
 
     public List<T> list() {
-        ArrayList<T> list = null;
+        ArrayList<T> list = new ArrayList<>();
 
+        Cursor cursor = this.database.query(this.table, null, null, null, null, null, null, null);
+
+        while (cursor.moveToNext()){
+            T entity = this.cursorToEntity(cursor);
+
+            list.add(entity);
+        }
+
+        cursor.close();
         return list;
     }
 
-    protected abstract ContentValues entityToValues(T entity);
+    protected ContentValues entityToValues(T entity, boolean insert) {
+        ContentValues contentValues = new ContentValues();
+        if (insert) {
+            contentValues.put("_id", entity.getId());
+        }
+
+        return contentValues;
+    }
+
+    protected T cursorToEntity(Cursor cursor) {
+        try {
+            T entity = this.entityClass.newInstance();
+            entity.setId(cursor.getInt(this.columnIndexId));
+
+            return entity;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected void mapColumns(Cursor cursor) {
+        this.columnIndexId = cursor.getColumnIndexOrThrow("_id");
+    }
+
+    private void mapColumnsInternal() {
+        final String sql = "SELECT * FROM " + this.table + " LIMIT 1;";
+        Cursor cursor = this.database.rawQuery(sql, null);
+        this.mapColumns(cursor);
+        cursor.close();
+    }
 
     protected abstract void validate(T entity) throws Exception;
 

@@ -14,10 +14,11 @@ public class Message extends Entity {
     private String content;
     private OffsetDateTime dtStore;
     private OffsetDateTime dtSend;
-    private User user;
-    private Activity activity;
+    private int userId;
+    private int activityId;
 
-    public Message() {}
+    public Message() {
+    }
 
     public String getContent() {
         return content;
@@ -43,20 +44,20 @@ public class Message extends Entity {
         this.dtSend = dtSend;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public Activity getActivity() {
-        return activity;
+    public int getActivityId() {
+        return activityId;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
+    public void setActivityId(int activityId) {
+        this.activityId = activityId;
     }
 
     @Override

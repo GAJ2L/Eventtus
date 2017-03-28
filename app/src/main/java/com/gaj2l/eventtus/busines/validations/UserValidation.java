@@ -1,5 +1,7 @@
-package com.gaj2l.eventtus.validations;
+package com.gaj2l.eventtus.busines.validations;
 
+import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.busines.exceptions.ValidationException;
 import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.User;
 
@@ -10,18 +12,18 @@ import com.gaj2l.eventtus.models.User;
 public class UserValidation extends Validation<User> {
 
     @Override
-    public void validate(User user) throws Exception{
+    public void validate(User user) throws ValidationException {
 
         if(user.getName() == null || user.getName().equals("")){
-            throw new Exception();
+            throw new ValidationException(R.string.exception_field_name);
         }
 
         if(user.getMail() == null || user.getMail().equals("")){
-            throw new Exception();
+            throw new ValidationException(R.string.exception_field_mail);
         }
 
         if(user.getMethodAutentication() == null || user.getMethodAutentication().equals("")){
-            throw new Exception();
+            throw new ValidationException(R.string.exception_field_method_autentication);
         }
     }
 }

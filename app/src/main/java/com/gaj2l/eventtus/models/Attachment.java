@@ -9,10 +9,11 @@ import com.gaj2l.eventtus.lib.Entity;
 public class Attachment extends Entity {
     private String name;
     private String local;
-    private Activity activity;
-    private TypeAttachment typeAttachment;
+    private int activityId;
+    private int typeAttachmentId;
 
-    public Attachment() {}
+    public Attachment() {
+    }
 
     public String getName() {
         return this.name;
@@ -30,19 +31,21 @@ public class Attachment extends Entity {
         this.local = local;
     }
 
-    public Activity getActivity() {
-        return this.activity;
+    public int getActivityId() {
+        return activityId;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
+    public void setActivityId(int activityId) {
+        this.activityId = activityId;
     }
 
-    public TypeAttachment getTypeAttachment() {
-        return this.typeAttachment;
+    public int getTypeAttachmentId() {
+        return typeAttachmentId;
     }
 
-    public void setTypeAttachment(TypeAttachment typeAttachment) { this.typeAttachment = typeAttachment; }
+    public void setTypeAttachmentId(int typeAttachmentId) {
+        this.typeAttachmentId = typeAttachmentId;
+    }
 
     @Override
     public String toString() {

@@ -168,8 +168,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // Logout Google
         if( mGoogleApiClient.isConnected() )
         {
-            Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-            mGoogleApiClient.disconnect();
+            Auth.GoogleSignInApi.signOut (mGoogleApiClient) .setResultCallback ( new ResultCallback <Status> () 
+            {
+                 @Override
+                 public void onResult (Status status) 
+                 {
+                       mGoogleApiClient.disconnect();       
+                 }
+            });
+            
         }
 
         // Logout Facebook

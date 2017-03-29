@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "347592453651",
+    "project_id": "firebase-eventtus"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347592453651:android:3351c6c04333159f",
+        "android_client_info": {
+          "package_name": "com.gaj2l.eventtus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347592453651-0vfghehaqmu9ftgguo71ln6cua7m4hnd.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "347592453651-b6p0ag8fqa3d2dq6fjh3j4l45n9v12u3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaj2l.eventtus",
+            "certificate_hash": "55402216e9ec195ea2b0f07269d21c1f05fce36b"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPEYc0Hrh-n5LGZ9JWkKyYPPelLbf9KSw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

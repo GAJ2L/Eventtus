@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Eventtus</string>
 
-    <string name="navigation_drawer_open">Abrir menu de navegação</string>
-    <string name="navigation_drawer_close">Fechar menu de navegação</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Configurações</string>
+    <string name="action_settings">Settings</string>
+
 
     <!-- START VALIDATIONS FIELDS-->
     <string name="exception_field_name">Campo nome não informado.</string>
@@ -27,4 +28,5 @@
     <string name="exception_field_mail">Campo e-mail não informado.</string>
     <string name="exception_field_method_autentication">Campo metodo de autenticação não informado.</string>
     <!-- END VALIDATIONS FIELDS -->
+
 </resources>

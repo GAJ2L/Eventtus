@@ -29,4 +29,8 @@
     <string name="exception_field_method_autentication">Campo metodo de autenticação não informado.</string>
     <!-- END VALIDATIONS FIELDS -->
 
+    <string name="facebook_app_id">1129202023857983</string>
+    <string name="lbl_btn_facebook">Login with Facebook</string>
+    <string name="lbl_btn_google">Login with Google</string>
+
 </resources>

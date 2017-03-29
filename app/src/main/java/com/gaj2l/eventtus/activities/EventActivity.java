@@ -1,5 +1,6 @@
 package com.gaj2l.eventtus.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -82,18 +83,18 @@ public class EventActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_talk_with_us) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_my_events) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_new_event) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logout) {
+            Intent i = new Intent( EventActivity.this, LoginActivity.class );
+            Bundle opt = new Bundle();
+            opt.putBoolean("logout",true);
+            i.putExtras(opt);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

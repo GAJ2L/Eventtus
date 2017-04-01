@@ -22,7 +22,7 @@ public class AttachmentRepository extends Repository<Attachment> {
     private int columnIndexTypeAttachmentId;
 
 
-    protected AttachmentRepository(SQLiteDatabase database) {
+    public AttachmentRepository(SQLiteDatabase database) {
         super(Attachment.class, database, "attachment");
     }
 

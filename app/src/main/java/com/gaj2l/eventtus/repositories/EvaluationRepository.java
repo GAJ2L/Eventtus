@@ -21,7 +21,7 @@ public class EvaluationRepository extends Repository<Evaluation> {
     private int columnIndexDtSend;
     private int columnIndexDtStore;
 
-    protected EvaluationRepository(SQLiteDatabase database) {
+    public EvaluationRepository(SQLiteDatabase database) {
         super(Evaluation.class, database, "evaluation");
     }
 

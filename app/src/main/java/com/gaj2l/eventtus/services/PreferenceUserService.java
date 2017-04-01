@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services;
 
 import com.gaj2l.eventtus.lib.Repository;
 import com.gaj2l.eventtus.lib.Service;
+import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.PreferenceUser;
 
 /**
@@ -10,7 +11,7 @@ import com.gaj2l.eventtus.models.PreferenceUser;
 
 public class PreferenceUserService extends Service<PreferenceUser> {
 
-    public PreferenceUserService(Repository<PreferenceUser> repository) {
-        super(repository);
+    public PreferenceUserService(Repository<PreferenceUser> repository, Validation<PreferenceUser> validation) {
+        super(repository, validation);
     }
 }

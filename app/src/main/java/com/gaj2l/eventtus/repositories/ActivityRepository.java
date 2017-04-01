@@ -27,7 +27,7 @@ public class ActivityRepository extends Repository<Activity> {
     private int columnIndexDtStart;
     private int columnIndexDtEnd;
 
-    protected ActivityRepository(SQLiteDatabase database) {
+    public ActivityRepository(SQLiteDatabase database) {
         super(Activity.class, database, "activity");
     }
 

@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services;
 
 import com.gaj2l.eventtus.lib.Repository;
 import com.gaj2l.eventtus.lib.Service;
+import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.Event;
 
 /**
@@ -10,7 +11,7 @@ import com.gaj2l.eventtus.models.Event;
 
 public class EventService extends Service<Event> {
 
-    public EventService(Repository<Event> repository) {
-        super(repository);
+    public EventService(Repository<Event> repository, Validation<Event> validation) {
+        super(repository, validation);
     }
 }

@@ -24,7 +24,7 @@ public class MessageRepository extends Repository<Message> {
     private int columnIndexDtStore;
     private int columnIndexDtSend;
 
-    protected MessageRepository(SQLiteDatabase database) {
+    public MessageRepository(SQLiteDatabase database) {
         super(Message.class, database, "message");
     }
 

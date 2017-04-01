@@ -17,7 +17,7 @@ public class TypeAttachmentRepository extends Repository<TypeAttachment> {
     private int columnIndexName;
     private int columnIndexImage;
 
-    protected TypeAttachmentRepository(SQLiteDatabase database) {
+    public TypeAttachmentRepository(SQLiteDatabase database) {
         super(TypeAttachment.class, database, "type_attachment");
     }
 

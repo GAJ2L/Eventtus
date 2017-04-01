@@ -17,7 +17,7 @@ public class PreferenceUserRepository extends Repository<PreferenceUser> {
     private int columnIndexFlNotification;
     private int columnIndexUserId;
 
-    protected PreferenceUserRepository(SQLiteDatabase database) {
+    public PreferenceUserRepository(SQLiteDatabase database) {
         super(PreferenceUser.class, database, "preference_user");
     }
 

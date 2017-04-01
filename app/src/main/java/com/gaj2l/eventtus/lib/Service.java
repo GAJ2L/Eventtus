@@ -10,8 +10,9 @@ public abstract class Service<T extends Entity> {
     private final Repository<T> repository;
     private Validation<T> validation;
 
-    protected Service(Repository<T> repository) {
+    protected Service(Repository<T> repository, Validation<T> validation) {
         this.repository = repository;
+        this.validation = validation;
     }
 
     public Repository<T> getRepository() {

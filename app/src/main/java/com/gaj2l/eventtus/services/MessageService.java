@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services;
 
 import com.gaj2l.eventtus.lib.Repository;
 import com.gaj2l.eventtus.lib.Service;
+import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.Message;
 
 /**
@@ -10,7 +11,7 @@ import com.gaj2l.eventtus.models.Message;
 
 public class MessageService extends Service<Message> {
 
-    public MessageService(Repository<Message> repository) {
-        super(repository);
+    public MessageService(Repository<Message> repository, Validation<Message> validation) {
+        super(repository, validation);
     }
 }

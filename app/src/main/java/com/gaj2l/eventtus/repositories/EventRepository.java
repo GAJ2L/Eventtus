@@ -29,7 +29,7 @@ public class EventRepository extends Repository<Event> {
     private int columnIndexDtSend;
     private int columnIndexDtStore;
 
-    protected EventRepository(SQLiteDatabase database) {
+    public EventRepository(SQLiteDatabase database) {
         super(Event.class, database, "event");
     }
 

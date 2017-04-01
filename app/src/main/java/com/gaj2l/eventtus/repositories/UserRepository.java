@@ -5,15 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.User;
-import com.gaj2l.eventtus.busines.validations.UserValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class UserRepository extends Repository<User> implements RepositoryInterface<User> {
+public class UserRepository extends Repository<User> {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_MAIL = "mail";
     public static final String COLUMN_METHOD_AUTENTICATION = "method_autentication";
@@ -54,12 +52,5 @@ public class UserRepository extends Repository<User> implements RepositoryInterf
         this.columnIndexName = cursor.getColumnIndex(COLUMN_NAME);
         this.columnIndexMail = cursor.getColumnIndex(COLUMN_MAIL);
         this.columnIndexMethodAutentication = cursor.getColumnIndex(COLUMN_METHOD_AUTENTICATION);
-
-    }
-
-    @Override
-    protected void validate(User entity) throws Exception {
-        UserValidation userValidation = new UserValidation();
-        userValidation.validate(entity);
     }
 }

@@ -35,7 +35,8 @@ public abstract class Repository<T extends Entity> {
 
     private void insert(T entity) throws Exception {
         ContentValues contentValues = this.entityToValues(entity, true);
-        this.database.insert(this.table, null, contentValues);
+        long id = this.database.insert(this.table, null, contentValues);
+        entity.setId(id);
     }
 
     private void update(T entity) throws Exception {
@@ -71,6 +72,10 @@ public abstract class Repository<T extends Entity> {
         String[] args = {String.valueOf(id)};
 
         Cursor cursor = this.database.query(this.table, null, "_id=?", args, null, null, null, null);
+        if (!cursor.moveToNext()) {
+            cursor.close();
+            return null;
+        }
 
         T entity = this.cursorToEntity(cursor);
 
@@ -84,7 +89,7 @@ public abstract class Repository<T extends Entity> {
 
         Cursor cursor = this.database.query(this.table, null, null, null, null, null, null, null);
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             T entity = this.cursorToEntity(cursor);
 
             list.add(entity);
@@ -96,10 +101,6 @@ public abstract class Repository<T extends Entity> {
 
     protected ContentValues entityToValues(T entity, boolean insert) {
         ContentValues contentValues = new ContentValues();
-        if (insert) {
-            contentValues.put("_id", entity.getId());
-        }
-
         return contentValues;
     }
 
@@ -124,8 +125,6 @@ public abstract class Repository<T extends Entity> {
         this.mapColumns(cursor);
         cursor.close();
     }
-
-    protected abstract void validate(T entity) throws Exception;
 
     protected void putDate(ContentValues values, String columnName, OffsetDateTime data) {
         if (data == null) {

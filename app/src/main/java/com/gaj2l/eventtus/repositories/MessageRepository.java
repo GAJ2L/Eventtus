@@ -64,10 +64,4 @@ public class MessageRepository extends Repository<Message> {
         this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
     }
-
-    @Override
-    protected void validate(Message entity) throws Exception {
-        MessageValidation messageValidation = new MessageValidation();
-        messageValidation.validate(entity);
-    }
 }

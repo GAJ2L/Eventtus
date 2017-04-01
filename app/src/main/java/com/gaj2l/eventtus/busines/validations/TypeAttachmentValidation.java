@@ -14,7 +14,7 @@ public class TypeAttachmentValidation extends Validation<TypeAttachment> {
     @Override
     public void validate(TypeAttachment typeAttachment) throws ValidationException {
 
-        if(typeAttachment.getName() == null || typeAttachment.getName().equals("")){
+        if (typeAttachment.getName() == null || typeAttachment.getName().equals("")) {
             throw new ValidationException(R.string.exception_field_name);
         }
     }

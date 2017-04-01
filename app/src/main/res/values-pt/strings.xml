@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Eventtus</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir menu de navegação</string>
+    <string name="navigation_drawer_close">Fechar menu de navegação</string>
 
-    <string name="action_settings">Settings</string>
-
+    <string name="action_settings">Configurações</string>
 
     <!-- START VALIDATIONS FIELDS-->
     <string name="exception_field_name">Campo nome não informado.</string>
@@ -29,8 +28,9 @@
     <string name="exception_field_method_autentication">Campo metodo de autenticação não informado.</string>
     <!-- END VALIDATIONS FIELDS -->
 
+    <!-- START SOCIALS FIELDS-->
     <string name="facebook_app_id">1129202023857983</string>
-    <string name="lbl_btn_facebook">Login with Facebook</string>
-    <string name="lbl_btn_google">Login with Google</string>
-
+    <string name="lbl_btn_facebook">Entrar com Facebook</string>
+    <string name="lbl_btn_google">Entrar com Google</string>
+    <!-- END SOCIALS FIELDS -->
 </resources>

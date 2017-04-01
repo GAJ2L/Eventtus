@@ -14,11 +14,11 @@ public class EvaluationValidation extends Validation<Evaluation> {
     @Override
     public void validate(Evaluation evaluation) throws ValidationException {
 
-        if(evaluation.getStars() == 0 ){
+        if (evaluation.getStars() == 0) {
             throw new ValidationException(R.string.exception_field_stars);
         }
 
-        if(evaluation.getDtStore() == null ){
+        if (evaluation.getDtStore() == null) {
             throw new ValidationException(R.string.exception_field_dt_store);
         }
     }

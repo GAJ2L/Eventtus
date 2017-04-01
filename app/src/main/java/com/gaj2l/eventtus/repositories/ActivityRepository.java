@@ -5,15 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.Activity;
-import com.gaj2l.eventtus.busines.validations.ActivityValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class ActivityRepository extends Repository<Activity> implements RepositoryInterface<Activity> {
+public class ActivityRepository extends Repository<Activity> {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_LOCAL_NAME = "local_name";
     public static final String COLUMN_LOCAL_GEOLOCATION = "local_geolocation";
@@ -74,11 +72,5 @@ public class ActivityRepository extends Repository<Activity> implements Reposito
         this.columnIndexEvaluationId = cursor.getColumnIndex(COLUMN_EVALUATION_ID);
         this.columnIndexDtStart = cursor.getColumnIndex(COLUMN_DT_START);
         this.columnIndexDtEnd = cursor.getColumnIndex(COLUMN_DT_END);
-    }
-
-    @Override
-    protected void validate(Activity entity) throws Exception {
-        ActivityValidation activityValidation = new ActivityValidation();
-        activityValidation.validate(entity);
     }
 }

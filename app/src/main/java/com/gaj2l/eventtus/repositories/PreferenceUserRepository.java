@@ -5,15 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.PreferenceUser;
-import com.gaj2l.eventtus.busines.validations.PreferenceUserValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class PreferenceUserRepository extends Repository<PreferenceUser> implements RepositoryInterface<PreferenceUser> {
+public class PreferenceUserRepository extends Repository<PreferenceUser> {
     public static final String COLUMN_FL_NOTIFICATION = "fl_notification";
     public static final String COLUMN_USER_ID = "user_id";
     private int columnIndexFlNotification;
@@ -49,11 +47,5 @@ public class PreferenceUserRepository extends Repository<PreferenceUser> impleme
 
         this.columnIndexFlNotification = cursor.getColumnIndex(COLUMN_FL_NOTIFICATION);
         this.columnIndexUserId = cursor.getColumnIndex(COLUMN_USER_ID);
-    }
-
-    @Override
-    protected void validate(PreferenceUser entity) throws Exception {
-        PreferenceUserValidation preferenceUserValidation = new PreferenceUserValidation();
-        preferenceUserValidation.validate(entity);
     }
 }

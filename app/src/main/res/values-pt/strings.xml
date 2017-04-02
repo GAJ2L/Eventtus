@@ -32,5 +32,10 @@
     <string name="facebook_app_id">1129202023857983</string>
     <string name="lbl_btn_facebook">Entrar com Facebook</string>
     <string name="lbl_btn_google">Entrar com Google</string>
+
+    <string name="err_btn_facebook">Houve um erro ao logar com o Facebook</string>
+    <string name="err_btn_google">Houve um erro ao logar com o Google</string>
+
     <!-- END SOCIALS FIELDS -->
+
 </resources>

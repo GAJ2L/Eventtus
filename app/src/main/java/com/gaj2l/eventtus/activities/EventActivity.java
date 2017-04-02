@@ -1,23 +1,34 @@
 package com.gaj2l.eventtus.activities;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.graphics.BitmapCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
-import com.gaj2l.eventtus.ioc.ComponentProvider;
-import com.gaj2l.eventtus.models.User;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 
 public class EventActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,20 +58,24 @@ public class EventActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        User user = new User();
-        user.setName("JAck");
-        user.setMail("asdas");
-        user.setMethodAutentication("asdnbjasdgh");
+        TextView lblEmail = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblMail );
+        TextView lblName  = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblName );
+        ImageView imgUser = (ImageView)navigationView.getHeaderView(0).findViewById( R.id.imgUser );
 
+        lblEmail.setText(getIntent().getExtras().getString("email"));
+        lblName.setText(getIntent().getExtras().getString("username"));
+
+        URL f = null;
         try {
-            ComponentProvider.getServiceComponent().getUserService().store(user);
+            if (android.os.Build.VERSION.SDK_INT > 9) {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-            Log.d("asd", user.getId() + "");
-
-            User user2 = ComponentProvider.getServiceComponent().getUserService().get(1);
-
-            Log.d("asd", user2.getName());
-
+                StrictMode.setThreadPolicy(policy);
+            }
+            f = new URL(getIntent().getExtras().getString("image"));
+            InputStream i = f.openConnection().getInputStream();
+            Bitmap b = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(i), 150, 150, false);
+            imgUser.setImageBitmap(b);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,19 +93,13 @@ public class EventActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.event, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -111,11 +120,7 @@ public class EventActivity extends AppCompatActivity
         } else if (id == R.id.nav_new_event) {
 
         } else if (id == R.id.nav_logout) {
-            Intent i = new Intent(EventActivity.this, LoginActivity.class);
-            Bundle opt = new Bundle();
-            opt.putBoolean("logout", true);
-            i.putExtras(opt);
-            startActivity(i);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

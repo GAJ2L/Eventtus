@@ -14,9 +14,11 @@ import com.gaj2l.eventtus.models.User;
 public class UserRepository extends Repository<User> {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_MAIL = "mail";
+    public static final String COLUMN_IMAGE= "image";
     public static final String COLUMN_METHOD_AUTENTICATION = "method_autentication";
     private int columnIndexName;
     private int columnIndexMail;
+    private int columnIndexImage;
     private int columnIndexMethodAutentication;
 
     public UserRepository(SQLiteDatabase database) {
@@ -27,8 +29,9 @@ public class UserRepository extends Repository<User> {
     protected ContentValues entityToValues(User entity, boolean insert) {
         ContentValues contentValues = super.entityToValues(entity, insert);
 
-        contentValues.put(COLUMN_NAME, entity.getName());
-        contentValues.put(COLUMN_MAIL, entity.getMail());
+        contentValues.put(COLUMN_NAME,  entity.getName());
+        contentValues.put(COLUMN_MAIL,  entity.getMail());
+        contentValues.put(COLUMN_IMAGE, entity.getImage());
         contentValues.put(COLUMN_METHOD_AUTENTICATION, entity.getMethodAutentication());
 
         return contentValues;
@@ -40,6 +43,7 @@ public class UserRepository extends Repository<User> {
 
         entity.setName(cursor.getString(this.columnIndexName));
         entity.setMail(cursor.getString(this.columnIndexMail));
+        entity.setImage(cursor.getString(this.columnIndexImage));
         entity.setMethodAutentication(cursor.getString(this.columnIndexMethodAutentication));
 
         return entity;
@@ -51,6 +55,7 @@ public class UserRepository extends Repository<User> {
 
         this.columnIndexName = cursor.getColumnIndex(COLUMN_NAME);
         this.columnIndexMail = cursor.getColumnIndex(COLUMN_MAIL);
+        this.columnIndexImage= cursor.getColumnIndex(COLUMN_IMAGE);
         this.columnIndexMethodAutentication = cursor.getColumnIndex(COLUMN_METHOD_AUTENTICATION);
     }
 }

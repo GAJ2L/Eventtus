@@ -2,6 +2,8 @@ package com.gaj2l.eventtus.models;
 
 import com.gaj2l.eventtus.lib.Entity;
 
+import java.net.URL;
+
 /**
  * Created by Jackson Majolo on 24/03/2017.
  */
@@ -10,10 +12,13 @@ public class User extends Entity {
 
     private String name;
     private String mail;
+    private String image;
     private String methodAutentication;
 
-    public User() {
-    }
+    public static String METHOD_GOOGLE   = "google";
+    public static String METHOD_FACEBOOK = "facebook";
+
+    public User() {}
 
     public String getName() {
         return this.name;
@@ -29,6 +34,14 @@ public class User extends Entity {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getMethodAutentication() {

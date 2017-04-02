@@ -5,21 +5,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.TypeAttachment;
-import com.gaj2l.eventtus.busines.validations.TypeAttachmentValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class TypeAttachmentRepository extends Repository<TypeAttachment> implements RepositoryInterface<TypeAttachment> {
+public class TypeAttachmentRepository extends Repository<TypeAttachment> {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_IMAGE = "image";
     private int columnIndexName;
     private int columnIndexImage;
 
-    protected TypeAttachmentRepository(SQLiteDatabase database) {
+    public TypeAttachmentRepository(SQLiteDatabase database) {
         super(TypeAttachment.class, database, "type_attachment");
     }
 
@@ -49,11 +47,5 @@ public class TypeAttachmentRepository extends Repository<TypeAttachment> impleme
 
         this.columnIndexName = cursor.getColumnIndex(COLUMN_NAME);
         this.columnIndexImage = cursor.getColumnIndex(COLUMN_IMAGE);
-    }
-
-    @Override
-    protected void validate(TypeAttachment entity) throws Exception {
-        TypeAttachmentValidation typeAttachmentValidation = new TypeAttachmentValidation();
-        typeAttachmentValidation.validate(entity);
     }
 }

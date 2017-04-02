@@ -5,13 +5,17 @@ package com.gaj2l.eventtus.lib;
  */
 
 public class Entity {
-    private int id;
+    private long id;
 
-    public int getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public boolean isNew(){ return this.id == 0;}
+    public boolean isNew() {
+        return this.id == 0;
+    }
 }

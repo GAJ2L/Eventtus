@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services;
 
 import com.gaj2l.eventtus.lib.Repository;
 import com.gaj2l.eventtus.lib.Service;
+import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.Attachment;
 
 /**
@@ -10,7 +11,7 @@ import com.gaj2l.eventtus.models.Attachment;
 
 public class AttachmentService extends Service<Attachment> {
 
-    public AttachmentService(Repository<Attachment> repository) {
-        super(repository);
+    public AttachmentService(Repository<Attachment> repository, Validation<Attachment> validation) {
+        super(repository, validation);
     }
 }

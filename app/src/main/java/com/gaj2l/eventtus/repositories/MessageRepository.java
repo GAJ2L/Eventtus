@@ -24,7 +24,7 @@ public class MessageRepository extends Repository<Message> {
     private int columnIndexDtStore;
     private int columnIndexDtSend;
 
-    protected MessageRepository(SQLiteDatabase database) {
+    public MessageRepository(SQLiteDatabase database) {
         super(Message.class, database, "message");
     }
 
@@ -63,11 +63,5 @@ public class MessageRepository extends Repository<Message> {
         this.columnIndexUserId = cursor.getColumnIndex(COLUMN_USER_ID);
         this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
-    }
-
-    @Override
-    protected void validate(Message entity) throws Exception {
-        MessageValidation messageValidation = new MessageValidation();
-        messageValidation.validate(entity);
     }
 }

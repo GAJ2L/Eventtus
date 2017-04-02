@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services;
 
 import com.gaj2l.eventtus.lib.Repository;
 import com.gaj2l.eventtus.lib.Service;
+import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.User;
 
 /**
@@ -10,7 +11,7 @@ import com.gaj2l.eventtus.models.User;
 
 public class UserService extends Service<User> {
 
-    public UserService(Repository<User> repository) {
-        super(repository);
+    public UserService(Repository<User> repository, Validation<User> validation) {
+        super(repository, validation);
     }
 }

@@ -14,7 +14,7 @@ public class PreferenceUserValidation extends Validation<PreferenceUser> {
     @Override
     public void validate(PreferenceUser preferenceUser) throws ValidationException {
 
-        if(preferenceUser.getUserId() == 0 ){
+        if (preferenceUser.getUserId() == 0) {
             throw new ValidationException(R.string.exception_field_user);
         }
     }

@@ -4,16 +4,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.gaj2l.eventtus.busines.validations.EvaluationValidation;
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.Evaluation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class EvaluationRepository extends Repository<Evaluation> implements RepositoryInterface<Evaluation> {
+public class EvaluationRepository extends Repository<Evaluation> {
     public static final String COLUMN_COMMENT = "name";
     public static final String COLUMN_STARS = "local";
     public static final String COLUMN_DT_SEND = "activity_id";
@@ -23,7 +21,7 @@ public class EvaluationRepository extends Repository<Evaluation> implements Repo
     private int columnIndexDtSend;
     private int columnIndexDtStore;
 
-    protected EvaluationRepository(SQLiteDatabase database) {
+    public EvaluationRepository(SQLiteDatabase database) {
         super(Evaluation.class, database, "evaluation");
     }
 
@@ -59,11 +57,5 @@ public class EvaluationRepository extends Repository<Evaluation> implements Repo
         this.columnIndexStars = cursor.getColumnIndex(COLUMN_STARS);
         this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
-    }
-
-    @Override
-    protected void validate(Evaluation entity) throws Exception {
-        EvaluationValidation evaluationValidation = new EvaluationValidation();
-        evaluationValidation.validate(entity);
     }
 }

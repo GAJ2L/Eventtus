@@ -5,15 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.Attachment;
-import com.gaj2l.eventtus.busines.validations.AttachmentValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class AttachmentRepository extends Repository<Attachment> implements RepositoryInterface<Attachment> {
+public class AttachmentRepository extends Repository<Attachment> {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_LOCAL = "local";
     public static final String COLUMN_ACTIVITY_ID = "activity_id";
@@ -24,7 +22,7 @@ public class AttachmentRepository extends Repository<Attachment> implements Repo
     private int columnIndexTypeAttachmentId;
 
 
-    protected AttachmentRepository(SQLiteDatabase database) {
+    public AttachmentRepository(SQLiteDatabase database) {
         super(Attachment.class, database, "attachment");
     }
 
@@ -60,11 +58,5 @@ public class AttachmentRepository extends Repository<Attachment> implements Repo
         this.columnIndexLocal = cursor.getColumnIndex(COLUMN_LOCAL);
         this.columnIndexActivityId = cursor.getColumnIndex(COLUMN_ACTIVITY_ID);
         this.columnIndexTypeAttachmentId = cursor.getColumnIndex(COLUMN_TYPE_ATTACHMENT_ID);
-    }
-
-    @Override
-    protected void validate(Attachment entity) throws Exception {
-        AttachmentValidation attachmentValidation = new AttachmentValidation();
-        attachmentValidation.validate(entity);
     }
 }

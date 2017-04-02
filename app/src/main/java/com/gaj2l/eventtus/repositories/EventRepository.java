@@ -5,15 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gaj2l.eventtus.lib.Repository;
-import com.gaj2l.eventtus.lib.interfaces.RepositoryInterface;
 import com.gaj2l.eventtus.models.Event;
-import com.gaj2l.eventtus.busines.validations.EventValidation;
 
 /**
  * Created by Jackson Majolo on 25/03/2017.
  */
 
-public class EventRepository extends Repository<Event> implements RepositoryInterface<Event> {
+public class EventRepository extends Repository<Event> {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_BANNER = "banner";
@@ -31,7 +29,7 @@ public class EventRepository extends Repository<Event> implements RepositoryInte
     private int columnIndexDtSend;
     private int columnIndexDtStore;
 
-    protected EventRepository(SQLiteDatabase database) {
+    public EventRepository(SQLiteDatabase database) {
         super(Event.class, database, "event");
     }
 
@@ -79,11 +77,5 @@ public class EventRepository extends Repository<Event> implements RepositoryInte
         this.columnIndexContactName = cursor.getColumnIndex(COLUMN_CONTACT_NAME);
         this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
-    }
-
-    @Override
-    protected void validate(Event entity) throws Exception {
-        EventValidation eventValidation = new EventValidation();
-        eventValidation.validate(entity);
     }
 }

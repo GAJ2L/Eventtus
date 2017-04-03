@@ -1,16 +1,13 @@
 package com.gaj2l.eventtus.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.graphics.BitmapCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -81,8 +78,6 @@ public class EventActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -115,6 +110,11 @@ public class EventActivity extends AppCompatActivity
         } else if (id == R.id.nav_new_event) {
 
         } else if (id == R.id.nav_logout) {
+            Intent login = new Intent(EventActivity.this,LoginActivity.class);
+            login.putExtra("logout",true);
+            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(login);
             finish();
         }
 

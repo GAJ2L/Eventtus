@@ -137,7 +137,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        redirectIfUserLogged();
+        if( getIntent().getBooleanExtra("logout",false) )
+        {
+            logout();
+            finish();
+        }
+        else
+        {
+            redirectIfUserLogged();
+        }
 
     }
 

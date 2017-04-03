@@ -1,6 +1,8 @@
 package com.gaj2l.eventtus.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,8 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -20,6 +25,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.models.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -44,8 +50,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
     private LoginButton     btnFacebook;
-    private Button          btnFace;
-    private Button          btnGoogle;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -54,6 +58,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        TextView lblApp          = (TextView) findViewById(R.id.lblApp);
+        RelativeLayout viewLogin = (RelativeLayout) findViewById(R.id.viewLogin);
+        Button btnFace           = (Button) findViewById(R.id.btnFace);
+        Button btnGoogle         = (Button) findViewById(R.id.btnGoogle);
+
+        btnGoogle.setTextColor(Color.RED);
+        btnFace.setTextColor(Color.BLUE);
+
+        lblApp.setTextColor(Color.WHITE);
+
+        lblApp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        viewLogin.setBackgroundColor(getColor(R.color.colorPrimary));
 
         //Login Google
         mGoogleApiClient = new GoogleApiClient.Builder(this).addOnConnectionFailedListener(this).addApi( Auth.GOOGLE_SIGN_IN_API, new GoogleSignInOptions.Builder( GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build() ).build();
@@ -77,14 +94,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     {
                         try
                         {
-                            User user = new User();
-                            user.setName(object.getString("name"));
-                            user.setMail(object.getString("email"));
-                            user.setMethodAutentication(User.METHOD_FACEBOOK);
-                            if( object.has("picture"))
-                                user.setImage(object.getJSONObject("picture").getJSONObject("data").getString("url") );
-
-                            redirect(user);
+                            User user = getUserByFacebook(object);
+                            onSaveUser( user );
+                            redirect( user );
                         }
                         catch (Exception e)
                         {
@@ -108,7 +120,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // Botões
         btnFacebook.setVisibility(View.INVISIBLE);
-        btnFace = (Button) findViewById(R.id.btnFace);
         btnFace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +129,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
         signInButton.setVisibility(View.INVISIBLE);
-        btnGoogle = (Button) findViewById(R.id.btnGoogle);
         btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +136,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 signIn();
             }
         });
-        //
+
+        redirectIfUserLogged();
+
     }
 
     private void signIn()
@@ -135,20 +147,91 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    private void redirectIfUserLogged() {
+
+        if( Profile.getCurrentProfile() != null  )
+        {
+            redirect( getUserByFacebook( Profile.getCurrentProfile() ) );
+        }
+        else
+        {
+            if( Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).isDone() )
+            {
+                GoogleSignInResult acct = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).get();
+
+                if (acct != null) {
+                    redirect(getUserByGoogle(acct.getSignInAccount()));
+                }
+            }
+        }
+    }
+
     private void handleSignInResult(GoogleSignInResult result)
     {
         if (result.isSuccess())
         {
-            GoogleSignInAccount acct = result.getSignInAccount();
+            User user = getUserByGoogle(result.getSignInAccount());
+            onSaveUser( user );
+            redirect( user );
+        }
+    }
 
+    private User getUserByFacebook( Profile object )
+    {
+        try
+        {
             User user = new User();
-            user.setName(acct.getDisplayName());
-            user.setMail(acct.getEmail());
-            user.setMethodAutentication(User.METHOD_GOOGLE);
-            if(acct.getPhotoUrl()!=null)
-                user.setImage(acct.getPhotoUrl().toString());
+            user.setName(object.getName());
+            user.setMethodAutentication(User.METHOD_FACEBOOK);
+            user.setImage(object.getProfilePictureUri(150,150).toString());
+            return user;
+        }
+        catch( Exception e )
+        {
+            return null;
+        }
+    }
 
-            redirect(user);
+    private User getUserByFacebook( JSONObject object )
+    {
+        try
+        {
+            User user = new User();
+            user.setName(object.getString("name"));
+            user.setMail(object.getString("email"));
+            user.setMethodAutentication(User.METHOD_FACEBOOK);
+            if( object.has("picture"))
+                user.setImage(object.getJSONObject("picture").getJSONObject("data").getString("url") );
+
+            return user;
+        }
+        catch( Exception e )
+        {
+            return null;
+        }
+    }
+
+    private User getUserByGoogle(GoogleSignInAccount acct )
+    {
+        User user = new User();
+        user.setName(acct.getDisplayName());
+        user.setMail(acct.getEmail());
+        user.setMethodAutentication(User.METHOD_GOOGLE);
+        if(acct.getPhotoUrl()!=null)
+            user.setImage(acct.getPhotoUrl().toString());
+
+        return user;
+    }
+
+    private void onSaveUser( User user )
+    {
+        try
+        {
+            ComponentProvider.getServiceComponent().getUserService().create(user);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -157,7 +240,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Intent event = new Intent(LoginActivity.this, EventActivity.class);
         event.putExtra( "username" , user.getName() );
         event.putExtra( "email"    , user.getMail() );
-
         event.putExtra( "image"    , user.getImage() );
         startActivity( event );
     }

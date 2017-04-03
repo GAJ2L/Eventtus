@@ -24,10 +24,7 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 
-import java.io.File;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 
 public class EventActivity extends AppCompatActivity
@@ -58,11 +55,9 @@ public class EventActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        TextView lblEmail = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblMail );
         TextView lblName  = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblName );
         ImageView imgUser = (ImageView)navigationView.getHeaderView(0).findViewById( R.id.imgUser );
 
-        lblEmail.setText(getIntent().getExtras().getString("email"));
         lblName.setText(getIntent().getExtras().getString("username"));
 
         URL f = null;

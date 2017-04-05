@@ -43,7 +43,7 @@ import org.json.JSONObject;
  * Created by Lucas Tomasi on 28/03/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>
 {
     private static final int RC_SIGN_IN = 9001;
     private SignInButton    signInButton;
@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         btnGoogle.setTextColor(Color.RED);
         btnFace.setTextColor(Color.BLUE);
-
         lblApp.setTextColor(Color.WHITE);
 
         lblApp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -79,43 +78,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Login Facebook
         btnFacebook     = (LoginButton) findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
-        btnFacebook.registerCallback( callbackManager, new FacebookCallback<LoginResult>()
-        {
-            @Override
-            public void onSuccess(LoginResult loginResult)
-            {
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,picture");
-
-                GraphRequest request = GraphRequest.newMeRequest( loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback()
-                {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response)
-                    {
-                        try
-                        {
-                            User user = getUserByFacebook(object);
-                            onSaveUser( user );
-                            redirect( user );
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                request.setParameters(parameters);
-                request.executeAsync();
-            }
-
-            @Override
-            public void onCancel() {}
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText( LoginActivity.this,R.string.err_btn_facebook,Toast.LENGTH_LONG).show();
-            }
-        });
+        btnFacebook.registerCallback( callbackManager, this );
         //
 
         // Botões
@@ -186,37 +149,39 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private User getUserByFacebook( Profile object )
     {
+        User user = new User();
+
         try
         {
-            User user = new User();
             user.setName(object.getName());
             user.setMethodAutentication(User.METHOD_FACEBOOK);
             user.setImage(object.getProfilePictureUri(150,150).toString());
-            return user;
         }
         catch( Exception e )
         {
-            return null;
+            Toast.makeText( LoginActivity.this,R.string.err_btn_facebook,Toast.LENGTH_LONG).show();
         }
+        return user;
     }
 
     private User getUserByFacebook( JSONObject object )
     {
+        User user = new User();
+
         try
         {
-            User user = new User();
             user.setName(object.getString("name"));
             user.setMail(object.getString("email"));
             user.setMethodAutentication(User.METHOD_FACEBOOK);
             if( object.has("picture"))
                 user.setImage(object.getJSONObject("picture").getJSONObject("data").getString("url") );
-
-            return user;
         }
         catch( Exception e )
         {
-            return null;
+            Toast.makeText( LoginActivity.this,R.string.err_btn_facebook,Toast.LENGTH_LONG).show();
         }
+
+        return user;
     }
 
     private User getUserByGoogle(GoogleSignInAccount acct )
@@ -302,5 +267,41 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public void onSuccess(LoginResult loginResult)
+    {
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,picture");
+
+        GraphRequest request = GraphRequest.newMeRequest( loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback()
+        {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response)
+            {
+                try
+                {
+                    User user = getUserByFacebook(object);
+                    onSaveUser( user );
+                    redirect( user );
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText( LoginActivity.this,R.string.err_btn_facebook,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    @Override
+    public void onCancel() {}
+
+    @Override
+    public void onError(FacebookException error)
+    {
+        Toast.makeText( LoginActivity.this,R.string.err_btn_facebook,Toast.LENGTH_LONG).show();
     }
 }

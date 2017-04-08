@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,102 +21,152 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.InputStream;
 import java.net.URL;
 
-public class EventActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+public class EventActivity
+        extends
+            AppCompatActivity
+        implements
+            NavigationView.OnNavigationItemSelectedListener
+{
+    public static class Events
+    {
+        public static final int ON_ADD_EVENT = 0;
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState )
+    {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_event);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initComponents();
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+    private void initComponents()
+    {
+        try
+        {
+            //EVENTOS
+            Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
+            setSupportActionBar(toolbar);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener( new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    registerEvent();
+                }
+            });
 
-        TextView lblName  = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblName );
-        ImageView imgUser = (ImageView)navigationView.getHeaderView(0).findViewById( R.id.imgUser );
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        lblName.setText(getIntent().getExtras().getString("username"));
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar,
+                                                                       R.string.navigation_drawer_open, R.string.navigation_drawer_close );
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
 
-        URL f = null;
-        try {
-            if (android.os.Build.VERSION.SDK_INT > 9) {
+            //PERFIL
+            NavigationView navigationView = NavigationView.class.cast( findViewById(R.id.nav_view) );
+
+            navigationView.setNavigationItemSelectedListener(this);
+
+            TextView lblName  = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblName );
+            ImageView imgUser = (ImageView)navigationView.getHeaderView(0).findViewById( R.id.imgUser );
+
+            lblName.setText(getIntent().getExtras().getString("username"));
+
+            if ( android.os.Build.VERSION.SDK_INT > 9 )
+            {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-                StrictMode.setThreadPolicy(policy);
+                StrictMode.setThreadPolicy( policy );
             }
-            f = new URL(getIntent().getExtras().getString("image"));
+
+            URL f = new URL(getIntent().getExtras().getString("image"));
             InputStream i = f.openConnection().getInputStream();
             Bitmap b = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(i), 150, 150, false);
             imgUser.setImageBitmap(b);
-        } catch (Exception e) {
+        }
+
+        catch ( Exception e )
+        {
             e.printStackTrace();
         }
     }
 
+    private void registerEvent()
+    {
+        Intent event = new Intent(EventActivity.this, CreateEventActivity.class);
+        startActivity(event);
+    }
+
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+
+        if ( drawer.isDrawerOpen(GravityCompat.START) )
+        {
             drawer.closeDrawer(GravityCompat.START);
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
         getMenuInflater().inflate(R.menu.event, menu);
+
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected( MenuItem item )
+    {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch ( id )
+        {
+            case R.id.action_settings:
+            {
+
+            }
+            break;
+
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected( item );
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+    public boolean onNavigationItemSelected( MenuItem item )
+    {
         int id = item.getItemId();
 
-        if (id == R.id.nav_talk_with_us) {
-            // Handle the camera action
-        } else if (id == R.id.nav_my_events) {
+        switch ( id )
+        {
+            case R.id.nav_new_event:
+            {
+                registerEvent();
+            }
+            break;
 
-        } else if (id == R.id.nav_new_event) {
-
-        } else if (id == R.id.nav_logout) {
-            Intent login = new Intent(EventActivity.this,LoginActivity.class);
-            login.putExtra("logout",true);
-            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(login);
-            finish();
+            case R.id.nav_logout:
+            {
+                Intent login = new Intent(EventActivity.this,LoginActivity.class);
+                login.putExtra("logout",true);
+                login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(login);
+            }
+            break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

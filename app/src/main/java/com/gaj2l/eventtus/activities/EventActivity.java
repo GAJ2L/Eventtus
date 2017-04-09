@@ -1,6 +1,8 @@
 package com.gaj2l.eventtus.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +10,8 @@ import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.lib.Session;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
@@ -37,6 +42,9 @@ public class EventActivity
     {
         public static final int ON_ADD_EVENT = 0;
     }
+
+    private static int ID_CAMERA_REQUEST = 1;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -61,7 +69,14 @@ public class EventActivity
                 @Override
                 public void onClick(View v)
                 {
-                    registerEvent();
+                    if( hasPermission() )
+                    {
+                        registerEvent();
+                    }
+                    else
+                    {
+                        requestPermission();
+                    }
                 }
             });
 
@@ -80,7 +95,7 @@ public class EventActivity
             TextView lblName  = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblName );
             ImageView imgUser = (ImageView)navigationView.getHeaderView(0).findViewById( R.id.imgUser );
 
-            lblName.setText(getIntent().getExtras().getString("username"));
+            lblName.setText( Session.getInstance(getApplicationContext()).getString("username") );
 
             if ( android.os.Build.VERSION.SDK_INT > 9 )
             {
@@ -89,7 +104,7 @@ public class EventActivity
                 StrictMode.setThreadPolicy( policy );
             }
 
-            URL f = new URL(getIntent().getExtras().getString("image"));
+            URL f = new URL(Session.getInstance(getApplicationContext()).getString("image"));
             InputStream i = f.openConnection().getInputStream();
             Bitmap b = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(i), 150, 150, false);
             imgUser.setImageBitmap(b);
@@ -99,6 +114,16 @@ public class EventActivity
         {
             e.printStackTrace();
         }
+    }
+
+    private boolean hasPermission()
+    {
+        return (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private void requestPermission()
+    {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, ID_CAMERA_REQUEST);
     }
 
     private void registerEvent()
@@ -154,7 +179,14 @@ public class EventActivity
         {
             case R.id.nav_new_event:
             {
-                registerEvent();
+                if( hasPermission() )
+                {
+                    registerEvent();
+                }
+                else
+                {
+                    requestPermission();
+                }
             }
             break;
 
@@ -172,5 +204,17 @@ public class EventActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        if( ID_CAMERA_REQUEST == requestCode )
+        {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                registerEvent();
+            }
+        }
     }
 }

@@ -1,11 +1,15 @@
 package com.gaj2l.eventtus.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,6 +30,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -57,6 +62,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.INTERNET},1);
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         TextView lblApp          = (TextView) findViewById(R.id.lblApp);
@@ -103,7 +111,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if( getIntent().getBooleanExtra("logout",false) )
         {
             logout();
-            finish();
         }
         else
         {
@@ -211,9 +218,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void redirect( User user )
     {
         Intent event = new Intent(LoginActivity.this, EventActivity.class);
-        event.putExtra( "username" , user.getName() );
-        event.putExtra( "email"    , user.getMail() );
-        event.putExtra( "image"    , user.getImage() );
+
+        Session.getInstance(getApplicationContext()).put( "username", user.getName() );
+        Session.getInstance(getApplicationContext()).put( "email", user.getMail() );
+        Session.getInstance(getApplicationContext()).put( "image", user.getImage() );
+
         startActivity( event );
     }
 
@@ -242,6 +251,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         {
             LoginManager.getInstance().logOut();
         }
+
+        Session.getInstance(getApplicationContext()).clear();
     }
 
     @Override

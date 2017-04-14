@@ -1,11 +1,12 @@
 package com.gaj2l.eventtus.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+
 import java.util.Arrays;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 /**

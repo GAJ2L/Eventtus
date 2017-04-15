@@ -25,6 +25,7 @@
     <string name="exception_field_content">Field content not informed.</string>
     <string name="exception_field_user">Field user not informed.</string>
     <string name="exception_field_mail">Field mail not informed.</string>
+    <string name="exception_field_image">Field image not informed.</string>
     <string name="exception_field_method_autentication">Field method autentication not informed.</string>
     <!-- END VALIDATIONS FIELDS -->
 

@@ -25,5 +25,9 @@ public class UserValidation extends Validation<User> {
         if (user.getMethodAutentication() == null || user.getMethodAutentication().equals("")) {
             throw new ValidationException(R.string.exception_field_method_autentication);
         }
+
+        if (user.getImage() == null || user.getImage().equals("")) {
+            throw new ValidationException(R.string.exception_field_image);
+        }
     }
 }

@@ -25,6 +25,7 @@
     <string name="exception_field_content">Campo conteúdo não informado.</string>
     <string name="exception_field_user">Campo usuário não informado.</string>
     <string name="exception_field_mail">Campo e-mail não informado.</string>
+    <string name="exception_field_image">Campo imagem não informado.</string>
     <string name="exception_field_method_autentication">Campo metodo de autenticação não informado.</string>
     <!-- END VALIDATIONS FIELDS -->
 

@@ -91,6 +91,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // Botões
         btnFacebook.setVisibility(View.INVISIBLE);
+        btnFacebook.setReadPermissions( "public_profile", "email" );
+
         btnFace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

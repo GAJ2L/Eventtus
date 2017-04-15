@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.activities;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.activities.adapters.ActivityAdapter;
-import com.gaj2l.eventtus.activities.adapters.EventAdapter;
 import com.gaj2l.eventtus.models.Activity;
 
 import java.util.ArrayList;

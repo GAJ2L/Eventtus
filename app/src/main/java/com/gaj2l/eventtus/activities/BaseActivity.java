@@ -1,6 +1,8 @@
 package com.gaj2l.eventtus.activities;
 
 import android.Manifest;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -130,10 +132,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else
-        {
-            super.onBackPressed();
-        }
     }
 
     @Override
@@ -182,6 +180,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         else if( id == R.id.nav_my_events )
         {
             getFragmentManager().beginTransaction().replace(R.id.fragment,new EventFragment() ).commit();
+        }
+        else if( id == R.id.nav_talk_with_us )
+        {
+            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.fragment)).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment,new ContactFragment() ).commit();
         }
         else if( id == R.id.nav_logout )
         {

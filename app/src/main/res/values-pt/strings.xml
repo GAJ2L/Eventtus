@@ -40,5 +40,10 @@
     <!-- START TITLES -->
     <string name="title_activities">Atividades</string>
     <string name="title_events">Eventos</string>
+    <string name="title_contact">Fale conosco</string>
     <!-- END TITLES-->
+
+    <string name="lbl_subject">Assunto</string>
+    <string name="send">Enviar</string>
+
 </resources>

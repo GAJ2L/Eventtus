@@ -4,11 +4,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_new_event"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/plus_circle"
             android:title="Adicionar evento" />
         <item
             android:id="@+id/nav_my_events"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/list"
             android:title="Meus Eventos" />
     </group>
 
@@ -16,11 +16,11 @@
         <menu>
             <item
                 android:id="@+id/nav_talk_with_us"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/mail"
                 android:title="Fale conosco" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/exit"
                 android:title="Sair" />
         </menu>
     </item>

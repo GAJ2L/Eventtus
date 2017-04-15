@@ -37,4 +37,8 @@
     <string name="err_btn_google">There was an error logging in with Google</string>
     <!-- END SOCIALS FIELDS -->
 
+    <!-- START TITLES -->
+    <string name="title_activities">Activities</string>
+    <string name="title_events">Events</string>
+    <!-- END TITLES-->
 </resources>

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
-import com.gaj2l.eventtus.activities.ActivityActivity;
 import com.gaj2l.eventtus.models.Activity;
 
 import java.util.List;
@@ -20,11 +19,9 @@ import java.util.List;
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder>
 {
     private List<Activity> list;
-    private android.app.Activity activity;
 
-    public ActivityAdapter( android.app.Activity activity, List<Activity> list )
+    public ActivityAdapter( List<Activity> list )
     {
-        this.activity = activity;
         this.list = list;
     }
 
@@ -42,7 +39,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     {
         viewHolder.setItemTitle(getActivity(i).getName());
         viewHolder.setItemDetail(getActivity(i).getLocalName());
-        viewHolder.setActivity(getActivity(i));
     }
 
     @Override
@@ -51,10 +47,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         return list.size();
     }
 
-    public List<Activity> getEvents()
-    {
-        return this.list;
-    }
 
     public Activity getActivity(int i)
     {
@@ -66,7 +58,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         public TextView itemTitle;
         public TextView itemDetail;
         public TextView btnRemove;
-        public Activity activity;
 
         public ViewHolder(View itemView)
         {
@@ -89,11 +80,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             });
         }
 
-        public void setActivity( Activity activity )
-        {
-            this.activity = activity;
-        }
-
         public void setItemTitle(String title)
         {
             itemTitle.setText(title);
@@ -106,14 +92,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         public void onClickCard(View v)
         {
-//            Intent intent = new Intent(activity, ActivityActivity.class);
+            Snackbar.make(v, "Atividade: "+ getAdapterPosition() + " clicada!" ,Snackbar.LENGTH_SHORT).show();
+//            Intent intent = new Intent(activity, ActivityFragment.class);
 //            intent.putExtra("ref_event",event.getId());
 //            activity.startActivity(intent);
         }
 
         public void onRemove( View v )
         {
-            Snackbar.make(v, "Atividade: "+ activity.getName() + " removido!" ,Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(v, "Atividade: "+ getAdapterPosition() + " removido!" ,Snackbar.LENGTH_SHORT).show();
         }
     }
 }

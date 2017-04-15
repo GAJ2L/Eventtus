@@ -2,6 +2,8 @@ package com.gaj2l.eventtus.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
@@ -51,6 +53,7 @@ public class CreateEventActivity
     @Override
     public void handleResult( Result rawResult )
     {
+        Toast.makeText(CreateEventActivity.this,rawResult.getText(),Toast.LENGTH_SHORT).show();
         mScannerView.resumeCameraPreview( this );
     }
 }

@@ -217,13 +217,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void redirect( User user )
     {
-        Intent event = new Intent(LoginActivity.this, EventActivity.class);
+        Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
 
         Session.getInstance(getApplicationContext()).put( "username", user.getName() );
         Session.getInstance(getApplicationContext()).put( "email", user.getMail() );
         Session.getInstance(getApplicationContext()).put( "image", user.getImage() );
 
-        startActivity( event );
+        startActivity( intent );
+
+        finish();
     }
 
     public void logout()

@@ -22,4 +22,7 @@
         app:headerLayout="@layout/nav_header_event"
         app:menu="@menu/activity_event_drawer" />
 
+
+
+
 </android.support.v4.widget.DrawerLayout>

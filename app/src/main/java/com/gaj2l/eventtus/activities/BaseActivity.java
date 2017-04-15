@@ -25,8 +25,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Session;
+
 import java.net.URL;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -38,7 +40,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_base);
 
         initComponents();
     }
@@ -67,7 +69,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
-            drawer.setDrawerListener(toggle);
+            drawer.addDrawerListener(toggle);
             toggle.syncState();
 
             //PERFIL
@@ -166,36 +168,28 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     {
         int id = item.getItemId();
 
-        switch ( id )
+        if( id == R.id.nav_new_event )
         {
-            case R.id.nav_new_event:
+            if( hasPermission() )
             {
-                if( hasPermission() )
-                {
-                    registerEvent();
-                }
-                else
-                {
-                    requestPermission();
-                }
+                registerEvent();
             }
-            break;
-
-            case R.id.nav_my_events:
+            else
             {
-                Intent i = new Intent(BaseActivity.this,EventActivity.class);
-                startActivity(i);
+                requestPermission();
             }
-            break;
-            case R.id.nav_logout:
-            {
-                Intent login = new Intent(BaseActivity.this,LoginActivity.class);
-                login.putExtra("logout",true);
-                login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(login);
-            }
-            break;
+        }
+        else if( id == R.id.nav_my_events )
+        {
+            getFragmentManager().beginTransaction().replace(R.id.fragment,new EventFragment() ).commit();
+        }
+        else if( id == R.id.nav_logout )
+        {
+            Intent login = new Intent(BaseActivity.this,LoginActivity.class);
+            login.putExtra("logout",true);
+            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(login);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,4 +1,4 @@
-package com.gaj2l.eventtus.activities;
+package com.gaj2l.eventtus.view.fragments;
 
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gaj2l.eventtus.R;
-import com.gaj2l.eventtus.activities.adapters.EventAdapter;
+import com.gaj2l.eventtus.view.activities.BaseActivity;
+import com.gaj2l.eventtus.view.adapters.EventAdapter;
 import com.gaj2l.eventtus.models.Event;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,6 @@
-package com.gaj2l.eventtus.activities;
+package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -30,16 +28,15 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.view.fragments.EventFragment;
 
 import java.net.URL;
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
-{
+public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static int ID_CAMERA_REQUEST = 1;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState )
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_base);
@@ -47,20 +44,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         initComponents();
     }
 
-    private void initComponents()
-    {
-        try
-        {
-            Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
+    private void initComponents() {
+        try {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener( new View.OnClickListener()
-            {
+            fab.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
-                    if( hasPermission() ) {
+                public void onClick(View v) {
+                    if (hasPermission()) {
                         registerEvent();
                     } else {
                         requestPermission();
@@ -70,126 +63,103 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
 
             //PERFIL
-            NavigationView navigationView = NavigationView.class.cast( findViewById(R.id.nav_view) );
+            NavigationView navigationView = NavigationView.class.cast(findViewById(R.id.nav_view));
 
             navigationView.setNavigationItemSelectedListener(this);
 
-            TextView lblName  = (TextView)navigationView.getHeaderView(0).findViewById( R.id.lblName );
-            ImageView imgUser = (ImageView)navigationView.getHeaderView(0).findViewById( R.id.imgUser );
+            TextView lblName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblName);
+            ImageView imgUser = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imgUser);
 
-            lblName.setText( Session.getInstance(getApplicationContext()).getString("username") );
+            lblName.setText(Session.getInstance(getApplicationContext()).getString("username"));
 
-            if ( android.os.Build.VERSION.SDK_INT > 9 )
-            {
+            if (android.os.Build.VERSION.SDK_INT > 9) {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-                StrictMode.setThreadPolicy( policy );
+                StrictMode.setThreadPolicy(policy);
             }
 
             URL f = new URL(Session.getInstance(getApplicationContext()).getString("image"));
-            Bitmap bitmap       = Bitmap.createScaledBitmap(BitmapFactory.decodeStream( f.openConnection().getInputStream() ), 150, 150, false);
+            Bitmap bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(f.openConnection().getInputStream()), 150, 150, false);
             Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-            BitmapShader shader = new BitmapShader (bitmap,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             Paint paint = new Paint();
-            Canvas c    = new Canvas(circleBitmap);
+            Canvas c = new Canvas(circleBitmap);
             paint.setShader(shader);
-            c.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getWidth()/2, paint);
+            c.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
             imgUser.setImageBitmap(circleBitmap);
-        }
-        catch ( Exception e )
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private boolean hasPermission()
-    {
+    private boolean hasPermission() {
         return (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestPermission()
-    {
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, ID_CAMERA_REQUEST);
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, ID_CAMERA_REQUEST);
     }
 
-    private void registerEvent()
-    {
+    private void registerEvent() {
         Intent event = new Intent(BaseActivity.this, CreateEventActivity.class);
         startActivity(event);
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        if ( drawer.isDrawerOpen(GravityCompat.START) )
-        {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu( Menu menu )
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.event, menu);
 
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected( MenuItem item )
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch ( id )
-        {
-            case R.id.action_settings:
-            {
+        switch (id) {
+            case R.id.action_settings: {
 
             }
             break;
 
         }
 
-        return super.onOptionsItemSelected( item );
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected( MenuItem item )
-    {
+    public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if( id == R.id.nav_new_event )
-        {
-            if( hasPermission() )
-            {
+        if (id == R.id.nav_new_event) {
+            if (hasPermission()) {
                 registerEvent();
-            }
-            else
-            {
+            } else {
                 requestPermission();
             }
-        }
-        else if( id == R.id.nav_my_events )
-        {
-            getFragmentManager().beginTransaction().replace(R.id.fragment,new EventFragment() ).commit();
-        }
-        else if( id == R.id.nav_talk_with_us )
-        {
-            getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.fragment)).commit();
-            getFragmentManager().beginTransaction().replace(R.id.fragment,new ContactFragment() ).commit();
-        }
-        else if( id == R.id.nav_logout )
-        {
-            Intent login = new Intent(BaseActivity.this,LoginActivity.class);
-            login.putExtra("logout",true);
+        } else if (id == R.id.nav_my_events) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).commit();
+        } else if (id == R.id.nav_talk_with_us) {
+            Intent intent = new Intent(BaseActivity.this, ContactActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_logout) {
+            Intent login = new Intent(BaseActivity.this, LoginActivity.class);
+            login.putExtra("logout", true);
             login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(login);
@@ -201,12 +171,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
-    {
-        if( ID_CAMERA_REQUEST == requestCode )
-        {
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (ID_CAMERA_REQUEST == requestCode) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 registerEvent();
             }
         }

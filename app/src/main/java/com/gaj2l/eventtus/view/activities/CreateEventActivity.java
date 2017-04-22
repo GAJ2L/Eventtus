@@ -1,4 +1,4 @@
-package com.gaj2l.eventtus.activities;
+package com.gaj2l.eventtus.view.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

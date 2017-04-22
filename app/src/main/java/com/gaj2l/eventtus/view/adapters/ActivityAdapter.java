@@ -1,9 +1,5 @@
-package com.gaj2l.eventtus.activities.adapters;
-/**
- * Created by Shade on 5/9/2016.
- */
+package com.gaj2l.eventtus.view.adapters;
 
-import android.app.Activity;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,16 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
-import com.gaj2l.eventtus.activities.ActivityFragment;
-import com.gaj2l.eventtus.models.Event;
+import com.gaj2l.eventtus.models.Activity;
 
 import java.util.List;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
-{
-    private List<Event> list;
+/**
+ * Created by lucas on 14/04/17.
+ */
 
-    public EventAdapter(List<Event> list )
+public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder>
+{
+    private List<Activity> list;
+
+    public ActivityAdapter( List<Activity> list )
     {
         this.list = list;
     }
@@ -38,9 +37,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i)
     {
-        viewHolder.setItemTitle(getEvent(i).getName());
-        viewHolder.setItemDetail(getEvent(i).getDescription());
-        viewHolder.setEvent(i);
+        viewHolder.setItemTitle(getActivity(i).getName());
+        viewHolder.setItemDetail(getActivity(i).getLocalName());
     }
 
     @Override
@@ -50,17 +48,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
     }
 
 
-    public Event getEvent(int i)
+    public Activity getActivity(int i)
     {
         return this.list.get(i);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
-        public TextView  itemTitle;
-        public TextView  itemDetail;
-        public TextView  btnRemove;
-        public int event;
+        public TextView itemTitle;
+        public TextView itemDetail;
+        public TextView btnRemove;
 
         public ViewHolder(View itemView)
         {
@@ -83,11 +80,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
             });
         }
 
-        public void setEvent( int event )
-        {
-            this.event = event;
-        }
-
         public void setItemTitle(String title)
         {
             itemTitle.setText(title);
@@ -100,12 +92,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
         public void onClickCard(View v)
         {
-            ((Activity)v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment,new ActivityFragment(),"activity_fragment" ).commit();
+            Snackbar.make(v, "Atividade: "+ getAdapterPosition() + " clicada!" ,Snackbar.LENGTH_SHORT).show();
+//            Intent intent = new Intent(activity, ActivityFragment.class);
+//            intent.putExtra("ref_event",event.getId());
+//            activity.startActivity(intent);
         }
 
         public void onRemove( View v )
         {
-            Snackbar.make(v, "Evento: "+ event + " removido!" ,Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(v, "Atividade: "+ getAdapterPosition() + " removido!" ,Snackbar.LENGTH_SHORT).show();
         }
     }
 }
+

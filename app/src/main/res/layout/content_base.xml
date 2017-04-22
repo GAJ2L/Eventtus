@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_event">
     <fragment
         android:id="@+id/fragment"
-        android:name="com.gaj2l.eventtus.activities.EventFragment"
+        android:name="com.gaj2l.eventtus.view.fragments.EventFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

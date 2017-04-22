@@ -32,32 +32,38 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        this.executeSchema(db, VERSION);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        while (oldVersion != newVersion) {
+            oldVersion++;
+            this.executeSchema(db, oldVersion);
+        }
+    }
+
+    private void executeSchema(SQLiteDatabase db, int version) {
         String sql = "";
 
         try {
-            InputStream inputStream = this.mContext.getResources().getAssets().open("database/" + VERSION + "/schema.sql");
+            InputStream inputStream = this.mContext.getResources().getAssets().open("database/" + version + "/schema.sql");
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String linha;
-            while ((linha = bufferedReader.readLine()) != null) {
-                if (!linha.contains("--")) {
-                    sql += linha;
+            String row;
+            while ((row = bufferedReader.readLine()) != null) {
+                if (!row.contains("--")) {
+                    sql += row;
                 }
             }
             inputStream.close();
 
-            String[] querys = sql.split(";");
-            for (String query : querys) {
+            for (String query : sql.split(";")) {
                 db.execSQL(query);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     public static String backupDatabase(Context context) throws Exception {

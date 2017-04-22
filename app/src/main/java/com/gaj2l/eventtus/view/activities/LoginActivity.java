@@ -1,4 +1,4 @@
-package com.gaj2l.eventtus.activities;
+package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -29,7 +29,6 @@ import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
-import com.gaj2l.eventtus.models.TypeAttachment;
 import com.gaj2l.eventtus.models.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

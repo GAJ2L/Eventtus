@@ -5,23 +5,23 @@
         <item
             android:id="@+id/nav_new_event"
             android:icon="@drawable/plus_circle"
-            android:title="Adicionar evento" />
+            android:title="@string/add_event" />
         <item
             android:id="@+id/nav_my_events"
             android:icon="@drawable/list"
-            android:title="Meus Eventos" />
+            android:title="@string/my_events" />
     </group>
 
-    <item android:title="Sistema">
+    <item android:title="@string/system">
         <menu>
             <item
                 android:id="@+id/nav_talk_with_us"
                 android:icon="@drawable/mail"
-                android:title="Fale conosco" />
+                android:title="@string/title_contact" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/exit"
-                android:title="Sair" />
+                android:title="@string/exit" />
         </menu>
     </item>
 

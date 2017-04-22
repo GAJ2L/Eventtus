@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.BaseActivity">
+    tools:context=".view.activities.BaseActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,33 +13,33 @@
             android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/txtMessage"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/txtMessage"
             android:layout_marginBottom="147dp"
             android:drawableStart="@drawable/send"
-            android:text="@string/send"
-            android:textSize="18sp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/txtEmail"
-            android:layout_alignEnd="@+id/txtEmail" />
+            android:text="@string/lbl_btn_send"
+            android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnSend"
-            android:layout_alignEnd="@+id/editText2"
-            android:layout_alignStart="@+id/editText2"
-            android:layout_below="@+id/editText2"
+            android:layout_alignEnd="@+id/txtSubject"
+            android:layout_alignStart="@+id/txtSubject"
+            android:layout_below="@+id/txtSubject"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="text"
+            android:hint="@string/lbl_message"
             android:inputType="textAutoCorrect|textMultiLine"
             android:singleLine="false"
             android:textAlignment="viewStart"
             android:textDirection="inherit" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/txtSubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"

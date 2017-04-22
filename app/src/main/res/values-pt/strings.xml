@@ -1,11 +1,4 @@
 <resources>
-    <string name="app_name">Eventtus</string>
-
-    <string name="navigation_drawer_open">Abrir menu de navegação</string>
-    <string name="navigation_drawer_close">Fechar menu de navegação</string>
-
-    <string name="action_settings">Configurações</string>
-
     <!-- START VALIDATIONS FIELDS-->
     <string name="exception_field_name">Campo nome não informado.</string>
     <string name="exception_field_dt_start">Campo data inicial não informado.</string>
@@ -29,22 +22,39 @@
     <string name="exception_field_method_autentication">Campo metodo de autenticação não informado.</string>
     <!-- END VALIDATIONS FIELDS -->
 
-    <!-- START SOCIALS FIELDS-->
+    <!-- START SOCIALS -->
     <string name="facebook_app_id">1129202023857983</string>
-    <string name="lbl_btn_facebook">Entrar com Facebook</string>
-    <string name="lbl_btn_google">Entrar com Google</string>
-
-    <string name="err_btn_facebook">Houve um erro ao logar com o Facebook</string>
-    <string name="err_btn_google">Houve um erro ao logar com o Google</string>
-    <!-- END SOCIALS FIELDS -->
+    <!-- END SOCIALS -->
 
     <!-- START TITLES -->
+    <string name="app_name">Eventtus</string>
+    <string name="action_settings">Configurações</string>
+    <string name="navigation_drawer_open">Abrir menu de navegação</string>
+    <string name="navigation_drawer_close">Fechar menu de navegação</string>
     <string name="title_activities">Atividades</string>
     <string name="title_events">Eventos</string>
     <string name="title_contact">Fale conosco</string>
+    <string name="add_event">Adicionar evento</string>
+    <string name="my_events">Meus eventos</string>
+    <string name="system">Sistema</string>
+    <string name="exit">Sair</string>
     <!-- END TITLES-->
 
+    <!-- START LABELS-->
+    <string name="lbl_btn_facebook">Entrar com Facebook</string>
+    <string name="lbl_btn_google">Entrar com Google</string>
     <string name="lbl_subject">Assunto</string>
-    <string name="send">Enviar</string>
+    <string name="lbl_message">Mensagem</string>
+    <string name="lbl_btn_send">Enviar</string>
+    <!-- END LABELS-->
 
+    <!-- START MESSAGES -->
+    <string name="send_message">Mensagem enviada com sucesso</string>
+    <string name="validate_fields_message">Preencha os campos do formulário</string>
+    <!-- END MESSAGES-->
+
+    <!-- START ERRORS -->
+    <string name="err_btn_facebook">There was an error logging in with Facebook</string>
+    <string name="err_btn_google">There was an error logging in with Google</string>
+    <!-- END ERRORS-->
 </resources>

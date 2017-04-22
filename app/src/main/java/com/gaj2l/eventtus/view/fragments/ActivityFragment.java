@@ -9,30 +9,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.ActivityAdapter;
-import com.gaj2l.eventtus.models.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityFragment extends Fragment
-{
+public class ActivityFragment extends Fragment {
     private List<Activity> activities;
 
-    public ActivityFragment()
-    {
+    public ActivityFragment() {
         activities = new ArrayList();
         Activity a = new Activity();
         a.setName("Palestra um");
         a.setLocalName("Prédio 12 - Sala 201");
-        activities.add(a);activities.add(a);activities.add(a);
+        activities.add(a);
+        activities.add(a);
+        activities.add(a);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        ((BaseActivity)getActivity()).setTitle(R.string.title_activities);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((BaseActivity) getActivity()).setTitle(R.string.title_activities);
+        ((BaseActivity) getActivity()).hideFloatingActionButton();
 
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 

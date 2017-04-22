@@ -34,6 +34,7 @@ import java.net.URL;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static int ID_CAMERA_REQUEST = 1;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
+            this.fab = (FloatingActionButton) findViewById(R.id.fab);
+            this.fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (hasPermission()) {
@@ -117,7 +118,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if( getFragmentManager().getBackStackEntryCount() > 0 ) {
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
                 getFragmentManager().popBackStack();
             } else {
                 finish();
@@ -182,6 +183,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 registerEvent();
             }
+        }
+    }
+
+    public void showFloatingActionButton() {
+        if (this.fab != null) {
+            this.fab.show();
+        }
+    }
+
+    public void hideFloatingActionButton() {
+        if (this.fab != null) {
+            this.fab.hide();
         }
     }
 }

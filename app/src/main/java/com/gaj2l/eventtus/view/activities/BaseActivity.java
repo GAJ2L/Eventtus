@@ -116,6 +116,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else {
+            if( getFragmentManager().getBackStackEntryCount() > 0 ) {
+                getFragmentManager().popBackStack();
+            } else {
+                finish();
+            }
         }
     }
 
@@ -153,7 +159,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 requestPermission();
             }
         } else if (id == R.id.nav_my_events) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
         } else if (id == R.id.nav_talk_with_us) {
             Intent intent = new Intent(BaseActivity.this, ContactActivity.class);
             startActivity(intent);

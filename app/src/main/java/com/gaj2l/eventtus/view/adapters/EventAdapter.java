@@ -100,7 +100,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
         public void onClickCard(View v)
         {
-            ((Activity)v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment,new ActivityFragment(),"activity_fragment" ).commit();
+            ((Activity)v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment,new ActivityFragment() ).addToBackStack("ActivityFragment").commit();
         }
 
         public void onRemove( View v )

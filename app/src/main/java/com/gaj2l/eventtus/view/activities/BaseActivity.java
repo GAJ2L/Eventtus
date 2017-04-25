@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
+import android.content.pm.ActivityInfo;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,6 +33,7 @@ import com.gaj2l.eventtus.view.fragments.EventFragment;
 
 import java.net.URL;
 
+
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static int ID_CAMERA_REQUEST = 1;
     private FloatingActionButton fab;
@@ -40,6 +42,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if( getFragmentManager().getBackStackEntryCount()<= 0 )
+        {
+            getFragmentManager().beginTransaction().replace(R.id.fragment,new EventFragment()).addToBackStack("EventFragment").commit();
+        }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_base);
 
         initComponents();

@@ -2,6 +2,8 @@ package com.gaj2l.eventtus.view.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,8 @@ public class ContactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setTitle(R.string.title_contact);
         setContentView(R.layout.activity_contact);
 
@@ -29,7 +33,10 @@ public class ContactActivity extends AppCompatActivity {
         this.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!fieldSubject.getText().toString().equals("") && !fieldMessage.getText().toString().equals("")) {
+                String subject = fieldSubject.getText().toString();
+                String message = fieldMessage.getText().toString();
+
+                if (!subject.equals("") && !message.equals("")) {
                     Toast.makeText(ContactActivity.this, R.string.send_message, Toast.LENGTH_LONG).show();
                     finish();
                 } else {
@@ -37,5 +44,20 @@ public class ContactActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }

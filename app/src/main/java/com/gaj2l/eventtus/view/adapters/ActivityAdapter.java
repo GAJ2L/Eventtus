@@ -16,18 +16,15 @@ import java.util.List;
  * Created by lucas on 14/04/17.
  */
 
-public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder>
-{
+public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
     private List<Activity> list;
 
-    public ActivityAdapter( List<Activity> list )
-    {
+    public ActivityAdapter(List<Activity> list) {
         this.list = list;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
-    {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -35,39 +32,35 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i)
-    {
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.setItemTitle(getActivity(i).getName());
         viewHolder.setItemDetail(getActivity(i).getLocalName());
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return list.size();
     }
 
 
-    public Activity getActivity(int i)
-    {
+    public Activity getActivity(int i) {
         return this.list.get(i);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
-    {
+    class ViewHolder extends RecyclerView.ViewHolder {
         public TextView itemTitle;
         public TextView itemDetail;
         public TextView btnRemove;
 
-        public ViewHolder(View itemView)
-        {
+        public ViewHolder(View itemView) {
             super(itemView);
-            itemTitle  = (TextView)itemView.findViewById(R.id.item_title);
-            itemDetail = (TextView)itemView.findViewById(R.id.item_detail);
-            btnRemove  = (TextView)itemView.findViewById(R.id.btnRemove);
+            itemTitle = (TextView) itemView.findViewById(R.id.item_title);
+            itemDetail = (TextView) itemView.findViewById(R.id.item_detail);
+            btnRemove = (TextView) itemView.findViewById(R.id.btnRemove);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     onClickCard(v);
                 }
             });
@@ -80,27 +73,23 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             });
         }
 
-        public void setItemTitle(String title)
-        {
+        public void setItemTitle(String title) {
             itemTitle.setText(title);
         }
 
-        public void setItemDetail(String detail)
-        {
+        public void setItemDetail(String detail) {
             itemDetail.setText(detail);
         }
 
-        public void onClickCard(View v)
-        {
-            Snackbar.make(v, "Atividade: "+ getAdapterPosition() + " clicada!" ,Snackbar.LENGTH_SHORT).show();
+        public void onClickCard(View v) {
+            Snackbar.make(v, "Atividade: " + getAdapterPosition() + " clicada!", Snackbar.LENGTH_SHORT).show();
 //            Intent intent = new Intent(activity, ActivityFragment.class);
 //            intent.putExtra("ref_event",event.getId());
 //            activity.startActivity(intent);
         }
 
-        public void onRemove( View v )
-        {
-            Snackbar.make(v, "Atividade: "+ getAdapterPosition() + " removido!" ,Snackbar.LENGTH_SHORT).show();
+        public void onRemove(View v) {
+            Snackbar.make(v, "Atividade: " + getAdapterPosition() + " removido!", Snackbar.LENGTH_SHORT).show();
         }
     }
 }

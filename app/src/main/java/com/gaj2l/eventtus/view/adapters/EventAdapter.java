@@ -12,23 +12,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
-import com.gaj2l.eventtus.view.fragments.ActivityFragment;
 import com.gaj2l.eventtus.models.Event;
+import com.gaj2l.eventtus.view.fragments.ActivityFragment;
 
 import java.util.List;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
-{
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private List<Event> list;
 
-    public EventAdapter(List<Event> list )
-    {
+    public EventAdapter(List<Event> list) {
         this.list = list;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
-    {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -36,41 +33,37 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i)
-    {
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.setItemTitle(getEvent(i).getName());
         viewHolder.setItemDetail(getEvent(i).getDescription());
         viewHolder.setEvent(i);
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return list.size();
     }
 
 
-    public Event getEvent(int i)
-    {
+    public Event getEvent(int i) {
         return this.list.get(i);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
-    {
-        public TextView  itemTitle;
-        public TextView  itemDetail;
-        public TextView  btnRemove;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView itemTitle;
+        public TextView itemDetail;
+        public TextView btnRemove;
         public int event;
 
-        public ViewHolder(View itemView)
-        {
+        public ViewHolder(View itemView) {
             super(itemView);
-            itemTitle  = (TextView)itemView.findViewById(R.id.item_title);
-            itemDetail = (TextView)itemView.findViewById(R.id.item_detail);
-            btnRemove  = (TextView)itemView.findViewById(R.id.btnRemove);
+            itemTitle = (TextView) itemView.findViewById(R.id.item_title);
+            itemDetail = (TextView) itemView.findViewById(R.id.item_detail);
+            btnRemove = (TextView) itemView.findViewById(R.id.btnRemove);
 
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     onClickCard(v);
                 }
             });
@@ -83,29 +76,24 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
             });
         }
 
-        public void setEvent( int event )
-        {
+        public void setEvent(int event) {
             this.event = event;
         }
 
-        public void setItemTitle(String title)
-        {
+        public void setItemTitle(String title) {
             itemTitle.setText(title);
         }
 
-        public void setItemDetail(String detail)
-        {
+        public void setItemDetail(String detail) {
             itemDetail.setText(detail);
         }
 
-        public void onClickCard(View v)
-        {
-            ((Activity)v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment,new ActivityFragment() ).addToBackStack("ActivityFragment").commit();
+        public void onClickCard(View v) {
+            ((Activity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, new ActivityFragment()).addToBackStack("ActivityFragment").commit();
         }
 
-        public void onRemove( View v )
-        {
-            Snackbar.make(v, "Evento: "+ event + " removido!" ,Snackbar.LENGTH_SHORT).show();
+        public void onRemove(View v) {
+            Snackbar.make(v, "Evento: " + event + " removido!", Snackbar.LENGTH_SHORT).show();
         }
     }
 }

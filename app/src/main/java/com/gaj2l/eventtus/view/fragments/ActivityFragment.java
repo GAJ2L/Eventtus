@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.view.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,14 +34,17 @@ public class ActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((BaseActivity) getActivity()).setTitle(R.string.title_activities);
         ((BaseActivity) getActivity()).hideFloatingActionButton();
+        return inflater.inflate(R.layout.fragment_activity, container, false);
+    }
 
-        View view = inflater.inflate(R.layout.fragment_event, container, false);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.events_list);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.activities_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+
         recyclerView.setAdapter(new ActivityAdapter(activities));
 
-        return view;
     }
 }

@@ -10,7 +10,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Bundle;
-import android.content.pm.ActivityInfo;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -42,11 +41,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if( getFragmentManager().getBackStackEntryCount()<= 0 )
-        {
-            getFragmentManager().beginTransaction().replace(R.id.fragment,new EventFragment()).addToBackStack("EventFragment").commit();
+        if (getFragmentManager().getBackStackEntryCount() <= 0) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
         }
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_base);
 
         initComponents();
@@ -125,7 +122,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if (getFragmentManager().getBackStackEntryCount() > 0) {
+            if (getFragmentManager().getBackStackEntryCount() > 1) {
                 getFragmentManager().popBackStack();
             } else {
                 finish();
@@ -155,7 +152,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -167,7 +163,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 requestPermission();
             }
         } else if (id == R.id.nav_my_events) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).commit();
         } else if (id == R.id.nav_talk_with_us) {
             Intent intent = new Intent(BaseActivity.this, ContactActivity.class);
             startActivity(intent);

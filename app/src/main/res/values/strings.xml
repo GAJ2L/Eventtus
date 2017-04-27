@@ -38,6 +38,7 @@
     <string name="my_events">My events</string>
     <string name="system">System</string>
     <string name="exit">Exit</string>
+    <string name="title_details_activity">Details of activity</string>
     <!-- END TITLES-->
 
     <!-- START LABELS-->
@@ -56,5 +57,10 @@
     <!-- START ERRORS -->
     <string name="err_btn_facebook">There was an error logging in with Facebook</string>
     <string name="err_btn_google">There was an error logging in with Google</string>
+    <string name="card_details_activity">Details</string>
+    <string name="card_rate_activity">To rate</string>
+    <string name="card_send_a_question">Send a question</string>
+    <string name="card_attachment">Attachements</string>
+    <string name="btn_location_activity">Location</string>
     <!-- END ERRORS-->
 </resources>

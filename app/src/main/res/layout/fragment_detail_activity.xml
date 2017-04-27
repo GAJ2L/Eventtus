@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="com.gaj2l.eventtus.view.activities.BaseActivity">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_details_activity"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardBackgroundColor="@color/colorAccent"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtTimeActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDateActivity"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:text="08:00 às 12:00"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtDateActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNameActivity"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:text="25-05-2017"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtNameActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:text="Palestra UM"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSendQuestionActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnLocationActivity"
+            android:layout_alignStart="@+id/btnLocationActivity"
+            android:layout_below="@+id/btnLocationActivity"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/question"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:text="@string/card_send_a_question"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnLocationActivity"
+            android:layout_alignStart="@+id/btnLocationActivity"
+            android:layout_below="@+id/btnLocationActivity"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/question"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:text="@string/card_send_a_question"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnLocationActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnToRateActivity"
+            android:layout_alignStart="@+id/btnToRateActivity"
+            android:layout_below="@+id/btnToRateActivity"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/location"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:text="@string/btn_location_activity"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnToRateActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnAttachmentsActivity"
+            android:layout_alignStart="@+id/btnAttachmentsActivity"
+            android:layout_below="@+id/btnAttachmentsActivity"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/star"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:text="@string/card_rate_activity"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnAttachmentsActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnDetailsActivity"
+            android:layout_alignStart="@+id/btnDetailsActivity"
+            android:layout_below="@+id/btnDetailsActivity"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/attachment"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:text="@string/card_attachment"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnDetailsActivity"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/card_view_details_activity"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/card_view_details_activity"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/details"
+            android:elevation="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:text="@string/card_details_activity"
+            android:textColor="@android:color/white" />
+
+
+    </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

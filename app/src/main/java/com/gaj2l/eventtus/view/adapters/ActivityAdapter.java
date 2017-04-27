@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Activity;
+import com.gaj2l.eventtus.view.activities.BaseActivity;
+import com.gaj2l.eventtus.view.fragments.ActivityFragment;
+import com.gaj2l.eventtus.view.fragments.DetailActivityFragment;
 
 import java.util.List;
 
@@ -82,10 +85,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         }
 
         public void onClickCard(View v) {
-            Snackbar.make(v, "Atividade: " + getAdapterPosition() + " clicada!", Snackbar.LENGTH_SHORT).show();
-//            Intent intent = new Intent(activity, ActivityFragment.class);
-//            intent.putExtra("ref_event",event.getId());
-//            activity.startActivity(intent);
+            DetailActivityFragment fragment = new DetailActivityFragment();
+            fragment.setActivity(list.get(getAdapterPosition()));
+            ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailActivityFragment").commit();
         }
 
         public void onRemove(View v) {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.fragments.ActivityFragment;
+import com.gaj2l.eventtus.view.fragments.DetailEventFragment;
 
 import java.util.List;
 
@@ -89,7 +90,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
 
         public void onClickCard(View v) {
-            ((Activity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, new ActivityFragment()).addToBackStack("ActivityFragment").commit();
+            DetailEventFragment fragment = new DetailEventFragment();
+            fragment.setEvent(list.get(getAdapterPosition()));
+            ((Activity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment ).addToBackStack("DetailEventFragment").commit();
         }
 
         public void onRemove(View v) {

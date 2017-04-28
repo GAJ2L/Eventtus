@@ -14,6 +14,10 @@ import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.ActivityAdapter;
 
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +28,16 @@ public class ActivityFragment extends Fragment {
         activities = new ArrayList();
         Activity a = new Activity();
         a.setName("Palestra um");
+        a.setDtStart( OffsetDateTime.of(2017,01,06,17,10,0,0, ZoneOffset.UTC) );
+        a.setDtEnd( OffsetDateTime.of(2017,01,06,17,50,0,0, ZoneOffset.UTC) );
         a.setLocalName("Prédio 12 - Sala 201");
         activities.add(a);
-        activities.add(a);
-        activities.add(a);
+        Activity b = new Activity();
+        b.setName("Palestra DOIS");
+        b.setDtStart( OffsetDateTime.of(2017,01,06,8,00,0,0, ZoneOffset.UTC) );
+        b.setDtEnd( OffsetDateTime.of(2017,01,07,18,30,0,0, ZoneOffset.UTC) );
+        b.setLocalName("Prédio 15 - Sala 301");
+        activities.add(b);
     }
 
     @Override

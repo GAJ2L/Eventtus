@@ -62,5 +62,9 @@
     <string name="card_send_a_question">Enviar um pergunta</string>
     <string name="card_attachment">Anexos</string>
     <string name="btn_location_activity">Localização</string>
+    <string name="btn_about_event">Sobre</string>
+    <string name="btn_delete">Excluir</string>
+    <string name="btn_contact">Contato</string>
+    <string name="btn_activities_event">Atividades</string>
     <!-- END ERRORS-->
 </resources>

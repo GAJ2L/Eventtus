@@ -13,6 +13,8 @@ import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.fragments.ActivityFragment;
 import com.gaj2l.eventtus.view.fragments.DetailActivityFragment;
 
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_activity_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -37,7 +39,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.setItemTitle(getActivity(i).getName());
-        viewHolder.setItemDetail(getActivity(i).getLocalName());
+        viewHolder.setItemLocal(getActivity(i).getLocalName());
+        viewHolder.setItemDateStart(getActivity(i).getDtStart().format(DateTimeFormatter.ofPattern("dd-MM-y HH:mm")));
     }
 
     @Override
@@ -52,26 +55,19 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView itemTitle;
-        public TextView itemDetail;
-        public TextView btnRemove;
+        public TextView itemLocal;
+        public TextView itemDateStart;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemTitle = (TextView) itemView.findViewById(R.id.item_title);
-            itemDetail = (TextView) itemView.findViewById(R.id.item_detail);
-            btnRemove = (TextView) itemView.findViewById(R.id.btnRemove);
+            itemTitle     = (TextView) itemView.findViewById(R.id.txtName);
+            itemLocal     = (TextView) itemView.findViewById(R.id.txtLocal);
+            itemDateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onClickCard(v);
-                }
-            });
-
-            btnRemove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onRemove(v);
                 }
             });
         }
@@ -80,18 +76,18 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             itemTitle.setText(title);
         }
 
-        public void setItemDetail(String detail) {
-            itemDetail.setText(detail);
+        public void setItemLocal(String detail) {
+            itemLocal.setText(detail);
+        }
+
+        public void setItemDateStart(String date) {
+            itemDateStart.setText(date);
         }
 
         public void onClickCard(View v) {
             DetailActivityFragment fragment = new DetailActivityFragment();
             fragment.setActivity(list.get(getAdapterPosition()));
             ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailActivityFragment").commit();
-        }
-
-        public void onRemove(View v) {
-            Snackbar.make(v, "Atividade: " + getAdapterPosition() + " removido!", Snackbar.LENGTH_SHORT).show();
         }
     }
 }

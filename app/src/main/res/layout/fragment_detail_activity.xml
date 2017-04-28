@@ -70,9 +70,9 @@
             android:id="@+id/btnSendQuestionActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnLocationActivity"
-            android:layout_alignStart="@+id/btnLocationActivity"
-            android:layout_below="@+id/btnLocationActivity"
+            android:layout_alignEnd="@+id/btnDeleteEvent"
+            android:layout_alignStart="@+id/btnDeleteEvent"
+            android:layout_below="@+id/btnDeleteEvent"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/question"
@@ -85,9 +85,9 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnLocationActivity"
-            android:layout_alignStart="@+id/btnLocationActivity"
-            android:layout_below="@+id/btnLocationActivity"
+            android:layout_alignEnd="@+id/btnDeleteEvent"
+            android:layout_alignStart="@+id/btnDeleteEvent"
+            android:layout_below="@+id/btnDeleteEvent"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
@@ -98,12 +98,12 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnLocationActivity"
+            android:id="@+id/btnDeleteEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnToRateActivity"
-            android:layout_alignStart="@+id/btnToRateActivity"
-            android:layout_below="@+id/btnToRateActivity"
+            android:layout_alignEnd="@+id/btnContact"
+            android:layout_alignStart="@+id/btnContact"
+            android:layout_below="@+id/btnContact"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/location"
@@ -113,12 +113,12 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnToRateActivity"
+            android:id="@+id/btnContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnAttachmentsActivity"
-            android:layout_alignStart="@+id/btnAttachmentsActivity"
-            android:layout_below="@+id/btnAttachmentsActivity"
+            android:layout_alignEnd="@+id/btnActivitiesEvent"
+            android:layout_alignStart="@+id/btnActivitiesEvent"
+            android:layout_below="@+id/btnActivitiesEvent"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/star"
@@ -128,12 +128,12 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnAttachmentsActivity"
+            android:id="@+id/btnActivitiesEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnDetailsActivity"
-            android:layout_alignStart="@+id/btnDetailsActivity"
-            android:layout_below="@+id/btnDetailsActivity"
+            android:layout_alignEnd="@+id/btnDetailsEvents"
+            android:layout_alignStart="@+id/btnDetailsEvents"
+            android:layout_below="@+id/btnDetailsEvents"
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/attachment"
@@ -143,7 +143,7 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnDetailsActivity"
+            android:id="@+id/btnDetailsEvents"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

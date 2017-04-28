@@ -14,6 +14,9 @@ import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.EventAdapter;
 
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +26,10 @@ public class EventFragment extends Fragment {
     public EventFragment() {
         events = new ArrayList();
         Event e = new Event();
-        e.setName("Crie XP");
-        e.setDescription("15-03-2017 à 30-03-2017");
+        e.setName("Eventtus");
+        e.setDtStart( OffsetDateTime.of(2017,01,01,8,10,0,0, ZoneOffset.UTC) );
+        e.setDtEnd( OffsetDateTime.of(2017,01,16,17,50,0,0, ZoneOffset.UTC) );
+        e.setDescription("Nunca é tarde para inovar");
         events.add(e);
         events.add(e);
         events.add(e);

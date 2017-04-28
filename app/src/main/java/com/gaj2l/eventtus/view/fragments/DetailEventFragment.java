@@ -19,14 +19,14 @@ import com.gaj2l.eventtus.view.adapters.ActivityAdapter;
  * Created by lucas on 25/04/17.
  */
 
-public class DetailActivityFragment extends Fragment
+public class DetailEventFragment extends Fragment
 {
     private Activity activity;
     private TextView txtName;
     private TextView txtDate;
     private TextView txtTime;
 
-    public DetailActivityFragment(){}
+    public DetailEventFragment(){}
 
     public void setActivity(Activity activity){ this.activity = activity; }
 

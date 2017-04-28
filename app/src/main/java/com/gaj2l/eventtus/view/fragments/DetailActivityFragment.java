@@ -19,7 +19,8 @@ import com.gaj2l.eventtus.view.activities.BaseActivity;
 
 public class DetailActivityFragment extends Fragment
 {
-    private Activity activity;
+    private static Activity activity;
+
     private TextView txtName;
     private TextView txtDate;
     private TextView txtTime;

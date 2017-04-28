@@ -20,7 +20,8 @@ import com.gaj2l.eventtus.view.activities.BaseActivity;
 
 public class DetailEventFragment extends Fragment
 {
-    private Event event;
+    private static Event event;
+
     private TextView txtName;
     private TextView txtDate;
     private TextView txtDescription;

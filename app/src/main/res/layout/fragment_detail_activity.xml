@@ -25,12 +25,16 @@
             android:clickable="true"
             android:foreground="?selectableItemBackground"
             card_view:cardBackgroundColor="@color/colorAccent"
-            card_view:cardCornerRadius="12dp"
             card_view:cardElevation="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="false"
+                android:animationCache="false"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:longClickable="false">
 
                 <TextView
                     android:id="@+id/txtTimeActivity"

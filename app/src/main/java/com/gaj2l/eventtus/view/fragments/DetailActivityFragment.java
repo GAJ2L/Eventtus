@@ -1,6 +1,7 @@
 package com.gaj2l.eventtus.view.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
+import com.gaj2l.eventtus.view.activities.ToRateActivity;
 
 /**
  * Created by lucas on 25/04/17.
@@ -59,6 +61,18 @@ public class DetailActivityFragment extends Fragment
         txtDate.setText( activity.getRangeDate() );
         txtTime.setText( activity.getRangeTime() );
 
+        btnToRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onToRate(v);
+            }
+        });
+    }
 
+    private void onToRate(View v)
+    {
+        Intent activity_to_rate = new Intent( getContext(), ToRateActivity.class);
+        activity_to_rate.putExtra("activity",activity.getId());
+        startActivity(activity_to_rate);
     }
 }

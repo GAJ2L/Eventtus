@@ -11,7 +11,7 @@
     android:layout_marginTop="7dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
-    card_view:cardBackgroundColor="@color/colorAccent"
+    card_view:cardBackgroundColor="@color/colorAccentWhite"
     card_view:cardElevation="3dp">
 
     <RelativeLayout

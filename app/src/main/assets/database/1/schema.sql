@@ -46,7 +46,9 @@
     'stars' DOUBLE NOT NULL,
     'comment' TEXT NULL,
     'dt_store' VARCHAR(100) NOT NULL,
-    'dt_send' VARCHAR(100) NULL);
+    'dt_send' VARCHAR(100) NULL,
+    'ref_activity' INTEGER NOT NULL,
+    'email' TEXT NOT NULL);
 
 
   -- -----------------------------------------------------

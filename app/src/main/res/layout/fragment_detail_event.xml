@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorAccentWhite"
     tools:context="com.gaj2l.eventtus.view.activities.BaseActivity">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -24,7 +24,7 @@
             android:layout_marginTop="7dp"
             android:clickable="true"
             android:foreground="?selectableItemBackground"
-            card_view:cardBackgroundColor="@color/colorAccent"
+            card_view:cardBackgroundColor="@color/colorAccentWhite"
             card_view:cardElevation="3dp">
 
             <RelativeLayout

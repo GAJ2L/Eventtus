@@ -32,6 +32,9 @@
             android:name=".view.activities.ContactActivity"
             android:label="@string/title_contact"></activity>
         <activity
+            android:name=".view.activities.ToRateActivity"
+            android:label="@string/title_to_rate_activity"></activity>
+        <activity
             android:name=".view.activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorAccentWhite"
     tools:context="com.gaj2l.eventtus.view.activities.BaseActivity">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activities_list"

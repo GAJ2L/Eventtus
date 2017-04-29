@@ -15,6 +15,8 @@ public class Evaluation extends Entity {
     private String comment;
     private OffsetDateTime dtStore;
     private OffsetDateTime dtSend;
+    private String email;
+    private int ref_activity;
 
     public Evaluation() {
     }
@@ -27,12 +29,28 @@ public class Evaluation extends Entity {
         this.stars = stars;
     }
 
+    public int getActivity() {
+        return ref_activity;
+    }
+
+    public void setActivity(int ref_activity) {
+        this.ref_activity = ref_activity;
+    }
+
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email= email;
     }
 
     public OffsetDateTime getDtStore() {

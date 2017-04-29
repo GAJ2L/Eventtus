@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activities.BaseActivity">
+
+    <RatingBar
+        android:id="@+id/rtbStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="#ffff00"
+        android:layout_above="@+id/line2"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/txtComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rtbStar"
+        android:layout_centerInParent="true"
+        android:layout_gravity="top|left"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="top"
+        android:hint="@string/lbl_message"
+        android:inputType="textMultiLine"
+        android:lines="20" />
+
+    <Button
+        android:id="@+id/btnSendRate"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtComment"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtComment"
+        android:layout_marginBottom="35dp"
+        android:background="@color/colorPrimary"
+        android:drawableLeft="@drawable/send_white"
+        android:paddingLeft="5dp"
+        android:paddingRight="35dp"
+        android:text="@string/btnSend"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="42dp"
+        android:background="@android:color/darker_gray"
+        android:layout_above="@+id/btnSendRate"
+        android:layout_alignEnd="@+id/rtbStar"
+        android:layout_alignStart="@+id/rtbStar" />
+
+    <TextView
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_above="@+id/rtbStar"
+        android:layout_alignEnd="@+id/rtbStar"
+        android:layout_alignStart="@+id/rtbStar" />
+
+</RelativeLayout>

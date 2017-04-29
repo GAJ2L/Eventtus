@@ -12,14 +12,18 @@ import com.gaj2l.eventtus.models.Evaluation;
  */
 
 public class EvaluationRepository extends Repository<Evaluation> {
-    public static final String COLUMN_COMMENT = "name";
-    public static final String COLUMN_STARS = "local";
-    public static final String COLUMN_DT_SEND = "activity_id";
-    public static final String COLUMN_DT_STORE = "type_attachment_id";
+    public static final String COLUMN_COMMENT = "comment";
+    public static final String COLUMN_STARS = "stars";
+    public static final String COLUMN_DT_SEND = "dt_send";
+    public static final String COLUMN_DT_STORE = "dt_store";
+    public static final String COLUMN_REF_ACTIVITY = "ref_activity";
+    public static final String COLUMN_EMAIL = "email";
     private int columnIndexComment;
     private int columnIndexStars;
     private int columnIndexDtSend;
     private int columnIndexDtStore;
+    private int columnIndexActivity;
+    private int columnIndexEmail;
 
     public EvaluationRepository(SQLiteDatabase database) {
         super(Evaluation.class, database, "evaluation");
@@ -33,6 +37,8 @@ public class EvaluationRepository extends Repository<Evaluation> {
         contentValues.put(COLUMN_STARS, entity.getStars());
         putDate(contentValues, COLUMN_DT_SEND, entity.getDtSend());
         putDate(contentValues, COLUMN_DT_STORE, entity.getDtStore());
+        contentValues.put(COLUMN_REF_ACTIVITY,entity.getActivity());
+        contentValues.put(COLUMN_EMAIL,entity.getEmail());
 
         return contentValues;
     }
@@ -44,7 +50,8 @@ public class EvaluationRepository extends Repository<Evaluation> {
         entity.setComment(cursor.getString(this.columnIndexComment));
         entity.setStars(cursor.getLong(this.columnIndexStars));
         entity.setDtSend(getDate(cursor, this.columnIndexDtSend));
-        entity.setDtStore(getDate(cursor, this.columnIndexDtStore));
+        entity.setDtStore(getDate(cursor, this.columnIndexActivity));
+        entity.setDtStore(getDate(cursor, this.columnIndexEmail));
 
         return entity;
     }
@@ -57,5 +64,7 @@ public class EvaluationRepository extends Repository<Evaluation> {
         this.columnIndexStars = cursor.getColumnIndex(COLUMN_STARS);
         this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
+        this.columnIndexActivity = cursor.getColumnIndex(COLUMN_REF_ACTIVITY);
+        this.columnIndexEmail = cursor.getColumnIndex(COLUMN_EMAIL);
     }
 }

@@ -39,6 +39,7 @@
     <string name="system">System</string>
     <string name="exit">Exit</string>
     <string name="title_details_activity">Details of activity</string>
+    <string name="title_to_rate_activity">To Rate</string>
     <!-- END TITLES-->
 
     <!-- START LABELS-->
@@ -66,5 +67,7 @@
     <string name="btn_delete">Delete</string>
     <string name="btn_contact">Contact</string>
     <string name="btn_activities_event">Activities</string>
+    <string name="btnSend">Send</string>
+    <string name="btnBack" >Back</string>
     <!-- END ERRORS-->
 </resources>

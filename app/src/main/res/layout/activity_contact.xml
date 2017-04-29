@@ -16,8 +16,12 @@
             android:layout_alignEnd="@+id/txtMessage"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/txtMessage"
-            android:layout_marginBottom="147dp"
-            android:drawableStart="@drawable/send"
+            android:layout_marginBottom="35dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/send_white"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:textColor="@android:color/white"
             android:text="@string/lbl_btn_send"
             android:textSize="18sp" />
 
@@ -26,17 +30,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnSend"
+            android:layout_gravity="top|left"
+            android:gravity="top"
+            android:layout_centerInParent="true"
             android:layout_alignEnd="@+id/txtSubject"
             android:layout_alignStart="@+id/txtSubject"
             android:layout_below="@+id/txtSubject"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/lbl_message"
-            android:inputType="textAutoCorrect|textMultiLine"
-            android:singleLine="false"
-            android:textAlignment="viewStart"
-            android:textDirection="inherit" />
+            android:inputType="textMultiLine" />
 
         <EditText
             android:id="@+id/txtSubject"

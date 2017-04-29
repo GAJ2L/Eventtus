@@ -6,7 +6,6 @@ import com.gaj2l.eventtus.busines.validations.EvaluationValidation;
 import com.gaj2l.eventtus.busines.validations.EventValidation;
 import com.gaj2l.eventtus.busines.validations.MessageValidation;
 import com.gaj2l.eventtus.busines.validations.PreferenceUserValidation;
-import com.gaj2l.eventtus.busines.validations.TypeAttachmentValidation;
 import com.gaj2l.eventtus.busines.validations.UserValidation;
 import com.gaj2l.eventtus.repositories.ActivityRepository;
 import com.gaj2l.eventtus.repositories.AttachmentRepository;
@@ -14,7 +13,6 @@ import com.gaj2l.eventtus.repositories.EvaluationRepository;
 import com.gaj2l.eventtus.repositories.EventRepository;
 import com.gaj2l.eventtus.repositories.MessageRepository;
 import com.gaj2l.eventtus.repositories.PreferenceUserRepository;
-import com.gaj2l.eventtus.repositories.TypeAttachmentRepository;
 import com.gaj2l.eventtus.repositories.UserRepository;
 import com.gaj2l.eventtus.services.ActivityService;
 import com.gaj2l.eventtus.services.AttachmentService;
@@ -22,7 +20,6 @@ import com.gaj2l.eventtus.services.EvaluationService;
 import com.gaj2l.eventtus.services.EventService;
 import com.gaj2l.eventtus.services.MessageService;
 import com.gaj2l.eventtus.services.PreferenceUserService;
-import com.gaj2l.eventtus.services.TypeAttachmentService;
 import com.gaj2l.eventtus.services.UserService;
 
 import javax.inject.Singleton;
@@ -71,12 +68,6 @@ public class ServiceModule {
     @Provides
     public PreferenceUserService providesPreferenceUserService(PreferenceUserRepository preferenceUserRepository, PreferenceUserValidation preferenceUserValidation) {
         return new PreferenceUserService(preferenceUserRepository, preferenceUserValidation);
-    }
-
-    @Singleton
-    @Provides
-    public TypeAttachmentService providesTypeAttachmentService(TypeAttachmentRepository typeAttachmentRepository, TypeAttachmentValidation typeAttachmentValidation) {
-        return new TypeAttachmentService(typeAttachmentRepository, typeAttachmentValidation);
     }
 
     @Singleton

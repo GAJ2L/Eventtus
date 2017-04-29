@@ -11,7 +11,6 @@ import com.gaj2l.eventtus.services.EvaluationService;
 import com.gaj2l.eventtus.services.EventService;
 import com.gaj2l.eventtus.services.MessageService;
 import com.gaj2l.eventtus.services.PreferenceUserService;
-import com.gaj2l.eventtus.services.TypeAttachmentService;
 import com.gaj2l.eventtus.services.UserService;
 
 import javax.inject.Singleton;
@@ -37,8 +36,6 @@ public interface ServiceComponent {
     MessageService getMessageService();
 
     PreferenceUserService getPreferenceUserService();
-
-    TypeAttachmentService getTypeAttachmentService();
 
     UserService getUserService();
 }

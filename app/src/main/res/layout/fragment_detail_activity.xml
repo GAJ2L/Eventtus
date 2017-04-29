@@ -50,14 +50,14 @@
                     android:id="@+id/txtDateActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtNameActivity"
+                    android:layout_below="@+id/txtNameActivityAttachments"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
                     android:text="25-05-2017"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txtNameActivity"
+                    android:id="@+id/txtNameActivityAttachments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"

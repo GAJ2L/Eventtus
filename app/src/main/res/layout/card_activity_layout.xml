@@ -22,7 +22,7 @@
             android:id="@+id/txtLocal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/icActivty"
+            android:layout_alignBottom="@+id/icType"
             android:layout_alignEnd="@+id/txtDateStart"
             android:layout_alignStart="@+id/txtDateStart"
             android:text="Prédio"
@@ -33,17 +33,17 @@
             android:id="@+id/txtDateStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/icActivty"
+            android:layout_alignTop="@+id/icType"
             android:layout_marginEnd="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="34dp"
-            android:layout_toEndOf="@+id/icActivty"
+            android:layout_toEndOf="@+id/icType"
             android:text="2001"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/txtName"
+            android:id="@+id/txtNameFile"
             android:layout_width="112dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -62,10 +62,10 @@
             android:background="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/icActivty"
+            android:id="@+id/icType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtName"
+            android:layout_alignStart="@+id/txtNameFile"
             android:layout_below="@+id/borda"
             android:layout_marginStart="13dp"
             android:layout_marginTop="13dp"

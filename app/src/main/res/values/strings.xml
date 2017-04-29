@@ -40,6 +40,7 @@
     <string name="exit">Exit</string>
     <string name="title_details_activity">Details of activity</string>
     <string name="title_to_rate_activity">To Rate</string>
+    <string name="title_attachments_activity">Attachments</string>
     <!-- END TITLES-->
 
     <!-- START LABELS-->
@@ -61,7 +62,7 @@
     <string name="card_details_activity">Details</string>
     <string name="card_rate_activity">To rate</string>
     <string name="card_send_a_question">Send a question</string>
-    <string name="card_attachment">Attachements</string>
+    <string name="card_attachment">Attachments</string>
     <string name="btn_location_activity">Location</string>
     <string name="btn_about_event">About</string>
     <string name="btn_delete">Delete</string>

@@ -8,7 +8,6 @@ import com.gaj2l.eventtus.repositories.EvaluationRepository;
 import com.gaj2l.eventtus.repositories.EventRepository;
 import com.gaj2l.eventtus.repositories.MessageRepository;
 import com.gaj2l.eventtus.repositories.PreferenceUserRepository;
-import com.gaj2l.eventtus.repositories.TypeAttachmentRepository;
 import com.gaj2l.eventtus.repositories.UserRepository;
 
 import javax.inject.Singleton;
@@ -57,12 +56,6 @@ public class RepositoryModule {
     @Provides
     public PreferenceUserRepository providesPreferenceUserRepository(SQLiteDatabase sqLiteDatabase) {
         return new PreferenceUserRepository(sqLiteDatabase);
-    }
-
-    @Singleton
-    @Provides
-    public TypeAttachmentRepository providesTypeAttachmentRepository(SQLiteDatabase sqLiteDatabase) {
-        return new TypeAttachmentRepository(sqLiteDatabase);
     }
 
     @Singleton

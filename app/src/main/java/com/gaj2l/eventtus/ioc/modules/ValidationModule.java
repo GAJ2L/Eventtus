@@ -6,7 +6,6 @@ import com.gaj2l.eventtus.busines.validations.EvaluationValidation;
 import com.gaj2l.eventtus.busines.validations.EventValidation;
 import com.gaj2l.eventtus.busines.validations.MessageValidation;
 import com.gaj2l.eventtus.busines.validations.PreferenceUserValidation;
-import com.gaj2l.eventtus.busines.validations.TypeAttachmentValidation;
 import com.gaj2l.eventtus.busines.validations.UserValidation;
 
 import javax.inject.Singleton;
@@ -55,12 +54,6 @@ public class ValidationModule {
     @Provides
     public PreferenceUserValidation providesPreferenceUserValidate() {
         return new PreferenceUserValidation();
-    }
-
-    @Singleton
-    @Provides
-    public TypeAttachmentValidation providesTypeAttachmentValidate() {
-        return new TypeAttachmentValidation();
     }
 
     @Singleton

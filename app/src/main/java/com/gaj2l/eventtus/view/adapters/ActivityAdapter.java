@@ -1,6 +1,5 @@
 package com.gaj2l.eventtus.view.adapters;
 
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
-import com.gaj2l.eventtus.view.fragments.ActivityFragment;
 import com.gaj2l.eventtus.view.fragments.DetailActivityFragment;
 
 import org.threeten.bp.format.DateTimeFormatter;
@@ -60,7 +58,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemTitle     = (TextView) itemView.findViewById(R.id.txtName);
+            itemTitle     = (TextView) itemView.findViewById(R.id.txtNameFile);
             itemLocal     = (TextView) itemView.findViewById(R.id.txtLocal);
             itemDateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
 

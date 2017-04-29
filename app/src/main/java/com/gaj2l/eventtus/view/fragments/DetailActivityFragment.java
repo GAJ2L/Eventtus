@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Activity;
+import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.ToRateActivity;
 
@@ -48,7 +49,7 @@ public class DetailActivityFragment extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
-        txtName         = (TextView) view.findViewById(R.id.txtNameActivity);
+        txtName         = (TextView) view.findViewById(R.id.txtNameActivityAttachments);
         txtDate         = (TextView) view.findViewById(R.id.txtDateActivity);
         txtTime         = (TextView) view.findViewById(R.id.txtTimeActivity);
         btnDetails      = (Button) view.findViewById(R.id.btnDetailsEvents);
@@ -67,11 +68,25 @@ public class DetailActivityFragment extends Fragment
                 onToRate(v);
             }
         });
+
+        btnAttachments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAttachments(v);
+            }
+        });
     }
 
     private void onToRate(View v)
     {
-        Intent activity_to_rate = new Intent( getContext(), ToRateActivity.class);
+        Intent activity_attachment = new Intent( getContext(), ToRateActivity.class);
+        activity_attachment.putExtra("activity",activity.getId());
+        startActivity(activity_attachment);
+    }
+
+    private void onAttachments(View v)
+    {
+        Intent activity_to_rate = new Intent( getContext(), AttachmentActivity.class);
         activity_to_rate.putExtra("activity",activity.getId());
         startActivity(activity_to_rate);
     }

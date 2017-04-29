@@ -25,9 +25,5 @@ public class AttachmentValidation extends Validation<Attachment> {
         if (attachment.getActivityId() == 0) {
             throw new ValidationException(R.string.exception_field_activity);
         }
-
-        if (attachment.getTypeAttachmentId() == 0) {
-            throw new ValidationException(R.string.exception_field_type_attachment);
-        }
     }
 }

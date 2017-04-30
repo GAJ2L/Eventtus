@@ -77,10 +77,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
             navigationView.setNavigationItemSelectedListener(this);
 
-            TextView lblName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblName);
+            TextView lblName  = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblName);
+            TextView lblEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblEmail);
             ImageView imgUser = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imgUser);
 
             lblName.setText(Session.getInstance(getApplicationContext()).getString("username"));
+            lblEmail.setText(Session.getInstance(getApplicationContext()).getString("email"));
 
             if (android.os.Build.VERSION.SDK_INT > 9) {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

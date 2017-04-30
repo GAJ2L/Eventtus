@@ -17,12 +17,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginBehavior;
+import com.facebook.login.LoginFragment;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -34,6 +37,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -46,7 +50,7 @@ import org.json.JSONObject;
  * Created by Lucas Tomasi on 28/03/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult> {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>,GraphRequest.GraphJSONObjectCallback {
     private static final int RC_SIGN_IN = 9001;
     private SignInButton signInButton;
     private GoogleApiClient mGoogleApiClient;
@@ -119,14 +123,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void redirectIfUserLogged() {
-
         if (Profile.getCurrentProfile() != null) {
-            redirect(getUserByFacebook(Profile.getCurrentProfile()));
+            onLoginFacebook(AccessToken.getCurrentAccessToken());
         } else {
             if (Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).isDone()) {
                 GoogleSignInResult acct = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).get();
 
                 if (acct != null) {
+                    GoogleSignInAccount s = acct.getSignInAccount();
                     redirect(getUserByGoogle(acct.getSignInAccount()));
                 }
             }
@@ -139,19 +143,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             onSaveUser(user);
             redirect(user);
         }
-    }
-
-    private User getUserByFacebook(Profile object) {
-        User user = new User();
-
-        try {
-            user.setName(object.getName());
-            user.setMethodAutentication(User.METHOD_FACEBOOK);
-            user.setImage(object.getProfilePictureUri(150, 150).toString());
-        } catch (Exception e) {
-            Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
-        }
-        return user;
     }
 
     private User getUserByFacebook(JSONObject object) {
@@ -255,31 +246,40 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onSuccess(LoginResult loginResult) {
+        onLoginFacebook(loginResult.getAccessToken());
+    }
+
+    private void onLoginFacebook(AccessToken accessToken)
+    {
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,picture");
-
-        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    User user = getUserByFacebook(object);
-                    onSaveUser(user);
-                    redirect(user);
-                } catch (Exception e) {
-                    Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, this);
         request.setParameters(parameters);
         request.executeAsync();
     }
 
+
     @Override
     public void onCancel() {
+        Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onError(FacebookException error) {
         Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onCompleted(JSONObject object, GraphResponse response) {
+        try
+        {
+            User user = getUserByFacebook(object);
+            onSaveUser(user);
+            redirect(user);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
+        }
     }
 }

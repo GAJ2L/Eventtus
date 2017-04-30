@@ -14,6 +14,7 @@ import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
+import com.gaj2l.eventtus.view.activities.LocationActivity;
 import com.gaj2l.eventtus.view.activities.ToRateActivity;
 
 /**
@@ -68,13 +69,24 @@ public class DetailActivityFragment extends Fragment
                 onToRate(v);
             }
         });
-
         btnAttachments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onAttachments(v);
             }
         });
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLocation(v);
+            }
+        });
+    }
+
+    private void onLocation(View v)
+    {
+        Intent location = new Intent(getContext(), LocationActivity.class);
+        startActivity(location);
     }
 
     private void onToRate(View v)

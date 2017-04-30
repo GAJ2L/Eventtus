@@ -1,18 +1,25 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +38,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.User;
 import com.google.android.gms.auth.api.Auth;
@@ -124,13 +132,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void redirectIfUserLogged() {
         if (Profile.getCurrentProfile() != null) {
+            Preload.show(this);
             onLoginFacebook(AccessToken.getCurrentAccessToken());
         } else {
             if (Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).isDone()) {
                 GoogleSignInResult acct = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).get();
 
                 if (acct != null) {
-                    GoogleSignInAccount s = acct.getSignInAccount();
                     redirect(getUserByGoogle(acct.getSignInAccount()));
                 }
             }
@@ -224,7 +232,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Preload.show(this);
         // Login Google
         if (requestCode == RC_SIGN_IN) {
             handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));

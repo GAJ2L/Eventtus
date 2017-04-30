@@ -24,6 +24,7 @@
 
     <!-- START SOCIALS -->
     <string name="facebook_app_id">1129202023857983</string>
+    <string name="google_maps_key">AIzaSyDdgNJBepj0PlYgFmjOrbf7DZD1HQUJPwU</string>
     <!-- END SOCIALS -->
 
     <!-- START TITLES -->
@@ -69,6 +70,7 @@
     <string name="btn_contact">Contact</string>
     <string name="btn_activities_event">Activities</string>
     <string name="btnSend">Send</string>
-    <string name="btnBack" >Back</string>
+    <string name="btnBack">Back</string>
+    <string name="title_activity_location">Location</string>
     <!-- END ERRORS-->
 </resources>

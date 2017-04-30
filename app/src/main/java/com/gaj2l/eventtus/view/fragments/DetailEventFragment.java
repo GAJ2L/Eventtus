@@ -1,6 +1,7 @@
 package com.gaj2l.eventtus.view.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
+import com.gaj2l.eventtus.view.activities.ContactActivity;
 
 /**
  * Created by lucas on 25/04/17.
@@ -93,7 +95,13 @@ public class DetailEventFragment extends Fragment
         ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, new ActivityFragment()).addToBackStack("ActivityFragment").commit();
     }
 
+    public void onContact(View v)
+    {
+        Intent contact = new Intent(v.getContext(), ContactActivity.class);
+        contact.putExtra("to",event.getContactMail());
+        startActivity(contact);
+    }
+
     public void onDelete(View v) {}
-    public void onContact(View v) {}
     public void onDetails(View v) {}
 }

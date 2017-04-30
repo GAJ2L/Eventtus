@@ -10,6 +10,8 @@ import com.gaj2l.eventtus.ioc.ComponentProvider;
 
 public class MyApplication extends Application {
 
+    public static String EMAIL_APPLICATION = "contact@eventtus.com";
+
     @Override
     public void onCreate() {
         super.onCreate();

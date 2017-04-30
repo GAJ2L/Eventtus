@@ -9,13 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gaj2l.eventtus.MyApplication;
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.lib.Session;
 
 public class ContactActivity extends AppCompatActivity {
 
     private Button btnSend;
     private EditText fieldSubject;
     private EditText fieldMessage;
+    private String to;
+    private String from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,9 @@ public class ContactActivity extends AppCompatActivity {
         setTitle(R.string.title_contact);
         setContentView(R.layout.activity_contact);
 
+        from = Session.getInstance(getApplicationContext()).getString("email");
+        to   = (getIntent().getStringExtra("to")!=null)? getIntent().getStringExtra("to") : MyApplication.EMAIL_APPLICATION;
+
         this.fieldSubject = (EditText) findViewById(R.id.txtSubject);
         this.fieldMessage = (EditText) findViewById(R.id.txtMessage);
         this.btnSend = (Button) findViewById(R.id.btnSend);
@@ -33,17 +40,22 @@ public class ContactActivity extends AppCompatActivity {
         this.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String subject = fieldSubject.getText().toString();
-                String message = fieldMessage.getText().toString();
-
-                if (!subject.equals("") && !message.equals("")) {
-                    Toast.makeText(ContactActivity.this, R.string.send_message, Toast.LENGTH_LONG).show();
-                    finish();
-                } else {
-                    Toast.makeText(ContactActivity.this, R.string.validate_fields_message, Toast.LENGTH_LONG).show();
-                }
+                send(v);
             }
         });
+    }
+
+    private void send( View v )
+    {
+        String subject = fieldSubject.getText().toString();
+        String message = fieldMessage.getText().toString();
+
+        if (!subject.equals("") && !message.equals("")) {
+            Toast.makeText(ContactActivity.this, R.string.send_message, Toast.LENGTH_LONG).show();
+            finish();
+        } else {
+            Toast.makeText(ContactActivity.this, R.string.validate_fields_message, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

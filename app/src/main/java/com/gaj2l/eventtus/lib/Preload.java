@@ -18,17 +18,16 @@ public class Preload
 
     private static Dialog preload;
 
-    public static void show(Context context)
+    public static Dialog getInstance(Context context)
     {
-        preload = new Dialog(context);
-        preload.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        preload.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT) );
-        preload.setContentView(LayoutInflater.from(context).inflate(R.layout.preloader, null));
-        preload.show();
-    }
+        if( preload == null )
+        {
+            preload = new Dialog(context);
+            preload.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            preload.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT) );
+            preload.setContentView(LayoutInflater.from(context).inflate(R.layout.preloader, null));
+        }
 
-    public static void hide()
-    {
-        preload.dismiss();
+        return preload;
     }
 }

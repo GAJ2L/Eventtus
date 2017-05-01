@@ -40,7 +40,10 @@ import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.lib.WebService;
+import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.models.User;
+import com.gaj2l.eventtus.services.web.EventWebService;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -131,8 +134,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void redirectIfUserLogged() {
+        Preload.getInstance(this).show();
         if (Profile.getCurrentProfile() != null) {
-            Preload.show(this);
             onLoginFacebook(AccessToken.getCurrentAccessToken());
         } else {
             if (Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).isDone()) {
@@ -196,7 +199,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
 
         startActivity(intent);
-
         finish();
     }
 
@@ -232,7 +234,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Preload.show(this);
+        Preload.getInstance(this).show();
         // Login Google
         if (requestCode == RC_SIGN_IN) {
             handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
@@ -289,5 +291,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         {
             Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Preload.getInstance(this).dismiss();
     }
 }

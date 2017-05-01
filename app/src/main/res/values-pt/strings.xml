@@ -40,6 +40,7 @@
     <string name="system">Sistema</string>
     <string name="exit">Sair</string>
     <string name="title_details_activity">Detalhes da atividade</string>
+    <string name="title_details_event">Detalhes do evento</string>
     <string name="title_to_rate_activity">Avaliar</string>
     <string name="title_attachments_activity">Anexos</string>
     <!-- END TITLES-->

@@ -84,32 +84,6 @@ public abstract class Repository<T extends Entity> {
         return entity;
     }
 
-    public List<T> get(  String[][] filter ) {
-        List<T> list = new ArrayList<>();
-        String columns = "";
-        String args[] = new String[filter.length];
-
-        for (int i = 0; i <= filter.length ; i ++ )
-        {
-            columns+= filter[i][0] + "=?,";
-            args[i] = filter[i][1];
-        }
-
-        columns = columns.substring(0,columns.length() -1 );
-
-        Cursor cursor = this.database.query(this.table, null, columns, args, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            T entity = this.cursorToEntity(cursor);
-
-            list.add(entity);
-        }
-
-        cursor.close();
-
-        return list;
-    }
-
     public List<T> list() {
         ArrayList<T> list = new ArrayList<>();
 
@@ -122,6 +96,31 @@ public abstract class Repository<T extends Entity> {
         }
 
         cursor.close();
+        return list;
+    }
+
+    public List<T> list(String[][] filter) {
+        List<T> list = new ArrayList<>();
+        String columns = "";
+        String args[] = new String[filter.length];
+
+        for (int i = 0; i <= filter.length; i++) {
+            columns += filter[i][0] + "=?,";
+            args[i] = filter[i][1];
+        }
+
+        columns = columns.substring(0, columns.length() - 1);
+
+        Cursor cursor = this.database.query(this.table, null, columns, args, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            T entity = this.cursorToEntity(cursor);
+
+            list.add(entity);
+        }
+
+        cursor.close();
+
         return list;
     }
 

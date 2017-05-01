@@ -45,4 +45,8 @@ public abstract class Service<T extends Entity> {
     public List<T> list() {
         return this.repository.list();
     }
+
+    public List<T> list(String[][] filters) {
+        return this.repository.list(filters);
+    }
 }

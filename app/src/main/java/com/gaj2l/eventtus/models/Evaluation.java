@@ -4,8 +4,6 @@ import com.gaj2l.eventtus.lib.Entity;
 
 import org.threeten.bp.OffsetDateTime;
 
-import java.sql.Timestamp;
-
 /**
  * Created by Jackson Majolo on 24/03/2017.
  */
@@ -16,7 +14,7 @@ public class Evaluation extends Entity {
     private OffsetDateTime dtStore;
     private OffsetDateTime dtSend;
     private String email;
-    private int ref_activity;
+    private int activityId;
 
     public Evaluation() {
     }
@@ -30,11 +28,11 @@ public class Evaluation extends Entity {
     }
 
     public int getActivity() {
-        return ref_activity;
+        return activityId;
     }
 
-    public void setActivity(int ref_activity) {
-        this.ref_activity = ref_activity;
+    public void setActivity(int activityId) {
+        this.activityId = activityId;
     }
 
     public String getComment() {
@@ -50,7 +48,7 @@ public class Evaluation extends Entity {
     }
 
     public void setEmail(String email) {
-        this.email= email;
+        this.email = email;
     }
 
     public OffsetDateTime getDtStore() {

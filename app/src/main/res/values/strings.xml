@@ -40,6 +40,7 @@
     <string name="system">System</string>
     <string name="exit">Exit</string>
     <string name="title_details_activity">Details of activity</string>
+    <string name="title_details_event">Details of event</string>
     <string name="title_to_rate_activity">To Rate</string>
     <string name="title_attachments_activity">Attachments</string>
     <!-- END TITLES-->

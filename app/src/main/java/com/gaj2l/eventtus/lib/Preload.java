@@ -13,19 +13,27 @@ import com.gaj2l.eventtus.R;
  * Created by lucas on 30/04/17.
  */
 
-public class Preload
+public class Preload extends Dialog
 {
+    private static Preload preload;
 
-    private static Dialog preload;
+    private Preload(Context context)
+    {
+        super(context);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT) );
+        setContentView(LayoutInflater.from(context).inflate(R.layout.preloader, null));
+    }
 
     public static Dialog getInstance(Context context)
     {
         if( preload == null )
         {
-            preload = new Dialog(context);
-            preload.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            preload.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT) );
-            preload.setContentView(LayoutInflater.from(context).inflate(R.layout.preloader, null));
+            preload = new Preload(context);
+        }
+        else if( !preload.getContext().equals(context) )
+        {
+            preload = new Preload(context);
         }
 
         return preload;

@@ -134,7 +134,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void redirectIfUserLogged() {
-        Preload.getInstance(this).show();
         if (Profile.getCurrentProfile() != null) {
             onLoginFacebook(AccessToken.getCurrentAccessToken());
         } else {
@@ -197,9 +196,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getInstance(getApplicationContext()).put("username", user.getName());
         Session.getInstance(getApplicationContext()).put("email", user.getMail());
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
-
-        startActivity(intent);
         finish();
+        startActivity(intent);
     }
 
     public void logout() {
@@ -234,7 +232,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Preload.getInstance(this).show();
         // Login Google
         if (requestCode == RC_SIGN_IN) {
             handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
@@ -291,11 +288,5 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         {
             Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Preload.getInstance(this).dismiss();
     }
 }

@@ -15,8 +15,8 @@ public class Activity extends Entity {
     private OffsetDateTime dtEnd;
     private String localName;
     private String localGeolocation;
-    private int eventId;
-    private int evaluationId;
+    private long eventId;
+    private long evaluationId;
 
     public Activity() {
     }
@@ -45,37 +45,29 @@ public class Activity extends Entity {
         this.dtEnd = dtEnd;
     }
 
-    public String getRangeTime()
-    {
+    public String getRangeTime() {
         String time = "";
         OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end   = this.getDtEnd();
+        OffsetDateTime end = this.getDtEnd();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        if(start.format(formatter).equalsIgnoreCase(end.format(formatter)) )
-        {
+        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
             time = start.format(formatter);
-        }
-        else
-        {
+        } else {
             time = start.format(formatter) + " - " + end.format(formatter);
         }
 
         return time;
     }
 
-    public String getRangeDate()
-    {
+    public String getRangeDate() {
         String date = "";
         OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end   = this.getDtEnd();
+        OffsetDateTime end = this.getDtEnd();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-y");
-        if(start.format(formatter).equalsIgnoreCase(end.format(formatter)) )
-        {
+        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
             date = start.format(formatter);
-        }
-        else
-        {
+        } else {
             date = start.format(formatter) + " / " + end.format(formatter);
         }
 
@@ -98,7 +90,7 @@ public class Activity extends Entity {
         this.localGeolocation = localGeolocation;
     }
 
-    public int getEventId() {
+    public long getEventId() {
         return eventId;
     }
 
@@ -106,7 +98,7 @@ public class Activity extends Entity {
         this.eventId = eventId;
     }
 
-    public int getEvaluationId() {
+    public long getEvaluationId() {
         return evaluationId;
     }
 

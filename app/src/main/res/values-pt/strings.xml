@@ -59,8 +59,8 @@
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
-    <string name="err_btn_facebook">There was an error logging in with Facebook</string>
-    <string name="err_btn_google">There was an error logging in with Google</string>
+    <string name="err_btn_facebook">Ocorreu um erro ao iniciar sessão com o Facebook</string>
+    <string name="err_btn_google">Ocorreu um erro ao iniciar sessão com o Google</string>
     <string name="card_details_activity">Detalhes</string>
     <string name="card_rate_activity">Avaliar</string>
     <string name="card_send_a_question">Enviar um pergunta</string>

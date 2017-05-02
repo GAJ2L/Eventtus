@@ -1,6 +1,5 @@
 package com.gaj2l.eventtus.view.adapters;
 
-import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.models.Attachment;
 
 import java.util.List;
-
-import javax.annotation.Resource;
 
 /**
  * Created by lucas.tomasi on 29/04/17.
@@ -75,16 +72,15 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
         }
 
         public void setItemSize(String size) {
-            itemSize.setText( size );
+            itemSize.setText(size);
         }
 
-        public void setItemType(int type)
-        {
-            itemType.setCompoundDrawablesWithIntrinsicBounds( Attachment.TYPES_DRAWABLES[type] ,0,0,0);
+        public void setItemType(int type) {
+            itemType.setCompoundDrawablesWithIntrinsicBounds(Attachment.TYPES_DRAWABLES[type], 0, 0, 0);
         }
 
         public void onClickCard(View v) {
-            Snackbar.make(v,"Baixando...",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(v, "Baixando...", Snackbar.LENGTH_LONG).show();
         }
     }
 }

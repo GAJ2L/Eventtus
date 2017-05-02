@@ -35,7 +35,11 @@
     'dt_end' VARCHAR(100) NOT NULL,
     'contact_name' TEXT NOT NULL,
     'contact_phone' TEXT NOT NULL,
-    'contact_mail' TEXT NOT NULL);
+    'contact_mail' TEXT NOT NULL,
+    'user_id' INT NOT NULL,
+    CONSTRAINT 'fk_event_user'
+      FOREIGN KEY ('user_id')
+      REFERENCES 'user' ('_id'));
 
 
   -- -----------------------------------------------------

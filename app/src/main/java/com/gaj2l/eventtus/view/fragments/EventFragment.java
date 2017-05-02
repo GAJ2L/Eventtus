@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.EventAdapter;
@@ -38,8 +39,8 @@ public class EventFragment extends Fragment {
         events.add(e);
         events.add(e);
 
-        //set events
-//        this.setUserEvents();
+        // set events
+//        this.setUserEvents(Session.getInstance(getContext()).getLong("user"));
     }
 
     public void setEvents(List<Event> events) {
@@ -48,7 +49,6 @@ public class EventFragment extends Fragment {
 
     private void setUserEvents(long userId) {
         this.events = ComponentProvider.getServiceComponent().getEventService().getEventsByUser(userId);
-        this.setEvents(this.events);
     }
 
     @Override

@@ -41,5 +41,9 @@ public class EventValidation extends Validation<Event> {
         if (event.getContactMail() == null || event.getContactMail().equals("")) {
             throw new ValidationException(R.string.exception_field_contact_mail);
         }
+
+        if (event.getUserId() == 0) {
+            throw new ValidationException(R.string.exception_field_user);
+        }
     }
 }

@@ -11,22 +11,27 @@ public class Attachment extends Entity {
     private String name;
     private String size;
     private String local;
-    private int activityId;
+    private long activityId;
     private int type;
 
-    public static int TYPE_IMAGE        = 0;
-    public static int TYPE_PDF          = 1;
-    public static int TYPE_LINK         = 2;
+    public static int TYPE_IMAGE = 0;
+    public static int TYPE_PDF = 1;
+    public static int TYPE_LINK = 2;
     public static int TYPE_PRESENTATION = 3;
-    public static int TYPE_DOC          = 4;
+    public static int TYPE_DOC = 4;
 
-    public static int TYPES_DRAWABLES[] = {R.drawable.image,R.drawable.pdf,R.drawable.link,R.drawable.slide,R.drawable.doc};
+    public static int TYPES_DRAWABLES[] = {R.drawable.image, R.drawable.pdf, R.drawable.link, R.drawable.slide, R.drawable.doc};
 
-    public Attachment() {}
+    public Attachment() {
+    }
 
-    public String getSize() { return size; }
+    public String getSize() {
+        return size;
+    }
 
-    public void setSize(String size) { this.size = size; }
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public String getName() {
         return this.name;
@@ -44,7 +49,7 @@ public class Attachment extends Entity {
         this.local = local;
     }
 
-    public int getActivityId() {
+    public long getActivityId() {
         return activityId;
     }
 
@@ -56,7 +61,9 @@ public class Attachment extends Entity {
         return type;
     }
 
-    public void setType(int type) { this.type = type; }
+    public void setType(int type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {

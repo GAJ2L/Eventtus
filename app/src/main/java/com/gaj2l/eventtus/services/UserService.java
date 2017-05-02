@@ -23,20 +23,20 @@ public class UserService extends Service<User> {
      * @param user
      * @return true case success
      */
-    public boolean create(User user) {
+    public boolean create(User user) throws Exception {
         try {
-            if (this.getUserByProvider(user.getMail(), user.getMethodAutentication()) != null) {
-                store(user);
+            if (this.getUserByProvider(user.getMail(), user.getMethodAutentication()) == null) {
+                this.store(user);
             }
         } catch (Exception e) {
-            return false;
+                throw e;
         }
 
         return true;
     }
 
     public User getUserByProvider(String email, String provider) {
-        String filters[][] = {{"mail", email}, {"methodAutentication", provider}};
+        String filters[][] = {{"mail", email}, {"method_autentication", provider}};
 
         List<User> users = this.list(filters);
         return (!users.isEmpty()) ? users.get(0) : null;

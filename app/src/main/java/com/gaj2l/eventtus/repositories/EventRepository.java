@@ -20,6 +20,7 @@ public class EventRepository extends Repository<Event> {
     public static final String COLUMN_CONTACT_NAME = "contact_name";
     public static final String COLUMN_DT_SEND = "dt_send";
     public static final String COLUMN_DT_STORE = "dt_store";
+    public static final String COLUMN_USER_ID = "user_id";
     private int columnIndexName;
     private int columnIndexDescription;
     private int columnIndexBanner;
@@ -28,6 +29,7 @@ public class EventRepository extends Repository<Event> {
     private int columnIndexContactName;
     private int columnIndexDtSend;
     private int columnIndexDtStore;
+    private int columnIndexUserId;
 
     public EventRepository(SQLiteDatabase database) {
         super(Event.class, database, "event");
@@ -45,6 +47,7 @@ public class EventRepository extends Repository<Event> {
         contentValues.put(COLUMN_CONTACT_NAME, entity.getContactName());
         putDate(contentValues, COLUMN_DT_SEND, entity.getDtStart());
         putDate(contentValues, COLUMN_DT_STORE, entity.getDtEnd());
+        contentValues.put(COLUMN_USER_ID, entity.getUserId());
 
         return contentValues;
     }
@@ -61,6 +64,7 @@ public class EventRepository extends Repository<Event> {
         entity.setContactName(cursor.getString(this.columnIndexContactName));
         entity.setDtStart(getDate(cursor, this.columnIndexDtSend));
         entity.setDtEnd(getDate(cursor, this.columnIndexDtStore));
+        entity.setId(cursor.getInt(this.columnIndexUserId));
 
         return entity;
     }
@@ -77,5 +81,6 @@ public class EventRepository extends Repository<Event> {
         this.columnIndexContactName = cursor.getColumnIndex(COLUMN_CONTACT_NAME);
         this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
+        this.columnIndexUserId = cursor.getColumnIndex(COLUMN_USER_ID);
     }
 }

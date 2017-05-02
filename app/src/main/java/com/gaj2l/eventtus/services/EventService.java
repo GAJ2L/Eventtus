@@ -18,7 +18,7 @@ public class EventService extends Service<Event> {
     }
 
     public List<Event> getEventsByUser(long userId) {
-        String filters[][] = {{"activity_id", String.valueOf(userId)}};
+        String filters[][] = {{"user_id", String.valueOf(userId)}};
         List<Event> events = this.list(filters);
         return (!events.isEmpty()) ? events : null;
     }

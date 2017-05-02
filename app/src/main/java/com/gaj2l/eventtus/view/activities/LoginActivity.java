@@ -1,25 +1,18 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,24 +24,17 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
-import com.facebook.login.LoginBehavior;
-import com.facebook.login.LoginFragment;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
-import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
-import com.gaj2l.eventtus.lib.WebService;
-import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.models.User;
-import com.gaj2l.eventtus.services.web.EventWebService;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -61,7 +47,7 @@ import org.json.JSONObject;
  * Created by Lucas Tomasi on 28/03/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>,GraphRequest.GraphJSONObjectCallback {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>, GraphRequest.GraphJSONObjectCallback {
     private static final int RC_SIGN_IN = 9001;
     private SignInButton signInButton;
     private GoogleApiClient mGoogleApiClient;
@@ -147,11 +133,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void handleSignInResult(GoogleSignInResult result) {
+    private void handleSignInResult(GoogleSignInResult result) throws Exception {
         if (result.isSuccess()) {
             User user = getUserByGoogle(result.getSignInAccount());
             onSaveUser(user);
             redirect(user);
+        } else {
+            throw new Exception("error connection google");
         }
     }
 
@@ -176,23 +164,25 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         user.setName(acct.getDisplayName());
         user.setMail(acct.getEmail());
         user.setMethodAutentication(User.METHOD_GOOGLE);
-        if (acct.getPhotoUrl() != null)
+        if (acct.getPhotoUrl() != null) {
             user.setImage(acct.getPhotoUrl().toString());
+        }
 
         return user;
     }
 
-    private void onSaveUser(User user) {
+    private void onSaveUser(User user) throws Exception {
         try {
             ComponentProvider.getServiceComponent().getUserService().create(user);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 
     private void redirect(User user) {
         Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
 
+        Session.getInstance(getApplicationContext()).put("user", user.getId());
         Session.getInstance(getApplicationContext()).put("username", user.getName());
         Session.getInstance(getApplicationContext()).put("email", user.getMail());
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
@@ -234,10 +224,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onActivityResult(requestCode, resultCode, data);
         // Login Google
         if (requestCode == RC_SIGN_IN) {
-            handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
+            try {
+                handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
+            } catch (Exception e) {
+                Toast.makeText(LoginActivity.this, R.string.err_btn_google, Toast.LENGTH_LONG).show();
+            }
         }
 
-        // Login Facebook
+        // Login Google
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -256,8 +250,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         onLoginFacebook(loginResult.getAccessToken());
     }
 
-    private void onLoginFacebook(AccessToken accessToken)
-    {
+    private void onLoginFacebook(AccessToken accessToken) {
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,picture");
         GraphRequest request = GraphRequest.newMeRequest(accessToken, this);
@@ -278,14 +271,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onCompleted(JSONObject object, GraphResponse response) {
-        try
-        {
+        try {
             User user = getUserByFacebook(object);
             onSaveUser(user);
             redirect(user);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
         }
     }

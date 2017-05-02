@@ -14,7 +14,7 @@ public class Evaluation extends Entity {
     private OffsetDateTime dtStore;
     private OffsetDateTime dtSend;
     private String email;
-    private int activityId;
+    private long activityId;
 
     public Evaluation() {
     }
@@ -27,11 +27,11 @@ public class Evaluation extends Entity {
         this.stars = stars;
     }
 
-    public int getActivity() {
+    public long getActivity() {
         return activityId;
     }
 
-    public void setActivity(int activityId) {
+    public void setActivity(long activityId) {
         this.activityId = activityId;
     }
 

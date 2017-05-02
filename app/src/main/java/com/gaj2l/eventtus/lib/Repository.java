@@ -104,12 +104,16 @@ public abstract class Repository<T extends Entity> {
         String columns = "";
         String args[] = new String[filter.length];
 
-        for (int i = 0; i <= filter.length; i++) {
-            columns += filter[i][0] + "=?,";
+        for (int i = 0; i < filter.length; i++) {
+            if (i != 0) {
+                columns += " AND ";
+            }
+
+            columns += filter[i][0] + "=?";
             args[i] = filter[i][1];
         }
 
-        columns = columns.substring(0, columns.length() - 1);
+        columns = columns.substring(0, columns.length());
 
         Cursor cursor = this.database.query(this.table, null, columns, args, null, null, null, null);
 

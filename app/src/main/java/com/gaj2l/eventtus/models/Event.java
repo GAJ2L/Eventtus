@@ -18,6 +18,7 @@ public class Event extends Entity {
     private String contactName;
     private String contactPhone;
     private String contactMail;
+    private long userId;
 
     public Event() {
     }
@@ -62,37 +63,37 @@ public class Event extends Entity {
         this.dtEnd = dtEnd;
     }
 
-    public String getRangeTime()
-    {
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getRangeTime() {
         String time = "";
         OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end   = this.getDtEnd();
+        OffsetDateTime end = this.getDtEnd();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        if(start.format(formatter).equalsIgnoreCase(end.format(formatter)) )
-        {
+        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
             time = start.format(formatter);
-        }
-        else
-        {
+        } else {
             time = start.format(formatter) + " - " + end.format(formatter);
         }
 
         return time;
     }
 
-    public String getRangeDate()
-    {
+    public String getRangeDate() {
         String date = "";
         OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end   = this.getDtEnd();
+        OffsetDateTime end = this.getDtEnd();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-y");
-        if(start.format(formatter).equalsIgnoreCase(end.format(formatter)) )
-        {
+        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
             date = start.format(formatter);
-        }
-        else
-        {
+        } else {
             date = start.format(formatter) + " / " + end.format(formatter);
         }
 

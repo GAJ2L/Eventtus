@@ -25,6 +25,7 @@ public class ActivityFragment extends Fragment {
     private List<Activity> activities;
 
     public ActivityFragment() {
+        // FIXME POR QUE NAO TEM NENHUM DADO NO BD
         activities = new ArrayList();
         Activity a = new Activity();
         a.setName("Palestra um");
@@ -40,18 +41,11 @@ public class ActivityFragment extends Fragment {
         b.setDtEnd(OffsetDateTime.of(2017, 01, 07, 18, 30, 0, 0, ZoneOffset.UTC));
         b.setLocalName("Prédio 15 - Sala 301");
         activities.add(b);
-
-        //set activities
-//        this.setUserActivities();
+        //
     }
 
     public void setActivities(List<Activity> activities) {
         this.activities = activities;
-    }
-
-    private void setUserActivities(long eventId) {
-        this.activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(eventId);
-        this.setActivities(this.activities);
     }
 
     @Override

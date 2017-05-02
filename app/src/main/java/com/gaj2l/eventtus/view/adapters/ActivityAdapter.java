@@ -20,10 +20,10 @@ import java.util.List;
  */
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
-    private List<Activity> list;
+    private List<Activity> activities;
 
     public ActivityAdapter(List<Activity> list) {
-        this.list = list;
+        this.activities = list;
     }
 
     @Override
@@ -43,12 +43,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (this.activities == null) {
+            return 0;
+        }
+        return activities.size();
     }
 
 
     public Activity getActivity(int i) {
-        return this.list.get(i);
+        return this.activities.get(i);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,8 +61,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemTitle     = (TextView) itemView.findViewById(R.id.txtNameFile);
-            itemLocal     = (TextView) itemView.findViewById(R.id.txtLocal);
+            itemTitle = (TextView) itemView.findViewById(R.id.txtNameFile);
+            itemLocal = (TextView) itemView.findViewById(R.id.txtLocal);
             itemDateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +87,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         public void onClickCard(View v) {
             DetailActivityFragment fragment = new DetailActivityFragment();
-            fragment.setActivity(list.get(getAdapterPosition()));
+            fragment.setActivity(activities.get(getAdapterPosition()));
             ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailActivityFragment").commit();
         }
     }

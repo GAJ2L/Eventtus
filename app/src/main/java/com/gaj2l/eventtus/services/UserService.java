@@ -25,11 +25,14 @@ public class UserService extends Service<User> {
      */
     public boolean create(User user) throws Exception {
         try {
-            if (this.getUserByProvider(user.getMail(), user.getMethodAutentication()) == null) {
+            User userSearch = this.getUserByProvider(user.getMail(), user.getMethodAutentication());
+            if (userSearch == null) {
                 this.store(user);
+            } else {
+                user.setId(userSearch.getId());
             }
         } catch (Exception e) {
-                throw e;
+            throw e;
         }
 
         return true;

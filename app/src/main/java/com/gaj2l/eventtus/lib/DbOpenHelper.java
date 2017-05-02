@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,6 +30,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         super(context, DATABASE, null, VERSION);
         this.mContext = context;
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -64,6 +66,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void deleteDatabase(Context context) {
+        boolean delete = context.deleteDatabase("eventtus");
+        Toast.makeText(context, "Deletou?" + String.valueOf(delete), Toast.LENGTH_LONG).show();
     }
 
     public static String backupDatabase(Context context) throws Exception {

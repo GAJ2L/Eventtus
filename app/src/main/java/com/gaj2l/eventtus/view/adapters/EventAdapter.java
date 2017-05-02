@@ -22,10 +22,10 @@ import java.util.List;
  */
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
-    private List<Event> list;
+    private List<Event> events;
 
     public EventAdapter(List<Event> list) {
-        this.list = list;
+        this.events = list;
     }
 
     @Override
@@ -48,11 +48,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (this.events == null) {
+            return 0;
+        }
+        return events.size();
     }
 
     public Event getEvent(int i) {
-        return this.list.get(i);
+        return this.events.get(i);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -88,7 +91,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         public void onClickCard(View v) {
             DetailEventFragment fragment = new DetailEventFragment();
-            fragment.setEvent(list.get(getAdapterPosition()));
+            fragment.setEvent(events.get(getAdapterPosition()));
             ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
         }
     }

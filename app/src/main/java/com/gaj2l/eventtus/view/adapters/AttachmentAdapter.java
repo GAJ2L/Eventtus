@@ -17,10 +17,10 @@ import java.util.List;
  */
 
 public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.ViewHolder> {
-    private List<Attachment> list;
+    private List<Attachment> attachments;
 
     public AttachmentAdapter(List<Attachment> list) {
-        this.list = list;
+        this.attachments = list;
     }
 
     @Override
@@ -40,12 +40,15 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (this.attachments == null) {
+            return 0;
+        }
+        return attachments.size();
     }
 
 
     public Attachment getAttachment(int i) {
-        return this.list.get(i);
+        return this.attachments.get(i);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

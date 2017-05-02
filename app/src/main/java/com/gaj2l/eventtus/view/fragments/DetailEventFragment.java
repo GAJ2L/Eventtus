@@ -11,34 +11,38 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.ContactActivity;
 
+import java.util.List;
+
 /**
  * Created by lucas on 25/04/17.
  */
 
-public class DetailEventFragment extends Fragment
-{
+public class DetailEventFragment extends Fragment {
     private static Event event;
 
     private TextView txtName;
     private TextView txtDate;
     private TextView txtDescription;
-    private Button   btnActivities;
-    private Button   btnContact;
-    private Button   btnDetails;
-    private Button   btnDelete;
+    private Button btnActivities;
+    private Button btnContact;
+    private Button btnDetails;
+    private Button btnDelete;
 
-    public DetailEventFragment(){}
+    public DetailEventFragment() {
+    }
 
-    public void setEvent(Event event){ this.event= event; }
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((BaseActivity) getContext()).setTitle(R.string.title_details_event);
         ((BaseActivity) getActivity()).hideFloatingActionButton();
 
@@ -46,19 +50,18 @@ public class DetailEventFragment extends Fragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
-    {
-        txtName        = (TextView) view.findViewById(R.id.txtNameEvent);
-        txtDate        = (TextView) view.findViewById(R.id.txtDateEvent);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        txtName = (TextView) view.findViewById(R.id.txtNameEvent);
+        txtDate = (TextView) view.findViewById(R.id.txtDateEvent);
         txtDescription = (TextView) view.findViewById(R.id.txtDescriptionEvent);
-        btnActivities  = (Button) view.findViewById(R.id.btnActivitiesEvent);
-        btnContact     = (Button) view.findViewById(R.id.btnContact);
-        btnDetails     = (Button) view.findViewById(R.id.btnDetailsEvents);
-        btnDelete      = (Button) view.findViewById(R.id.btnDeleteEvent);
+        btnActivities = (Button) view.findViewById(R.id.btnActivitiesEvent);
+        btnContact = (Button) view.findViewById(R.id.btnContact);
+        btnDetails = (Button) view.findViewById(R.id.btnDetailsEvents);
+        btnDelete = (Button) view.findViewById(R.id.btnDeleteEvent);
 
-        txtName.setText( event.getName() );
-        txtDate.setText( event.getRangeDate() );
-        txtDescription.setText( event.getDescription() );
+        txtName.setText(event.getName());
+        txtDate.setText(event.getRangeDate());
+        txtDescription.setText(event.getDescription());
 
         btnActivities.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,18 +93,22 @@ public class DetailEventFragment extends Fragment
     }
 
 
-    public void onActivities(View v)
-    {
-        ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, new ActivityFragment()).addToBackStack("ActivityFragment").commit();
+    public void onActivities(View v) {
+        ActivityFragment activityFragment = new ActivityFragment();
+        List<Activity> activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(this.event.getId());
+//        activityFragment.setActivities(activities);
+        ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, activityFragment).addToBackStack("ActivityFragment").commit();
     }
 
-    public void onContact(View v)
-    {
+    public void onContact(View v) {
         Intent contact = new Intent(v.getContext(), ContactActivity.class);
-        contact.putExtra("to",event.getContactMail());
+        contact.putExtra("to", event.getContactMail());
         startActivity(contact);
     }
 
-    public void onDelete(View v) {}
-    public void onDetails(View v) {}
+    public void onDelete(View v) {
+    }
+
+    public void onDetails(View v) {
+    }
 }

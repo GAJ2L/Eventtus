@@ -1,6 +1,7 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +13,17 @@ import android.widget.Toast;
 import com.gaj2l.eventtus.MyApplication;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.services.web.EmailWebService;
 
 public class ContactActivity extends AppCompatActivity {
 
     private Button btnSend;
     private EditText fieldSubject;
     private EditText fieldMessage;
-    private String to;
-    private String from;
+    private String to_name;
+    private String to_email;
+    private String from_name;
+    private String from_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,10 @@ public class ContactActivity extends AppCompatActivity {
         setTitle(R.string.title_contact);
         setContentView(R.layout.activity_contact);
 
-        from = Session.getInstance(getApplicationContext()).getString("email");
-        to   = (getIntent().getStringExtra("to")!=null)? getIntent().getStringExtra("to") : MyApplication.EMAIL_APPLICATION;
+        from_email = Session.getInstance(getApplicationContext()).getString("email");
+        from_name  = Session.getInstance(getApplicationContext()).getString("username");
+        to_email   = (getIntent().getStringExtra("to")!=null)?   getIntent().getStringExtra("to")   : MyApplication.EMAIL_APPLICATION;
+        to_name    = (getIntent().getStringExtra("name")!=null)? getIntent().getStringExtra("name") : MyApplication.EMAIL_NAME;
 
         this.fieldSubject = (EditText) findViewById(R.id.txtSubject);
         this.fieldMessage = (EditText) findViewById(R.id.txtMessage);
@@ -45,16 +51,21 @@ public class ContactActivity extends AppCompatActivity {
         });
     }
 
-    private void send( View v )
+    private void send( final View v )
     {
         String subject = fieldSubject.getText().toString();
         String message = fieldMessage.getText().toString();
 
         if (!subject.equals("") && !message.equals("")) {
-            Toast.makeText(ContactActivity.this, R.string.send_message, Toast.LENGTH_LONG).show();
+            EmailWebService.send(message, subject, from_name, from_email, to_name, to_email, new EmailWebService.ActionEvent() {
+                @Override
+                public void afterSend(String status, String message) {
+                    Snackbar.make(v,message,Snackbar.LENGTH_LONG).show();
+                }
+            });
             finish();
         } else {
-            Toast.makeText(ContactActivity.this, R.string.validate_fields_message, Toast.LENGTH_LONG).show();
+            Snackbar.make(v, R.string.validate_fields_message, Toast.LENGTH_LONG).show();
         }
     }
 

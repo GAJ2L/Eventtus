@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.gaj2l.eventtus.lib.Preload;
+import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.lib.WebService;
+import com.gaj2l.eventtus.models.Event;
+import com.gaj2l.eventtus.services.web.EventWebService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
@@ -51,9 +56,18 @@ public class CreateEventActivity
     }
 
     @Override
-    public void handleResult( Result rawResult )
+    public void handleResult( final Result rawResult )
     {
-        Toast.makeText(CreateEventActivity.this,rawResult.getText(),Toast.LENGTH_SHORT).show();
+        Preload.getInstance(CreateEventActivity.this).show();
+
+        EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
+            @Override
+            public void onEvent(String msg) {
+                Preload.getInstance(CreateEventActivity.this).dismiss();
+                Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
         mScannerView.resumeCameraPreview( this );
     }
 }

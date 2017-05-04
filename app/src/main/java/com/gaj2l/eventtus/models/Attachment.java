@@ -53,7 +53,7 @@ public class Attachment extends Entity {
         return activityId;
     }
 
-    public void setActivityId(int activityId) {
+    public void setActivityId(long activityId) {
         this.activityId = activityId;
     }
 

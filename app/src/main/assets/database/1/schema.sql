@@ -33,10 +33,12 @@
     'banner' TEXT NULL,
     'dt_start' VARCHAR(100) NOT NULL,
     'dt_end' VARCHAR(100) NOT NULL,
+    'dt_store' VARCHAR(100),
     'contact_name' TEXT NOT NULL,
     'contact_phone' TEXT NOT NULL,
     'contact_mail' TEXT NOT NULL,
     'user_id' INT NOT NULL,
+    'event_service_id' INT NOT NULL,
     CONSTRAINT 'fk_event_user'
       FOREIGN KEY ('user_id')
       REFERENCES 'user' ('_id'));
@@ -76,29 +78,18 @@
 
 
   -- -----------------------------------------------------
-  -- Table TypeAttachment
-  -- -----------------------------------------------------
-  CREATE TABLE IF NOT EXISTS 'type_attachment' (
-    '_id' INTEGER PRIMARY KEY AUTOINCREMENT,
-    'name' TEXT NOT NULL,
-    'image' TEXT NULL);
-
-
-  -- -----------------------------------------------------
   -- Table Attachment
   -- -----------------------------------------------------
   CREATE TABLE IF NOT EXISTS 'attachment' (
     '_id' INTEGER PRIMARY KEY AUTOINCREMENT,
     'name' TEXT NOT NULL,
     'local' TEXT NOT NULL,
+    'size' TEXT NOT NULL,
     'activity_id' INT NOT NULL,
-    'type_attachment_id' INT NOT NULL,
+    'type' INT NOT NULL,
     CONSTRAINT 'fk_attachment_activity'
       FOREIGN KEY ('activity_id')
-      REFERENCES 'activity' ('_id')    
-    CONSTRAINT 'fk_attachment_type_attachment'
-      FOREIGN KEY ('type_attachment_id')
-      REFERENCES 'type_attachment' ('_id'));
+      REFERENCES 'activity' ('_id'));
 
 
   -- -----------------------------------------------------

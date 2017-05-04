@@ -18,9 +18,8 @@ public class ActivityService extends Service<Activity> {
     }
 
     public List<Activity> getActivitiesByEvent(long eventId) {
-//        String filters[][] = {{"event_id", String.valueOf(eventId)}};
-//        List<Activity> activities = this.list(filters);
-//        return (!activities.isEmpty()) ? activities : null;
-        return null;
+        String filters[][] = {{"event_id", String.valueOf(eventId)}};
+        List<Activity> activities = this.list(filters);
+        return (!activities.isEmpty()) ? activities : null;
     }
 }

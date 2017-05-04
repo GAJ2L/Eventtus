@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.EventAdapter;
@@ -25,23 +26,8 @@ public class EventFragment extends Fragment {
     private List<Event> events;
 
     public EventFragment() {
-        // FIXME POR QUE NAO TEM NENHUM DADO NO BD
-        events = new ArrayList();
-        Event e = new Event();
-        e.setName("Eventtus");
-        e.setDtStart(OffsetDateTime.of(2017, 01, 01, 8, 10, 0, 0, ZoneOffset.UTC));
-        e.setDtEnd(OffsetDateTime.of(2017, 01, 16, 17, 50, 0, 0, ZoneOffset.UTC));
-        e.setDescription("Nunca é tarde para inovar");
-        events.add(e);
-        events.add(e);
-        events.add(e);
-        events.add(e);
-        events.add(e);
-        events.add(e);
-        //
-
         // set events
-//        this.setUserEvents(Session.getInstance(getContext()).getLong("user"));
+        this.setUserEvents(Session.getInstance(getContext()).getLong("user"));
     }
 
     private void setUserEvents(long userId) {
@@ -62,6 +48,6 @@ public class EventFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(new EventAdapter(events));
+        recyclerView.setAdapter(new EventAdapter(this.events));
     }
 }

@@ -18,18 +18,22 @@ public class EventRepository extends Repository<Event> {
     public static final String COLUMN_CONTACT_MAIL = "contact_mail";
     public static final String COLUMN_CONTACT_PHONE = "contact_phone";
     public static final String COLUMN_CONTACT_NAME = "contact_name";
-    public static final String COLUMN_DT_SEND = "dt_send";
+    public static final String COLUMN_DT_START = "dt_start";
+    public static final String COLUMN_DT_END = "dt_end";
     public static final String COLUMN_DT_STORE = "dt_store";
     public static final String COLUMN_USER_ID = "user_id";
+    public static final String COLUMN_EVENT_SERVICE_ID = "event_service_id";
     private int columnIndexName;
     private int columnIndexDescription;
     private int columnIndexBanner;
     private int columnIndexContactMail;
     private int columnIndexContactPhone;
     private int columnIndexContactName;
-    private int columnIndexDtSend;
+    private int columnIndexDtStart;
+    private int columnIndexDtEnd;
     private int columnIndexDtStore;
     private int columnIndexUserId;
+    private int columnIndexEventServiceId;
 
     public EventRepository(SQLiteDatabase database) {
         super(Event.class, database, "event");
@@ -45,9 +49,11 @@ public class EventRepository extends Repository<Event> {
         contentValues.put(COLUMN_CONTACT_MAIL, entity.getContactMail());
         contentValues.put(COLUMN_CONTACT_PHONE, entity.getContactPhone());
         contentValues.put(COLUMN_CONTACT_NAME, entity.getContactName());
-        putDate(contentValues, COLUMN_DT_SEND, entity.getDtStart());
-        putDate(contentValues, COLUMN_DT_STORE, entity.getDtEnd());
+        putDate(contentValues, COLUMN_DT_START, entity.getDtStart());
+        putDate(contentValues, COLUMN_DT_END, entity.getDtEnd());
+        putDate(contentValues, COLUMN_DT_STORE, entity.getDtStore());
         contentValues.put(COLUMN_USER_ID, entity.getUserId());
+        contentValues.put(COLUMN_EVENT_SERVICE_ID, entity.getEventServiceId());
 
         return contentValues;
     }
@@ -62,9 +68,11 @@ public class EventRepository extends Repository<Event> {
         entity.setContactMail(cursor.getString(this.columnIndexContactMail));
         entity.setContactPhone(cursor.getString(this.columnIndexContactPhone));
         entity.setContactName(cursor.getString(this.columnIndexContactName));
-        entity.setDtStart(getDate(cursor, this.columnIndexDtSend));
-        entity.setDtEnd(getDate(cursor, this.columnIndexDtStore));
+        entity.setDtEnd(getDate(cursor, this.columnIndexDtEnd));
+        entity.setDtStart(getDate(cursor, this.columnIndexDtStart));
+        entity.setDtStore(getDate(cursor, this.columnIndexDtStore));
         entity.setId(cursor.getInt(this.columnIndexUserId));
+        entity.setId(cursor.getInt(this.columnIndexEventServiceId));
 
         return entity;
     }
@@ -79,8 +87,10 @@ public class EventRepository extends Repository<Event> {
         this.columnIndexContactMail = cursor.getColumnIndex(COLUMN_CONTACT_MAIL);
         this.columnIndexContactPhone = cursor.getColumnIndex(COLUMN_CONTACT_PHONE);
         this.columnIndexContactName = cursor.getColumnIndex(COLUMN_CONTACT_NAME);
-        this.columnIndexDtSend = cursor.getColumnIndex(COLUMN_DT_SEND);
+        this.columnIndexDtStart = cursor.getColumnIndex(COLUMN_DT_START);
+        this.columnIndexDtEnd = cursor.getColumnIndex(COLUMN_DT_END);
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
         this.columnIndexUserId = cursor.getColumnIndex(COLUMN_USER_ID);
+        this.columnIndexEventServiceId = cursor.getColumnIndex(COLUMN_EVENT_SERVICE_ID);
     }
 }

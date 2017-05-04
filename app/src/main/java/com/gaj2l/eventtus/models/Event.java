@@ -1,6 +1,7 @@
 package com.gaj2l.eventtus.models;
 
 import com.gaj2l.eventtus.lib.Entity;
+import com.gaj2l.eventtus.lib.Util;
 
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -15,12 +16,22 @@ public class Event extends Entity {
     private String banner;
     private OffsetDateTime dtStart;
     private OffsetDateTime dtEnd;
+    private OffsetDateTime dtStore;
     private String contactName;
     private String contactPhone;
     private String contactMail;
     private long userId;
+    private long eventServiceId;
 
     public Event() {
+    }
+
+    public long getEventServiceId() {
+        return eventServiceId;
+    }
+
+    public void setEventServiceId(long eventServiceId) {
+        this.eventServiceId = eventServiceId;
     }
 
     public String getName() {
@@ -73,30 +84,21 @@ public class Event extends Entity {
 
     public String getRangeTime() {
         String time = "";
-        OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end = this.getDtEnd();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
-            time = start.format(formatter);
+        if (Util.getTimeFomatted(dtStart).equalsIgnoreCase(Util.getTimeFomatted(dtEnd))) {
+            time = Util.getTimeFomatted(dtStart);
         } else {
-            time = start.format(formatter) + " - " + end.format(formatter);
+            time = Util.getTimeFomatted(dtStart)+ " / " + Util.getTimeFomatted(dtEnd);
         }
-
         return time;
     }
 
     public String getRangeDate() {
         String date = "";
-        OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end = this.getDtEnd();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-y");
-        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
-            date = start.format(formatter);
+        if (Util.getDateFomatted(dtStart).equalsIgnoreCase(Util.getDateFomatted(dtEnd))) {
+            date = Util.getDateFomatted(dtStart);
         } else {
-            date = start.format(formatter) + " / " + end.format(formatter);
+            date = Util.getDateFomatted(dtStart) + " / " + Util.getDateFomatted(dtEnd);
         }
-
         return date;
     }
 
@@ -122,6 +124,14 @@ public class Event extends Entity {
 
     public void setContactMail(String contactMail) {
         this.contactMail = contactMail;
+    }
+
+    public OffsetDateTime getDtStore() {
+        return dtStore;
+    }
+
+    public void setDtStore(OffsetDateTime dtStore) {
+        this.dtStore = dtStore;
     }
 
     @Override

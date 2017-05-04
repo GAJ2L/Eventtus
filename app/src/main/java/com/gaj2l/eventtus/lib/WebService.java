@@ -10,22 +10,22 @@ import com.loopj.android.http.RequestParams;
 
 public class WebService
 {
-    private static final String BASE_URL = "http://192.168.1.105/";
+    private static final String BASE_URL = "http://jacksonmajolo.ml/Eventtus/WebService.php";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler)
+    public static void get(String clazz, String method, RequestParams params, AsyncHttpResponseHandler responseHandler)
     {
-        client.get(getAbsoluteUrl(url), params, responseHandler);
+        client.get(WebService.getUrl(clazz,method), params, responseHandler);
     }
 
-    public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler)
+    public static void post(String clazz, String method, RequestParams params, AsyncHttpResponseHandler responseHandler)
     {
-        client.post(getAbsoluteUrl(url), params, responseHandler);
+        client.post(WebService.getUrl(clazz,method), params, responseHandler);
     }
 
-    private static String getAbsoluteUrl(String relativeUrl)
+    public static String getUrl(String clazz, String method)
     {
-        return BASE_URL + relativeUrl;
+        return WebService.BASE_URL+"?class="+clazz+"&method="+method;
     }
 }

@@ -169,10 +169,6 @@ public abstract class Repository<T extends Entity> {
         if (value == null) {
             return null;
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        TemporalAccessor accessor = formatter.parse(value);
-        Instant instant = Instant.from(accessor);
-
-        return OffsetDateTime.ofInstant(instant, ZoneId.systemDefault());
+        return OffsetDateTime.parse(value);
     }
 }

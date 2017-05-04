@@ -1,6 +1,7 @@
 package com.gaj2l.eventtus.models;
 
 import com.gaj2l.eventtus.lib.Entity;
+import com.gaj2l.eventtus.lib.Util;
 
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -47,30 +48,21 @@ public class Activity extends Entity {
 
     public String getRangeTime() {
         String time = "";
-        OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end = this.getDtEnd();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
-            time = start.format(formatter);
+        if (Util.getTimeFomatted(dtStart).equalsIgnoreCase(Util.getTimeFomatted(dtEnd))) {
+            time = Util.getTimeFomatted(dtStart);
         } else {
-            time = start.format(formatter) + " - " + end.format(formatter);
+            time = Util.getTimeFomatted(dtStart)+ " / " + Util.getTimeFomatted(dtEnd);
         }
-
         return time;
     }
 
     public String getRangeDate() {
         String date = "";
-        OffsetDateTime start = this.getDtStart();
-        OffsetDateTime end = this.getDtEnd();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-y");
-        if (start.format(formatter).equalsIgnoreCase(end.format(formatter))) {
-            date = start.format(formatter);
+        if (Util.getDateFomatted(dtStart).equalsIgnoreCase(Util.getDateFomatted(dtEnd))) {
+            date = Util.getDateFomatted(dtStart);
         } else {
-            date = start.format(formatter) + " / " + end.format(formatter);
+            date = Util.getDateFomatted(dtStart) + " / " + Util.getDateFomatted(dtEnd);
         }
-
         return date;
     }
 
@@ -94,7 +86,7 @@ public class Activity extends Entity {
         return eventId;
     }
 
-    public void setEventId(int eventId) {
+    public void setEventId(long eventId) {
         this.eventId = eventId;
     }
 
@@ -102,7 +94,7 @@ public class Activity extends Entity {
         return evaluationId;
     }
 
-    public void setEvaluationId(int evaluationId) {
+    public void setEvaluationId(long evaluationId) {
         this.evaluationId = evaluationId;
     }
 

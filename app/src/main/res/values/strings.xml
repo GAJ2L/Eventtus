@@ -35,6 +35,7 @@
     <string name="title_activities">Activities</string>
     <string name="title_events">Events</string>
     <string name="title_contact">Contact us</string>
+    <string name="title_questions">Send a Question</string>
     <string name="add_event">Add event</string>
     <string name="my_events">My events</string>
     <string name="system">System</string>

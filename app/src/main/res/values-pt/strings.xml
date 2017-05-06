@@ -44,6 +44,7 @@
     <string name="title_details_event">Detalhes do evento</string>
     <string name="title_to_rate_activity">Avaliar</string>
     <string name="title_attachments_activity">Anexos</string>
+    <string name="title_send_a_question">Enviar uma  mensagem</string>
     <!-- END TITLES-->
 
     <!-- START LABELS-->
@@ -52,6 +53,8 @@
     <string name="lbl_subject">Assunto</string>
     <string name="lbl_message">Mensagem</string>
     <string name="lbl_btn_send">Enviar</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
     <!-- END LABELS-->
 
     <!-- START MESSAGES -->
@@ -62,7 +65,10 @@
     <string name="downloading">Baixando</string>
     <string name="downloading_success">Baixado com sucesso</string>
     <string name="downloading_error">Erro ao baixar arquivo</string>
-
+    <string name="error_send_message">Erro ao envia a mensagem</string>
+    <string name="error_delete_event">Erro ao deletar evento</string>
+    <string name="success_delete_event">Sucesso ao deletar evento</string>
+    <string name="question_delete_msg">Você deseja deletar?</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

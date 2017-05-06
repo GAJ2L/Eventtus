@@ -72,7 +72,7 @@ public class EventRepository extends Repository<Event> {
         entity.setDtStart(getDate(cursor, this.columnIndexDtStart));
         entity.setDtStore(getDate(cursor, this.columnIndexDtStore));
         entity.setEventServiceId(cursor.getInt(this.columnIndexEventServiceId));
-
+        entity.setUserId(cursor.getLong(this.columnIndexUserId));
         return entity;
     }
 

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.DbOpenHelper;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 /**
  * Created by Lucas Tomasi
@@ -17,6 +18,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AndroidThreeTen.init(this);
         ComponentProvider.initialize(this);
     }
 }

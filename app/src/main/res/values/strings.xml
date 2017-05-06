@@ -44,6 +44,7 @@
     <string name="title_details_event">Details of event</string>
     <string name="title_to_rate_activity">To Rate</string>
     <string name="title_attachments_activity">Attachments</string>
+    <string name="title_send_a_question">Send a question</string>
     <!-- END TITLES-->
 
     <!-- START LABELS-->
@@ -52,6 +53,8 @@
     <string name="lbl_subject">Subject</string>
     <string name="lbl_message">Message</string>
     <string name="lbl_btn_send">Send</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <!-- END LABELS-->
 
     <!-- START MESSAGES -->
@@ -62,6 +65,10 @@
     <string name="downloading">Downloading</string>
     <string name="downloading_success">Downloaded successfully</string>
     <string name="downloading_error">Error downloading file</string>
+    <string name="error_send_message">Error in send the question</string>
+    <string name="error_delete_event">Error in delete event</string>
+    <string name="success_delete_event">Success in delete event</string>
+    <string name="question_delete_msg">Do you want to delete?</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

@@ -17,8 +17,11 @@ public class MessageService extends Service<Message> {
         super(repository, validation);
     }
 
-    public List<Message> getMessagesByActivity(long activityId) {
-        String filters[][] = {{"activity_id", String.valueOf(activityId)}};
+    public List<Message> getMessagesByActivity(long activityId, long user_id) {
+        String filters[][] = {
+                {"activity_id", String.valueOf(activityId)},
+                {"user_id"    , String.valueOf(user_id)   }
+        };
         List<Message> messages = this.list(filters);
         return (!messages.isEmpty()) ? messages : null;
     }

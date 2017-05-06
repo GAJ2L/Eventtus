@@ -53,7 +53,7 @@
     'comment' TEXT NULL,
     'dt_store' VARCHAR(100) NOT NULL,
     'dt_send' VARCHAR(100) NULL,
-    'ref_activity' INTEGER NOT NULL,
+    'activity_id' INTEGER NOT NULL,
     'email' TEXT NOT NULL);
 
 
@@ -99,7 +99,7 @@
     '_id' INTEGER PRIMARY KEY AUTOINCREMENT,
     'content' TEXT NOT NULL,
     'dt_store' VARCHAR(100) NOT NULL,
-    'dt_send' VARCHAR(100) NOT NULL,
+    'dt_send' VARCHAR(100),
     'user_id' INT NOT NULL,
     'activity_id' INT NOT NULL,
     CONSTRAINT 'fk_message_user'

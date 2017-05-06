@@ -86,22 +86,6 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnDeleteEvent"
-            android:layout_alignStart="@+id/btnDeleteEvent"
-            android:layout_below="@+id/btnDeleteEvent"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:drawableLeft="@drawable/question"
-            android:paddingLeft="5dp"
-            android:paddingRight="35dp"
-            android:text="@string/card_send_a_question"
-            android:textColor="@android:color/white" />
-
-        <Button
             android:id="@+id/btnDeleteEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

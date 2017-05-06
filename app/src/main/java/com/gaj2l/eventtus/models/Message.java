@@ -46,7 +46,7 @@ public class Message extends Entity {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -54,7 +54,7 @@ public class Message extends Entity {
         return activityId;
     }
 
-    public void setActivityId(int activityId) {
+    public void setActivityId(long activityId) {
         this.activityId = activityId;
     }
 

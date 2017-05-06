@@ -42,7 +42,7 @@ public class EventWebService
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response)
             {
-                String msg = "";
+                String status = "";
                 try
                 {
                     Event event = new Event();
@@ -98,18 +98,23 @@ public class EventWebService
                             }
                         }
                     }
-                    msg = "Success";
+                    status = "success";
                 }
                 catch (Exception e)
                 {
-                    msg = e.getMessage();
+                    status = "error";
                     e.printStackTrace();
                 }
 
                 finally
                 {
-                    action.onEvent(msg);
+                    action.onEvent(status);
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                action.onEvent("error");
             }
         });
     }

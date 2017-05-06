@@ -1,9 +1,13 @@
 package com.gaj2l.eventtus.view.fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,8 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Message;
+import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
@@ -106,7 +112,33 @@ public class DetailEventFragment extends Fragment {
         startActivity(contact);
     }
 
-    public void onDelete(View v) {
+    public void onDelete(final View v)
+    {
+        String msg   = getResources().getString(R.string.question_delete_msg);
+        String title = getResources().getString(R.string.app_name);
+        Message.confirm(getContext(),title,msg, new Message.Action() {
+            @Override
+            public void onPositiveButton() {
+                delete(v);
+            }
+            @Override
+            public void onNegativeButton() {}
+        });
+    }
+
+    public void delete(View v)
+    {
+        try
+        {
+            ComponentProvider.getServiceComponent().getEventService().clearEvent(event);
+            Util.clearBackStake(((BaseActivity) v.getContext()).getFragmentManager());
+            ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            Snackbar.make(v,R.string.error_delete_event,Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void onDetails(View v) {

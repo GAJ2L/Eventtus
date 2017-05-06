@@ -15,6 +15,7 @@ import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.LocationActivity;
+import com.gaj2l.eventtus.view.activities.QuestionActivity;
 import com.gaj2l.eventtus.view.activities.ToRateActivity;
 
 /**
@@ -81,6 +82,12 @@ public class DetailActivityFragment extends Fragment
                 onLocation(v);
             }
         });
+        btnSendQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSendQuestion(v);
+            }
+        });
     }
 
     private void onLocation(View v)
@@ -101,5 +108,12 @@ public class DetailActivityFragment extends Fragment
         Intent activity_to_rate = new Intent( getContext(), AttachmentActivity.class);
         activity_to_rate.putExtra("activity",activity.getId());
         startActivity(activity_to_rate);
+    }
+
+    private void onSendQuestion(View v)
+    {
+        Intent send_question = new Intent( getContext(), QuestionActivity.class);
+        send_question.putExtra("activity",activity.getId());
+        startActivity(send_question);
     }
 }

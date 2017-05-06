@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.lib;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
@@ -17,7 +19,7 @@ import java.net.URL;
  * Created by lucas on 05/05/17.
  */
 
-public class Download extends AsyncTask<String, String, String>
+public abstract class Download extends AsyncTask<String, String, String>
 {
     private View view;
     private String url;
@@ -63,6 +65,8 @@ public class Download extends AsyncTask<String, String, String>
             {
                 Snackbar.make(view, R.string.downloading_success ,Snackbar.LENGTH_SHORT).show();
             }
+
+            onEvent(f);
         }
         catch (Exception e)
         {
@@ -76,4 +80,7 @@ public class Download extends AsyncTask<String, String, String>
 
         return null;
     }
+
+    public abstract void onEvent( File file );
+
 }

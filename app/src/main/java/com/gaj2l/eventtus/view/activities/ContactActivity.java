@@ -40,6 +40,7 @@ public class ContactActivity extends AppCompatActivity {
         to_name    = (getIntent().getStringExtra("name")!=null)? getIntent().getStringExtra("name") : MyApplication.EMAIL_NAME;
 
         this.fieldSubject = (EditText) findViewById(R.id.txtSubject);
+        this.fieldSubject.requestFocus();
         this.fieldMessage = (EditText) findViewById(R.id.txtMessage);
         this.btnSend = (Button) findViewById(R.id.btnSend);
 

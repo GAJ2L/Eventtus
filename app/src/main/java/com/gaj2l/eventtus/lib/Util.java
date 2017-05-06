@@ -1,5 +1,6 @@
 package com.gaj2l.eventtus.lib;
 
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
@@ -64,5 +65,14 @@ public class Util
     public static ServerSocket socket()
     {
         return socket;
+    }
+
+    public static  void clearBackStake(FragmentManager fragmentManager)
+    {
+        while ( fragmentManager.getBackStackEntryCount() > 0 )
+        {
+            fragmentManager.popBackStack();
+            fragmentManager.executePendingTransactions();
+        }
     }
 }

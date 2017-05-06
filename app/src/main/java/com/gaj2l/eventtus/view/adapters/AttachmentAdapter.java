@@ -2,19 +2,19 @@ package com.gaj2l.eventtus.view.adapters;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.design.widget.Snackbar;
+import android.os.StrictMode;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Download;
-import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Attachment;
-import com.gaj2l.eventtus.view.activities.BaseActivity;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -87,11 +87,30 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
             itemType.setCompoundDrawablesWithIntrinsicBounds(Attachment.TYPES_DRAWABLES[type], 0, 0, 0);
         }
 
-        public void onClickCard(View v) {
+        public void onClickCard(final View v) {
             Attachment a = getAttachment(getAdapterPosition());
             if( a.getType() != Attachment.TYPE_LINK )
             {
-                new Download(v,a.getLocal(),a.getName()).execute();
+                new Download(v, a.getLocal(), a.getName()) {
+                    @Override
+                    public void onEvent(File file) {
+                        try
+                        {
+                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                            StrictMode.setVmPolicy(builder.build());
+                            Intent intent = new Intent();
+                            intent.setAction(android.content.Intent.ACTION_VIEW);
+                            String extension = MimeTypeMap.getFileExtensionFromUrl(file.getAbsolutePath());
+                            String mime      = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+                            intent.setDataAndType(Uri.fromFile(file), mime);
+                            v.getContext().startActivity(Intent.createChooser(intent,""));
+                        }
+                        catch ( Exception e )
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }.execute();
             }
             else
             {

@@ -106,8 +106,10 @@ public class EventWebService
                     e.printStackTrace();
                 }
 
-                action.onEvent(msg);
-
+                finally
+                {
+                    action.onEvent(msg);
+                }
             }
         });
     }

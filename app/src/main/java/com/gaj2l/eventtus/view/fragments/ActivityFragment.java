@@ -24,25 +24,7 @@ import java.util.List;
 public class ActivityFragment extends Fragment {
     private List<Activity> activities;
 
-    public ActivityFragment() {
-        // FIXME POR QUE NAO TEM NENHUM DADO NO BD
-        activities = new ArrayList();
-        Activity a = new Activity();
-        a.setName("Palestra um");
-        a.setId(1);
-        a.setDtStart(OffsetDateTime.of(2017, 01, 06, 17, 10, 0, 0, ZoneOffset.UTC));
-        a.setDtEnd(OffsetDateTime.of(2017, 01, 06, 17, 50, 0, 0, ZoneOffset.UTC));
-        a.setLocalName("Prédio 12 - Sala 201");
-        activities.add(a);
-        Activity b = new Activity();
-        b.setName("Palestra DOIS");
-        b.setId(2);
-        b.setDtStart(OffsetDateTime.of(2017, 01, 06, 8, 00, 0, 0, ZoneOffset.UTC));
-        b.setDtEnd(OffsetDateTime.of(2017, 01, 07, 18, 30, 0, 0, ZoneOffset.UTC));
-        b.setLocalName("Prédio 15 - Sala 301");
-        activities.add(b);
-        //
-    }
+    public ActivityFragment() {}
 
     public void setActivities(List<Activity> activities) {
         this.activities = activities;

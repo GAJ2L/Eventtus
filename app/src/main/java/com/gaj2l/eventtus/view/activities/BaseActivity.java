@@ -115,6 +115,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private void registerEvent() {
         Intent event = new Intent(BaseActivity.this, CreateEventActivity.class);
         startActivity(event);
+        finish();
     }
 
     @Override

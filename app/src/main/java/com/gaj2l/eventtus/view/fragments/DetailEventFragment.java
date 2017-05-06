@@ -96,7 +96,7 @@ public class DetailEventFragment extends Fragment {
     public void onActivities(View v) {
         ActivityFragment activityFragment = new ActivityFragment();
         List<Activity> activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(this.event.getId());
-//        activityFragment.setActivities(activities);
+        activityFragment.setActivities(activities);
         ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, activityFragment).addToBackStack("ActivityFragment").commit();
     }
 

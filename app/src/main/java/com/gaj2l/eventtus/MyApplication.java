@@ -17,7 +17,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        DbOpenHelper.deleteDatabase(getApplicationContext());
         ComponentProvider.initialize(this);
     }
 }

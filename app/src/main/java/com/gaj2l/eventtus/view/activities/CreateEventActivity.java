@@ -1,7 +1,10 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.gaj2l.eventtus.lib.Preload;
@@ -58,16 +61,28 @@ public class CreateEventActivity
     @Override
     public void handleResult( final Result rawResult )
     {
+        mScannerView.stopCamera();
         Preload.getInstance(CreateEventActivity.this).show();
-
         EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
             @Override
             public void onEvent(String msg) {
                 Preload.getInstance(CreateEventActivity.this).dismiss();
                 Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();
-                finish();
+                redirect();
             }
         });
         mScannerView.resumeCameraPreview( this );
+    }
+
+    @Override
+    public void onBackPressed() {
+        redirect();
+    }
+
+    private void redirect()
+    {
+        Intent events = new Intent(CreateEventActivity.this,BaseActivity.class);
+        startActivity(events);
+        finish();
     }
 }

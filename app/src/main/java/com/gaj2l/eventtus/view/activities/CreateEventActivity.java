@@ -69,7 +69,7 @@ public class CreateEventActivity
             public void onEvent(String status) {
                 Preload.getInstance(CreateEventActivity.this).dismiss();
                 redirect();
-                int msg = (status.equals("success"))? R.string.add_event_success : R.string.add_event_error;
+                int msg = (status.equalsIgnoreCase("success"))? R.string.add_event_success : R.string.add_event_error;
                 Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();
             }
         });

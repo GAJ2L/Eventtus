@@ -127,7 +127,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 GoogleSignInResult acct = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).get();
 
                 if (acct != null) {
-                    redirect(getUserByGoogle(acct.getSignInAccount()));
+                    try
+                    {
+                        User user = getUserByGoogle(acct.getSignInAccount());
+                        onSaveUser(user);
+                        redirect(user);
+                    }
+                    catch (Exception e )
+                    {
+                        Toast.makeText(LoginActivity.this,R.string.err_btn_google,Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }
@@ -139,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             onSaveUser(user);
             redirect(user);
         } else {
-            throw new Exception("error connection google");
+            throw new Exception("error");
         }
     }
 

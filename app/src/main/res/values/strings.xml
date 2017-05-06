@@ -57,6 +57,11 @@
     <!-- START MESSAGES -->
     <string name="send_message">Message sent successfully</string>
     <string name="validate_fields_message">Fill in the form fields</string>
+    <string name="add_event_success">Event added successfully</string>
+    <string name="add_event_error">There was an error adding the event</string>
+    <string name="downloading">Downloading</string>
+    <string name="downloading_success">Downloaded successfully</string>
+    <string name="downloading_error">Error downloading file</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

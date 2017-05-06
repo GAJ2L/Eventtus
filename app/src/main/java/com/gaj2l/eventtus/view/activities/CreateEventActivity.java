@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.WebService;
@@ -65,10 +66,11 @@ public class CreateEventActivity
         Preload.getInstance(CreateEventActivity.this).show();
         EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
             @Override
-            public void onEvent(String msg) {
+            public void onEvent(String status) {
                 Preload.getInstance(CreateEventActivity.this).dismiss();
-                Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();
                 redirect();
+                int msg = (status.equals("success"))? R.string.add_event_success : R.string.add_event_error;
+                Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();
             }
         });
         mScannerView.resumeCameraPreview( this );

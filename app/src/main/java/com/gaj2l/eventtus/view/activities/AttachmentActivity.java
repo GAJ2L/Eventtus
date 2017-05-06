@@ -1,5 +1,6 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.models.Attachment;
 import com.gaj2l.eventtus.view.adapters.AttachmentAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

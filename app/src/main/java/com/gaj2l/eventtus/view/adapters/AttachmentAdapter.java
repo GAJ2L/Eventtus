@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.view.adapters;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.lib.Download;
+import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Attachment;
+import com.gaj2l.eventtus.view.activities.BaseActivity;
 
 import java.util.List;
 
@@ -83,7 +88,19 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
         }
 
         public void onClickCard(View v) {
-            Snackbar.make(v, "Baixando...", Snackbar.LENGTH_LONG).show();
+            Attachment a = getAttachment(getAdapterPosition());
+            if( a.getType() != Attachment.TYPE_LINK )
+            {
+                new Download(v,a.getLocal(),a.getName()).execute();
+            }
+            else
+            {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(a.getLocal()));
+                v.getContext().startActivity(intent);
+            }
         }
     }
 }

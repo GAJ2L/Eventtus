@@ -1,9 +1,21 @@
 package com.gaj2l.eventtus.lib;
 
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.view.View;
+
+import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.socket.ServerSocket;
 
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
+
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Created by lucas tomasi on 03/05/17.

@@ -68,7 +68,8 @@
     'local_name' TEXT NOT NULL,
     'local_geolocation' TEXT NULL,
     'event_id' INT NOT NULL,
-    'evaluation_id' INT NOT NULL,
+    'evaluation_id' INT,
+    'activity_service_id' INT NOT NULL,
     CONSTRAINT 'fk_activity_event'
       FOREIGN KEY ('event_id')
       REFERENCES 'event' ('_id'),

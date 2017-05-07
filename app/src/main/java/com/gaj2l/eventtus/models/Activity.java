@@ -17,9 +17,18 @@ public class Activity extends Entity {
     private String localName;
     private String localGeolocation;
     private long eventId;
+    private long activityServiceId;
     private long evaluationId;
 
     public Activity() {
+    }
+
+    public long getActivityServiceId() {
+        return activityServiceId;
+    }
+
+    public void setActivityServiceId(long activityServiceId) {
+        this.activityServiceId = activityServiceId;
     }
 
     public String getName() {

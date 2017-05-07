@@ -26,7 +26,7 @@ public class Util
 {
     public static DateTimeFormatter PATTERN_TIME = DateTimeFormatter.ofPattern("HH:mm");
     public static DateTimeFormatter PATTERN_DATE = DateTimeFormatter.ofPattern("dd-MM-y");
-    public static DateTimeFormatter PATTERN_DATE_TIME = DateTimeFormatter.ofPattern("dd-MM-y HH:mm");
+    public static DateTimeFormatter PATTERN_DATE_TIME = DateTimeFormatter.ofPattern("dd-MM-y HH:mm:ss");
 
     public static ServerSocket socket;
 

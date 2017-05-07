@@ -38,7 +38,7 @@ public abstract class Service<T extends Entity> {
         this.repository.delete(entity);
     }
 
-    public T get(int id) {
+    public T get(long id) {
         return this.repository.get(id);
     }
 

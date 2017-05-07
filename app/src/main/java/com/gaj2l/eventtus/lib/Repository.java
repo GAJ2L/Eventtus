@@ -68,7 +68,7 @@ public abstract class Repository<T extends Entity> {
         this.database.delete(this.table, "_id=?", args);
     }
 
-    public T get(int id) {
+    public T get(long id) {
         String[] args = {String.valueOf(id)};
 
         Cursor cursor = this.database.query(this.table, null, "_id=?", args, null, null, null, null);

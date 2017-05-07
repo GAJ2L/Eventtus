@@ -10,6 +10,7 @@ import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.lib.WebService;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Attachment;
+import com.gaj2l.eventtus.models.Evaluation;
 import com.gaj2l.eventtus.models.Event;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -75,6 +76,7 @@ public class EventWebService
                         activity.setDtEnd( Util.parse2OffsetDateTime( response.getString("dt_end") ) );
                         activity.setLocalName( actJson.getString( "local_name") );
                         activity.setLocalGeolocation( actJson.getString("local_geolocation") );
+                        activity.setActivityServiceId( actJson.getLong("id") );
                         activity.setEventId( event.getId() );
 
                         // saving activity
@@ -96,6 +98,21 @@ public class EventWebService
                                 //saving attachment
                                 ComponentProvider.getServiceComponent().getAttachmentService().store(attachment);
                             }
+                        }
+
+                        if( actJson.has("evaluation") )
+                        {
+                            JSONObject evaluation = actJson.getJSONObject("evaluation");
+
+                            Evaluation eval = new Evaluation();
+                            eval.setStars( Float.parseFloat(evaluation.getString("stars")) );
+                            eval.setComment(evaluation.getString("comment"));
+                            eval.setEmail(evaluation.getString("email"));
+                            eval.setDtStore( Util.parse2OffsetDateTime(evaluation.getString("dt_store")));
+                            eval.setActivity( activity.getId());
+
+                            //saving attachment
+                            ComponentProvider.getServiceComponent().getEvaluationService().store(eval);
                         }
                     }
                     status = "success";

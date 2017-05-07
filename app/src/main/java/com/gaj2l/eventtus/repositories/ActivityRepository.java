@@ -19,6 +19,7 @@ public class ActivityRepository extends Repository<Activity> {
     public static final String COLUMN_EVALUATION_ID = "evaluation_id";
     public static final String COLUMN_DT_START = "dt_start";
     public static final String COLUMN_DT_END = "dt_end";
+    public static final String COLUMN_ACTIVITY_SERVICE_ID = "activity_service_id";
     private int columnIndexName;
     private int columnIndexLocalName;
     private int columnIndexLocalGeolocation;
@@ -26,6 +27,7 @@ public class ActivityRepository extends Repository<Activity> {
     private int columnIndexEvaluationId;
     private int columnIndexDtStart;
     private int columnIndexDtEnd;
+    private int columnIndexActivityServiceId;
 
     public ActivityRepository(SQLiteDatabase database) {
         super(Activity.class, database, "activity");
@@ -42,6 +44,7 @@ public class ActivityRepository extends Repository<Activity> {
         contentValues.put(COLUMN_EVALUATION_ID, entity.getEvaluationId());
         putDate(contentValues, COLUMN_DT_START, entity.getDtStart());
         putDate(contentValues, COLUMN_DT_END, entity.getDtEnd());
+        contentValues.put(COLUMN_ACTIVITY_SERVICE_ID, entity.getActivityServiceId());
 
         return contentValues;
     }
@@ -55,6 +58,7 @@ public class ActivityRepository extends Repository<Activity> {
         entity.setLocalGeolocation(cursor.getString(this.columnIndexLocalGeolocation));
         entity.setEventId(cursor.getInt(this.columnIndexEventId));
         entity.setEvaluationId(cursor.getInt(this.columnIndexEvaluationId));
+        entity.setActivityServiceId(cursor.getLong(this.columnIndexActivityServiceId));
         entity.setDtStart(getDate(cursor, this.columnIndexDtStart));
         entity.setDtEnd(getDate(cursor, this.columnIndexDtEnd));
 
@@ -72,5 +76,6 @@ public class ActivityRepository extends Repository<Activity> {
         this.columnIndexEvaluationId = cursor.getColumnIndex(COLUMN_EVALUATION_ID);
         this.columnIndexDtStart = cursor.getColumnIndex(COLUMN_DT_START);
         this.columnIndexDtEnd = cursor.getColumnIndex(COLUMN_DT_END);
+        this.columnIndexActivityServiceId = cursor.getColumnIndex(COLUMN_ACTIVITY_SERVICE_ID);
     }
 }

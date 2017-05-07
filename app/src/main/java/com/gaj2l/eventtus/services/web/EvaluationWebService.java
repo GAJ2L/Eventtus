@@ -1,7 +1,9 @@
 package com.gaj2l.eventtus.services.web;
 
+import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.lib.WebService;
+import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -22,8 +24,9 @@ public class EvaluationWebService
     public static void sendServer(final Evaluation evaluation, final Action response )
     {
         Map params = new HashMap();
+        Activity activity = ComponentProvider.getServiceComponent().getActivityService().get(evaluation.getActivity());
         params.put("email"    , evaluation.getEmail());
-        params.put("activity" , String.valueOf(evaluation.getActivity()));
+        params.put("activity" , String.valueOf(activity.getActivityServiceId()));
         params.put("comment"  , evaluation.getComment());
         params.put("star"     , String.valueOf(evaluation.getStars()));
         params.put("dt_store" , Util.getAllDateFomatted(evaluation.getDtStore()));

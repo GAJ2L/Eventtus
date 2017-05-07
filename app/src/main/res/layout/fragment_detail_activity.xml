@@ -108,7 +108,7 @@
             android:layout_alignStart="@+id/btnActivitiesEvent"
             android:layout_below="@+id/btnActivitiesEvent"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
+            android:background="?attr/colorPrimary"
             android:drawableLeft="@drawable/star"
             android:paddingLeft="5dp"
             android:paddingRight="35dp"

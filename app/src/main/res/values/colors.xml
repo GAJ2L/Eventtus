@@ -5,4 +5,5 @@
     <color name="colorAccent">#1b5689</color>
     <color name="colorAccentWhite">#ffffff</color>
     <color name="color_green_android">#3bc2d7</color>
+    <color name="color_disabled">#aaa</color>
 </resources>

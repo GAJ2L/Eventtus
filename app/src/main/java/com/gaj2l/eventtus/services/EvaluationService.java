@@ -17,8 +17,11 @@ public class EvaluationService extends Service<Evaluation> {
         super(repository, validation);
     }
 
-    public List<Evaluation> getEvaluationsByActivity(long activityId) {
-        String filters[][] = {{"activity_id", String.valueOf(activityId)}};
+    public List<Evaluation> getEvaluationsByActivity(long activityId,String email) {
+        String filters[][] = {
+                {"activity_id", String.valueOf(activityId)},
+                {"email", email}
+        };
         List<Evaluation> evaluations = this.list(filters);
         return (!evaluations.isEmpty()) ? evaluations : null;
     }

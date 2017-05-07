@@ -34,7 +34,6 @@ public class DetailEventFragment extends Fragment {
 
     private TextView txtName;
     private TextView txtDate;
-    private TextView txtDescription;
     private Button btnActivities;
     private Button btnContact;
     private Button btnDetails;
@@ -59,7 +58,6 @@ public class DetailEventFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         txtName = (TextView) view.findViewById(R.id.txtNameEvent);
         txtDate = (TextView) view.findViewById(R.id.txtDateEvent);
-        txtDescription = (TextView) view.findViewById(R.id.txtDescriptionEvent);
         btnActivities = (Button) view.findViewById(R.id.btnActivitiesEvent);
         btnContact = (Button) view.findViewById(R.id.btnContact);
         btnDetails = (Button) view.findViewById(R.id.btnDetailsEvents);
@@ -67,7 +65,6 @@ public class DetailEventFragment extends Fragment {
 
         txtName.setText(event.getName());
         txtDate.setText(event.getRangeDate());
-        txtDescription.setText(event.getDescription());
 
         btnActivities.setOnClickListener(new View.OnClickListener() {
             @Override

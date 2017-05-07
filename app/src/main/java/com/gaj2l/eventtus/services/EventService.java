@@ -59,7 +59,7 @@ public class EventService extends Service<Event> {
                             }
                         }
 
-                        List<Evaluation> evaluations = ComponentProvider.getServiceComponent().getEvaluationService().getEvaluationsByActivity(activity.getId());
+                        List<Evaluation> evaluations = ComponentProvider.getServiceComponent().getEvaluationService().getEvaluationsByActivity(activity.getId(),Session.getInstance(null).getString("email"));
 
                         if( evaluations!= null && !evaluations.isEmpty() )
                         {

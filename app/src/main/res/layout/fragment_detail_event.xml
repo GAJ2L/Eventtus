@@ -32,16 +32,6 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/txtDescriptionEvent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtDateEvent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp"
-                    android:text="08:00 às 12:00"
-                    android:textSize="14sp" />
-
-                <TextView
                     android:id="@+id/txtDateEvent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -16,7 +16,7 @@ public class EvaluationRepository extends Repository<Evaluation> {
     public static final String COLUMN_STARS = "stars";
     public static final String COLUMN_DT_SEND = "dt_send";
     public static final String COLUMN_DT_STORE = "dt_store";
-    public static final String COLUMN_REF_ACTIVITY = "ref_activity";
+    public static final String COLUMN_REF_ACTIVITY = "activity_id";
     public static final String COLUMN_EMAIL = "email";
     private int columnIndexComment;
     private int columnIndexStars;
@@ -50,8 +50,9 @@ public class EvaluationRepository extends Repository<Evaluation> {
         entity.setComment(cursor.getString(this.columnIndexComment));
         entity.setStars(cursor.getLong(this.columnIndexStars));
         entity.setDtSend(getDate(cursor, this.columnIndexDtSend));
-        entity.setDtStore(getDate(cursor, this.columnIndexActivity));
-        entity.setDtStore(getDate(cursor, this.columnIndexEmail));
+        entity.setDtStore(getDate(cursor, this.columnIndexDtStore));
+        entity.setEmail(cursor.getString(this.columnIndexEmail));
+        entity.setActivity(cursor.getLong(this.columnIndexActivity));
 
         return entity;
     }

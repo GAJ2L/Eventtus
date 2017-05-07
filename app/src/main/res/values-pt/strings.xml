@@ -68,7 +68,9 @@
     <string name="error_send_message">Erro ao envia a mensagem</string>
     <string name="error_delete_event">Erro ao deletar evento</string>
     <string name="success_delete_event">Sucesso ao deletar evento</string>
-    <string name="question_delete_msg">Você deseja deletar?</string>
+    <string name="error_evaluate">Erro ao avaliar</string>
+    <string name="success_evaluate">Avaliado!</string>
+    <string name="disable_button_evaluate">Você já avaliou ou essa ativiade ainda não começou</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

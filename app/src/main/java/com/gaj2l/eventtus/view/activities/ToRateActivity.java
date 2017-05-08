@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Evaluation;
 import com.gaj2l.eventtus.services.web.EvaluationWebService;
@@ -75,6 +76,10 @@ public class ToRateActivity extends AppCompatActivity
     {
         try
         {
+            btnToRate.setEnabled(false);
+            btnToRate.setClickable(false);
+            final Preload p = new Preload(v.getContext());
+            p.show();
             if(txtComment.getText().toString().trim().equals("") || rtbStar.getRating() == 0)
             {
                 Snackbar.make(v,R.string.validate_fields_message,Snackbar.LENGTH_LONG).show();
@@ -92,6 +97,7 @@ public class ToRateActivity extends AppCompatActivity
             EvaluationWebService.sendServer(e, new EvaluationWebService.Action() {
                 @Override
                 public void onEvaluate(String status) {
+                    p.dismiss();
                     if(status == "success")
                     {
                         Snackbar.make(v, R.string.success_evaluate, Snackbar.LENGTH_LONG).show();

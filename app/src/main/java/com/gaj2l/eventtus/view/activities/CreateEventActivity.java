@@ -63,11 +63,12 @@ public class CreateEventActivity
     public void handleResult( final Result rawResult )
     {
         mScannerView.stopCamera();
-        Preload.getInstance(CreateEventActivity.this).show();
+        final Preload p = new Preload(CreateEventActivity.this);
+        p.show();
         EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
             @Override
             public void onEvent(String status) {
-                Preload.getInstance(CreateEventActivity.this).dismiss();
+                p.dismiss();
                 redirect();
                 int msg = (status.equalsIgnoreCase("success"))? R.string.add_event_success : R.string.add_event_error;
                 Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();

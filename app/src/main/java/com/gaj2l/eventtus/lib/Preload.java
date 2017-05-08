@@ -15,27 +15,12 @@ import com.gaj2l.eventtus.R;
 
 public class Preload extends Dialog
 {
-    private static Preload preload;
-
-    private Preload(Context context)
+    public Preload(Context context)
     {
         super(context);
+        setCancelable(false);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT) );
         setContentView(LayoutInflater.from(context).inflate(R.layout.preloader, null));
-    }
-
-    public static Dialog getInstance(Context context)
-    {
-        if( preload == null )
-        {
-            preload = new Preload(context);
-        }
-        else if( !preload.getContext().equals(context) )
-        {
-            preload = new Preload(context);
-        }
-
-        return preload;
     }
 }

@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -20,16 +20,26 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/questionListValue"
-                android:layout_width="match_parent"
+                android:id="@+id/icCheck"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="18dp"
-                android:text="Question Value"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:layout_marginEnd="9dp"
+                android:drawableLeft="@drawable/check" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/questionListValue"
+        android:layout_width="298dp"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Question Value"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
 </android.support.v7.widget.CardView>

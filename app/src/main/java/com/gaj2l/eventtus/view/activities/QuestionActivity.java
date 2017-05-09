@@ -1,28 +1,29 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.busines.socket.ClientSocket;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
-import com.gaj2l.eventtus.lib.Util;
-import com.gaj2l.eventtus.models.Attachment;
+import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Message;
 import com.gaj2l.eventtus.view.adapters.QuestionAdapter;
 
-import org.threeten.bp.Clock;
 import org.threeten.bp.OffsetDateTime;
-import org.threeten.bp.ZoneId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +34,30 @@ public class QuestionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private long activity_id;
     private long user_id;
-    private List<String> messages = new ArrayList();
+    private List<Message> messages = new ArrayList();
+    private ClientSocket client = new ClientSocket() {
+        @Override
+        public void onRecive(String data) throws Exception {
+            new Thread(){
+                @Override
+                public void run() {
+                    QuestionActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(),"Recebido",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }.start();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        client.start();
 
         setContentView(R.layout.activity_question);
 
@@ -53,7 +72,7 @@ public class QuestionActivity extends AppCompatActivity {
         user_id     = Session.getInstance(getApplicationContext()).getLong("user");
         messages    = getMessages();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnSendMsg);
+        Button fab = (Button) findViewById(R.id.btnSendMsg);
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -68,43 +87,40 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private List<String> getMessages()
+    private List<Message> getMessages()
     {
-        List<String> msgs      = new ArrayList();
-        List<Message> messages = ComponentProvider.getServiceComponent().getMessageService().getMessagesByActivity( activity_id, user_id );
-
-        List<Message> m2= ComponentProvider.getServiceComponent().getMessageService().list();
-
-        if( messages !=  null && messages.size() != 0 )
-        {
-            for( Message message : messages )
-            {
-                msgs.add( message.getContent() );
-            }
-        }
-
-        return msgs;
+        List<Message> m = ComponentProvider.getServiceComponent().getMessageService().getMessagesByActivity( activity_id, user_id );
+        return (m!=null && !m.isEmpty())?m : new ArrayList();
     }
 
-    private void store(String msg) throws Exception
+    private Message store(String msg) throws Exception
     {
         Message m = new Message();
         m.setActivityId(activity_id);
         m.setDtStore(OffsetDateTime.now());
         m.setContent(msg);
         m.setUserId(user_id);
+        m.setEmail(Session.getInstance(getApplicationContext()).getString("email"));
+        Activity activity = ComponentProvider.getServiceComponent().getActivityService().get(activity_id);
+        m.setActivityServiceId(activity.getActivityServiceId());
 
         ComponentProvider.getServiceComponent().getMessageService().store(m);
+
+        return m;
     }
 
     private void sndMsg(View v)
     {
         try
         {
+            txt.clearFocus();
+            InputMethodManager in = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            in.hideSoftInputFromWindow(txt.getWindowToken(), 0);
+
             String msg = txt.getText().toString();
-            store(msg);
-            Util.socket().send( msg );
-            messages.add( msg );
+            Message message = store(msg);
+            client.send(message.toJson());
+            messages.add( message );
             txt.setText( "" );
             txt.clearFocus();
         }

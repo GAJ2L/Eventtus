@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,35 +17,35 @@
         android:id="@+id/listSndMsg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/messageField" />
 
     <EditText
         android:id="@+id/messageField"
-        android:layout_width="match_parent"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtSubject"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_toStartOf="@+id/btnSendMsg"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/lbl_message"
         android:inputType="textMultiLine" />
 
-
-    <android.support.design.widget.FloatingActionButton
+    <Button
         android:id="@+id/btnSendMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="#ffffff"
-        app:backgroundTint="@color/colorPrimaryDark"
-        app:srcCompat="@drawable/send" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/messageField"
+        android:layout_marginEnd="5dp"
+        android:background="@color/colorPrimary"
+        android:drawableLeft="@drawable/send_white"
+        android:elevation="1dp"
+        android:paddingStart="5dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

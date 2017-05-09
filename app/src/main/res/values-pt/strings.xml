@@ -87,5 +87,6 @@
     <string name="btn_activities_event">Atividades</string>
     <string name="btnSend">Enviar</string>
     <string name="btnBack">Voltar</string>
+    <string name="err_send_question_btn">Não é possível enviar uma mensagem</string>
     <!-- END ERRORS-->
 </resources>

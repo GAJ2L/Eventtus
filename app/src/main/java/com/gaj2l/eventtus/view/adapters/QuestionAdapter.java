@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.models.Message;
 
 import java.util.List;
 
@@ -18,9 +19,9 @@ public class QuestionAdapter
     extends
         RecyclerView.Adapter<QuestionAdapter.ViewHolder>
 {
-    private List<String> messages;
+    private List<Message> messages;
 
-    public QuestionAdapter( List<String> list)
+    public QuestionAdapter( List<Message> list)
     {
         this.messages = list;
     }
@@ -38,7 +39,8 @@ public class QuestionAdapter
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i)
     {
-        viewHolder.setMessage( messages.get(i) );
+        viewHolder.setMessage( messages.get(i).getContent() );
+        viewHolder.setVisible( true );
     }
 
     @Override
@@ -56,14 +58,20 @@ public class QuestionAdapter
     class ViewHolder extends RecyclerView.ViewHolder
     {
         public TextView message;
+        public TextView icCheck;
 
         public ViewHolder(View itemView) {
             super(itemView);
             message = (TextView) itemView.findViewById(R.id.questionListValue);
+            icCheck = (TextView) itemView.findViewById(R.id.icCheck);
         }
 
         public void setMessage( String msg ) {
         message.setText(msg);
     }
+        public void setVisible( boolean visible) {
+            int v = (visible)? View.VISIBLE: View.INVISIBLE;
+            icCheck.setVisibility(v);
+        }
     }
 }

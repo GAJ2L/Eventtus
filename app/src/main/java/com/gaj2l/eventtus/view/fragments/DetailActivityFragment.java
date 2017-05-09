@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.busines.socket.ClientSocket;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
@@ -148,8 +150,12 @@ public class DetailActivityFragment extends Fragment
 
     private void onSendQuestion(View v)
     {
-        Intent send_question = new Intent( getContext(), QuestionActivity.class);
-        send_question.putExtra("activity",activity.getId());
-        startActivity(send_question);
+        if( ClientSocket.isRunning() ) {
+            Intent send_question = new Intent(getContext(), QuestionActivity.class);
+            send_question.putExtra("activity", activity.getId());
+            startActivity(send_question);
+        } else {
+            Snackbar.make(v,R.string.err_send_question_btn , Snackbar.LENGTH_LONG).show();
+        }
     }
 }

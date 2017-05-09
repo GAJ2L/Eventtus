@@ -89,6 +89,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             DetailActivityFragment fragment = new DetailActivityFragment();
             fragment.setActivity(activities.get(getAdapterPosition()));
             ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailActivityFragment").commit();
+            ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().setBreadCrumbTitle("OI");
         }
     }
 }

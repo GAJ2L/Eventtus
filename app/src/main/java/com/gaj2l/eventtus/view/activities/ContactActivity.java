@@ -66,7 +66,7 @@ public class ContactActivity extends AppCompatActivity {
             });
             finish();
         } else {
-            Snackbar.make(v, R.string.validate_fields_message, Toast.LENGTH_LONG).show();
+            Snackbar.make(v, R.string.validate_fields_message, Snackbar.LENGTH_LONG).show();
         }
     }
 

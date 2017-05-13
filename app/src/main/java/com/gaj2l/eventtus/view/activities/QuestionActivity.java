@@ -85,6 +85,16 @@ public class QuestionActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        try
+        {
+            // envia mensagem para o server
+            client.send("eventtus");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private List<Message> getMessages()

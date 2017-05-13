@@ -42,8 +42,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/messageField"
         android:layout_marginEnd="5dp"
-        android:background="@color/colorPrimary"
-        android:drawableLeft="@drawable/send_white"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/send"
         android:elevation="1dp"
         android:paddingStart="5dp" />
 

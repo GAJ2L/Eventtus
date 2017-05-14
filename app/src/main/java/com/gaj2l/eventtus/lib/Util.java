@@ -14,6 +14,7 @@ public class Util
     public static DateTimeFormatter PATTERN_TIME = DateTimeFormatter.ofPattern("HH:mm");
     public static DateTimeFormatter PATTERN_DATE = DateTimeFormatter.ofPattern("dd-MM-y");
     public static DateTimeFormatter PATTERN_DATE_TIME = DateTimeFormatter.ofPattern("dd-MM-y HH:mm:ss");
+    public static DateTimeFormatter PATTERN_DATE_TIME_US = DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss");
 
     /**
      *  converte string em um objeto do tipo offsetdatetime
@@ -39,6 +40,11 @@ public class Util
     public static String getAllDateFomatted( OffsetDateTime dateTime )
     {
         return dateTime.format(PATTERN_DATE_TIME);
+    }
+
+    public static String getAllDateFomattedUs( OffsetDateTime dateTime )
+    {
+        return dateTime.format(PATTERN_DATE_TIME_US);
     }
 
     public static  void clearBackStake(FragmentManager fragmentManager)

@@ -189,6 +189,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getInstance(getApplicationContext()).put("username", user.getName());
         Session.getInstance(getApplicationContext()).put("email", user.getMail());
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
+
         finish();
         startActivity(intent);
     }

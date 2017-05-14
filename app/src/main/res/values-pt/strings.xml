@@ -36,6 +36,7 @@
     <string name="title_events">Eventos</string>
     <string name="title_contact">Fale conosco</string>
     <string name="title_questions">Envie uma Pergunta</string>
+    <string name="title_create_event">Adicionar evento</string>
     <string name="add_event">Adicionar evento</string>
     <string name="my_events">Meus eventos</string>
     <string name="system">Sistema</string>

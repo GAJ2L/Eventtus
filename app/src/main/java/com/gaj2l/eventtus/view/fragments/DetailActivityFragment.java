@@ -137,6 +137,7 @@ public class DetailActivityFragment extends Fragment
     private void onLocation(View v)
     {
         Intent location = new Intent(getContext(), LocationActivity.class);
+        location.putExtra("activity", activity.getId());
         startActivity(location);
     }
 

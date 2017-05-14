@@ -92,7 +92,7 @@ public class Message extends Entity {
         {
             JSONObject response = new JSONObject();
             response.put("email",email);
-            response.put("date",Util.getAllDateFomatted(dtStore));
+            response.put("date",Util.getAllDateFomattedUs(dtStore));
             response.put("activity",activityServiceId);
             response.put("content",content);
 

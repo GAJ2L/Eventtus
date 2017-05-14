@@ -18,6 +18,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //FIXME - APAGA BASE
+        //DbOpenHelper.deleteDatabase(getApplicationContext());
+
         AndroidThreeTen.init(this);
         ComponentProvider.initialize(this);
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.ActivityAdapter;
@@ -24,10 +25,12 @@ import java.util.List;
 public class ActivityFragment extends Fragment {
     private List<Activity> activities;
 
-    public ActivityFragment() {}
+    public ActivityFragment() {
+        setActivities(Session.getInstance(getContext()).getLong("event_id"));
+    }
 
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public void setActivities(long event_id) {
+        this.activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(event_id);
     }
 
     @Override

@@ -49,7 +49,7 @@ public abstract class ClientSocket
             out    = new DataOutputStream(socket.getOutputStream());
             in     = new DataInputStream(socket.getInputStream());
         }
-        catch ( IOException e )
+        catch ( Exception e )
         {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public abstract class ClientSocket
         {
             while ( true )
             {
-                Thread.sleep(1000);
+                Thread.sleep(3000);
                 byte[] b = new byte[8];
                 in.read(b);
                 String retorno = new String(b, "UTF-8").substring(0,7);

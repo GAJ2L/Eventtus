@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Message;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
@@ -97,9 +98,9 @@ public class DetailEventFragment extends Fragment {
 
 
     public void onActivities(View v) {
+        Session.getInstance(getContext()).put("event_id",this.event.getId());
         ActivityFragment activityFragment = new ActivityFragment();
-        List<Activity> activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(this.event.getId());
-        activityFragment.setActivities(activities);
+        
         ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, activityFragment).addToBackStack("ActivityFragment").commit();
     }
 

@@ -83,6 +83,13 @@ public class DetailActivityFragment extends Fragment
             btnToRate.setBackgroundColor( Color.rgb(170,170,170) );
         }
 
+        if( !isStarted() || isFinished() )
+        {
+            btnSendQuestion.setEnabled( false );
+            btnSendQuestion.setClickable( false );
+            btnSendQuestion.setBackgroundColor( Color.rgb(170,170,170) );
+        }
+
         btnToRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +128,11 @@ public class DetailActivityFragment extends Fragment
         return OffsetDateTime.now().isAfter(activity.getDtStart());
     }
 
+    private boolean isFinished()
+    {
+        return OffsetDateTime.now().isAfter(activity.getDtEnd().plusHours(2));
+    }
+
 
     private void onLocation(View v)
     {
@@ -151,7 +163,7 @@ public class DetailActivityFragment extends Fragment
 
     private void onSendQuestion(View v)
     {
-        if( ClientSocket.isRunning() ) {
+        if( ClientSocket.isRunning() && isStarted() && !isFinished() ) {
             Intent send_question = new Intent(getContext(), QuestionActivity.class);
             send_question.putExtra("activity", activity.getId());
             startActivity(send_question);

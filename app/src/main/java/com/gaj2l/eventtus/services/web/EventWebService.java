@@ -12,6 +12,7 @@ import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Attachment;
 import com.gaj2l.eventtus.models.Evaluation;
 import com.gaj2l.eventtus.models.Event;
+import com.gaj2l.eventtus.models.Message;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -113,6 +114,26 @@ public class EventWebService
 
                             //saving attachment
                             ComponentProvider.getServiceComponent().getEvaluationService().store(eval);
+                        }
+
+                        if( actJson.has("messages") )
+                        {
+                            JSONArray messages = actJson.getJSONArray("messages");
+
+                            for (int j = 0; j < messages.length(); j++)
+                            {
+                                JSONObject message = messages.getJSONObject(j);
+                                Message me = new Message();
+                                me.setActivityServiceId( activity.getActivityServiceId() );
+                                me.setActivityId( activity.getId() );
+                                me.setContent( message.getString("content") );
+                                me.setDtStore( Util.parse2OffsetDateTime(message.getString("dt_store")));
+                                me.setEmail( message.getString("email") );
+                                me.setUserId( Session.getInstance(null).getLong("user") );
+
+                                //saving message
+                                ComponentProvider.getServiceComponent().getMessageService().store(me);
+                            }
                         }
                     }
                     status = "success";

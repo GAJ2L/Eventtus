@@ -83,11 +83,21 @@ public class Session {
         return preferences.getFloat(key, def);
     }
 
-    public long getLong(String key) {
+    public long getLong(String key)
+    {
         return getLong(key, 0);
     }
 
-    public long getLong(String key, long def) {
-        return preferences.getLong(key, def);
+    public long getLong(String key, long def)
+    {
+        try
+        {
+            return preferences.getLong(key, def);
+        }
+        catch ( Exception e  )
+        {
+            return 0;
+        }
+
     }
 }

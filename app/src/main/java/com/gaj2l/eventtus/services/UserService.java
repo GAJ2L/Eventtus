@@ -25,7 +25,7 @@ public class UserService extends Service<User> {
      */
     public boolean create(User user) throws Exception {
         try {
-            User userSearch = this.getUserByProvider(user.getMail(), user.getMethodAutentication());
+            User userSearch = this.getUserByProvider(user.getMail());
             if (userSearch == null) {
                 this.store(user);
             } else {
@@ -38,8 +38,8 @@ public class UserService extends Service<User> {
         return true;
     }
 
-    public User getUserByProvider(String email, String provider) {
-        String filters[][] = {{"mail", email}, {"method_autentication", provider}};
+    public User getUserByProvider(String email) {
+        String filters[][] = {{"mail", email}};
 
         List<User> users = this.list(filters);
         return (!users.isEmpty()) ? users.get(0) : null;

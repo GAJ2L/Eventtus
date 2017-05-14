@@ -58,18 +58,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        long user_id = Session.getInstance(getApplicationContext()).getLong("user");
-        if (user_id != 0) {
-            User user = ComponentProvider.getServiceComponent().getUserService().get(user_id);
-            if (user != null) {
-                this.redirect(user);
-            } else {
-                Session.getInstance(getApplicationContext()).put("user", 0);
-                Session.getInstance(getApplicationContext()).put("username", "");
-                Session.getInstance(getApplicationContext()).put("email", "");
-                Session.getInstance(getApplicationContext()).put("image", "");
-            }
-        }
         setContentView(R.layout.activity_login);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
@@ -133,24 +121,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void redirectIfUserLogged() {
-        if (Profile.getCurrentProfile() != null) {
-            onLoginFacebook(AccessToken.getCurrentAccessToken());
-        } else {
-            if (Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).isDone()) {
-                GoogleSignInResult acct = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient).get();
-
-                if (acct != null) {
-                    try {
-                        User user = getUserByGoogle(acct.getSignInAccount());
-                        onSaveUser(user);
-                        redirect(user);
-                    } catch (Exception e) {
-                        Toast.makeText(LoginActivity.this, R.string.err_btn_google, Toast.LENGTH_LONG).show();
-                    }
-                }
+        long user_id = Session.getInstance(getApplicationContext()).getLong("user");
+        if (user_id != 0) {
+            User user = ComponentProvider.getServiceComponent().getUserService().get(user_id);
+            if (user != null) {
+                this.redirect(user);
+            } else {
+                Session.getInstance(getApplicationContext()).put("user", 0);
+                Session.getInstance(getApplicationContext()).put("username", "");
+                Session.getInstance(getApplicationContext()).put("email", "");
+                Session.getInstance(getApplicationContext()).put("image", "");
             }
         }
     }
+
 
     private void handleSignInResult(GoogleSignInResult result) throws Exception {
         if (result.isSuccess()) {

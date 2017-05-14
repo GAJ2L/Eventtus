@@ -42,7 +42,7 @@
     <string name="exit">Exit</string>
     <string name="title_details_activity">Details of activity</string>
     <string name="title_details_event">Details of event</string>
-    <string name="title_create_event">Add Event</string>
+    <string name="title_create_event">Add event</string>
     <string name="title_to_rate_activity">To Rate</string>
     <string name="title_attachments_activity">Attachments</string>
     <string name="title_send_a_question">Send a question</string>

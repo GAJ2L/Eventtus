@@ -3,16 +3,15 @@ package com.gaj2l.eventtus.view.activities;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
-
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.maps.DirectionFinder;
@@ -20,7 +19,6 @@ import com.gaj2l.eventtus.busines.maps.DirectionFinderListener;
 import com.gaj2l.eventtus.busines.maps.Route;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.models.Activity;
-import com.gaj2l.eventtus.models.Event;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,12 +29,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationActivity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener
+public class LocationActivity extends AppCompatActivity implements OnMapReadyCallback, DirectionFinderListener
 {
     public int ID_ACCESS_FINE_LOCATION = 3;
 
@@ -54,13 +51,34 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setTitle(R.string.title_activity_location);
+
         if (!hasPermission()) {
             requestPermission();
         } else {
             initComponents();
         }
-
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
 
     private void initComponents() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);

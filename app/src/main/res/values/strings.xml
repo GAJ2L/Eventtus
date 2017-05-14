@@ -19,7 +19,7 @@
     <string name="exception_field_user">Field user not informed.</string>
     <string name="exception_field_mail">Field mail not informed.</string>
     <string name="exception_field_image">Field image not informed.</string>
-    <string name="exception_field_method_autentication">Field method autentication not informed.</string>
+    <string name="exception_field_method_autentication">Field method authentication not informed.</string>
     <!-- END VALIDATIONS FIELDS -->
 
     <!-- START SOCIALS -->
@@ -71,6 +71,7 @@
     <string name="question_delete_msg">Do you want to delete?</string>
     <string name="error_evaluate">Error in evaluate</string>
     <string name="success_evaluate">Evaluated!</string>
+    <string name="find_routes">Find Routes</string>
     <string name="disable_button_evaluate">Have you ever evaluated or this activity has not yet</string>
     <!-- END MESSAGES-->
 

@@ -4,10 +4,10 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +18,7 @@ import com.gaj2l.eventtus.busines.maps.DirectionFinder;
 import com.gaj2l.eventtus.busines.maps.DirectionFinderListener;
 import com.gaj2l.eventtus.busines.maps.Route;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.models.Activity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,14 +34,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationActivity extends AppCompatActivity implements OnMapReadyCallback, DirectionFinderListener
-{
+public class LocationActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback, DirectionFinderListener {
     public int ID_ACCESS_FINE_LOCATION = 3;
 
     private GoogleMap mMap;
     private Activity activity;
     private LocationManager mLocationManager;
-    private ProgressDialog progressDialog;
+    private static Preload preload;
+    private Location myLocation;
 
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
@@ -80,13 +81,23 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
 
-    private void initComponents() {
+    private void initComponents()
+    {
+        preload = new Preload( this );
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
 
         activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        myLocation = mLocationManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {return;}
+
+        mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 350, this );
     }
 
 
@@ -125,8 +136,6 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
             mMap.setMyLocationEnabled(true);
 
-            Location myLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
             mMap.addMarker(new MarkerOptions()
                             .position( location )
                             .title( activity.getName() ));
@@ -135,7 +144,8 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
 
-            sendRequest( myLocation.getLatitude() + "," + myLocation.getLongitude(), activity.getLocalGeolocation() );
+            if ( myLocation != null )
+                sendRequest( myLocation.getLatitude() + "," + myLocation.getLongitude(), activity.getLocalGeolocation() );
         }
     }
 
@@ -153,6 +163,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
         try {
             new DirectionFinder(this, origin, destination ).execute();
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -161,8 +172,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onDirectionFinderStart()
     {
-        progressDialog = ProgressDialog.show( this, getResources().getString( R.string.find_routes ),
-                getResources().getString( R.string.find_routes ), true);
+        preload.show();
 
         if (originMarkers != null) {
             for (Marker marker : originMarkers) {
@@ -185,7 +195,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        progressDialog.dismiss();
+        preload.dismiss();
         polylinePaths = new ArrayList<>();
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();
@@ -205,5 +215,22 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
     }
+
+    @Override
+    public void onLocationChanged(final Location location)
+    {
+        myLocation = location;
+
+        onMapReady( mMap );
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+    @Override
+    public void onProviderEnabled(String provider) {}
+
+    @Override
+    public void onProviderDisabled(String provider) {}
 }
 

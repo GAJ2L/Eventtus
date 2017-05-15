@@ -73,8 +73,8 @@ public class EventWebService
 
                         Activity activity = new Activity();
                         activity.setName( actJson.getString("name") );
-                        activity.setDtStart( Util.parse2OffsetDateTime( response.getString("dt_start") ) );
-                        activity.setDtEnd( Util.parse2OffsetDateTime( response.getString("dt_end") ) );
+                        activity.setDtStart( Util.parse2OffsetDateTime( actJson.getString("dt_start") ) );
+                        activity.setDtEnd( Util.parse2OffsetDateTime( actJson   .getString("dt_end") ) );
                         activity.setLocalName( actJson.getString( "local_name") );
                         activity.setLocalGeolocation( actJson.getString("local_geolocation") );
                         activity.setActivityServiceId( actJson.getLong("id") );

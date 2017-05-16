@@ -3,8 +3,15 @@ package com.gaj2l.eventtus.view.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +37,7 @@ import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -42,6 +50,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import org.json.JSONObject;
+
+import java.net.URL;
 
 /**
  * Created by Lucas Tomasi on 28/03/17.
@@ -149,26 +159,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private User getUserByFacebook(JSONObject object) {
         User user = new User();
 
-        try {
+        try
+        {
             user.setName(object.getString("name"));
             user.setMail(object.getString("email"));
             user.setMethodAutentication(User.METHOD_FACEBOOK);
             if (object.has("picture"))
+            {
                 user.setImage(object.getJSONObject("picture").getJSONObject("data").getString("url"));
-        } catch (Exception e) {
+                user.setImage( Util.bitmap2base64(Util.getBitmap(user.getImage())) );
+            }
+        } catch (Exception e)
+        {
             Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
         }
 
         return user;
     }
 
-    private User getUserByGoogle(GoogleSignInAccount acct) {
+    private User getUserByGoogle(GoogleSignInAccount acct) throws Exception{
         User user = new User();
         user.setName(acct.getDisplayName());
         user.setMail(acct.getEmail());
         user.setMethodAutentication(User.METHOD_GOOGLE);
-        if (acct.getPhotoUrl() != null) {
+        if (acct.getPhotoUrl() != null)
+        {
             user.setImage(acct.getPhotoUrl().toString());
+            user.setImage( Util.bitmap2base64(Util.getBitmap(user.getImage())) );
         }
 
         return user;
@@ -184,7 +201,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void redirect(User user) {
         Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
-
         Session.getInstance(getApplicationContext()).put("user", user.getId());
         Session.getInstance(getApplicationContext()).put("username", user.getName());
         Session.getInstance(getApplicationContext()).put("email", user.getMail());

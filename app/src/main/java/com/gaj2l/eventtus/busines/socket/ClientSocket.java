@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.busines.socket;
 
+import android.os.StrictMode;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -77,9 +79,17 @@ public abstract class ClientSocket
 
 
     public static boolean isRunning() {
-        try (Socket s = new Socket(HOST, PORT)) {
+        try
+        {
+            if (android.os.Build.VERSION.SDK_INT > 9) { StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+            }
+            Socket s = new Socket(HOST, PORT);
+            s.close();
             return true;
-        } catch (IOException ex) {
+        }
+        catch (Exception ex)
+        {
             ex.printStackTrace();
             return false;
         }

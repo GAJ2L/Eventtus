@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.view.fragments.EventFragment;
 
 import java.net.URL;
@@ -84,21 +86,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             lblName.setText(Session.getInstance(getApplicationContext()).getString("username"));
             lblEmail.setText(Session.getInstance(getApplicationContext()).getString("email"));
 
-            if (android.os.Build.VERSION.SDK_INT > 9) {
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-                StrictMode.setThreadPolicy(policy);
-            }
-
-            URL f = new URL(Session.getInstance(getApplicationContext()).getString("image"));
-            Bitmap bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(f.openConnection().getInputStream()), 150, 150, false);
-            Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-            BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            Paint paint = new Paint();
-            Canvas c = new Canvas(circleBitmap);
-            paint.setShader(shader);
-            c.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
-            imgUser.setImageBitmap(circleBitmap);
+            imgUser.setImageBitmap(Util.base642bitmap(Session.getInstance(getApplicationContext()).getString("image")));
         } catch (Exception e) {
             e.printStackTrace();
         }

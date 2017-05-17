@@ -17,6 +17,7 @@ import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.socket.ClientSocket;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
@@ -38,8 +39,8 @@ public class DetailActivityFragment extends Fragment
     private static Activity activity;
 
     private TextView txtName;
-    private TextView txtDate;
-    private TextView txtTime;
+    private TextView txtDateIni;
+    private TextView txtDateFin;
     private Button btnDetails;
     private Button btnAttachments;
     private Button btnToRate;
@@ -63,17 +64,19 @@ public class DetailActivityFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         txtName         = (TextView) view.findViewById(R.id.txtNameActivityAttachments);
-        txtDate         = (TextView) view.findViewById(R.id.txtDateActivity);
-        txtTime         = (TextView) view.findViewById(R.id.txtTimeActivity);
+        txtDateIni      = (TextView) view.findViewById(R.id.txtDateIniActivity);
+        txtDateFin      = (TextView) view.findViewById(R.id.txtDateFinActivity);
         btnDetails      = (Button) view.findViewById(R.id.btnDetailsEvents);
         btnAttachments  = (Button) view.findViewById(R.id.btnActivitiesEvent);
         btnToRate       = (Button) view.findViewById(R.id.btnContact);
         btnLocation     = (Button) view.findViewById(R.id.btnDeleteEvent);
         btnSendQuestion = (Button) view.findViewById(R.id.btnSendQuestionActivity);
 
-        txtName.setText( activity.getName() );
-        txtDate.setText( activity.getRangeDate() );
-        txtTime.setText( activity.getRangeTime() );
+        String val = (activity.getName().length() > 27)? activity.getName().substring(0,27) + "..." : activity.getName();
+        txtName.setText( val );
+
+        txtDateIni.setText(Util.getAllDateFomatted(activity.getDtStart()));
+        txtDateFin.setText(Util.getAllDateFomatted(activity.getDtEnd()));
 
         // clica somente se a atividade começou e não foi avaliada
         if(  hasToRate() || !isStarted() )

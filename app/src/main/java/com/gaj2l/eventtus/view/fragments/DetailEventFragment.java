@@ -34,7 +34,7 @@ public class DetailEventFragment extends Fragment {
     private static Event event;
 
     private TextView txtName;
-    private TextView txtDate;
+    private TextView txtStateEvent;
     private Button btnActivities;
     private Button btnContact;
     private Button btnDetails;
@@ -58,14 +58,17 @@ public class DetailEventFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         txtName = (TextView) view.findViewById(R.id.txtNameEvent);
-        txtDate = (TextView) view.findViewById(R.id.txtDateEvent);
+        txtStateEvent = (TextView) view.findViewById(R.id.txtStateEvent);
         btnActivities = (Button) view.findViewById(R.id.btnActivitiesEvent);
         btnContact = (Button) view.findViewById(R.id.btnContact);
         btnDetails = (Button) view.findViewById(R.id.btnDetailsEvents);
         btnDelete = (Button) view.findViewById(R.id.btnDeleteEvent);
 
         txtName.setText(event.getName());
-        txtDate.setText(event.getRangeDate());
+
+        txtStateEvent.setText(getResources().getString(Event.STATE_TITLE[event.getState()]) );
+        txtStateEvent.setCompoundDrawablesRelativeWithIntrinsicBounds( Event.STATE_DRAWABLES[event.getState()],0,0,0 );
+        txtStateEvent.setTextColor(getResources().getColor(Event.STATE_COLORS[event.getState()],null) );
 
         btnActivities.setOnClickListener(new View.OnClickListener() {
             @Override

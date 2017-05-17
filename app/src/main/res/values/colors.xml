@@ -6,4 +6,8 @@
     <color name="colorAccentWhite">#ffffff</color>
     <color name="color_green_android">#3bc2d7</color>
     <color name="color_disabled">#aaa</color>
+
+    <color name="color_finished">#1b5689</color>
+    <color name="color_idle">#aaa</color>
+    <color name="color_running">#008000</color>
 </resources>

@@ -37,7 +37,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.setItemTitle(getActivity(i).getName());
-        viewHolder.setItemLocal(getActivity(i).getLocalName());
         viewHolder.setItemDateStart(getActivity(i).getDtStart().format(DateTimeFormatter.ofPattern("dd-MM-y HH:mm")));
     }
 
@@ -56,14 +55,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView itemTitle;
-        public TextView itemLocal;
         public TextView itemDateStart;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemTitle = (TextView) itemView.findViewById(R.id.txtNameFile);
-            itemLocal = (TextView) itemView.findViewById(R.id.txtLocal);
-            itemDateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
+            itemDateStart = (TextView) itemView.findViewById(R.id.txtState);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,12 +70,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             });
         }
 
-        public void setItemTitle(String title) {
+        public void setItemTitle(String title)
+        {
             itemTitle.setText(title);
-        }
-
-        public void setItemLocal(String detail) {
-            itemLocal.setText(detail);
         }
 
         public void setItemDateStart(String date) {

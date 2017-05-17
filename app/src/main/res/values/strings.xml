@@ -74,6 +74,10 @@
     <string name="success_evaluate">Evaluated!</string>
     <string name="find_routes">Find Routes</string>
     <string name="disable_button_evaluate">Have you ever evaluated or this activity has not yet</string>
+    <string name="activities">Activities</string>
+    <string name="in_progress">In progress</string>
+    <string name="completed">Completed</string>
+    <string name="idle">Idle</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

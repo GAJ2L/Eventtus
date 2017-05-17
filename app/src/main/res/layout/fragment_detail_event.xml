@@ -32,22 +32,38 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/txtDateEvent"
+                    android:id="@+id/txtStateEvent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtNameEvent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="12dp"
-                    android:text="25-05-2017"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:drawableLeft="@drawable/runnig"
+                    android:drawablePadding="5dp"
+                    android:text="Em Andamento"
+                    android:textColor="@android:color/holo_green_dark"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txtNameEvent"
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginLeft="15dp"
+                    android:drawableLeft="@drawable/bubble"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="15dp" />
+
+                <TextView
+                    android:id="@+id/txtNameEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/textView2"
                     android:text="Eventtus"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"

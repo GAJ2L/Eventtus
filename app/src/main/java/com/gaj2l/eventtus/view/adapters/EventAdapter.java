@@ -42,8 +42,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         int size = activities != null ? activities.size() : 0;
 
         viewHolder.setItemTitle(event.getName());
-        viewHolder.setItemAmountActivities(size + " atividades");
-        viewHolder.setItemDateStart(event.getDtStart().format(DateTimeFormatter.ofPattern("dd-MM-y HH:mm")));
+        viewHolder.setItemAmountActivities(String.valueOf(size));
+        viewHolder.setItemState(Event.STATE_TITLE[event.getState()],Event.STATE_DRAWABLES[event.getState()],Event.STATE_COLORS[event.getState()]);
     }
 
     @Override
@@ -61,13 +61,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView itemTitle;
         public TextView itemLocal;
-        public TextView itemDateStart;
+        public TextView itemState;
+        public View     view;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemTitle = (TextView) itemView.findViewById(R.id.txtNameFile);
             itemLocal = (TextView) itemView.findViewById(R.id.txtLocal);
-            itemDateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
+            itemState = (TextView) itemView.findViewById(R.id.txtState);
+            view      = itemView;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,11 +84,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
 
         public void setItemAmountActivities(String detail) {
-            itemLocal.setText(detail);
+            itemLocal.setText(detail+ " " + view.getResources().getString(R.string.activities));
         }
 
-        public void setItemDateStart(String date) {
-            itemDateStart.setText(date);
+        public void setItemState(int name,int drawable, int color)
+        {
+            itemState.setCompoundDrawablesWithIntrinsicBounds(drawable,0,0,0);
+            itemState.setText(view.getResources().getString(name));
+            itemState.setTextColor(view.getResources().getColor(color,null));
         }
 
         public void onClickCard(View v) {

@@ -74,6 +74,11 @@
     <string name="success_evaluate">Avaliado!</string>
     <string name="disable_button_evaluate">Você já avaliou ou essa ativiade ainda não começou</string>
     <string name="find_routes">Procurando Rotas</string>
+    <string name="activities">Atividades</string>
+    <string name="in_progress">Em andamento</string>
+    <string name="completed">Concluído</string>
+    <string name="idle">Aguardando</string>
+
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

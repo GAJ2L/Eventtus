@@ -1,5 +1,8 @@
 package com.gaj2l.eventtus.models;
 
+import android.graphics.Color;
+
+import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Entity;
 import com.gaj2l.eventtus.lib.Util;
 
@@ -23,7 +26,31 @@ public class Event extends Entity {
     private long userId;
     private long eventServiceId;
 
+    public static int STATE_IDLE     = 0;
+    public static int STATE_FINISHED = 1;
+    public static int STATE_PROGRESS = 2;
+
+    public  static int STATE_DRAWABLES[] = {R.drawable.idle,R.drawable.finished,R.drawable.runnig};
+    public  static int STATE_TITLE[]     = {R.string.idle,R.string.completed,R.string.in_progress};
+    public  static int STATE_COLORS[]    = {R.color.color_idle,R.color.color_finished,R.color.color_running};
+
     public Event() {
+    }
+
+    public int getState()
+    {
+        if(OffsetDateTime.now().isAfter(getDtEnd()))
+        {
+            return STATE_FINISHED;
+        }
+        else if(OffsetDateTime.now().isAfter(getDtStart()))
+        {
+            return STATE_PROGRESS;
+        }
+        else
+        {
+            return STATE_IDLE;
+        }
     }
 
     public long getEventServiceId() {

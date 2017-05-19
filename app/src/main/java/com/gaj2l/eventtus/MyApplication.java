@@ -3,11 +3,10 @@ package com.gaj2l.eventtus;
 import android.app.Application;
 
 import com.gaj2l.eventtus.ioc.ComponentProvider;
-import com.gaj2l.eventtus.lib.DbOpenHelper;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 /**
- * Created by Lucas Tomasi
+ * Created by Jackson Majolo
  */
 
 public class MyApplication extends Application {

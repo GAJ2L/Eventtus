@@ -1,6 +1,5 @@
 package com.gaj2l.eventtus.view.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Evaluation;
@@ -25,8 +24,7 @@ import org.threeten.bp.OffsetDateTime;
  * Created by lucas.tomasi on 28/04/17.
  */
 
-public class ToRateActivity extends AppCompatActivity
-{
+public class ToRateActivity extends AppCompatActivity {
     private Button btnToRate;
     private RatingBar rtbStar;
     private TextView txtComment;
@@ -41,11 +39,11 @@ public class ToRateActivity extends AppCompatActivity
         setTitle(R.string.title_to_rate_activity);
         setContentView(R.layout.activity_to_rate);
 
-        activity   = getIntent().getExtras().getLong("activity");
+        activity = getIntent().getExtras().getLong("activity");
 
-        btnToRate  = (Button)    findViewById(R.id.btnSendRate);
-        txtComment = (TextView)  findViewById(R.id.txtComment);
-        rtbStar    = (RatingBar) findViewById(R.id.rtbStar);
+        btnToRate = (Button) findViewById(R.id.btnSendRate);
+        txtComment = (TextView) findViewById(R.id.txtComment);
+        rtbStar = (RatingBar) findViewById(R.id.rtbStar);
 
 
         btnToRate.setOnClickListener(new View.OnClickListener() {
@@ -72,64 +70,67 @@ public class ToRateActivity extends AppCompatActivity
         return true;
     }
 
-    private void onSaveEvaluation(final View v)
-    {
-        try
-        {
-            if(rtbStar.getRating() == 0)
-            {
-                Snackbar.make(v,R.string.validate_fields_message,Snackbar.LENGTH_LONG).show();
+    private void onSaveEvaluation(final View v) {
+        final Preload p = new Preload(v.getContext());
+        p.show();
+
+        try {
+            // check stars rate
+            if (rtbStar.getRating() == 0) {
+                p.dismiss();
+                Snackbar.make(v, R.string.validate_fields_message, Snackbar.LENGTH_LONG).show();
                 return;
             }
 
             btnToRate.setEnabled(false);
             btnToRate.setClickable(false);
 
-            final Preload p = new Preload(v.getContext());
-            p.show();
+            // check connection
+            if (Internet.isConnect(getApplicationContext())) {
+                Evaluation e = new Evaluation();
+                e.setComment(txtComment.getText().toString());
+                e.setStars(rtbStar.getRating());
+                e.setDtStore(OffsetDateTime.now());
+                e.setEmail(Session.getInstance(getApplicationContext()).getString("email"));
+                e.setActivity(activity);
 
-            Evaluation e = new Evaluation();
-            e.setComment(txtComment.getText().toString());
-            e.setStars(rtbStar.getRating());
-            e.setDtStore(OffsetDateTime.now());
-            e.setEmail(Session.getInstance(getApplicationContext()).getString("email"));
-            e.setActivity(activity);
+                EvaluationWebService.sendServer(e, new EvaluationWebService.Action() {
+                    @Override
+                    public void onEvaluate(String status) {
+                        if (status == "success") {
+                            Snackbar.make(v, R.string.success_evaluate, Snackbar.LENGTH_LONG).show();
 
-            ComponentProvider.getServiceComponent().getEvaluationService().store(e);
-
-            EvaluationWebService.sendServer(e, new EvaluationWebService.Action() {
-                @Override
-                public void onEvaluate(String status) {
-                    p.dismiss();
-                    if(status == "success")
-                    {
-                        Snackbar.make(v, R.string.success_evaluate, Snackbar.LENGTH_LONG).show();
-
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try
-                                {
-                                    Thread.sleep(1000);
-                                    finish();
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Thread.sleep(1000);
+                                        finish();
+                                    } catch (InterruptedException e1) {
+                                        e1.printStackTrace();
+                                    }
                                 }
-                                catch (InterruptedException e1)
-                                {
-                                    e1.printStackTrace();
-                                }
-                            }
-                        }).start();
+                            }).start();
+
+                        } else {
+                            Snackbar.make(v, R.string.error_evaluate, Snackbar.LENGTH_LONG).show();
+                        }
                     }
-                    else
-                    {
-                        Snackbar.make(v, R.string.error_evaluate, Snackbar.LENGTH_LONG).show();
-                    }
-                }
-            });
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+                });
+
+                // store object after send server
+                ComponentProvider.getServiceComponent().getEvaluationService().store(e);
+            } else {
+                p.dismiss();
+                btnToRate.setEnabled(true);
+                btnToRate.setClickable(true);
+                Snackbar.make(v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+                return;
+            }
+        } catch (Exception e) {
+            p.dismiss();
+            btnToRate.setEnabled(true);
+            btnToRate.setClickable(true);
             Snackbar.make(v, R.string.error_evaluate, Snackbar.LENGTH_LONG).show();
         }
     }

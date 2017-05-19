@@ -78,7 +78,6 @@
     <string name="in_progress">Em andamento</string>
     <string name="completed">Concluído</string>
     <string name="idle">Aguardando</string>
-
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
@@ -95,6 +94,8 @@
     <string name="btn_activities_event">Atividades</string>
     <string name="btnSend">Enviar</string>
     <string name="btnBack">Voltar</string>
+    <string name="title_activity_location">Localização</string>
     <string name="err_send_question_btn">Não é possível enviar uma mensagem</string>
+    <string name="err_conection">Não conectado à Internet</string>
     <!-- END ERRORS-->
 </resources>

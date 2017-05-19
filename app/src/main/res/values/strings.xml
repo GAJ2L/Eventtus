@@ -96,5 +96,6 @@
     <string name="btnBack">Back</string>
     <string name="title_activity_location">Location</string>
     <string name="err_send_question_btn">Is not possible to send a message</string>
+    <string name="err_conection">Not connected to the internet</string>
     <!-- END ERRORS-->
 </resources>

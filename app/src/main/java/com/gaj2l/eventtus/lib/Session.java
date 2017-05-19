@@ -28,7 +28,7 @@ public class Session {
     }
 
     public void clear() {
-        preferences.edit().clear();
+        preferences.edit().clear().commit();
     }
 
     public void put(String key, String value) {

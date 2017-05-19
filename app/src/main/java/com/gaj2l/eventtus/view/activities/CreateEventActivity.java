@@ -1,8 +1,10 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.WebService;
@@ -84,19 +87,23 @@ public class CreateEventActivity
     @Override
     public void handleResult( final Result rawResult )
     {
-        mScannerView.stopCamera();
-        final Preload p = new Preload(CreateEventActivity.this);
-        p.show();
-        EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
-            @Override
-            public void onEvent(String status) {
-                p.dismiss();
-                redirect();
-                int msg = (status.equalsIgnoreCase("success"))? R.string.add_event_success : R.string.add_event_error;
-                Toast.makeText(CreateEventActivity.this,msg,Toast.LENGTH_SHORT).show();
-            }
-        });
-        mScannerView.resumeCameraPreview( this );
+        if( Internet.isConnect(CreateEventActivity.this) ) {
+            mScannerView.stopCamera();
+            final Preload p = new Preload(CreateEventActivity.this);
+            p.show();
+            EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
+                @Override
+                public void onEvent(String status) {
+                    p.dismiss();
+                    redirect();
+                    int msg = (status.equalsIgnoreCase("success")) ? R.string.add_event_success : R.string.add_event_error;
+                    Snackbar.make(mScannerView , msg, Snackbar.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            Snackbar.make( mScannerView, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+        }
+        mScannerView.resumeCameraPreview(this);
     }
 
     @Override

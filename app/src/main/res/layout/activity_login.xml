@@ -30,6 +30,7 @@
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:background="@android:color/background_light"
+        android:drawableLeft="@drawable/google"
         android:text="@string/lbl_btn_google"
         android:textColorHint="@color/colorAccent" />
 
@@ -43,6 +44,7 @@
         android:layout_marginLeft="10pt"
         android:layout_marginRight="10pt"
         android:background="@android:color/background_light"
+        android:drawableLeft="@drawable/facebook"
         android:text="@string/lbl_btn_facebook"
         android:textColorHint="@color/colorAccent" />
 
@@ -55,5 +57,14 @@
         android:layout_below="@+id/login_button"
         android:layout_alignParentStart="true"
         android:layout_marginTop="45dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnFace"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:drawableLeft="@drawable/eventtus" />
 
 </RelativeLayout>

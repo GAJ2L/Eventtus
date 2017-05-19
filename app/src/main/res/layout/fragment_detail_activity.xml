@@ -99,6 +99,7 @@
                 android:layout_alignEnd="@+id/btnDeleteEvent"
                 android:layout_alignStart="@+id/btnDeleteEvent"
                 android:layout_below="@+id/btnDeleteEvent"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimary"
                 android:drawableLeft="@drawable/question"

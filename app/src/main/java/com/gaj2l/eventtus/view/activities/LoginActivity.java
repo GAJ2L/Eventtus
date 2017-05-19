@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -169,9 +170,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 user.setImage(object.getJSONObject("picture").getJSONObject("data").getString("url"));
                 user.setImage( Util.bitmap2base64(Util.getBitmap(user.getImage())) );
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
-            Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
+            Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();
         }
 
         return user;
@@ -247,7 +249,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             try {
                 handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
             } catch (Exception e) {
-                Toast.makeText(LoginActivity.this, R.string.err_btn_google, Toast.LENGTH_LONG).show();
+                Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_google, Snackbar.LENGTH_LONG).show();
             }
         }
 
@@ -257,7 +259,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(LoginActivity.this, R.string.err_btn_google, Toast.LENGTH_LONG).show();
+        Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_google, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -281,12 +283,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onCancel() {
-        Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
+        Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void onError(FacebookException error) {
-        Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
+        Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -296,7 +298,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             onSaveUser(user);
             redirect(user);
         } catch (Exception e) {
-            Toast.makeText(LoginActivity.this, R.string.err_btn_facebook, Toast.LENGTH_LONG).show();
+            Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();;
         }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.gaj2l.eventtus.MyApplication;
 import com.gaj2l.eventtus.R;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.services.web.EmailWebService;
 
@@ -35,9 +36,9 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
 
         from_email = Session.getInstance(getApplicationContext()).getString("email");
-        from_name  = Session.getInstance(getApplicationContext()).getString("username");
-        to_email   = (getIntent().getStringExtra("to")!=null)?   getIntent().getStringExtra("to")   : MyApplication.EMAIL_APPLICATION;
-        to_name    = (getIntent().getStringExtra("name")!=null)? getIntent().getStringExtra("name") : MyApplication.EMAIL_NAME;
+        from_name = Session.getInstance(getApplicationContext()).getString("username");
+        to_email = (getIntent().getStringExtra("to") != null) ? getIntent().getStringExtra("to") : MyApplication.EMAIL_APPLICATION;
+        to_name = (getIntent().getStringExtra("name") != null) ? getIntent().getStringExtra("name") : MyApplication.EMAIL_NAME;
 
         this.fieldSubject = (EditText) findViewById(R.id.txtSubject);
         this.fieldSubject.requestFocus();
@@ -52,19 +53,22 @@ public class ContactActivity extends AppCompatActivity {
         });
     }
 
-    private void send( final View v )
-    {
+    private void send(final View v) {
         String subject = fieldSubject.getText().toString();
         String message = fieldMessage.getText().toString();
 
         if (!subject.equals("") && !message.equals("")) {
-            EmailWebService.send(message, subject, from_name, from_email, to_name, to_email, new EmailWebService.ActionEvent() {
-                @Override
-                public void afterSend(String status, String message) {
-                    Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            });
-            finish();
+            if (Internet.isConnect(getApplicationContext())) {
+                EmailWebService.send(message, subject, from_name, from_email, to_name, to_email, new EmailWebService.ActionEvent() {
+                    @Override
+                    public void afterSend(String status, String message) {
+                        Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                finish();
+            } else {
+                Snackbar.make(v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+            }
         } else {
             Snackbar.make(v, R.string.validate_fields_message, Snackbar.LENGTH_LONG).show();
         }

@@ -61,7 +61,7 @@ public class ContactActivity extends AppCompatActivity {
             EmailWebService.send(message, subject, from_name, from_email, to_name, to_email, new EmailWebService.ActionEvent() {
                 @Override
                 public void afterSend(String status, String message) {
-                    Snackbar.make(v,message,Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             });
             finish();

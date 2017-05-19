@@ -76,18 +76,18 @@ public class ToRateActivity extends AppCompatActivity
     {
         try
         {
-            btnToRate.setEnabled(false);
-            btnToRate.setClickable(false);
-
-            if(txtComment.getText().toString().trim().equals("") || rtbStar.getRating() == 0)
+            if(rtbStar.getRating() == 0)
             {
                 Snackbar.make(v,R.string.validate_fields_message,Snackbar.LENGTH_LONG).show();
                 return;
             }
-            
+
+            btnToRate.setEnabled(false);
+            btnToRate.setClickable(false);
+
             final Preload p = new Preload(v.getContext());
             p.show();
-            
+
             Evaluation e = new Evaluation();
             e.setComment(txtComment.getText().toString());
             e.setStars(rtbStar.getRating());

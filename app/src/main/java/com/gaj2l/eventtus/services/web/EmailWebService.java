@@ -59,7 +59,7 @@ public class EmailWebService
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                System.err.println("CODE: " + statusCode + " Message: " + throwable.getMessage() );
+                action.afterSend( "error" , responseString );
             }
         });
     }

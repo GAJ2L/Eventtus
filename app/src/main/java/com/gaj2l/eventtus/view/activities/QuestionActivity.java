@@ -7,6 +7,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,13 +41,13 @@ public class QuestionActivity extends AppCompatActivity {
     private ClientSocket client = new ClientSocket() {
         @Override
         public void onRecive(String data) throws Exception {
-            new Thread(){
+            new Thread() {
                 @Override
                 public void run() {
                     QuestionActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(),"Recebido",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "Recebido", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -53,8 +56,7 @@ public class QuestionActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         client.start();
@@ -63,48 +65,69 @@ public class QuestionActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        txt          = (EditText)findViewById( R.id.messageField );
+        txt = (EditText) findViewById(R.id.messageField);
         recyclerView = (RecyclerView) findViewById(R.id.listSndMsg);
 
         setTitle(R.string.title_send_a_question);
 
         activity_id = getIntent().getExtras().getLong("activity");
-        user_id     = Session.getInstance(getApplicationContext()).getLong("user");
-        messages    = getMessages();
+        user_id = Session.getInstance(getApplicationContext()).getLong("user");
+        messages = getMessages();
 
         Button fab = (Button) findViewById(R.id.btnSendMsg);
-        fab.setOnClickListener( new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 sndMsg(view);
             }
         });
 
-        QuestionAdapter adapter = new QuestionAdapter( messages );
+        fab.setEnabled(false);
+
+        txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                enableSubmitIfReady();
+            }
+        });
+
+        QuestionAdapter adapter = new QuestionAdapter(messages);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        try
-        {
+        try {
             // envia mensagem para o server
             client.send("eventtus");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private List<Message> getMessages()
-    {
-        List<Message> m = ComponentProvider.getServiceComponent().getMessageService().getMessagesByActivity( activity_id, user_id );
-        return (m!=null && !m.isEmpty())?m : new ArrayList();
+    private void enableSubmitIfReady() {
+
+        boolean isReady = txt.getText().toString().length() >= 1;
+
+        Button fab = (Button) findViewById(R.id.btnSendMsg);
+        fab.setEnabled(isReady);
     }
 
-    private Message store(String msg) throws Exception
-    {
+    private List<Message> getMessages() {
+        List<Message> m = ComponentProvider.getServiceComponent().getMessageService().getMessagesByActivity(activity_id, user_id);
+        return (m != null && !m.isEmpty()) ? m : new ArrayList();
+    }
+
+    private Message store(String msg) throws Exception {
         Message m = new Message();
         m.setActivityId(activity_id);
         m.setDtStore(OffsetDateTime.now());
@@ -119,25 +142,21 @@ public class QuestionActivity extends AppCompatActivity {
         return m;
     }
 
-    private void sndMsg(View v)
-    {
-        try
-        {
+    private void sndMsg(View v) {
+        try {
             txt.clearFocus();
-            InputMethodManager in = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager in = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
             in.hideSoftInputFromWindow(txt.getWindowToken(), 0);
 
             String msg = txt.getText().toString();
             Message message = store(msg);
             client.send(message.toJson());
-            messages.add( message );
-            txt.setText( "" );
+            messages.add(message);
+            txt.setText("");
             txt.clearFocus();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            Snackbar.make(v,R.string.error_send_message,Snackbar.LENGTH_LONG).show();
+            Snackbar.make(v, R.string.error_send_message, Snackbar.LENGTH_LONG).show();
         }
     }
 

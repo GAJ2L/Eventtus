@@ -22,14 +22,16 @@ import java.net.URL;
 public abstract class Download extends AsyncTask<String, String, String>
 {
     private View view;
+    private Preload preload;
     private String url;
     private String name;
 
     public Download(View view , String url, String name)
     {
-        this.view = view;
-        this.url  = url;
-        this.name = name;
+        this.view    = view;
+        this.url     = url;
+        this.name    = name;
+        this.preload =  new Preload(view.getContext());
     }
 
     @Override
@@ -38,6 +40,7 @@ public abstract class Download extends AsyncTask<String, String, String>
         if( view != null )
         {
             Snackbar.make(view, R.string.downloading ,Snackbar.LENGTH_INDEFINITE).show();
+            preload.show();
         }
     }
 
@@ -66,6 +69,7 @@ public abstract class Download extends AsyncTask<String, String, String>
                 Snackbar.make(view, R.string.downloading_success ,Snackbar.LENGTH_SHORT).show();
             }
 
+            preload.dismiss();
             onEvent(f);
         }
         catch (Exception e)
@@ -74,6 +78,7 @@ public abstract class Download extends AsyncTask<String, String, String>
 
             if( view != null )
             {
+                preload.dismiss();
                 Snackbar.make(view, R.string.downloading_error ,Snackbar.LENGTH_SHORT).show();
             }
         }

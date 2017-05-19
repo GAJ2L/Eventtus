@@ -92,12 +92,9 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
             Attachment a = getAttachment(getAdapterPosition());
             if( a.getType() != Attachment.TYPE_LINK )
             {
-                final Preload p = new Preload(v.getContext());
-                p.show();
                 new Download(v, a.getLocal(), a.getName()) {
                     @Override
                     public void onEvent(File file) {
-                        p.dismiss();
                         try
                         {
                             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();

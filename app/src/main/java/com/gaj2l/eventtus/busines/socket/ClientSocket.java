@@ -85,6 +85,7 @@ public abstract class ClientSocket
                 StrictMode.setThreadPolicy(policy);
             }
             Socket s = new Socket(HOST, PORT);
+            new DataOutputStream(s.getOutputStream()).writeUTF("running?");
             s.close();
             return true;
         }

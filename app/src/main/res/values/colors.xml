@@ -10,4 +10,6 @@
     <color name="color_finished">#1b5689</color>
     <color name="color_idle">#aaa</color>
     <color name="color_running">#008000</color>
+    <color name="color_blue_face">#475993</color>
+    <color name="color_red_google">#F14336</color>
 </resources>

@@ -81,8 +81,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Button btnFace = (Button) findViewById(R.id.btnFace);
         Button btnGoogle = (Button) findViewById(R.id.btnGoogle);
 
-        btnGoogle.setTextColor(Color.RED);
-        btnFace.setTextColor(Color.BLUE);
+        btnGoogle.setTextColor(getColor(R.color.color_red_google));
+        btnFace.setTextColor(getColor(R.color.color_blue_face));
         lblApp.setTextColor(Color.WHITE);
 
         lblApp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import com.gaj2l.eventtus.busines.maps.DirectionFinder;
 import com.gaj2l.eventtus.busines.maps.DirectionFinderListener;
 import com.gaj2l.eventtus.busines.maps.Route;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.models.Activity;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -83,8 +85,6 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
     private void initComponents()
     {
-        preload = new Preload( this );
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
@@ -161,8 +161,16 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
             return;
         }
 
-        try {
-            new DirectionFinder(this, origin, destination ).execute();
+        try
+        {
+            if(Internet.isConnect(getApplicationContext()))
+            {
+                new DirectionFinder(this, origin, destination).execute();
+            }
+            else
+            {
+                Snackbar.make(getWindow().findViewById(R.id.map), R.string.err_conection_maps, Snackbar.LENGTH_LONG).show();
+            }
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -172,8 +180,6 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     @Override
     public void onDirectionFinderStart()
     {
-        preload.show();
-
         if (originMarkers != null) {
             for (Marker marker : originMarkers) {
                 marker.remove();
@@ -195,7 +201,6 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        preload.dismiss();
         polylinePaths = new ArrayList<>();
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();

@@ -97,5 +97,6 @@
     <string name="title_activity_location">Localização</string>
     <string name="err_send_question_btn">Não é possível enviar uma mensagem</string>
     <string name="err_conection">Não conectado à Internet</string>
+    <string name="err_conection_maps">Não foi possivel montar a rota. Verifique sua conexão!</string>
     <!-- END ERRORS-->
 </resources>

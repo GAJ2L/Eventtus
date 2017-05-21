@@ -97,5 +97,8 @@
     <string name="title_activity_location">Location</string>
     <string name="err_send_question_btn">Is not possible to send a message</string>
     <string name="err_conection">Not connected to the internet</string>
+    <string name="err_conection_maps">Could not mount route. Check your connection!</string>
     <!-- END ERRORS-->
+
+
 </resources>

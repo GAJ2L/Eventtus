@@ -25,7 +25,7 @@ public class UserService extends Service<User> {
      */
     public boolean create(User user) throws Exception {
         try {
-            User userSearch = this.getUserByProvider(user.getMail());
+            User userSearch = this.getUserByEmail(user.getMail());
             if (userSearch == null) {
                 this.store(user);
             } else {
@@ -38,7 +38,7 @@ public class UserService extends Service<User> {
         return true;
     }
 
-    public User getUserByProvider(String email) {
+    public User getUserByEmail(String email) {
         String filters[][] = {{"mail", email}};
 
         List<User> users = this.list(filters);

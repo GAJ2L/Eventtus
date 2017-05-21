@@ -30,6 +30,13 @@ public class EventService extends Service<Event> {
         return (!events.isEmpty()) ? events : null;
     }
 
+    public Event getEventByServiceId(long serviceId)
+    {
+        String filters[][] = {{"event_service_id", String.valueOf(serviceId)}};
+        List<Event> events = this.list(filters);
+        return (!events.isEmpty()) ? events.get(0) : null;
+    }
+
     public void clearEvent( Event e ) throws Exception
     {
         String filters[][] = {

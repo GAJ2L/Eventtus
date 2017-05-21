@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "347592453651",
-    "project_id": "firebase-eventtus"
+    "firebase_url": "https://fir-eventtus.firebaseio.com",
+    "project_id": "firebase-eventtus",
+    "storage_bucket": "firebase-eventtus.appspot.com"
   },
   "client": [
     {
@@ -12,6 +14,10 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "347592453651-93nbe8pgin0eh2ts2vpchs6rri6po3p2.apps.googleusercontent.com",
+          "client_type": 3
+        },
         {
           "client_id": "347592453651-0vfghehaqmu9ftgguo71ln6cua7m4hnd.apps.googleusercontent.com",
           "client_type": 3
@@ -27,7 +33,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAPEYc0Hrh-n5LGZ9JWkKyYPPelLbf9KSw"
+            "current_key": "AIzaSyAPEYc0Hrh-n5LGZ9JWkKyYPPelLbf9KSw"
         }
       ],
       "services": {
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347592453651-93nbe8pgin0eh2ts2vpchs6rri6po3p2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

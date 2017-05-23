@@ -18,6 +18,9 @@ package com.gaj2l.eventtus.services.notifications;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
@@ -26,6 +29,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.WebService;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.models.User;
@@ -55,6 +59,7 @@ public class NotificationService extends FirebaseMessagingService
             if( hasNotify(data.get("type"),data.get("value")) )
             {
                 System.out.println("AQUI00: "+remoteMessage.getMessageId());
+
                 handleNow(data.get("method"),data.get("value"));
 
                 if (remoteMessage.getNotification() != null) {
@@ -108,16 +113,19 @@ public class NotificationService extends FirebaseMessagingService
         {
             if (Integer.valueOf(method) == METHOD_EVENT_UPDATE)
             {
-                //// FIXME: 21/05/17 
+                //// FIXME: 21/05/17
                 System.out.println("Atualizando evento.....");
             }
         }
     }
 
     private void sendNotification(String title, String messageBody) {
+
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.eventtus)
+                .setLargeIcon(BitmapFactory.decodeResource( getResources() , R.mipmap.ic_launcher_round ) )
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)

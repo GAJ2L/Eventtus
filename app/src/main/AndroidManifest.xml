@@ -54,6 +54,10 @@
         </activity>
 
         <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/eventtus" />
+
+        <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".view.activities.BaseActivity" />
         <meta-data
@@ -71,12 +75,6 @@
             android:name=".services.notifications.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name=".services.notifications.NotificationIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->

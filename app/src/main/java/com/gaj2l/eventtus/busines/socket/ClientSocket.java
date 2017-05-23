@@ -18,7 +18,7 @@ public abstract class ClientSocket
         Thread
 {
     private static final String  HOST = "45.55.153.203";
-    private static final Integer PORT = 5000;
+    private static final Integer PORT = 443;
     private static Socket  socket;
     private static DataOutputStream out;
     private static DataInputStream in;

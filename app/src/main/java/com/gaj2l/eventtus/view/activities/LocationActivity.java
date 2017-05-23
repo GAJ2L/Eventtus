@@ -42,7 +42,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     private GoogleMap mMap;
     private Activity activity;
     private LocationManager mLocationManager;
-    private static Preload preload;
+    private Preload preload;
     private Location myLocation;
 
     private List<Marker> originMarkers = new ArrayList<>();
@@ -85,6 +85,8 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
     private void initComponents()
     {
+        preload = new Preload(this);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
@@ -180,44 +182,61 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     @Override
     public void onDirectionFinderStart()
     {
-        if (originMarkers != null) {
-            for (Marker marker : originMarkers) {
-                marker.remove();
+        try
+        {
+            preload.show();
+            if (originMarkers != null) {
+                for (Marker marker : originMarkers) {
+                    marker.remove();
+                }
+            }
+
+            if (destinationMarkers != null) {
+                for (Marker marker : destinationMarkers) {
+                    marker.remove();
+                }
+            }
+
+            if (polylinePaths != null) {
+                for (Polyline polyline : polylinePaths) {
+                    polyline.remove();
+                }
             }
         }
-
-        if (destinationMarkers != null) {
-            for (Marker marker : destinationMarkers) {
-                marker.remove();
-            }
-        }
-
-        if (polylinePaths != null) {
-            for (Polyline polyline:polylinePaths ) {
-                polyline.remove();
-            }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        polylinePaths = new ArrayList<>();
-        originMarkers = new ArrayList<>();
-        destinationMarkers = new ArrayList<>();
+        try
+        {
+            preload.dismiss();
 
-        for (Route route : routes) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 18));
+            polylinePaths = new ArrayList<>();
+            originMarkers = new ArrayList<>();
+            destinationMarkers = new ArrayList<>();
 
-            PolylineOptions polylineOptions = new PolylineOptions().
-                    geodesic(true).
-                    color( getResources().getColor( R.color.colorPrimaryDark, null ) ).
-                    width(18);
+            for (Route route : routes) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 18));
 
-            for (int i = 0; i < route.points.size(); i++) {
-                                polylineOptions.add(route.points.get(i));
+                PolylineOptions polylineOptions = new PolylineOptions().
+                        geodesic(true).
+                        color( getResources().getColor( R.color.colorPrimaryDark, null ) ).
+                        width(18);
+
+                for (int i = 0; i < route.points.size(); i++) {
+                    polylineOptions.add(route.points.get(i));
+                }
+
+                polylinePaths.add(mMap.addPolyline(polylineOptions));
             }
-
-            polylinePaths.add(mMap.addPolyline(polylineOptions));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 

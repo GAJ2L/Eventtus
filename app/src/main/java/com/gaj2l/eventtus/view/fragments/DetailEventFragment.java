@@ -1,13 +1,11 @@
 package com.gaj2l.eventtus.view.fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +17,10 @@ import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
-import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.ContactActivity;
-
-import java.util.List;
+import com.gaj2l.eventtus.view.activities.EventDetailsActivity;
 
 /**
  * Created by lucas on 25/04/17.
@@ -39,6 +35,7 @@ public class DetailEventFragment extends Fragment {
     private Button btnContact;
     private Button btnDetails;
     private Button btnDelete;
+    private CardView cardView;
 
     public DetailEventFragment() {
     }
@@ -63,6 +60,7 @@ public class DetailEventFragment extends Fragment {
         btnContact = (Button) view.findViewById(R.id.btnContact);
         btnDetails = (Button) view.findViewById(R.id.btnDetailsEvents);
         btnDelete = (Button) view.findViewById(R.id.btnDeleteEvent);
+        cardView  = (CardView) view.findViewById( R.id.card_view_details_activity);
 
         txtName.setText(event.getName());
 
@@ -92,6 +90,12 @@ public class DetailEventFragment extends Fragment {
         });
 
         btnDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDetails(v);
+            }
+        });
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDetails(v);
@@ -142,6 +146,10 @@ public class DetailEventFragment extends Fragment {
         }
     }
 
-    public void onDetails(View v) {
+    public void onDetails(View v)
+    {
+        Intent dtl= new Intent(v.getContext(), EventDetailsActivity.class);
+        dtl.putExtra("event", event.getId() );
+        startActivity(dtl);
     }
 }

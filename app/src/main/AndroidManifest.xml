@@ -8,9 +8,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
@@ -25,6 +27,9 @@
             android:name=".view.activities.BaseActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activities.EventDetailsActivity"
+            android:label="@string/title_details_event" />
         <activity
             android:name=".view.activities.CreateEventActivity"
             android:label="@string/app_name" />
@@ -42,13 +47,14 @@
             android:label="@string/title_send_a_question" />
         <activity
             android:name=".view.activities.LocationActivity"
-            android:label="@string/title_activity_location"/>
+            android:label="@string/title_activity_location" />
         <activity
             android:name=".view.activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,7 +62,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/eventtus" />
-
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".view.activities.BaseActivity" />
@@ -71,14 +76,12 @@
             android:value="@string/google_maps_key" />
 
         <!-- [START firebase_service] -->
-        <service
-            android:name=".services.notifications.NotificationService">
+        <service android:name=".services.notifications.NotificationService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->
-
     </application>
 
 </manifest>

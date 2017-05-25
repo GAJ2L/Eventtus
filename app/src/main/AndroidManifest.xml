@@ -82,6 +82,7 @@
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->
+        <activity android:name=".view.activities.ActivityDetailsActivity"></activity>
     </application>
 
 </manifest>

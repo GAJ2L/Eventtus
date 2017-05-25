@@ -1,8 +1,7 @@
 package com.gaj2l.eventtus.view.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -20,7 +19,6 @@ public class EventDetailsActivity extends AppCompatActivity
     private TextView txtInfo;
     private TextView txtContact;
     private TextView txtDt;
-    private CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

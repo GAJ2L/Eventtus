@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
+import com.gaj2l.eventtus.view.activities.ActivityDetailsActivity;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.LocationActivity;
@@ -46,6 +48,7 @@ public class DetailActivityFragment extends Fragment
     private Button btnToRate;
     private Button btnLocation;
     private Button btnSendQuestion;
+    private CardView view;
 
     public DetailActivityFragment(){}
 
@@ -71,6 +74,7 @@ public class DetailActivityFragment extends Fragment
         btnToRate       = (Button) view.findViewById(R.id.btnContact);
         btnLocation     = (Button) view.findViewById(R.id.btnDeleteEvent);
         btnSendQuestion = (Button) view.findViewById(R.id.btnSendQuestionActivity);
+        view            = (CardView) view.findViewById(R.id.card_view_details_activity);
 
         String val = (activity.getName().length() > 27)? activity.getName().substring(0,27) + "..." : activity.getName();
         txtName.setText( val );
@@ -115,6 +119,18 @@ public class DetailActivityFragment extends Fragment
             @Override
             public void onClick(View v) {
                 onSendQuestion(v);
+            }
+        });
+        btnDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDetails(v);
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDetails(v);
             }
         });
     }
@@ -162,6 +178,13 @@ public class DetailActivityFragment extends Fragment
         Intent activity_to_rate = new Intent( getContext(), AttachmentActivity.class);
         activity_to_rate.putExtra("activity",activity.getId());
         startActivity(activity_to_rate);
+    }
+
+    private void onDetails(View v)
+    {
+        Intent intent = new Intent( getContext(), ActivityDetailsActivity.class);
+        intent.putExtra("activity",activity.getId());
+        startActivity(intent);
     }
 
     private void onSendQuestion(View v)

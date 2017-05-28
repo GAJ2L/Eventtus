@@ -1,15 +1,20 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Event;
+
+import java.net.URL;
 
 public class EventDetailsActivity extends AppCompatActivity
 {
@@ -19,6 +24,7 @@ public class EventDetailsActivity extends AppCompatActivity
     private TextView txtInfo;
     private TextView txtContact;
     private TextView txtDt;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +40,26 @@ public class EventDetailsActivity extends AppCompatActivity
         load();
     }
 
-    private void load() {
-        event = ComponentProvider.getServiceComponent().getEventService().get(getIntent().getExtras().getLong("event"));
+    private void load()
+    {
+        try {
+            event = ComponentProvider.getServiceComponent().getEventService().get(getIntent().getExtras().getLong("event"));
 
-        txtName.setText(event.getName());
-        txtInfo.setText(event.getDescription());
+            txtName.setText(event.getName());
+            txtInfo.setText(event.getDescription());
 
-        txtContact.setText( event.getContactName() + "\n\n" +
-                            event.getContactMail() + "\n\n" +
-                            event.getContactPhone() );
+            txtContact.setText(event.getContactName() + "\n\n" +
+                    event.getContactMail() + "\n\n" +
+                    event.getContactPhone());
 
-        txtDt.setText( Util.getDateFomatted( event.getDtStart() ) + " - " + Util.getDateFomatted( event.getDtEnd() ) );
+            txtDt.setText(Util.getDateFomatted(event.getDtStart()) + " - " + Util.getDateFomatted(event.getDtEnd()));
+            imageView.setImageBitmap( Util.getImageBitmap( event.getBanner() ));
+        }
+
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -69,5 +84,6 @@ public class EventDetailsActivity extends AppCompatActivity
         txtInfo     = (TextView) findViewById( R.id.textEvtInfo);
         txtContact  = (TextView) findViewById( R.id.textEvtContact);
         txtDt       = (TextView) findViewById( R.id.textEvtDate);
+        imageView   = (ImageView) findViewById( R.id.eventImageView);
     }
 }

@@ -101,4 +101,11 @@
     <!-- END ERRORS-->
 
 
+    <string name="details_location">Location</string>
+    <string name="details_name">Name</string>
+    <string name="details_event">Event</string>
+    <string name="details_info">Description</string>
+    <string name="details_date">Date</string>
+    <string name="details_contact">Contact</string>
+
 </resources>

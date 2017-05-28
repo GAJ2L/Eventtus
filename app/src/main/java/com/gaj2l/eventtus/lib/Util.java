@@ -86,6 +86,17 @@ public class Util
 
     }
 
+
+    public static Bitmap getImageBitmap(String url) throws Exception
+    {
+        if (android.os.Build.VERSION.SDK_INT > 9) { StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        URL f = new URL(url);
+        return Bitmap.createScaledBitmap(BitmapFactory.decodeStream(f.openConnection().getInputStream()), 150, 150, false);
+    }
+
     public static String bitmap2base64(Bitmap bitmap)
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -81,7 +81,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!-- [END firebase_iid_service] -->
+        <service android:name=".services.notifications.NotificationToken">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- [END firebase_service] -->
         <activity android:name=".view.activities.ActivityDetailsActivity"></activity>
     </application>
 

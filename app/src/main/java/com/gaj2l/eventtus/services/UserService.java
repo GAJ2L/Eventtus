@@ -4,6 +4,7 @@ import com.gaj2l.eventtus.lib.Repository;
 import com.gaj2l.eventtus.lib.Service;
 import com.gaj2l.eventtus.lib.Validation;
 import com.gaj2l.eventtus.models.User;
+import com.gaj2l.eventtus.services.web.TokenWebService;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class UserService extends Service<User> {
             User userSearch = this.getUserByEmail(user.getMail());
             if (userSearch == null) {
                 this.store(user);
+                //save token in server
+                TokenWebService.save(user.getMail());
             } else {
                 user.setId(userSearch.getId());
             }

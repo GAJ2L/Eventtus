@@ -93,10 +93,10 @@ public class CreateEventActivity
             p.show();
             EventWebService.getEvent(Session.getInstance(getApplicationContext()).getString("email"), rawResult.getText(), new EventWebService.ActionEvent() {
                 @Override
-                public void onEvent(String status) {
+                public void onEvent(Event event) {
                     p.dismiss();
                     redirect();
-                    int msg = (status.equalsIgnoreCase("success")) ? R.string.add_event_success : R.string.add_event_error;
+                    int msg = (event != null ) ? R.string.add_event_success : R.string.add_event_error;
                     Snackbar.make(mScannerView , msg, Snackbar.LENGTH_LONG).show();
                 }
             });

@@ -78,6 +78,7 @@
     <string name="in_progress">Em andamento</string>
     <string name="completed">Concluído</string>
     <string name="idle">Aguardando</string>
+    <string name="update_event_success">Evento atualizado com sucesso</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
@@ -106,6 +107,7 @@
     <string name="details_info">Informação</string>
     <string name="details_date">Data</string>
     <string name="details_contact">Contato</string>
+    <string name="btn_refresh_event">Atualizar</string>
 
 
 </resources>

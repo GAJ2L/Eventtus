@@ -14,10 +14,13 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Message;
+import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Event;
+import com.gaj2l.eventtus.services.web.EventWebService;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.ContactActivity;
 import com.gaj2l.eventtus.view.activities.EventDetailsActivity;
@@ -35,6 +38,7 @@ public class DetailEventFragment extends Fragment {
     private Button btnContact;
     private Button btnDetails;
     private Button btnDelete;
+    private Button btnRefresh;
     private CardView cardView;
 
     public DetailEventFragment() {
@@ -60,6 +64,7 @@ public class DetailEventFragment extends Fragment {
         btnContact = (Button) view.findViewById(R.id.btnContact);
         btnDetails = (Button) view.findViewById(R.id.btnDetailsEvents);
         btnDelete = (Button) view.findViewById(R.id.btnDeleteEvent);
+        btnRefresh = (Button) view.findViewById(R.id.btnRefreshEvent);
         cardView  = (CardView) view.findViewById( R.id.card_view_details_activity);
 
         txtName.setText(event.getName());
@@ -74,21 +79,24 @@ public class DetailEventFragment extends Fragment {
                 onActivities(v);
             }
         });
-
         btnContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onContact(v);
             }
         });
-
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDelete(v);
             }
         });
-
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRefresh(v);
+            }
+        });
         btnDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +111,37 @@ public class DetailEventFragment extends Fragment {
         });
     }
 
+    public void onRefresh(final View v)
+    {
+        if( Internet.isConnect(v.getContext()) )
+        {
+            final Preload p = new Preload(v.getContext());
+
+            p.show();
+
+            final String email = Session.getInstance(getContext()).getString("email");
+
+            EventWebService.refreshEvent( event.getEventServiceId(), email, new EventWebService.ActionEvent()
+            {
+                @Override
+                public void onEvent(Event event)
+                {
+                    p.dismiss();
+                    int msg = ( event != null ) ? R.string.update_event_success : R.string.add_event_error;
+                    Snackbar.make(v , msg, Snackbar.LENGTH_LONG).show();
+                    getFragmentManager().popBackStack();
+                    DetailEventFragment fragment = new DetailEventFragment();
+                    fragment.setEvent(event);
+                    ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
+
+                }
+            });
+        }
+        else
+        {
+            Snackbar.make( v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+        }
+    }
 
     public void onActivities(View v) {
         Session.getInstance(getContext()).put("event_id",this.event.getId());

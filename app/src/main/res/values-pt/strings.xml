@@ -108,6 +108,10 @@
     <string name="details_date">Data</string>
     <string name="details_contact">Contato</string>
     <string name="btn_refresh_event">Atualizar</string>
+    <string name="info">Eventtus  Desenvolvido pela GAJ2L, Eventtus é um aplicativo com o objetivo de facilitar a vida dos organizadores e dos usuários de um evento.  Com uma interface simples e ágil, podemos visualizar detalhes dos eventos e atividades nos quais está inscrito, tanto quanto suas localizações.</string>
+    <string name="info_eventtus">Equipe:</string>
+    <string name="action_credits">Créditos</string>
+    <string name="title_credits">Créditos</string>
 
 
 </resources>

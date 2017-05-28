@@ -133,8 +133,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_settings: {
-
+            case R.id.action_credits: {
+                Intent credits = new Intent(BaseActivity.this,CreditsActivity.class);
+                startActivity(credits);
             }
             break;
 

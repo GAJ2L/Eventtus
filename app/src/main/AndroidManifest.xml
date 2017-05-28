@@ -31,6 +31,12 @@
             android:name=".view.activities.EventDetailsActivity"
             android:label="@string/title_details_event" />
         <activity
+            android:name=".view.activities.ActivityDetailsActivity"
+            android:label="@string/title_details_activity"/>
+        <activity
+            android:name=".view.activities.CreditsActivity"
+            android:label="@string/title_credits"/>
+        <activity
             android:name=".view.activities.CreateEventActivity"
             android:label="@string/app_name" />
         <activity
@@ -87,7 +93,6 @@
             </intent-filter>
         </service>
         <!-- [END firebase_service] -->
-        <activity android:name=".view.activities.ActivityDetailsActivity"></activity>
     </application>
 
 </manifest>

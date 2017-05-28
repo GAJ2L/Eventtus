@@ -76,6 +76,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="https://github.com/GAJ2L/Eventtus"
+        android:text="https://github.com/GAJ2L"
         android:textAlignment="center" />
 </RelativeLayout>

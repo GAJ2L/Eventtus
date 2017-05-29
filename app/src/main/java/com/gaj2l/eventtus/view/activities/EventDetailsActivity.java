@@ -54,6 +54,8 @@ public class EventDetailsActivity extends AppCompatActivity
 
             txtDt.setText(Util.getDateFomatted(event.getDtStart()) + " - " + Util.getDateFomatted(event.getDtEnd()));
             imageView.setImageBitmap( Util.getImageBitmap( event.getBanner() ));
+            imageView.setAdjustViewBounds( true );
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
 
         catch ( Exception e )

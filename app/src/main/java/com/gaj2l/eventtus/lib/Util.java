@@ -94,7 +94,7 @@ public class Util
         }
 
         URL f = new URL(url);
-        return Bitmap.createScaledBitmap(BitmapFactory.decodeStream(f.openConnection().getInputStream()), 150, 150, false);
+        return Bitmap.createBitmap( BitmapFactory.decodeStream( f.openConnection().getInputStream() ) );
     }
 
     public static String bitmap2base64(Bitmap bitmap)

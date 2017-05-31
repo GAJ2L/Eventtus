@@ -41,32 +41,32 @@
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView8"
-        android:layout_marginTop="8dp"
-        android:padding="10dp"
+        android:padding="15dp"
         android:text="@string/info"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/txtTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView11"
-        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:text="@string/info_eventtus"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:layout_above="@+id/textView13"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtTeam"
         android:paddingLeft="20dp"
-        android:text="Gabriel S. Ferronatto\nArtur Tomasi\nJackson D. Majolo\nLucas Tomasi\nLucas V. Schneider" />
+        android:text="Gabriel S. Ferronatto\nArtur Tomasi\nJackson D. Majolo\nLucas Tomasi\nLucas V. Schneider"
+        android:layout_above="@+id/name_team"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView15"

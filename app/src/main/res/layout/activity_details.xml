@@ -6,148 +6,194 @@
         android:layout_height="match_parent"
         tools:context="com.gaj2l.eventtus.view.activities.ActivityDetailsActivity">
 
-        <TableLayout
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
 
-            <TableRow
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="@string/details_name"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="@string/details_name"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+        </TableRow>
 
-            </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textActivityName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="Sad but tru:"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="@string/details_event"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textActivityEvent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="Sad but tru:"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="@string/details_location"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </TableRow>
-
-            <TableRow
+            <TextView
+                android:id="@+id/textActivityName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="Sad but tru:"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp" />
+        </TableRow>
 
-                <TextView
-                    android:id="@+id/textActivityLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="Lorem ipsum dolor sit amet."
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
-            </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
 
-            <TableRow
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="@string/details_event"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="@string/details_date"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </TableRow>
+        </TableRow>
 
-            <TableRow
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textActivityEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="Sad but tru:"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="@string/details_location"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
 
-                <TextView
-                    android:id="@+id/textActivityDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="7dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="7dp"
-                    android:text="Sad but tru:"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
-            </TableRow>
-        </TableLayout>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textActivityLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="Lorem ipsum dolor sit amet."
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="@string/details_date"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textActivityDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="Sad but tru:"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:paddingBottom="7dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="7dp"
+                android:text="@string/evaluations"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtTotalEvaluation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/no_evaluations"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/cardview_dark_background" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <RatingBar
+        android:id="@+id/avgStars"
+        style="@style/Widget.AppCompat.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/table"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

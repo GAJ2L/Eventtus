@@ -113,5 +113,6 @@
     <string name="info_eventtus">Team:</string>
     <string name="info">Eventtus Developed by GAJ2L, Eventtus is an application designed to make life easier for organizers and users of an event. With a simple and agile interface, we can visualize details of the events and activities in which it is registered, as well as its locations.</string>
     <string name="title_credits">Credits</string>
+    <string name="evaluations">Evaluations</string>
 
 </resources>

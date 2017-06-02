@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gaj2l.eventtus.view.activities.SurveyActivty">
+
+    <TextView
+        android:id="@+id/question_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        android:background="@color/com_facebook_button_login_silver_background_color"
+        android:padding="10dp"
+        android:text="Praesent ut pretium sapien. Donec interdum semper dolor, ut eleifend lectus consequat sed. Nulla bibendum odio enim, a pretium urna consequat quis. Nam vestibulum eros erat, eget imperdiet lorem fermentum sed. "
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="@string/back" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnSave"
+        android:layout_alignBottom="@+id/btnSave"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:text="@string/next"
+        android:textAlignment="center"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnBack"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:text="@string/finish"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <ScrollView
+        android:id="@+id/paneOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/question_title"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnSave">
+    </ScrollView>
+
+
+</RelativeLayout>

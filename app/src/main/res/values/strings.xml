@@ -115,4 +115,8 @@
     <string name="title_credits">Credits</string>
     <string name="evaluations">Evaluations</string>
 
+    <string name="survey">Survey</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="finish">Save</string>
 </resources>

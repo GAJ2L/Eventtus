@@ -114,5 +114,9 @@
     <string name="title_credits">Créditos</string>
     <string name="evaluations">Avaliações</string>
 
+    <string name="survey">Pesquisa</string>
+    <string name="back">Anterior</string>
+    <string name="next">Próximo</string>
+    <string name="finish">Finalizar</string>
 
 </resources>

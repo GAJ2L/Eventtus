@@ -7,12 +7,12 @@
     tools:context="com.gaj2l.eventtus.view.activities.BaseActivity">
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:scrollbars="horizontal|vertical">
 
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -172,6 +172,20 @@
                 android:text="@string/card_details_activity"
                 android:textColor="@android:color/white" />
 
+            <Button
+                android:id="@+id/btnShowSurvey"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/btnSendQuestionActivity"
+                android:layout_alignStart="@+id/btnSendQuestionActivity"
+                android:layout_below="@+id/btnSendQuestionActivity"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:drawableLeft="@drawable/details"
+                android:paddingLeft="5dp"
+                android:paddingRight="35dp"
+                android:text="@string/survey" />
 
         </RelativeLayout>
     </ScrollView>

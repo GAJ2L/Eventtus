@@ -26,6 +26,7 @@ import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.LocationActivity;
 import com.gaj2l.eventtus.view.activities.QuestionActivity;
+import com.gaj2l.eventtus.view.activities.SurveyActivty;
 import com.gaj2l.eventtus.view.activities.ToRateActivity;
 
 import org.threeten.bp.OffsetDateTime;
@@ -48,6 +49,7 @@ public class DetailActivityFragment extends Fragment
     private Button btnToRate;
     private Button btnLocation;
     private Button btnSendQuestion;
+    private Button btnSurvey;
     private CardView view;
 
     public DetailActivityFragment(){}
@@ -74,6 +76,7 @@ public class DetailActivityFragment extends Fragment
         btnToRate       = (Button) view.findViewById(R.id.btnContact);
         btnLocation     = (Button) view.findViewById(R.id.btnDeleteEvent);
         btnSendQuestion = (Button) view.findViewById(R.id.btnSendQuestionActivity);
+        btnSurvey       = (Button) view.findViewById( R.id.btnShowSurvey );
         view            = (CardView) view.findViewById(R.id.card_view_details_activity);
 
         String val = (activity.getName().length() > 27)? activity.getName().substring(0,27) + "..." : activity.getName();
@@ -95,6 +98,10 @@ public class DetailActivityFragment extends Fragment
             btnSendQuestion.setEnabled( false );
             btnSendQuestion.setClickable( false );
             btnSendQuestion.setBackgroundColor( Color.rgb(170,170,170) );
+
+            btnSurvey.setEnabled( false );
+            btnSurvey.setClickable( false );
+            btnSurvey.setBackgroundColor( Color.rgb(170,170,170) );
         }
 
         btnToRate.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +132,12 @@ public class DetailActivityFragment extends Fragment
             @Override
             public void onClick(View v) {
                 onDetails(v);
+            }
+        });
+        btnSurvey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSurvey(v);
             }
         });
         view.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +198,13 @@ public class DetailActivityFragment extends Fragment
         Intent intent = new Intent( getContext(), ActivityDetailsActivity.class);
         intent.putExtra("activity",activity.getId());
         startActivity(intent);
+    }
+
+    private void onSurvey(View v)
+    {
+        Intent survey = new Intent(getContext(), SurveyActivty.class);
+        survey.putExtra("activity", activity.getId());
+        startActivity(survey);
     }
 
     private void onSendQuestion(View v)

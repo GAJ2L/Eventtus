@@ -51,7 +51,6 @@ public class DetailEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((BaseActivity) getContext()).setTitle(R.string.title_details_event);
-        ((BaseActivity) getActivity()).hideFloatingActionButton();
 
         return inflater.inflate(R.layout.fragment_detail_event, container, false);
     }

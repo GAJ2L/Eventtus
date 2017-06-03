@@ -3,15 +3,7 @@ package com.gaj2l.eventtus.view.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Shader;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,10 +12,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,12 +22,9 @@ import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.view.fragments.EventFragment;
 
-import java.net.URL;
-
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static int ID_CAMERA_REQUEST = 1;
-    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +43,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            this.fab = (FloatingActionButton) findViewById(R.id.fab);
-            this.fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (hasPermission()) {
-                        registerEvent();
-                    } else {
-                        requestPermission();
-                    }
-                }
-            });
-
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -79,7 +54,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
             navigationView.setNavigationItemSelectedListener(this);
 
-            TextView lblName  = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblName);
+            TextView lblName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblName);
             TextView lblEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblEmail);
             ImageView imgUser = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imgUser);
 
@@ -92,15 +67,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private boolean hasPermission() {
+    public boolean hasPermission() {
         return (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestPermission() {
+    public void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, ID_CAMERA_REQUEST);
     }
 
-    private void registerEvent() {
+    public void registerEvent() {
         Intent event = new Intent(BaseActivity.this, CreateEventActivity.class);
         startActivity(event);
         finish();
@@ -134,7 +109,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.action_credits: {
-                Intent credits = new Intent(BaseActivity.this,CreditsActivity.class);
+                Intent credits = new Intent(BaseActivity.this, CreditsActivity.class);
                 startActivity(credits);
             }
             break;
@@ -178,18 +153,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 registerEvent();
             }
-        }
-    }
-
-    public void showFloatingActionButton() {
-        if (this.fab != null) {
-            this.fab.show();
-        }
-    }
-
-    public void hideFloatingActionButton() {
-        if (this.fab != null) {
-            this.fab.hide();
         }
     }
 }

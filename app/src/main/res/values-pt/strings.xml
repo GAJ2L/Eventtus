@@ -113,5 +113,7 @@
     <string name="action_credits">Créditos</string>
     <string name="title_credits">Créditos</string>
 
-
+    <string name="code">Código</string>
+    <string name="message_code">Digite o código do evento</string>
+    <string name="qrcode">QR Code</string>
 </resources>

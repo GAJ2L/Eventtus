@@ -30,7 +30,6 @@
     <!-- START TITLES -->
     <string name="app_name">Eventtus</string>
     <string name="action_settings">Settings</string>
-    <string name="action_credits">Credits</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activities">Activities</string>
@@ -102,7 +101,6 @@
     <string name="err_conection_maps">Could not mount route. Check your connection!</string>
     <!-- END ERRORS-->
 
-
     <string name="details_location">Location</string>
     <string name="details_name">Name</string>
     <string name="details_event">Event</string>
@@ -112,6 +110,10 @@
     <string name="btn_refresh_event">Refresh</string>
     <string name="info_eventtus">Team:</string>
     <string name="info">Eventtus Developed by GAJ2L, Eventtus is an application designed to make life easier for organizers and users of an event. With a simple and agile interface, we can visualize details of the events and activities in which it is registered, as well as its locations.</string>
+    <string name="action_credits">Credits</string>
     <string name="title_credits">Credits</string>
 
+    <string name="code">Code</string>
+    <string name="message_code">Enter the event code</string>
+    <string name="qrcode">QR Code</string>
 </resources>

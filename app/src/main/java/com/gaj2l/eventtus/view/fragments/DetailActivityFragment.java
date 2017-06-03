@@ -58,7 +58,6 @@ public class DetailActivityFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ((BaseActivity) getContext()).setTitle(R.string.title_details_activity);
-        ((BaseActivity) getActivity()).hideFloatingActionButton();
 
         return inflater.inflate(R.layout.fragment_detail_activity, container, false);
     }

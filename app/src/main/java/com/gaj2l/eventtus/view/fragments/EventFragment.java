@@ -113,7 +113,6 @@ public class EventFragment extends Fragment {
     private void redirect() {
         getFragmentManager().popBackStack();
         getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
-
     }
 
     private void getEventServer(String chave) {

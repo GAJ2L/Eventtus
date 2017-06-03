@@ -17,10 +17,12 @@ import android.widget.Toast;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.socket.ClientSocket;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
+import com.gaj2l.eventtus.services.web.SurveyWebService;
 import com.gaj2l.eventtus.view.activities.ActivityDetailsActivity;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
@@ -201,9 +203,30 @@ public class DetailActivityFragment extends Fragment
 
     private void onSurvey(View v)
     {
-        Intent survey = new Intent(getContext(), SurveyActivty.class);
-        survey.putExtra("activity", activity.getId());
-        startActivity(survey);
+        if( Internet.isConnect(v.getContext()) ) {
+            try {
+                SurveyWebService.hasSurvey(activity, Session.getInstance(getContext()).getString("email"), new SurveyWebService.ActionEvent<Boolean>() {
+                    @Override
+                    public void onEvent(Boolean has) {
+                        if (has) {
+                            Intent survey = new Intent(getContext(), SurveyActivty.class);
+                            survey.putExtra("activity", activity.getId());
+                            startActivity(survey);
+                        } else {
+                            Toast.makeText(getContext(), getString(R.string.message_no_survey), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        else
+        {
+            Snackbar.make( v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     private void onSendQuestion(View v)

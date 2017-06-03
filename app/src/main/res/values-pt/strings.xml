@@ -121,4 +121,7 @@
     <string name="next">Próximo</string>
     <string name="finish">Finalizar</string>
     <string name="no_evaluations">Sem avaliações</string>
+
+    <string name="message_no_survey">Não existe pesquisas para responder!</string>
+    <string name="message_error_survey">Responda todas as perguntas!</string>
 </resources>

@@ -60,6 +60,7 @@ public class ActivityDetailsActivity extends AppCompatActivity
                 txtLocation.setText(activity.getLocalName());
                 txtEvt.setText( event.getName() );
                 txtDt.setText( Util.getAllDateFomatted( activity.getDtStart() ) + " - " + Util.getDateFomatted( activity.getDtEnd() ) );
+
                 if( count != 0 )
                 {
                     totalEvaluations.setText( "Total: " + count );
@@ -70,6 +71,8 @@ public class ActivityDetailsActivity extends AppCompatActivity
                 }
 
                 avgStars.setRating(stars);
+                avgStars.setClickable( false );
+                avgStars.setIsIndicator( true );
 
                 p.dismiss();
             }

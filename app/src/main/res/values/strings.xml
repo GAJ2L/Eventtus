@@ -121,4 +121,7 @@
     <string name="next">Next</string>
     <string name="finish">Save</string>
     <string name="no_evaluations">No evaluations</string>
+    <string name="message_no_survey">There no survey to answer!</string>
+    <string name="message_error_survey">Answer all questions!</string>
+
 </resources>

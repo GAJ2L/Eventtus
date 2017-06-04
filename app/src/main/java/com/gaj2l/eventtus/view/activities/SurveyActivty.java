@@ -1,5 +1,6 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Answer;
@@ -36,7 +38,7 @@ import java.util.List;
 public class SurveyActivty extends AppCompatActivity {
 
     private Activity activity;
-    private static Survey survey;
+    private Survey survey;
 
     private TextView txtSurvey;
     private TextView txtQuestion;
@@ -44,6 +46,8 @@ public class SurveyActivty extends AppCompatActivity {
     private Button btnSave;
     private Button btnNext;
     private ScrollView paneOptions;
+
+    private Preload preload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,6 +82,9 @@ public class SurveyActivty extends AppCompatActivity {
 
     private void load() {
         try {
+            preload = new Preload(this);
+            preload.show();
+
             activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
 
             SurveyWebService.getSurvey( activity, new SurveyWebService.ActionEvent<Survey>() {
@@ -86,6 +93,10 @@ public class SurveyActivty extends AppCompatActivity {
                     SurveyActivty.this.survey = survey;
 
                     loadOptions();
+
+                    updateEditable();
+
+                    preload.dismiss();
                 }
             } );
         } catch ( Exception e ) {
@@ -108,6 +119,7 @@ public class SurveyActivty extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                     survey.answer( new Answer( survey.question(), checkedId ) );
+                    updateEditable();
                 }
             });
 
@@ -131,19 +143,19 @@ public class SurveyActivty extends AppCompatActivity {
         }
     }
 
-    private void onSave() {
+    private void onSave( final View v ) {
         try {
             if (survey.canFinish()) {
                 SurveyWebService.finish(survey, activity, Session.getInstance(getApplicationContext()).getString("email"), new SurveyWebService.ActionEvent<Boolean>() {
                     @Override
                     public void onEvent(Boolean survey) {
                         finish();
-                        Toast.makeText(getApplicationContext(), getString( R.string.message_error_survey ), Toast.LENGTH_SHORT).show();
+                        Snackbar.make( v, getString( R.string.success), Snackbar.LENGTH_LONG).show();
                     }
                 });
 
             } else {
-                Toast.makeText(getApplicationContext(), getString( R.string.message_error_survey ), Toast.LENGTH_SHORT).show();
+                Snackbar.make( v, getString( R.string.message_error_survey ), Snackbar.LENGTH_LONG).show();
             }
 
         }  catch ( Exception e ) {
@@ -165,6 +177,21 @@ public class SurveyActivty extends AppCompatActivity {
         }
     }
 
+    private void updateEditable()
+    {
+        btnSave.setEnabled( survey.canFinish() );
+        btnSave.setClickable( survey.canFinish() );
+        btnSave.setBackgroundColor( survey.canFinish() ? getResources().getColor( R.color.colorPrimaryDark, null ) : Color.rgb(170,170,170) );
+
+        btnNext.setEnabled( survey.hasNext() );
+        btnNext.setClickable( survey.hasNext() );
+        btnNext.setBackgroundColor( survey.hasNext() ? getResources().getColor( R.color.colorPrimaryDark, null ) : Color.rgb(170,170,170) );
+
+        btnBack.setEnabled( survey.hasPrevious() );
+        btnBack.setClickable( survey.hasPrevious() );
+        btnBack.setBackgroundColor( survey.hasPrevious() ? getResources().getColor( R.color.colorPrimaryDark, null ) : Color.rgb(170,170,170) );
+    }
+
     private void initComponents() {
         txtQuestion = (TextView) findViewById(R.id.question_title);
         txtSurvey   = (TextView) findViewById(R.id.survey_text);
@@ -178,19 +205,19 @@ public class SurveyActivty extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSave();
+                onSave(v);updateEditable();
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBack();
+                onBack(); updateEditable();
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onNext();
+                onNext();updateEditable();
             }
         });
     }

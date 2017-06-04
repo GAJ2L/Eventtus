@@ -85,7 +85,7 @@ public class SurveyWebService
 
         return survey;
     }
-    
+
     public static void finish(Survey survey, Activity activity, String mail, final ActionEvent<Boolean> evt )
     {
         try {

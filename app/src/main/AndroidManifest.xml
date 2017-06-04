@@ -54,13 +54,17 @@
         <activity
             android:name=".view.activities.LocationActivity"
             android:label="@string/title_activity_location" />
+
         <activity
             android:name=".view.activities.LoginActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".view.activities.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 public class Session {
     private static Session session;
     private SharedPreferences preferences;
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
     private Session(Context context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -83,21 +84,24 @@ public class Session {
         return preferences.getFloat(key, def);
     }
 
-    public long getLong(String key)
-    {
+    public long getLong(String key) {
         return getLong(key, 0);
     }
 
-    public long getLong(String key, long def)
-    {
-        try
-        {
+    public long getLong(String key, long def) {
+        try {
             return preferences.getLong(key, def);
-        }
-        catch ( Exception e  )
-        {
+        } catch (Exception e) {
             return 0;
         }
 
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        put(IS_FIRST_TIME_LAUNCH, isFirstTime);
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 }

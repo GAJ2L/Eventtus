@@ -121,4 +121,20 @@
     <string name="next">Next</string>
     <string name="finish">Save</string>
     <string name="no_evaluations">No evaluations</string>
+
+    <!-- START SLIDE-->
+    <string name="slide_next">Next</string>
+    <string name="slide_skip">Skip</string>
+    <string name="slide_start">Come on</string>
+    <string name="slide_1_title">Hello!</string>
+    <string name="slide_1_desc">Thank you for your interest in using Eventtus!</string>
+    <string name="slide_2_title">Events</string>
+    <string name="slide_2_desc">Have all your event data in the palm of your hand!</string>
+    <string name="slide_3_title">Activities</string>
+    <string name="slide_3_desc">See and download all the material that the minister offers!</string>
+    <string name="slide_4_title">Location</string>
+    <string name="slide_4_desc">Find out where your activity will occur!</string>
+    <string name="slide_5_title">Did you like the event?</string>
+    <string name="slide_5_desc">So evaluate it and leave a message to the organizers!</string>
+    <!-- END SLIDE-->
 </resources>

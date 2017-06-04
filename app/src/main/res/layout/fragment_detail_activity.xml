@@ -182,7 +182,7 @@
                 android:layout_below="@+id/btnSendQuestionActivity"
                 android:background="@color/colorPrimary"
                 android:textColor="@android:color/white"
-                android:drawableLeft="@drawable/details"
+                android:drawableLeft="@drawable/survey"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
                 android:text="@string/survey" />

@@ -10,12 +10,26 @@
         android:id="@+id/question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/survey_text"
         android:layout_gravity="right"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:background="@color/com_facebook_button_login_silver_background_color"
+        android:background="@color/com_facebook_button_login_silver_background_color_pressed"
         android:padding="10dp"
-        android:text="Praesent ut pretium sapien. Donec interdum semper dolor, ut eleifend lectus consequat sed. Nulla bibendum odio enim, a pretium urna consequat quis. Nam vestibulum eros erat, eget imperdiet lorem fermentum sed. "
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/survey_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="su"
+        android:padding="10dp"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
     <Button
@@ -66,6 +80,7 @@
         android:layout_below="@+id/question_title"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/btnSave">
+
     </ScrollView>
 
 

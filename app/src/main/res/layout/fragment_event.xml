@@ -35,8 +35,7 @@
             fab:fab_colorPressed="@color/white_pressed"
             fab:fab_addButtonColorNormal="@color/colorPrimary"
             fab:fab_addButtonColorPressed="@color/colorPrimary"
-            fab:fab_addButtonPlusIconColor="@color/white"
-            fab:fab_title="@string/qrcode" />
+            fab:fab_addButtonPlusIconColor="@color/white"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_b"
@@ -46,8 +45,7 @@
             fab:fab_colorPressed="@color/white_pressed"
             fab:fab_addButtonColorNormal="@color/colorPrimary"
             fab:fab_addButtonColorPressed="@color/colorPrimary"
-            fab:fab_addButtonPlusIconColor="@color/white"
-            fab:fab_title="@string/code" />
+            fab:fab_addButtonPlusIconColor="@color/white"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </RelativeLayout>

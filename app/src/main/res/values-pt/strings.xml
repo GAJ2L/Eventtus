@@ -82,6 +82,8 @@
     <string name="message_no_survey">Não existe pesquisas para responder!</string>
     <string name="message_error_survey">Responda todas as perguntas!</string>
     <string name="success">Salvo com Sucesso!</string>
+    <string name="no_survey">Sem Pesquisas</string>
+    <string name="no_survey_info">Está atividade não possui pesquisas para serem respondidas</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
@@ -139,5 +141,7 @@
     <string name="slide_4_desc">Descubra onde irá ocorrer a sua ativade!</string>
     <string name="slide_5_title">Gostou do evento?</string>
     <string name="slide_5_desc">Então avalie ele e deixe uma mensagem aos organizadores!</string>
+    <string name="slide_6_title">Interação</string>
+    <string name="slide_6_desc">Interaja com o palestrando enviando perguntas e respondendo pesquisas</string>
     <!-- END SLIDE-->
 </resources>

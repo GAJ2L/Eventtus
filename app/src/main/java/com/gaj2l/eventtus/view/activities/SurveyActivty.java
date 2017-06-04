@@ -10,8 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -90,11 +92,16 @@ public class SurveyActivty extends AppCompatActivity {
             SurveyWebService.getSurvey( activity, new SurveyWebService.ActionEvent<Survey>() {
                 @Override
                 public void onEvent(Survey survey) {
+
                     SurveyActivty.this.survey = survey;
 
-                    loadOptions();
+                    if ( SurveyActivty.this.survey != null && SurveyActivty.this.survey.hasQuestions()) {
+                        loadOptions();
 
-                    updateEditable();
+                        updateEditable();
+                    } else {
+                        setContentView( R.layout.no_survey);
+                    }
 
                     preload.dismiss();
                 }

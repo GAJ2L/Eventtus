@@ -83,6 +83,8 @@
     <string name="no_evaluations">No evaluations</string>
     <string name="message_no_survey">There no survey to answer!</string>
     <string name="message_error_survey">Answer all questions!</string>
+    <string name="no_survey">No Survey</string>
+    <string name="no_survey_info">This activity has no survey to answer</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
@@ -139,5 +141,7 @@
     <string name="slide_4_desc">Find out where your activity will occur!</string>
     <string name="slide_5_title">Did you like the event?</string>
     <string name="slide_5_desc">So evaluate it and leave a message to the organizers!</string>
+    <string name="slide_6_title">Interact</string>
+    <string name="slide_6_desc">Interact with the speaker by submitting questions and answering surveys</string>
     <!-- END SLIDE-->
 </resources>

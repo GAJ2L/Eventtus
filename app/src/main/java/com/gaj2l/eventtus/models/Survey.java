@@ -15,115 +15,45 @@ public class Survey
     private int index = 0;
     private HashMap<Integer, Answer> answers = new HashMap();
 
-    public Survey( String name )
-    {
-        this( name, null );
-    }
-
     public Survey( String name, List questions )
     {
         this.name = name;
         this.questions = questions;
     }
 
-    public void name( String name )
-    {
-        this.name = name;
-    }
+    public void name( String name ) { this.name = name; }
 
-    public String name()
-    {
-        return  name;
-    }
+    public String name() { return  name; }
 
-    public List<Question> questions()
-    {
-        return questions;
-    }
+    public boolean hasQuestions() { return questions != null && ! questions.isEmpty(); }
+    public List<Question> questions() { return questions; }
 
-    public void questions( List questions )
-    {
-        this.questions = questions;
-    }
+    public Question question() { return questions.get(index); }
 
-    public void question( Question question )
-    {
-        if ( questions == null )
-        {
-            questions = new ArrayList();
-        }
+    public boolean hasNext() { return index < questions.size() - 1; }
 
-        questions.add( question );
-    }
+    public void next() { index++; }
 
-    public Question question( int index )
-    {
-        if ( index > 0 && index < questions.size() )
-        {
-            return questions.get(index);
-        }
+    public boolean hasPrevious() { return index > 0; }
+
+    public void previous() { index--; }
+
+    public String title() { return ( index + 1 ) + "/" +  questions().size() + " - " + name; }
+
+    public boolean canFinish() { return questions().size() == answers().size(); }
+
+    public HashMap<Integer, Answer> answers() { return answers; }
+
+    public Answer answer() {
+        if ( answers != null ) return answers.get( question().id() );
 
         return null;
     }
 
-    public Question question()
-    {
-        return questions.get(index);
-    }
-
-    public boolean hasNext()
-    {
-        return index < questions.size() - 1;
-    }
-
-    public void next()
-    {
-        index++;
-    }
-
-    public boolean hasPrevious()
-    {
-        return index > 0;
-    }
-
-    public void previous()
-    {
-        index--;
-    }
-
-    public String title()
-    {
-        return ( index + 1 ) + "/" +  questions().size() + " - " + name;
-    }
-
-    public boolean canFinish()
-    {
-        return questions().size() == answers().size();
-    }
-
-    public Answer answer()
-    {
-        if ( answers != null )
-        {
-            return answers.get( question().id() );
-        }
-
-        return null;
-    }
-
-    public void answer( Answer a )
-    {
-        if ( answers == null )
-        {
-            answers = new HashMap();
-        }
+    public void answer( Answer a ) {
+        if ( answers == null ) answers = new HashMap();
 
         answers.put( question().id(), a );
-    }
-
-    public HashMap<Integer, Answer> answers()
-    {
-        return answers;
     }
 
     @Override

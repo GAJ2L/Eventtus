@@ -81,19 +81,11 @@ public class EventFragment extends Fragment {
 
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    alertDialog = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Material_Dialog_Alert);
-                } else {
-                    alertDialog = new AlertDialog.Builder(view.getContext());
-                }
-
                 alertDialog.setView(input);
                 alertDialog.setTitle(R.string.message_code);
                 alertDialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        String chave = input.getText().toString();
-
-                        getEventServer(chave);
+                        getEventServer(input.getText().toString());
                     }
                 });
 

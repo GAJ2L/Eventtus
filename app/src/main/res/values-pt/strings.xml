@@ -79,6 +79,9 @@
     <string name="completed">Concluído</string>
     <string name="idle">Aguardando</string>
     <string name="update_event_success">Evento atualizado com sucesso</string>
+    <string name="message_no_survey">Não existe pesquisas para responder!</string>
+    <string name="message_error_survey">Responda todas as perguntas!</string>
+    <string name="success">Salvo com Sucesso!</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
@@ -122,6 +125,4 @@
     <string name="finish">Finalizar</string>
     <string name="no_evaluations">Sem avaliações</string>
 
-    <string name="message_no_survey">Não existe pesquisas para responder!</string>
-    <string name="message_error_survey">Responda todas as perguntas!</string>
 </resources>

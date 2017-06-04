@@ -79,6 +79,11 @@
     <string name="completed">Completed</string>
     <string name="idle">Idle</string>
     <string name="update_event_success">Event updated successfully</string>
+    <string name="success">Saved successfully</string>
+    <string name="no_evaluations">No evaluations</string>
+    <string name="message_no_survey">There no survey to answer!</string>
+    <string name="message_error_survey">Answer all questions!</string>
+
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->
@@ -120,8 +125,4 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="finish">Save</string>
-    <string name="no_evaluations">No evaluations</string>
-    <string name="message_no_survey">There no survey to answer!</string>
-    <string name="message_error_survey">Answer all questions!</string>
-
 </resources>

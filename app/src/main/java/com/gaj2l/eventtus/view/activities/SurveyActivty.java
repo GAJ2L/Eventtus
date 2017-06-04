@@ -134,7 +134,13 @@ public class SurveyActivty extends AppCompatActivity {
     private void onSave() {
         try {
             if (survey.canFinish()) {
-                SurveyWebService.finish( survey, activity, Session.getInstance(getApplicationContext()).getString("email"));
+                SurveyWebService.finish(survey, activity, Session.getInstance(getApplicationContext()).getString("email"), new SurveyWebService.ActionEvent<Boolean>() {
+                    @Override
+                    public void onEvent(Boolean survey) {
+                        finish();
+                        Toast.makeText(getApplicationContext(), getString( R.string.message_error_survey ), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             } else {
                 Toast.makeText(getApplicationContext(), getString( R.string.message_error_survey ), Toast.LENGTH_SHORT).show();

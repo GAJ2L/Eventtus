@@ -204,26 +204,10 @@ public class DetailActivityFragment extends Fragment
     private void onSurvey(View v)
     {
         if( Internet.isConnect(v.getContext()) ) {
-            try {
-                SurveyWebService.hasSurvey(activity, Session.getInstance(getContext()).getString("email"), new SurveyWebService.ActionEvent<Boolean>() {
-                    @Override
-                    public void onEvent(Boolean has) {
-                        if (has) {
-                            Intent survey = new Intent(getContext(), SurveyActivty.class);
-                            survey.putExtra("activity", activity.getId());
-                            startActivity(survey);
-                        } else {
-                            Toast.makeText(getContext(), getString(R.string.message_no_survey), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        else
+            Intent survey = new Intent(getContext(), SurveyActivty.class);
+            survey.putExtra("activity", activity.getId());
+            startActivity(survey);
+        } else
         {
             Snackbar.make( v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
         }

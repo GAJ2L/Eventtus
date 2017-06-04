@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services.web;
 
 import com.gaj2l.eventtus.lib.WebService;
 import com.gaj2l.eventtus.models.Activity;
+import com.gaj2l.eventtus.models.Answer;
 import com.gaj2l.eventtus.models.Option;
 import com.gaj2l.eventtus.models.Question;
 import com.gaj2l.eventtus.models.Survey;
@@ -84,37 +85,8 @@ public class SurveyWebService
 
         return survey;
     }
-
-    public static void hasSurvey( Activity a, String mail, final ActionEvent<Boolean> evt )
-    {
-        Map params = new HashMap();
-
-        params.put("activity_id", String.valueOf(a.getActivityServiceId()));
-        params.put("email", mail);
-
-        WebService.get( CLASS, "hasSurvey",new RequestParams( params ),new JsonHttpResponseHandler()
-        {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response)
-            {
-                boolean has = true;
-
-                try
-                {
-                    has = response.getBoolean( "has" );
-                }
-
-                catch ( Exception e )
-                {
-                    e.printStackTrace();
-                }
-
-                evt.onEvent( has );
-            }
-        });
-    }
-
-    public static void finish(Survey survey, Activity activity, String mail)
+    
+    public static void finish(Survey survey, Activity activity, String mail, final ActionEvent<Boolean> evt )
     {
         try {
             Map params = new HashMap();
@@ -124,12 +96,12 @@ public class SurveyWebService
 
             JSONArray answers = new JSONArray();
 
-            for ( Map.Entry entry : survey.answers().entrySet() )
+            for ( Map.Entry<Integer, Answer> entry : survey.answers().entrySet() )
             {
                 JSONObject answer = new JSONObject();
 
                 answer.put( "question", entry.getKey() );
-                answer.put( "option",   entry.getValue() );
+                answer.put( "option",   entry.getValue().option() );
 
                 answers.put( answer );
             }
@@ -138,7 +110,9 @@ public class SurveyWebService
 
             WebService.post(CLASS, "store", new RequestParams(params), new AsyncHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
+                {
+                    evt.onEvent( true );
                 }
 
                 @Override

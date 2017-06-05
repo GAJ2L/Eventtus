@@ -37,6 +37,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.User;
@@ -208,8 +209,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getInstance(getApplicationContext()).put("username", user.getName());
         Session.getInstance(getApplicationContext()).put("email", user.getMail());
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
-        //save token in server
-        TokenWebService.save(user.getMail());
+
+        if(Internet.isConnect(getApplicationContext()))
+            TokenWebService.save(user.getMail());
+
         finish();
         startActivity(intent);
     }

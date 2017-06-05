@@ -24,7 +24,7 @@ public class TokenWebService
         Map params = new HashMap();
         params.put("email",email);
         params.put("token", FirebaseInstanceId.getInstance().getToken() );
-        
+
         WebService.post(CLASS, "save", new RequestParams(params), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {}

@@ -12,8 +12,5 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class NotificationToken extends FirebaseInstanceIdService
 {
     @Override
-    public void onTokenRefresh()
-    {
-        TokenWebService.save(Session.getInstance(getApplicationContext()).getString("email"));
-    }
+    public void onTokenRefresh() {}
 }

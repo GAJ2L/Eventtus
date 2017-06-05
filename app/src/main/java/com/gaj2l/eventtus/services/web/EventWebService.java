@@ -2,6 +2,7 @@ package com.gaj2l.eventtus.services.web;
 
 
 import android.app.Application;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 
 import com.gaj2l.eventtus.ioc.ComponentProvider;
@@ -81,7 +82,9 @@ public class EventWebService
             Event event = new Event();
             event.setEventServiceId( response.getLong("id") );
             event.setName( response.getString("name") );
-            event.setBanner( response.getString("banner") );
+            Bitmap bitmap = Util.getImageBitmap( response.getString("banner") );
+            String banner = Util.bitmap2base64( bitmap );
+            event.setBanner( banner );
             event.setContactMail( response.getString("contact_mail") );
             event.setContactName( response.getString("contact_name") );
             event.setContactPhone( response.getString("contact_phone") );

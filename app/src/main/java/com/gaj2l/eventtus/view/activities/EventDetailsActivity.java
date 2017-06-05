@@ -53,7 +53,7 @@ public class EventDetailsActivity extends AppCompatActivity
                     event.getContactPhone());
 
             txtDt.setText(Util.getDateFomatted(event.getDtStart()) + " - " + Util.getDateFomatted(event.getDtEnd()));
-            imageView.setImageBitmap( Util.getImageBitmap( event.getBanner() ));
+            imageView.setImageBitmap( Util.base642bitmap( event.getBanner() ));
             imageView.setAdjustViewBounds( true );
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }

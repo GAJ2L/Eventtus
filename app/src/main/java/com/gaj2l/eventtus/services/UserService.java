@@ -25,16 +25,21 @@ public class UserService extends Service<User> {
      * @return true case success
      */
     public boolean create(User user) throws Exception {
-        try {
+        try
+        {
             User userSearch = this.getUserByEmail(user.getMail());
-            if (userSearch == null) {
+
+            if (userSearch == null)
+            {
                 this.store(user);
-                //save token in server
-                TokenWebService.save(user.getMail());
-            } else {
+            }
+            else
+            {
                 user.setId(userSearch.getId());
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             throw e;
         }
 

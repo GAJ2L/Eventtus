@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.services.notifications;
 
+import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.services.web.TokenWebService;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -12,7 +14,6 @@ public class NotificationToken extends FirebaseInstanceIdService
     @Override
     public void onTokenRefresh()
     {
-        String token = FirebaseInstanceId.getInstance().getToken();
-        System.out.println(token);
+        TokenWebService.save(Session.getInstance(getApplicationContext()).getString("email"));
     }
 }

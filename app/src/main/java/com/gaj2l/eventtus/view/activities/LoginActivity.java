@@ -40,6 +40,7 @@ import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.User;
+import com.gaj2l.eventtus.services.web.TokenWebService;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -207,7 +208,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getInstance(getApplicationContext()).put("username", user.getName());
         Session.getInstance(getApplicationContext()).put("email", user.getMail());
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
-
+        //save token in server
+        TokenWebService.save(user.getMail());
         finish();
         startActivity(intent);
     }

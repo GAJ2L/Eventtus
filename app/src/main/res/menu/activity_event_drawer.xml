@@ -8,7 +8,7 @@
             android:title="@string/add_event" />
         <item
             android:id="@+id/nav_my_events"
-            android:icon="@drawable/list"
+            android:icon="@drawable/event"
             android:title="@string/my_events" />
     </group>
 

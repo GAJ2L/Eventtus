@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
@@ -44,39 +45,43 @@ public class ActivityDetailsActivity extends AppCompatActivity
 
     private void load()
     {
-        final Preload p = new Preload(ActivityDetailsActivity.this);
-        p.show();
-
         activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
+        Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
 
-        EvaluationWebService.getMedia(activity.getActivityServiceId(), new EvaluationWebService.AbstractAction()
+        txtName.setText(activity.getName());
+        txtLocation.setText(activity.getLocalName());
+        txtEvt.setText( event.getName() );
+        txtDt.setText( Util.getAllDateFomatted( activity.getDtStart() ) + " - " + Util.getDateFomatted( activity.getDtEnd() ) );
+
+        if(Internet.isConnect(getApplicationContext()))
         {
-            @Override
-            public void onEvaluate(float stars, int count)
-            {
-                Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
+            final Preload p = new Preload(ActivityDetailsActivity.this);
+            p.show();
 
-                txtName.setText(activity.getName());
-                txtLocation.setText(activity.getLocalName());
-                txtEvt.setText( event.getName() );
-                txtDt.setText( Util.getAllDateFomatted( activity.getDtStart() ) + " - " + Util.getDateFomatted( activity.getDtEnd() ) );
+            EvaluationWebService.getMedia(activity.getActivityServiceId(), new EvaluationWebService.AbstractAction() {
+                @Override
+                public void onEvaluate(float stars, int count) {
+                    if (count != 0) {
+                        totalEvaluations.setText("Total: " + count);
+                    } else {
+                        totalEvaluations.setText(R.string.no_evaluations);
+                    }
 
-                if( count != 0 )
-                {
-                    totalEvaluations.setText( "Total: " + count );
+                    avgStars.setRating(stars);
+                    avgStars.setClickable(false);
+                    avgStars.setIsIndicator(true);
+
+                    p.dismiss();
                 }
-                else
-                {
-                    totalEvaluations.setText( R.string.no_evaluations );
-                }
-
-                avgStars.setRating(stars);
-                avgStars.setClickable( false );
-                avgStars.setIsIndicator( true );
-
-                p.dismiss();
-            }
-        });
+            });
+        }
+        else
+        {
+            totalEvaluations.setText(R.string.err_conection);
+            avgStars.setRating(0);
+            avgStars.setClickable(false);
+            avgStars.setIsIndicator(true);
+        }
 
     }
 

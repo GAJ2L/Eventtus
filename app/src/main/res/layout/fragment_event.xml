@@ -31,21 +31,23 @@
             android:id="@+id/action_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/white_pressed"
             fab:fab_addButtonColorNormal="@color/colorPrimary"
             fab:fab_addButtonColorPressed="@color/colorPrimary"
-            fab:fab_addButtonPlusIconColor="@color/white"/>
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="@string/qrcode" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_colorPressed="@color/white_pressed"
             fab:fab_addButtonColorNormal="@color/colorPrimary"
             fab:fab_addButtonColorPressed="@color/colorPrimary"
-            fab:fab_addButtonPlusIconColor="@color/white"/>
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_title="@string/code" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </RelativeLayout>

@@ -1,13 +1,19 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -37,7 +43,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SurveyActivty extends AppCompatActivity {
+public class SurveyActivty extends AppCompatActivity implements View.OnTouchListener
+{
+    private GestureDetector gestureDetector;
 
     private Activity activity;
     private Survey survey;
@@ -45,15 +53,13 @@ public class SurveyActivty extends AppCompatActivity {
     private TextView txtSurvey;
     private TextView txtQuestion;
     private Button btnBack;
-    private Button btnSave;
     private Button btnNext;
     private ScrollView paneOptions;
 
     private Preload preload;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_activty);
 
@@ -89,143 +95,177 @@ public class SurveyActivty extends AppCompatActivity {
 
             activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
 
-            SurveyWebService.getSurvey( activity, new SurveyWebService.ActionEvent<Survey>() {
+            SurveyWebService.getSurvey(activity, new SurveyWebService.ActionEvent<Survey>() {
                 @Override
                 public void onEvent(Survey survey) {
 
                     SurveyActivty.this.survey = survey;
 
-                    if ( SurveyActivty.this.survey != null && SurveyActivty.this.survey.hasQuestions()) {
+                    if (SurveyActivty.this.survey != null && SurveyActivty.this.survey.hasQuestions()) {
                         loadOptions();
 
                         updateEditable();
                     } else {
-                        setContentView( R.layout.no_survey);
+                        setContentView(R.layout.no_survey);
                     }
 
                     preload.dismiss();
                 }
-            } );
-        } catch ( Exception e ) {
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void loadOptions() {
         try {
-            txtSurvey.setText( survey.title() );
+            txtSurvey.setText(survey.title());
 
-            txtQuestion.setText( survey.question().name() );
+            txtQuestion.setText(survey.question().name());
 
             paneOptions.removeAllViews();
 
-            RadioGroup rg = new RadioGroup( paneOptions.getContext() );
+            RadioGroup rg = new RadioGroup(paneOptions.getContext());
 
-            rg.setOnCheckedChangeListener( new RadioGroup.OnCheckedChangeListener()
-            {
+            rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                    survey.answer( new Answer( survey.question(), checkedId ) );
+                    survey.answer(new Answer(survey.question(), checkedId));
                     updateEditable();
                 }
             });
 
-            for ( Option opt : survey.question().options() )  {
+            for (Option opt : survey.question().options()) {
                 final RadioButton rd = new RadioButton(rg.getContext());
-                rd.setTextSize( 18 );
-                rd.setPadding( 20,20,20,20 );
-                rd.setTextColor( getResources().getColor( R.color.colorPrimaryDark, null ) );
-                rd.setId( opt.value() );
-                rd.setText( opt.name() );
+                rd.setTextSize(18);
+                rd.setPadding(20, 20, 20, 20);
+                rd.setTextColor(getResources().getColor(R.color.colorPrimaryDark, null));
+                rd.setId(opt.value());
+                rd.setText(opt.name());
                 rg.addView(rd);
 
-                if ( survey.answer() != null && survey.answer().option() == opt.value() ) {
-                    rg.check( rd.getId() );
+                if (survey.answer() != null && survey.answer().option() == opt.value()) {
+                    rg.check(rd.getId());
                 }
             }
 
             paneOptions.addView(rg);
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void onSave( final View v ) {
+    private void onSave(final View v) {
         try {
             if (survey.canFinish()) {
                 SurveyWebService.finish(survey, activity, Session.getInstance(getApplicationContext()).getString("email"), new SurveyWebService.ActionEvent<Boolean>() {
                     @Override
                     public void onEvent(Boolean survey) {
                         finish();
-                        Snackbar.make( v, getString( R.string.success), Snackbar.LENGTH_LONG).show();
+                        Toast.makeText( getApplicationContext(), getString(R.string.success), Toast.LENGTH_LONG ).show();
                     }
                 });
 
             } else {
-                Snackbar.make( v, getString( R.string.message_error_survey ), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(v, getString(R.string.message_error_survey), Snackbar.LENGTH_LONG).show();
             }
 
-        }  catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void onBack() {
-        if ( survey.hasPrevious() ) {
+        if (survey.hasPrevious()) {
             survey.previous();
             loadOptions();
         }
     }
 
-    private void onNext() {
-        if ( survey.hasNext() ) {
+    private void onNext(View v) {
+        if (survey.hasNext()) {
             survey.next();
             loadOptions();
+        } else if ( v != null ){
+            onSave(v);
         }
     }
 
-    private void updateEditable()
-    {
-        btnSave.setEnabled( survey.canFinish() );
-        btnSave.setClickable( survey.canFinish() );
-        btnSave.setBackgroundColor( survey.canFinish() ? getResources().getColor( R.color.colorPrimaryDark, null ) : Color.rgb(170,170,170) );
+    private void updateEditable() {
+        btnNext.setText(survey.hasNext() ? getString(R.string.next) : getString(R.string.finish));
 
-        btnNext.setEnabled( survey.hasNext() );
-        btnNext.setClickable( survey.hasNext() );
-        btnNext.setBackgroundColor( survey.hasNext() ? getResources().getColor( R.color.colorPrimaryDark, null ) : Color.rgb(170,170,170) );
-
-        btnBack.setEnabled( survey.hasPrevious() );
-        btnBack.setClickable( survey.hasPrevious() );
-        btnBack.setBackgroundColor( survey.hasPrevious() ? getResources().getColor( R.color.colorPrimaryDark, null ) : Color.rgb(170,170,170) );
+        btnBack.setVisibility(survey.hasPrevious() ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void initComponents() {
+        gestureDetector = new GestureDetector(this, new GestureListener());
+
         txtQuestion = (TextView) findViewById(R.id.question_title);
-        txtSurvey   = (TextView) findViewById(R.id.survey_text);
+        txtSurvey = (TextView) findViewById(R.id.survey_text);
 
         btnBack = (Button) findViewById(R.id.btnBack);
         btnNext = (Button) findViewById(R.id.btnNext);
-        btnSave = (Button) findViewById(R.id.btnSave);
 
-        paneOptions = (ScrollView) findViewById( R.id.paneOptions);
+        paneOptions = (ScrollView) findViewById(R.id.paneOptions);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSave(v);updateEditable();
-            }
-        });
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBack(); updateEditable();
+                onBack();
+                updateEditable();
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onNext();updateEditable();
+                onNext(v);
+                updateEditable();
             }
         });
+
+        paneOptions.setOnTouchListener( this );
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+
+    private final class GestureListener extends GestureDetector.SimpleOnGestureListener
+    {
+        private static final int SWIPE_THRESHOLD = 100;
+        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            boolean result = false;
+            try
+            {
+                float diffY = e2.getY() - e1.getY();
+                float diffX = e2.getX() - e1.getX();
+
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+
+                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+
+                        if (diffX > 0) {
+                            onBack();
+                        } else {
+                            onNext(null);
+                        }
+                        result = true;
+                    }
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            return result;
+        }
     }
 }

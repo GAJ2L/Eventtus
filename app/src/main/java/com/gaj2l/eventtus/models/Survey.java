@@ -26,6 +26,7 @@ public class Survey
     public String name() { return  name; }
 
     public boolean hasQuestions() { return questions != null && ! questions.isEmpty(); }
+
     public List<Question> questions() { return questions; }
 
     public Question question() { return questions.get(index); }
@@ -38,7 +39,7 @@ public class Survey
 
     public void previous() { index--; }
 
-    public String title() { return ( index + 1 ) + "/" +  questions().size() + " - " + name; }
+    public String title() { return ( index + 1 ) + "/" +  questions().size(); }
 
     public boolean canFinish() { return questions().size() == answers().size(); }
 

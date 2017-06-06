@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/survey_text"
         android:layout_gravity="right"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
@@ -21,17 +20,27 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="19dp" />
 
-    <TextView
-        android:id="@+id/survey_text"
+    <ScrollView
+        android:id="@+id/paneOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/textView12"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/question_title">
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryDark"
-        android:fontFamily="su"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
+        android:textColor="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:id="@+id/btnBack"
@@ -39,50 +48,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="right"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:text="@string/back" />
+        android:layout_marginStart="10dp"
+        android:background="@color/white"
+        android:text="@string/back"
+        android:textColor="@color/colorPrimary"
+        style="?android:attr/borderlessButtonStyle"/>
 
-    <Button
-        android:id="@+id/btnNext"
+
+    <TextView
+        android:id="@+id/survey_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnSave"
-        android:layout_alignBottom="@+id/btnSave"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_weight="1"
-        android:text="@string/next"
-        android:textAlignment="center"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnBack"
+        android:layout_alignBaseline="@+id/btnNext"
+        android:layout_alignBottom="@+id/btnNext"
         android:layout_centerHorizontal="true"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:text="@string/finish"
-        android:textAlignment="center"
-        android:textColor="@android:color/white" />
+        android:background="@color/white"
+        android:text="TextView"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp" />
 
-    <ScrollView
-        android:id="@+id/paneOptions"
+    <TextView
+        android:id="@+id/textView12"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/question_title"
+        android:layout_height="1dp"
+        android:layout_above="@+id/btnNext"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnSave">
-
-    </ScrollView>
+        android:background="@color/colorPrimary"
+        android:text="TextView" />
 
 
 </RelativeLayout>

@@ -1,30 +1,22 @@
 package com.gaj2l.eventtus.view.activities;
 
-import android.content.Context;
-import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
@@ -33,19 +25,14 @@ import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Answer;
 import com.gaj2l.eventtus.models.Option;
-import com.gaj2l.eventtus.models.Question;
 import com.gaj2l.eventtus.models.Survey;
 import com.gaj2l.eventtus.services.web.SurveyWebService;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class SurveyActivty extends AppCompatActivity implements View.OnTouchListener
 {
     private GestureDetector gestureDetector;
+
+    private ViewFlipper viewFlipper;
 
     private Activity activity;
     private Survey survey;
@@ -102,9 +89,9 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
                     SurveyActivty.this.survey = survey;
 
                     if (SurveyActivty.this.survey != null && SurveyActivty.this.survey.hasQuestions()) {
-                        loadOptions();
-
                         updateEditable();
+
+                        loadOptions();
                     } else {
                         setContentView(R.layout.no_survey);
                     }
@@ -177,18 +164,22 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
 
     private void onBack() {
         if (survey.hasPrevious()) {
+            showAnimation(true);
             survey.previous();
             loadOptions();
         }
+        updateEditable();
     }
 
     private void onNext(View v) {
         if (survey.hasNext()) {
+            showAnimation(false);
             survey.next();
             loadOptions();
         } else if ( v != null ){
             onSave(v);
         }
+        updateEditable();
     }
 
     private void updateEditable() {
@@ -197,8 +188,24 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
         btnBack.setVisibility(survey.hasPrevious() ? View.VISIBLE : View.INVISIBLE);
     }
 
+    private void showAnimation( boolean back )
+    {
+        if ( back ) {
+            viewFlipper.setInAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.in_left));
+            viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.out_left));
+        } else {
+            viewFlipper.setInAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.in_right));
+            viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.out_right));
+        }
+
+        viewFlipper.showNext();
+
+    }
+
     private void initComponents() {
         gestureDetector = new GestureDetector(this, new GestureListener());
+
+        viewFlipper = (ViewFlipper) this.findViewById(R.id.view_flipper);
 
         txtQuestion = (TextView) findViewById(R.id.question_title);
         txtSurvey = (TextView) findViewById(R.id.survey_text);
@@ -212,14 +219,12 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
             @Override
             public void onClick(View v) {
                 onBack();
-                updateEditable();
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onNext(v);
-                updateEditable();
             }
         });
 

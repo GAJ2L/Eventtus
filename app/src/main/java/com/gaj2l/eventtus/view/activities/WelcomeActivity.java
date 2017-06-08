@@ -143,7 +143,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 btnNext.setText(getString(R.string.slide_start));
                 btnSkip.setVisibility(View.GONE);
             } else {
-                // still pages are left
+                // still pages are in_left
                 btnNext.setText(getString(R.string.next));
                 btnSkip.setVisibility(View.VISIBLE);
             }

@@ -1,39 +1,33 @@
 {
   "project_info": {
-    "project_number": "347592453651",
-    "firebase_url": "https://fir-eventtus.firebaseio.com",
-    "project_id": "firebase-eventtus",
-    "storage_bucket": "firebase-eventtus.appspot.com"
+    "project_number": "21083276313",
+    "project_id": "eventtus-d23a3"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:347592453651:android:3351c6c04333159f",
+        "mobilesdk_app_id": "1:21083276313:android:3351c6c04333159f",
         "android_client_info": {
           "package_name": "com.gaj2l.eventtus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "347592453651-93nbe8pgin0eh2ts2vpchs6rri6po3p2.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "347592453651-0vfghehaqmu9ftgguo71ln6cua7m4hnd.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "347592453651-b6p0ag8fqa3d2dq6fjh3j4l45n9v12u3.apps.googleusercontent.com",
+          "client_id": "21083276313-7da59c4a0v8sbkinl6t6aqnq5a42rijo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gaj2l.eventtus",
-            "certificate_hash": "55402216e9ec195ea2b0f07269d21c1f05fce36b"
+            "certificate_hash": "26d665ba40b3ac43e4777ff5692dce43931057c1"
           }
+        },
+        {
+          "client_id": "21083276313-efotq46itt2335icqvmcv619rehbqtsh.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-            "current_key": "AIzaSyAPEYc0Hrh-n5LGZ9JWkKyYPPelLbf9KSw"
+          "current_key": "AIzaSyCmUKF636XH8-4SRY6na3VvyyUdPZMTOog"
         }
       ],
       "services": {
@@ -41,16 +35,11 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "347592453651-93nbe8pgin0eh2ts2vpchs6rri6po3p2.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

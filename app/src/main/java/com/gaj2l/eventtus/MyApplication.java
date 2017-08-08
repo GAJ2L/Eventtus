@@ -3,6 +3,7 @@ package com.gaj2l.eventtus;
 import android.app.Application;
 
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.DbOpenHelper;
 import com.gaj2l.eventtus.services.notifications.NotificationToken;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;

@@ -7,7 +7,7 @@
     '_id' INTEGER PRIMARY KEY AUTOINCREMENT,
     'name' TEXT NOT NULL,
     'mail' TEXT NOT NULL,
-    'image' TEXT NOT NULL,
+    'image' TEXT,
     'method_autentication' VARCHAR(45) NOT NULL);
 
 

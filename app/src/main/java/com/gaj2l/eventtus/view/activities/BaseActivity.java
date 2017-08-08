@@ -3,6 +3,9 @@ package com.gaj2l.eventtus.view.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -11,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DrawableUtils;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,7 +65,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             lblName.setText(Session.getInstance(getApplicationContext()).getString("username"));
             lblEmail.setText(Session.getInstance(getApplicationContext()).getString("email"));
 
-            imgUser.setImageBitmap(Util.base642bitmap(Session.getInstance(getApplicationContext()).getString("image")));
+            if( !Session.getInstance(getApplicationContext()).getString("image").equalsIgnoreCase("") )
+                imgUser.setImageBitmap(Util.base642bitmap(Session.getInstance(getApplicationContext()).getString("image")));
+            else
+                imgUser.setImageDrawable(getResources().getDrawable(R.drawable.person,null));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -25,11 +25,11 @@
                     android:layout_gravity="right"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="sadsadasdasdasdasdasd asd sad asd asd a adsad ad a adasd"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    tools:text="sadsadasdasdasdasdasd asd sad asd asd a adsad ad a adasd" />
 
                 <ScrollView
                     android:id="@+id/paneOptions"
@@ -50,7 +50,7 @@
                     android:layout_above="@+id/paneOptions"
                     android:layout_alignParentStart="true"
                     android:background="@color/colorPrimary"
-                    android:text="TextView" />
+                    tools:text="ss" />
 
             </RelativeLayout>
         </ViewFlipper>
@@ -78,17 +78,17 @@
             style="?android:attr/borderlessButtonStyle"/>
 
 
-        <TextView
-            android:id="@+id/survey_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnNext"
-            android:layout_alignBottom="@+id/btnNext"
-            android:layout_centerHorizontal="true"
-            android:background="@color/white"
-            android:text="TextView"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18dp" />
+    <TextView
+        android:id="@+id/survey_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnNext"
+        android:layout_alignBottom="@+id/btnNext"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        tools:text="TextView" />
 
         <TextView
             android:id="@+id/textView12"

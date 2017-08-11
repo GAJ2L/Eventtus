@@ -22,14 +22,14 @@
             android:id="@+id/txtLocal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/txtState"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/icType"
             android:drawableLeft="@drawable/mini_time"
             android:drawablePadding="5dp"
-            android:text="Prédio"
             android:textColor="@android:color/black"
             android:textSize="14sp"
-            android:layout_above="@+id/txtState"
-            android:layout_toEndOf="@+id/icType"
-            android:layout_marginStart="11dp" />
+            tools:text="Prédio" />
 
         <TextView
             android:id="@+id/txtState"
@@ -41,9 +41,9 @@
             android:layout_marginEnd="5dp"
             android:drawableLeft="@drawable/finished"
             android:drawablePadding="5dp"
-            android:text="Em andamento"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="Em andamento" />
 
         <TextView
             android:id="@+id/txtNameFile"
@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="2dp"
-            android:text="Event Name"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="Event Name" />
 
         <TextView
             android:id="@+id/borda"

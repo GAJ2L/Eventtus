@@ -27,9 +27,9 @@
             android:layout_marginRight="10dp"
             android:layout_marginStart="18dp"
             android:layout_toEndOf="@+id/icType"
-            android:text="Activity Name"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="Activity Name" />
 
         <TextView
             android:id="@+id/icType"
@@ -47,7 +47,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
-            android:text="TextView" />
+            tools:text="Info" />
 
     </RelativeLayout>
 

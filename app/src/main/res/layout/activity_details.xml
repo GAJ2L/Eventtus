@@ -43,9 +43,9 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
-                android:text="Sad but tru:"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Sad but tru:" />
         </TableRow>
 
         <TableRow
@@ -78,9 +78,9 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
-                android:text="Sad but tru:"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Sad but tru:" />
         </TableRow>
 
         <TableRow
@@ -112,9 +112,9 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
-                android:text="Lorem ipsum dolor sit amet."
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Lorem ipsum dolor sit amet." />
         </TableRow>
 
         <TableRow
@@ -146,9 +146,9 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
-                android:text="Sad but tru:"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Sad but tru:" />
         </TableRow>
 
         <TableRow

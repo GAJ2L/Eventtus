@@ -29,9 +29,9 @@
             android:layout_marginLeft="5dp"
             android:drawableLeft="@drawable/mini_calendar"
             android:drawablePadding="5dp"
-            android:text="15-20-2201 22:22"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="15-20-2201 22:22" />
 
         <TextView
             android:id="@+id/txtNameFile"
@@ -41,9 +41,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_toEndOf="@+id/icType"
-            android:text="Activity Name"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="Activity Name" />
 
         <TextView
             android:id="@+id/icType"

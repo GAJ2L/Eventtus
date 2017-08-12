@@ -59,9 +59,9 @@
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
-                    android:text="Sad but tru:"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="Sad but tru:" />
             </TableRow>
 
             <TableRow
@@ -94,9 +94,9 @@
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies ipsum vitae odio consequat aliquam. Pellentesque sit amet libero vehicula, vulputate risus in, sollicitudin tellus. Ut ultricies ex non neque consequat iaculis. Donec vestibulum pellentesque leo a condimentum. Mauris elit felis, malesuada pharetra blandit sed, semper sed turpis. Integer eget nisi nibh. Praesent auctor sit amet urna malesuada sollicitudin. Pellentesque ultricies, eros non pellentesque rutrum, justo purus mollis risus, a fringilla orci elit a massa. Praesent convallis odio diam, non sollicitudin velit fringilla quis."
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies ipsum vitae odio consequat aliquam. Pellentesque sit amet libero vehicula, vulputate risus in, sollicitudin tellus. Ut ultricies ex non neque consequat iaculis. Donec vestibulum pellentesque leo a condimentum. Mauris elit felis, malesuada pharetra blandit sed, semper sed turpis. Integer eget nisi nibh. Praesent auctor sit amet urna malesuada sollicitudin. Pellentesque ultricies, eros non pellentesque rutrum, justo purus mollis risus, a fringilla orci elit a massa. Praesent convallis odio diam, non sollicitudin velit fringilla quis." />
             </TableRow>
 
             <TableRow
@@ -129,9 +129,9 @@
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
-                    android:text="Sad but tru:"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="Sad but tru:" />
             </TableRow>
 
             <TableRow
@@ -164,9 +164,9 @@
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
-                    android:text="Sad but tru:"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="Sad but tru:" />
             </TableRow>
         </TableLayout>
     </ScrollView>

@@ -42,7 +42,7 @@ public class EventDetailsActivity extends AppCompatActivity
     {
         try
         {
-            event = ComponentProvider.getServiceComponent().getEventService().get(getIntent().getExtras().getLong("event"));
+            event = ComponentProvider.getServiceComponent().getEventService().get(getIntent().getExtras().getLong("menu"));
 
             txtName.setText(event.getName());
             txtInfo.setText(event.getDescription());

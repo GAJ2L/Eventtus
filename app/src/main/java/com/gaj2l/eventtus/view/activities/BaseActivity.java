@@ -101,50 +101,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        if (drawer.isDrawerOpen(GravityCompat.START))
-        {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else
-        {
-            if (getFragmentManager().getBackStackEntryCount() > 1)
-            {
+        } else {
+            if (getFragmentManager().getBackStackEntryCount() > 1) {
                 getFragmentManager().popBackStack();
-            }
-            else
-            {
+            } else {
                 finish();
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.event, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-
-        switch (id)
-        {
-            case R.id.action_credits:
-            {
-                Intent credits = new Intent(BaseActivity.this, CreditsActivity.class);
-                startActivity(credits);
-            }
-            break;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -166,6 +134,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.nav_my_events)
         {
             getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).commit();
+        }
+        else if (id == R.id.nav_info)
+        {
+            Intent intent = new Intent(BaseActivity.this, CreditsActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_talk_with_us)
         {

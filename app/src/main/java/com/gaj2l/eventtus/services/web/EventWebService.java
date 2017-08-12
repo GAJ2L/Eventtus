@@ -93,10 +93,10 @@ public class EventWebService
             event.setDtEnd( Util.parse2OffsetDateTime( response.getString("dt_end") ) );
             event.setUserId(Session.getInstance(null).getLong("user"));
 
-            // clearing event and activities and attachments
+            // clearing menu and activities and attachments
             ComponentProvider.getServiceComponent().getEventService().clearEvent(event);
 
-            // saving event
+            // saving menu
             ComponentProvider.getServiceComponent().getEventService().store(event);
 
             JSONArray activities = response.getJSONArray("activities");

@@ -40,6 +40,7 @@
     <string name="add_event">Adicionar evento</string>
     <string name="my_events">Meus eventos</string>
     <string name="system">Sistema</string>
+    <string name="about">Sobre</string>
     <string name="exit">Sair</string>
     <string name="title_details_activity">Detalhes da atividade</string>
     <string name="title_details_event">Detalhes do evento</string>

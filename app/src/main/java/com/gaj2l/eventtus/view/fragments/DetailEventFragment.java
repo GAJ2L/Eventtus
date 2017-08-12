@@ -191,7 +191,7 @@ public class DetailEventFragment extends Fragment
     public void onDetails(View v)
     {
         Intent dtl= new Intent(v.getContext(), EventDetailsActivity.class);
-        dtl.putExtra("event", event.getId() );
+        dtl.putExtra("menu", event.getId() );
         startActivity(dtl);
     }
 }

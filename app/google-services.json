@@ -1,19 +1,21 @@
 {
   "project_info": {
-    "project_number": "21083276313",
-    "project_id": "eventtus-d23a3"
+    "project_number": "830665025771",
+    "firebase_url": "https://eventtus-17aab.firebaseio.com",
+    "project_id": "eventtus-17aab",
+    "storage_bucket": "eventtus-17aab.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:21083276313:android:3351c6c04333159f",
+        "mobilesdk_app_id": "1:830665025771:android:3351c6c04333159f",
         "android_client_info": {
           "package_name": "com.gaj2l.eventtus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "21083276313-7da59c4a0v8sbkinl6t6aqnq5a42rijo.apps.googleusercontent.com",
+          "client_id": "830665025771-9d44hc7kqenhdk0vgu8vncln2cn5simt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gaj2l.eventtus",
@@ -27,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmUKF636XH8-4SRY6na3VvyyUdPZMTOog"
+          "current_key": "AIzaSyDaPosAVnRwqbD8Si3liTjyz67HemZ4u48"
         }
       ],
       "services": {
@@ -39,7 +41,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -13,15 +13,14 @@ import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.fragments.DetailEventFragment;
 
-import org.threeten.bp.format.DateTimeFormatter;
-
 import java.util.List;
 
 /**
  * Created by Jackson Majolo on 01/05/17.
  */
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
+{
     private List<Event> events;
 
     public EventAdapter(List<Event> list) {
@@ -29,14 +28,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_event_layout, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(ViewHolder viewHolder, int i)
+    {
         Event event = getEvent(i);
         List<Activity> activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(event.getId());
         int size = activities != null ? activities.size() : 0;
@@ -47,8 +48,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
     @Override
-    public int getItemCount() {
-        if (this.events == null) {
+    public int getItemCount()
+    {
+        if (this.events == null)
+        {
             return 0;
         }
         return events.size();
@@ -58,13 +61,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return this.events.get(i);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder
+    {
         public TextView itemTitle;
         public TextView itemLocal;
         public TextView itemState;
         public View     view;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView)
+        {
             super(itemView);
             itemTitle = (TextView) itemView.findViewById(R.id.txtNameFile);
             itemLocal = (TextView) itemView.findViewById(R.id.txtLocal);
@@ -83,7 +88,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             itemTitle.setText(title);
         }
 
-        public void setItemAmountActivities(String detail) {
+        public void setItemAmountActivities(String detail)
+        {
             itemLocal.setText(detail+ " " + view.getResources().getString(R.string.activities));
         }
 
@@ -94,11 +100,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             itemState.setTextColor(view.getResources().getColor(color,null));
         }
 
-        public void onClickCard(View v) {
+        public void onClickCard(View v)
+        {
             DetailEventFragment fragment = new DetailEventFragment();
             fragment.setEvent(events.get(getAdapterPosition()));
             ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
         }
     }
 }
-

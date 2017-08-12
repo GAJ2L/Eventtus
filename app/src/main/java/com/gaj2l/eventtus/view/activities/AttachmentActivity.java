@@ -1,7 +1,6 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -11,14 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.models.Attachment;
 import com.gaj2l.eventtus.view.adapters.AttachmentAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,13 +58,14 @@ public class AttachmentActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -77,20 +75,27 @@ public class AttachmentActivity extends AppCompatActivity
     }
 
 
-    private boolean hasPermission() {
+    private boolean hasPermission()
+    {
         return (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestPermission() {
+    private void requestPermission()
+    {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},ID_WRITE_EXTERNAL_STORAGE_REQUEST);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (ID_WRITE_EXTERNAL_STORAGE_REQUEST== requestCode) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        if (ID_WRITE_EXTERNAL_STORAGE_REQUEST== requestCode)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 initComponents();
-            } else {
+            }
+            else
+            {
                 finish();
             }
         }

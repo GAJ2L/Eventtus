@@ -20,6 +20,7 @@ import com.gaj2l.eventtus.busines.maps.DirectionFinderListener;
 import com.gaj2l.eventtus.busines.maps.Route;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Internet;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.models.Activity;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +37,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback, DirectionFinderListener {
+public class LocationActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback, DirectionFinderListener
+{
     public int ID_ACCESS_FINE_LOCATION = 3;
 
     private GoogleMap mMap;
@@ -50,7 +52,8 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     private List<Polyline> polylinePaths = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
@@ -58,17 +61,22 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
         setTitle(R.string.title_activity_location);
 
-        if (!hasPermission()) {
+        if (!hasPermission())
+        {
             requestPermission();
-        } else {
+        }
+        else
+        {
             initComponents();
         }
     }
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;
@@ -104,64 +112,74 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 50, this );
     }
 
-
-    private boolean hasPermission() {
+    private boolean hasPermission()
+    {
         return (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestPermission() {
+    private void requestPermission()
+    {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, ID_ACCESS_FINE_LOCATION);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (ID_ACCESS_FINE_LOCATION == requestCode) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        if (ID_ACCESS_FINE_LOCATION == requestCode)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 initComponents();
-            } else {
+            }
+            else
+            {
                 finish();
             }
         }
     }
 
-
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
 
         String[] geolocation = activity.getLocalGeolocation().split(",");
 
-        if (geolocation.length > 1) {
+        if (geolocation.length > 1)
+        {
             LatLng location = new LatLng(Double.parseDouble(geolocation[0]), Double.parseDouble(geolocation[1]));
 
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
                 return;
             }
 
             mMap.setMyLocationEnabled(true);
 
-            mMap.addMarker(new MarkerOptions()
-                            .position( location )
-                            .title( activity.getName() ));
+            mMap.addMarker(new MarkerOptions().position( location ).title( activity.getName() ));
 
             mMap.setIndoorEnabled( true );
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
 
             if ( myLocation != null )
-                sendRequest( myLocation.getLatitude() + "," + myLocation.getLongitude(), activity.getLocalGeolocation() );
+            {
+                sendRequest(myLocation.getLatitude() + "," + myLocation.getLongitude(), activity.getLocalGeolocation());
+            }
         }
     }
 
-
     private void sendRequest( String origin, String destination )
     {
-        if (origin.isEmpty()) {
-            Toast.makeText(this, "Please enter origin address!", Toast.LENGTH_SHORT).show();
+        if (origin.isEmpty())
+        {
+            Message.show(this, R.string.message_origin);
             return;
         }
-        if (destination.isEmpty()) {
-            Toast.makeText(this, "Please enter destination address!", Toast.LENGTH_SHORT).show();
+
+        if (destination.isEmpty())
+        {
+            Message.show(this, R.string.message_destination);
             return;
         }
 
@@ -173,10 +191,13 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
             }
             else
             {
-                Snackbar.make(getWindow().findViewById(R.id.map), R.string.err_conection_maps, Snackbar.LENGTH_LONG).show();
+                Message.show(getWindow().findViewById(R.id.map).getContext(), R.string.err_conection_maps);
             }
 
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            Message.error(getApplicationContext(),e.getMessage());
             e.printStackTrace();
         }
     }
@@ -187,32 +208,40 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         try
         {
             preload.show();
-            if (originMarkers != null) {
-                for (Marker marker : originMarkers) {
+            if (originMarkers != null)
+            {
+                for (Marker marker : originMarkers)
+                {
                     marker.remove();
                 }
             }
 
-            if (destinationMarkers != null) {
-                for (Marker marker : destinationMarkers) {
+            if (destinationMarkers != null)
+            {
+                for (Marker marker : destinationMarkers)
+                {
                     marker.remove();
                 }
             }
 
-            if (polylinePaths != null) {
-                for (Polyline polyline : polylinePaths) {
+            if (polylinePaths != null)
+            {
+                for (Polyline polyline : polylinePaths)
+                {
                     polyline.remove();
                 }
             }
         }
         catch ( Exception e )
         {
+            Message.error(getApplicationContext(),e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onDirectionFinderSuccess(List<Route> routes) {
+    public void onDirectionFinderSuccess(List<Route> routes)
+    {
         try
         {
             preload.dismiss();
@@ -221,15 +250,14 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
             originMarkers = new ArrayList<>();
             destinationMarkers = new ArrayList<>();
 
-            for (Route route : routes) {
+            for (Route route : routes)
+            {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 18));
 
-                PolylineOptions polylineOptions = new PolylineOptions().
-                        geodesic(true).
-                        color( getResources().getColor( R.color.colorPrimaryDark, null ) ).
-                        width(18);
+                PolylineOptions polylineOptions = new PolylineOptions().geodesic(true).color( getResources().getColor( R.color.colorPrimaryDark, null ) ).width(18);
 
-                for (int i = 0; i < route.points.size(); i++) {
+                for (int i = 0; i < route.points.size(); i++)
+                {
                     polylineOptions.add(route.points.get(i));
                 }
 
@@ -238,6 +266,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         }
         catch (Exception e)
         {
+            Message.error(getApplicationContext(),e.getMessage());
             e.printStackTrace();
         }
     }
@@ -259,4 +288,3 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
     @Override
     public void onProviderDisabled(String provider) {}
 }
-

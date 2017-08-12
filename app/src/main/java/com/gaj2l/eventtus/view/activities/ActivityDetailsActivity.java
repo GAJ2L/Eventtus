@@ -1,8 +1,7 @@
 package com.gaj2l.eventtus.view.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RatingBar;
@@ -21,11 +20,11 @@ public class ActivityDetailsActivity extends AppCompatActivity
 {
     private Activity activity;
 
-    private TextView txtName;
-    private TextView txtDt;
-    private TextView txtLocation;
-    private TextView txtEvt;
-    private TextView totalEvaluations;
+    private TextView  txtName;
+    private TextView  txtDt;
+    private TextView  txtLocation;
+    private TextView  txtEvt;
+    private TextView  ttEvals;
     private RatingBar avgStars;
 
     @Override
@@ -58,13 +57,18 @@ public class ActivityDetailsActivity extends AppCompatActivity
             final Preload p = new Preload(ActivityDetailsActivity.this);
             p.show();
 
-            EvaluationWebService.getMedia(activity.getActivityServiceId(), new EvaluationWebService.AbstractAction() {
+            EvaluationWebService.getMedia(activity.getActivityServiceId(), new EvaluationWebService.AbstractAction()
+            {
                 @Override
-                public void onEvaluate(float stars, int count) {
-                    if (count != 0) {
-                        totalEvaluations.setText("Total: " + count);
-                    } else {
-                        totalEvaluations.setText(R.string.no_evaluations);
+                public void onEvaluate(float stars, int count)
+                {
+                    if (count != 0)
+                    {
+                        ttEvals.setText("Total: " + count);
+                    }
+                    else
+                    {
+                        ttEvals.setText(R.string.no_evaluations);
                     }
 
                     avgStars.setRating(stars);
@@ -77,7 +81,7 @@ public class ActivityDetailsActivity extends AppCompatActivity
         }
         else
         {
-            totalEvaluations.setText(R.string.err_conection);
+            ttEvals.setText(R.string.err_conection);
             avgStars.setRating(0);
             avgStars.setClickable(false);
             avgStars.setIsIndicator(true);
@@ -91,8 +95,10 @@ public class ActivityDetailsActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;
@@ -107,7 +113,7 @@ public class ActivityDetailsActivity extends AppCompatActivity
         txtDt       = (TextView) findViewById( R.id.textActivityDate);
         txtLocation = (TextView) findViewById( R.id.textActivityLocation);
         txtEvt      = (TextView) findViewById( R.id.textActivityEvent);
-        totalEvaluations = (TextView) findViewById(R.id.txtTotalEvaluation);
+        ttEvals     = (TextView) findViewById(R.id.txtTotalEvaluation);
         avgStars    = (RatingBar) findViewById(R.id.avgStars);
     }
 }

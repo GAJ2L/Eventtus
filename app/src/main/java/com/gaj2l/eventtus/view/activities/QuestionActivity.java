@@ -2,21 +2,17 @@ package com.gaj2l.eventtus.view.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.socket.ClientSocket;
@@ -31,23 +27,29 @@ import org.threeten.bp.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionActivity extends AppCompatActivity {
-
+public class QuestionActivity extends AppCompatActivity
+{
     private EditText txt;
     private RecyclerView recyclerView;
     private long activity_id;
     private long user_id;
     private List<Message> messages = new ArrayList();
-    private ClientSocket client = new ClientSocket() {
+    private ClientSocket client    = new ClientSocket()
+    {
         @Override
-        public void onRecive(String data) throws Exception {
-            new Thread() {
+        public void onRecive(String data) throws Exception
+        {
+            new Thread()
+            {
                 @Override
-                public void run() {
-                    QuestionActivity.this.runOnUiThread(new Runnable() {
+                public void run()
+                {
+                    QuestionActivity.this.runOnUiThread( new Runnable()
+                    {
                         @Override
-                        public void run() {
-                            Toast.makeText(getBaseContext(), "Recebido", Toast.LENGTH_LONG).show();
+                        public void run()
+                        {
+                            com.gaj2l.eventtus.lib.Message.show(getBaseContext(), "Recebido");
                         }
                     });
                 }
@@ -56,7 +58,8 @@ public class QuestionActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         client.start();
@@ -84,16 +87,13 @@ public class QuestionActivity extends AppCompatActivity {
 
         fab.setEnabled(false);
 
-        txt.addTextChangedListener(new TextWatcher() {
+        txt.addTextChangedListener(new TextWatcher()
+        {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count){}
 
             @Override
             public void afterTextChanged(Editable arg0) {
@@ -106,28 +106,34 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        try {
+        try
+        {
             // envia mensagem para o server
             client.send("eventtus");
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            com.gaj2l.eventtus.lib.Message.error(getApplicationContext(),e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void enableSubmitIfReady() {
-
+    private void enableSubmitIfReady()
+    {
         boolean isReady = txt.getText().toString().length() >= 1;
 
         Button fab = (Button) findViewById(R.id.btnSendMsg);
         fab.setEnabled(isReady);
     }
 
-    private List<Message> getMessages() {
+    private List<Message> getMessages()
+    {
         List<Message> m = ComponentProvider.getServiceComponent().getMessageService().getMessagesByActivity(activity_id, user_id);
         return (m != null && !m.isEmpty()) ? m : new ArrayList();
     }
 
-    private Message store(String msg) throws Exception {
+    private Message store(String msg) throws Exception
+    {
         Message m = new Message();
         m.setActivityId(activity_id);
         m.setDtStore(OffsetDateTime.now());
@@ -142,8 +148,10 @@ public class QuestionActivity extends AppCompatActivity {
         return m;
     }
 
-    private void sndMsg(View v) {
-        try {
+    private void sndMsg(View v)
+    {
+        try
+        {
             txt.clearFocus();
             InputMethodManager in = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
             in.hideSoftInputFromWindow(txt.getWindowToken(), 0);
@@ -154,20 +162,23 @@ public class QuestionActivity extends AppCompatActivity {
             messages.add(message);
             txt.setText("");
             txt.clearFocus();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            com.gaj2l.eventtus.lib.Message.show(v.getContext(), R.string.error_send_message);
             e.printStackTrace();
-            Snackbar.make(v, R.string.error_send_message, Snackbar.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

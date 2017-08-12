@@ -1,7 +1,6 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Internet;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Evaluation;
@@ -24,14 +24,16 @@ import org.threeten.bp.OffsetDateTime;
  * Created by lucas.tomasi on 28/04/17.
  */
 
-public class ToRateActivity extends AppCompatActivity {
+public class ToRateActivity extends AppCompatActivity
+{
     private Button btnToRate;
     private RatingBar rtbStar;
     private TextView txtComment;
     private long activity;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,13 +57,14 @@ public class ToRateActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -70,15 +73,18 @@ public class ToRateActivity extends AppCompatActivity {
         return true;
     }
 
-    private void onSaveEvaluation(final View v) {
+    private void onSaveEvaluation(final View v)
+    {
         final Preload p = new Preload(v.getContext());
         p.show();
 
-        try {
+        try
+        {
             // check stars rate
-            if (rtbStar.getRating() == 0) {
+            if (rtbStar.getRating() == 0)
+            {
                 p.dismiss();
-                Snackbar.make(v, R.string.validate_fields_message, Snackbar.LENGTH_LONG).show();
+                Message.show(v.getContext(), R.string.validate_fields_message);
                 return;
             }
 
@@ -86,7 +92,8 @@ public class ToRateActivity extends AppCompatActivity {
             btnToRate.setClickable(false);
 
             // check connection
-            if (Internet.isConnect(getApplicationContext())) {
+            if (Internet.isConnect(getApplicationContext()))
+            {
                 Evaluation e = new Evaluation();
                 e.setComment(txtComment.getText().toString());
                 e.setStars(rtbStar.getRating());
@@ -94,44 +101,60 @@ public class ToRateActivity extends AppCompatActivity {
                 e.setEmail(Session.getInstance(getApplicationContext()).getString("email"));
                 e.setActivity(activity);
 
-                EvaluationWebService.sendServer(e, new EvaluationWebService.Action() {
+                EvaluationWebService.sendServer(e, new EvaluationWebService.Action()
+                {
                     @Override
-                    public void onEvaluate(String status) {
-                        if (status == "success") {
-                            Snackbar.make(v, R.string.success_evaluate, Snackbar.LENGTH_LONG).show();
+                    public void onEvaluate(String status)
+                    {
+                        if (status == "success")
+                        {
+                            Message.show(getApplicationContext(), R.string.success_evaluate);
 
-                            new Thread(new Runnable() {
+                            new Thread(new Runnable()
+                            {
                                 @Override
-                                public void run() {
-                                    try {
+                                public void run()
+                                {
+                                    try
+                                    {
                                         Thread.sleep(1000);
                                         finish();
-                                    } catch (InterruptedException e1) {
+                                    }
+                                    catch (Exception e1)
+                                    {
+                                        Message.error(getApplicationContext(),e1.getMessage());
                                         e1.printStackTrace();
                                     }
                                 }
                             }).start();
 
-                        } else {
-                            Snackbar.make(v, R.string.error_evaluate, Snackbar.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Message.show(getApplicationContext(), R.string.error_evaluate);
                         }
                     }
                 });
 
                 // store object after send server
                 ComponentProvider.getServiceComponent().getEvaluationService().store(e);
-            } else {
+            }
+            else
+            {
                 p.dismiss();
                 btnToRate.setEnabled(true);
                 btnToRate.setClickable(true);
-                Snackbar.make(v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+                Message.show(getApplicationContext(), R.string.err_conection);
                 return;
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             p.dismiss();
             btnToRate.setEnabled(true);
             btnToRate.setClickable(true);
-            Snackbar.make(v, R.string.error_evaluate, Snackbar.LENGTH_LONG).show();
+            Message.error(getApplicationContext(), R.string.error_evaluate);
+            e.printStackTrace();
         }
     }
 }

@@ -87,6 +87,8 @@
     <string name="message_error_survey">Answer all questions!</string>
     <string name="no_survey">No Survey</string>
     <string name="no_survey_info">This activity has no survey to answer</string>
+    <string name="message_origin">Please enter origin address!</string>
+    <string name="message_destination">Please enter destination address!</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

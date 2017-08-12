@@ -1,23 +1,22 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.gaj2l.eventtus.MyApplication;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Internet;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.services.web.EmailWebService;
 
-public class ContactActivity extends AppCompatActivity {
-
+public class ContactActivity extends AppCompatActivity
+{
     private Button btnSend;
     private EditText fieldSubject;
     private EditText fieldMessage;
@@ -27,7 +26,8 @@ public class ContactActivity extends AppCompatActivity {
     private String from_email;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,30 +53,39 @@ public class ContactActivity extends AppCompatActivity {
         });
     }
 
-    private void send(final View v) {
+    private void send(final View v)
+    {
         String subject = fieldSubject.getText().toString();
         String message = fieldMessage.getText().toString();
 
-        if (!subject.equals("") && !message.equals("")) {
-            if (Internet.isConnect(getApplicationContext())) {
+        if (!subject.equals("") && !message.equals(""))
+        {
+            if (Internet.isConnect(getApplicationContext()))
+            {
                 EmailWebService.send(message, subject, from_name, from_email, to_name, to_email, new EmailWebService.ActionEvent() {
                     @Override
                     public void afterSend(String status, String message) {
-                        Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
+                        Message.show(v.getContext(), message);
                     }
                 });
                 finish();
-            } else {
-                Snackbar.make(v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
             }
-        } else {
-            Snackbar.make(v, R.string.validate_fields_message, Snackbar.LENGTH_LONG).show();
+            else
+            {
+                Message.show(v.getContext(), R.string.err_conection);
+            }
+        }
+        else
+        {
+            Message.show(v.getContext(), R.string.validate_fields_message);
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;

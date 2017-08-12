@@ -1,21 +1,16 @@
 package com.gaj2l.eventtus.view.activities;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Internet;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
-import com.gaj2l.eventtus.lib.WebService;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.services.web.EventWebService;
 import com.google.zxing.BarcodeFormat;
@@ -28,11 +23,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 /**
  * Created by Artur Tomasi on 05/04/17.
  */
-public class CreateEventActivity
-    extends
-        AppCompatActivity
-    implements
-        ZXingScannerView.ResultHandler
+public class CreateEventActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler
 {
     private ZXingScannerView mScannerView;
 
@@ -54,8 +45,10 @@ public class CreateEventActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 redirect();
                 return true;
@@ -87,7 +80,8 @@ public class CreateEventActivity
     @Override
     public void handleResult( final Result rawResult )
     {
-        if( Internet.isConnect(CreateEventActivity.this) ) {
+        if( Internet.isConnect(CreateEventActivity.this) )
+        {
             mScannerView.stopCamera();
             final Preload p = new Preload(CreateEventActivity.this);
             p.show();
@@ -97,11 +91,13 @@ public class CreateEventActivity
                     p.dismiss();
                     redirect();
                     int msg = (event != null ) ? R.string.add_event_success : R.string.add_event_error;
-                    Snackbar.make(mScannerView , msg, Snackbar.LENGTH_LONG).show();
+                    Message.show(mScannerView.getContext(), msg);
                 }
             });
-        } else {
-            Snackbar.make( mScannerView, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+        }
+        else
+        {
+            Message.show(mScannerView.getContext(), R.string.err_conection);
         }
         mScannerView.resumeCameraPreview(this);
     }

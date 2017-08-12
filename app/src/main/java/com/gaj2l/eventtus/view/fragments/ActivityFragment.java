@@ -22,31 +22,33 @@ import org.threeten.bp.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityFragment extends Fragment {
+public class ActivityFragment extends Fragment
+{
     private List<Activity> activities;
 
-    public ActivityFragment() {
+    public ActivityFragment()
+    {
         setActivities(Session.getInstance(getContext()).getLong("event_id"));
     }
 
-    public void setActivities(long event_id) {
+    public void setActivities(long event_id)
+    {
         this.activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent(event_id);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         ((BaseActivity) getActivity()).setTitle(R.string.title_activities);
         return inflater.inflate(R.layout.fragment_activity, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.activities_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-
         recyclerView.setAdapter(new ActivityAdapter(activities));
-
     }
 }

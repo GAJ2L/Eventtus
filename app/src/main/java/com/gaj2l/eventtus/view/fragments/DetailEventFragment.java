@@ -29,7 +29,8 @@ import com.gaj2l.eventtus.view.activities.EventDetailsActivity;
  * Created by lucas on 25/04/17.
  */
 
-public class DetailEventFragment extends Fragment {
+public class DetailEventFragment extends Fragment
+{
     private static Event event;
 
     private TextView txtName;
@@ -41,22 +42,22 @@ public class DetailEventFragment extends Fragment {
     private Button btnRefresh;
     private CardView cardView;
 
-    public DetailEventFragment() {
-    }
+    public DetailEventFragment() {}
 
     public void setEvent(Event event) {
         this.event = event;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         ((BaseActivity) getContext()).setTitle(R.string.title_details_event);
-
         return inflater.inflate(R.layout.fragment_detail_event, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
         txtName = (TextView) view.findViewById(R.id.txtNameEvent);
         txtStateEvent = (TextView) view.findViewById(R.id.txtStateEvent);
         btnActivities = (Button) view.findViewById(R.id.btnActivitiesEvent);
@@ -127,7 +128,7 @@ public class DetailEventFragment extends Fragment {
                 {
                     p.dismiss();
                     int msg = ( event != null ) ? R.string.update_event_success : R.string.add_event_error;
-                    Snackbar.make(v , msg, Snackbar.LENGTH_LONG).show();
+                    Message.show(v.getContext() , msg);
                     getFragmentManager().popBackStack();
                     DetailEventFragment fragment = new DetailEventFragment();
                     fragment.setEvent(event);
@@ -138,18 +139,20 @@ public class DetailEventFragment extends Fragment {
         }
         else
         {
-            Snackbar.make( v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+            Message.show(v.getContext(), R.string.err_conection);
         }
     }
 
-    public void onActivities(View v) {
+    public void onActivities(View v)
+    {
         Session.getInstance(getContext()).put("event_id",this.event.getId());
         ActivityFragment activityFragment = new ActivityFragment();
         
         ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, activityFragment).addToBackStack("ActivityFragment").commit();
     }
 
-    public void onContact(View v) {
+    public void onContact(View v)
+    {
         Intent contact = new Intent(v.getContext(), ContactActivity.class);
         contact.putExtra("to", event.getContactMail());
         startActivity(contact);
@@ -159,7 +162,8 @@ public class DetailEventFragment extends Fragment {
     {
         String msg   = getResources().getString(R.string.question_delete_msg);
         String title = getResources().getString(R.string.app_name);
-        Message.confirm(getContext(),title,msg, new Message.Action() {
+        Message.confirm(getContext(),title,msg, new Message.Action()
+        {
             @Override
             public void onPositiveButton() {
                 delete(v);
@@ -180,7 +184,7 @@ public class DetailEventFragment extends Fragment {
         catch( Exception e )
         {
             e.printStackTrace();
-            Snackbar.make(v,R.string.error_delete_event,Snackbar.LENGTH_LONG).show();
+            Message.show(v.getContext(),R.string.error_delete_event);
         }
     }
 

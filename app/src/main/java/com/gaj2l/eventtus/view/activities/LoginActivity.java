@@ -3,18 +3,10 @@ package com.gaj2l.eventtus.view.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Shader;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +15,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -38,6 +29,7 @@ import com.facebook.login.widget.LoginButton;
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Internet;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.User;
@@ -54,13 +46,12 @@ import com.google.android.gms.common.api.Status;
 
 import org.json.JSONObject;
 
-import java.net.URL;
-
 /**
  * Created by Lucas Tomasi on 28/03/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>, GraphRequest.GraphJSONObjectCallback {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult>, GraphRequest.GraphJSONObjectCallback
+{
     private static final int RC_SIGN_IN = 9001;
     private SignInButton signInButton;
     private GoogleApiClient mGoogleApiClient;
@@ -68,12 +59,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private LoginButton btnFacebook;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED)
+        {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 1);
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -121,25 +114,35 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        if (getIntent().getBooleanExtra("logout", false)) {
+        if (getIntent().getBooleanExtra("logout", false))
+        {
             logout();
-        } else {
+        }
+        else
+        {
             redirectIfUserLogged();
         }
     }
 
-    private void signIn() {
+    private void signIn()
+    {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void redirectIfUserLogged() {
+    private void redirectIfUserLogged()
+    {
         long user_id = Session.getInstance(getApplicationContext()).getLong("user");
-        if (user_id != 0) {
+
+        if (user_id != 0)
+        {
             User user = ComponentProvider.getServiceComponent().getUserService().get(user_id);
-            if (user != null) {
+            if (user != null)
+            {
                 this.redirect(user);
-            } else {
+            }
+            else
+            {
                 Session.getInstance(getApplicationContext()).put("user", 0);
                 Session.getInstance(getApplicationContext()).put("username", "");
                 Session.getInstance(getApplicationContext()).put("email", "");
@@ -148,18 +151,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-
-    private void handleSignInResult(GoogleSignInResult result) throws Exception {
-        if (result.isSuccess()) {
+    private void handleSignInResult(GoogleSignInResult result) throws Exception
+    {
+        if (result.isSuccess())
+        {
             User user = getUserByGoogle(result.getSignInAccount());
             onSaveUser(user);
             redirect(user);
-        } else {
-            throw new Exception("error");
+        }
+        else
+        {
+            throw new Exception(getResources().getString(R.string.err_btn_google));
         }
     }
 
-    private User getUserByFacebook(JSONObject object) {
+    private User getUserByFacebook(JSONObject object)
+    {
         User user = new User();
 
         try
@@ -175,13 +182,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
         catch (Exception e)
         {
-            Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();
+            Message.show(getApplicationContext(),R.string.err_btn_facebook);
         }
 
         return user;
     }
 
-    private User getUserByGoogle(GoogleSignInAccount acct) throws Exception{
+    private User getUserByGoogle(GoogleSignInAccount acct) throws Exception
+    {
         User user = new User();
         user.setName(acct.getDisplayName());
         user.setMail(acct.getEmail());
@@ -195,15 +203,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         return user;
     }
 
-    private void onSaveUser(User user) throws Exception {
-        try {
-            ComponentProvider.getServiceComponent().getUserService().create(user);
-        } catch (Exception e) {
-            throw e;
-        }
+    private void onSaveUser(User user) throws Exception
+    {
+        ComponentProvider.getServiceComponent().getUserService().create(user);
     }
 
-    private void redirect(User user) {
+    private void redirect(User user)
+    {
         Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
         Session.getInstance(getApplicationContext()).put("user", user.getId());
         Session.getInstance(getApplicationContext()).put("username", user.getName());
@@ -211,35 +217,39 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Session.getInstance(getApplicationContext()).put("image", user.getImage());
 
         if(Internet.isConnect(getApplicationContext()))
+        {
             TokenWebService.save(user.getMail());
-
+        }
         finish();
         startActivity(intent);
     }
 
-    public void logout() {
+    public void logout()
+    {
         // Logout Google
         mGoogleApiClient.connect();
-        mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+        mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks()
+        {
             @Override
-            public void onConnected(@Nullable Bundle bundle) {
-
-                if (mGoogleApiClient.isConnected()) {
-                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+            public void onConnected(@Nullable Bundle bundle)
+            {
+                if (mGoogleApiClient.isConnected())
+                {
+                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>()
+                    {
                         @Override
-                        public void onResult(@NonNull Status status) {
-                        }
+                        public void onResult(@NonNull Status status) {}
                     });
                 }
             }
 
             @Override
-            public void onConnectionSuspended(int i) {
-            }
+            public void onConnectionSuspended(int i) {}
         });
 
         // Logout Facebook
-        if (Profile.getCurrentProfile() != null) {
+        if (Profile.getCurrentProfile() != null)
+        {
             LoginManager.getInstance().logOut();
         }
 
@@ -247,14 +257,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
         // Login Google
-        if (requestCode == RC_SIGN_IN) {
-            try {
+        if (requestCode == RC_SIGN_IN)
+        {
+            try
+            {
                 handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
-            } catch (Exception e) {
-                Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_google, Snackbar.LENGTH_LONG).show();
+            }
+            catch (Exception e)
+            {
+                Message.show(getApplicationContext(), R.string.err_btn_google);
             }
         }
 
@@ -263,8 +278,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_google, Snackbar.LENGTH_LONG).show();
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult)
+    {
+        Message.show(getApplicationContext(), R.string.err_btn_google);
     }
 
     @Override
@@ -273,11 +289,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public void onSuccess(LoginResult loginResult) {
+    public void onSuccess(LoginResult loginResult)
+    {
         onLoginFacebook(loginResult.getAccessToken());
     }
 
-    private void onLoginFacebook(AccessToken accessToken) {
+    private void onLoginFacebook(AccessToken accessToken)
+    {
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,picture");
         GraphRequest request = GraphRequest.newMeRequest(accessToken, this);
@@ -287,23 +305,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     @Override
-    public void onCancel() {
-        Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();
+    public void onCancel()
+    {
+        Message.show(getApplicationContext(), R.string.err_btn_facebook);
     }
 
     @Override
-    public void onError(FacebookException error) {
-        Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();
+    public void onError(FacebookException error)
+    {
+        Message.show(getApplicationContext(), R.string.err_btn_facebook);
     }
 
     @Override
-    public void onCompleted(JSONObject object, GraphResponse response) {
-        try {
+    public void onCompleted(JSONObject object, GraphResponse response)
+    {
+        try
+        {
             User user = getUserByFacebook(object);
             onSaveUser(user);
             redirect(user);
-        } catch (Exception e) {
-            Snackbar.make(getWindow().findViewById(R.id.viewLogin), R.string.err_btn_facebook, Snackbar.LENGTH_LONG).show();;
+        }
+        catch (Exception e)
+        {
+            Message.show(getApplicationContext(), R.string.err_btn_facebook);
         }
     }
 }

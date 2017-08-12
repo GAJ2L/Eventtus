@@ -5,24 +5,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.socket.ClientSocket;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Internet;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
-import com.gaj2l.eventtus.services.web.SurveyWebService;
 import com.gaj2l.eventtus.view.activities.ActivityDetailsActivity;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
@@ -166,7 +164,6 @@ public class DetailActivityFragment extends Fragment
         return OffsetDateTime.now().isAfter(activity.getDtEnd().plusHours(2));
     }
 
-
     private void onLocation(View v)
     {
         Intent location = new Intent(getContext(), LocationActivity.class);
@@ -174,7 +171,8 @@ public class DetailActivityFragment extends Fragment
         startActivity(location);
     }
 
-    private void onToRate(View v) {
+    private void onToRate(View v)
+    {
         if (!hasToRate() && isStarted())
         {
             Intent activity_attachment = new Intent(getContext(), ToRateActivity.class);
@@ -183,7 +181,7 @@ public class DetailActivityFragment extends Fragment
         }
         else
         {
-            Snackbar.make(v,R.string.disable_button_evaluate,Snackbar.LENGTH_LONG).show();
+            Message.show(v.getContext(),R.string.disable_button_evaluate);
         }
     }
 
@@ -203,24 +201,29 @@ public class DetailActivityFragment extends Fragment
 
     private void onSurvey(View v)
     {
-        if( Internet.isConnect(v.getContext()) ) {
+        if( Internet.isConnect(v.getContext()) )
+        {
             Intent survey = new Intent(getContext(), SurveyActivty.class);
             survey.putExtra("activity", activity.getId());
             startActivity(survey);
-        } else
+        }
+        else
         {
-            Snackbar.make( v, R.string.err_conection, Snackbar.LENGTH_LONG).show();
+            Message.show( v.getContext(), R.string.err_conection);
         }
     }
 
     private void onSendQuestion(View v)
     {
-        if( ClientSocket.isRunning() && isStarted() && !isFinished() ) {
+        if( ClientSocket.isRunning() && isStarted() && !isFinished() )
+        {
             Intent send_question = new Intent(getContext(), QuestionActivity.class);
             send_question.putExtra("activity", activity.getId());
             startActivity(send_question);
-        } else {
-            Snackbar.make(v,R.string.err_send_question_btn , Snackbar.LENGTH_LONG).show();
+        }
+        else
+        {
+            Message.show(v.getContext(),R.string.err_send_question_btn);
         }
     }
 }

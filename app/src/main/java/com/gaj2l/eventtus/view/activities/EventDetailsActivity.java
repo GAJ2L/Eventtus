@@ -1,7 +1,5 @@
 package com.gaj2l.eventtus.view.activities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,10 +9,9 @@ import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Event;
-
-import java.net.URL;
 
 public class EventDetailsActivity extends AppCompatActivity
 {
@@ -27,7 +24,8 @@ public class EventDetailsActivity extends AppCompatActivity
     private ImageView imageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
@@ -42,24 +40,21 @@ public class EventDetailsActivity extends AppCompatActivity
 
     private void load()
     {
-        try {
+        try
+        {
             event = ComponentProvider.getServiceComponent().getEventService().get(getIntent().getExtras().getLong("event"));
 
             txtName.setText(event.getName());
             txtInfo.setText(event.getDescription());
-
-            txtContact.setText(event.getContactName() + "\n\n" +
-                    event.getContactMail() + "\n\n" +
-                    event.getContactPhone());
-
+            txtContact.setText(event.getContactName() + "\n\n" + event.getContactMail() + "\n\n" + event.getContactPhone());
             txtDt.setText(Util.getDateFomatted(event.getDtStart()) + " - " + Util.getDateFomatted(event.getDtEnd()));
             imageView.setImageBitmap( Util.base642bitmap( event.getBanner() ));
             imageView.setAdjustViewBounds( true );
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
-
         catch ( Exception e )
         {
+            Message.error(getApplicationContext(),e.getMessage());
             e.printStackTrace();
         }
     }
@@ -70,8 +65,10 @@ public class EventDetailsActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 return true;

@@ -3,6 +3,7 @@ package com.gaj2l.eventtus.lib;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.gaj2l.eventtus.R;
 
@@ -31,6 +32,26 @@ public  abstract class Message
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public static void show(Context context, String text)
+    {
+        Toast.makeText(context,text, Toast.LENGTH_LONG).show();
+    }
+
+    public static void show(Context context, int text)
+    {
+        Toast.makeText(context,text, Toast.LENGTH_LONG).show();
+    }
+
+    public static void error(Context context, String text)
+    {
+        Toast.makeText(context,text, Toast.LENGTH_LONG).show();
+    }
+
+    public static void error(Context context, int text)
+    {
+        Toast.makeText(context,text, Toast.LENGTH_LONG).show();
     }
 
     public static abstract class Action

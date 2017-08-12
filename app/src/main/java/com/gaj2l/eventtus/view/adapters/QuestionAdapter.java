@@ -15,9 +15,7 @@ import java.util.List;
  * Created by artur on 5/4/17.
  */
 
-public class QuestionAdapter
-    extends
-        RecyclerView.Adapter<QuestionAdapter.ViewHolder>
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder>
 {
     private List<Message> messages;
 
@@ -54,13 +52,13 @@ public class QuestionAdapter
         return messages.size();
     }
 
-
     class ViewHolder extends RecyclerView.ViewHolder
     {
         public TextView message;
         public TextView icCheck;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView)
+        {
             super(itemView);
             message = (TextView) itemView.findViewById(R.id.questionListValue);
             icCheck = (TextView) itemView.findViewById(R.id.icCheck);
@@ -69,7 +67,9 @@ public class QuestionAdapter
         public void setMessage( String msg ) {
         message.setText(msg);
     }
-        public void setVisible( boolean visible) {
+
+        public void setVisible( boolean visible)
+        {
             int v = (visible)? View.VISIBLE: View.INVISIBLE;
             icCheck.setVisibility(v);
         }

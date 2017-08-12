@@ -84,6 +84,8 @@
     <string name="success">Salvo com Sucesso!</string>
     <string name="no_survey">Sem Pesquisas</string>
     <string name="no_survey_info">Está atividade não possui pesquisas para serem respondidas</string>
+    <string name="message_origin">Por favor entre com um endereço de origem!</string>
+    <string name="message_destination">Por favor entre com um endereço de destino!</string>
     <!-- END MESSAGES-->
 
     <!-- START ERRORS -->

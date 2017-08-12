@@ -69,19 +69,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 1);
         }
+
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        TextView lblApp = (TextView) findViewById(R.id.lblApp);
-        RelativeLayout viewLogin = (RelativeLayout) findViewById(R.id.viewLogin);
         Button btnFace = (Button) findViewById(R.id.btnFace);
         Button btnGoogle = (Button) findViewById(R.id.btnGoogle);
-
-        btnGoogle.setTextColor(getColor(R.color.color_red_google));
-        btnFace.setTextColor(getColor(R.color.color_blue_face));
-        lblApp.setTextColor(Color.WHITE);
-
-        lblApp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        viewLogin.setBackgroundColor(getColor(R.color.colorPrimary));
 
         //Login Google
         mGoogleApiClient = new GoogleApiClient.Builder(this).addOnConnectionFailedListener(this).addApi(Auth.GOOGLE_SIGN_IN_API, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()).build();

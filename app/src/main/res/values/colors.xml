@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2269a7</color>
-    <color name="colorPrimaryDark">#1b5689</color>
+    <color name="colorPrimaryDark">#0c6cbf</color>
     <color name="colorAccent">#1b5689</color>
     <color name="colorAccentWhite">#ffffff</color>
     <color name="color_green_android">#3bc2d7</color>
@@ -11,7 +11,7 @@
     <color name="color_idle">#aaaaaa</color>
     <color name="color_running">#008000</color>
     <color name="color_blue_face">#475993</color>
-    <color name="color_red_google">#F14336</color>
+    <color name="color_red_google">#f14336</color>
 
     <color name="black_semi_transparent">#B2000000</color>
     <color name="background">#e5e5e5</color>

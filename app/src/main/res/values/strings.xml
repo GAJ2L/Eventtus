@@ -51,8 +51,8 @@
     <!-- END TITLES-->
 
     <!-- START LABELS-->
-    <string name="lbl_btn_facebook">Login with Facebook</string>
-    <string name="lbl_btn_google">Login with Google</string>
+    <string name="lbl_btn_facebook">Sign in with Facebook</string>
+    <string name="lbl_btn_google">Sign in   with Google</string>
     <string name="lbl_subject">Subject</string>
     <string name="lbl_message">Message</string>
     <string name="lbl_btn_send">Send</string>

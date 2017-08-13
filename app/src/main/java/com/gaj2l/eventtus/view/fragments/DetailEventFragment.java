@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,7 @@ import com.gaj2l.eventtus.services.web.EventWebService;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.activities.ContactActivity;
 import com.gaj2l.eventtus.view.activities.EventDetailsActivity;
+import com.gaj2l.eventtus.view.controllers.ViewController;
 
 /**
  * Created by lucas on 25/04/17.
@@ -178,8 +178,10 @@ public class DetailEventFragment extends Fragment
         try
         {
             ComponentProvider.getServiceComponent().getEventService().clearEvent(event);
+
             Util.clearBackStake(((BaseActivity) v.getContext()).getFragmentManager());
-            ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
+
+            ViewController.redirectEvents( ((BaseActivity) v.getContext()).getFragmentManager(), v.getContext() );
         }
         catch( Exception e )
         {

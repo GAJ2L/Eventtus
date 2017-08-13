@@ -61,6 +61,7 @@
 
     <!-- START MESSAGES -->
     <string name="send_message">Mensagem enviada com sucesso</string>
+    <string name="error">Ocorreu um erro inesperado!</string>
     <string name="validate_fields_message">Preencha os campos do formulário</string>
     <string name="add_event_success">Evento adicionado com sucesso</string>
     <string name="add_event_error">Houve um erro ao adicionar o evento</string>

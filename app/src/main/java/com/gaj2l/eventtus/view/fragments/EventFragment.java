@@ -26,6 +26,8 @@ import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.services.web.EventWebService;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.adapters.EventAdapter;
+import com.gaj2l.eventtus.view.controllers.EventListener;
+import com.gaj2l.eventtus.view.controllers.ViewController;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -84,60 +86,15 @@ public class EventFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                final EditText input = new EditText(view.getContext());
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                input.setLayoutParams(lp);
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
-                alertDialog.setView(input);
-                alertDialog.setTitle(R.string.message_code);
-                alertDialog.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        getEventServer(input.getText().toString());
-                    }
-                });
-
-                alertDialog.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which) {}
-                });
-
-                alertDialog.show();
+             ViewController.showInputCode(view.getContext(), new EventListener() {
+                 @Override
+                 public void onEvent(Object source) throws Exception {
+                     ViewController.redirectEvents(getFragmentManager(), recyclerView.getContext());
+                 }
+             });
             }
         });
 
         recyclerView.setAdapter(new EventAdapter(this.events));
-    }
-
-    private void redirect()
-    {
-        getFragmentManager().popBackStack();
-        getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
-    }
-
-    private void getEventServer(String chave)
-    {
-        if (Internet.isConnect(recyclerView.getContext()))
-        {
-            final Preload p = new Preload(recyclerView.getContext());
-            p.show();
-            EventWebService.getEvent(Session.getInstance(recyclerView.getContext()).getString("email"), chave, new EventWebService.ActionEvent()
-            {
-                @Override
-                public void onEvent(Event event)
-                {
-                    p.dismiss();
-                    redirect();
-                    int msg = (event != null) ? R.string.add_event_success : R.string.add_event_error;
-                    Message.show(recyclerView.getContext(), msg);
-                }
-            });
-        }
-        else
-        {
-            Message.show(recyclerView.getContext(), R.string.err_conection);
-        }
     }
 }

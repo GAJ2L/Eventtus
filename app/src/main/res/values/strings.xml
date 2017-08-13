@@ -63,6 +63,7 @@
 
     <!-- START MESSAGES -->
     <string name="send_message">Message sent successfully</string>
+    <string name="error">An unexpected error occurred!</string>
     <string name="validate_fields_message">Fill in the form fields</string>
     <string name="add_event_success">Event added successfully</string>
     <string name="add_event_error">There was an error adding the event</string>

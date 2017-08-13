@@ -1,6 +1,8 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -12,8 +14,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +23,8 @@ import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
-import com.gaj2l.eventtus.view.fragments.EventFragment;
+import com.gaj2l.eventtus.view.controllers.EventListener;
+import com.gaj2l.eventtus.view.controllers.ViewController;
 
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -33,13 +36,21 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
 
-        if (getFragmentManager().getBackStackEntryCount() <= 0)
-        {
-            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).addToBackStack("EventFragment").commit();
-        }
-        setContentView(R.layout.activity_base);
+        try {
+            if (getFragmentManager().getBackStackEntryCount() <= 0)
+            {
+                ViewController.redirectEvents( getFragmentManager(), getApplicationContext() );
+            }
 
-        initComponents();
+            setContentView(R.layout.activity_base);
+
+            initComponents();
+        }
+
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
     }
 
     private void initComponents()
@@ -118,44 +129,68 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
     {
-        int id = item.getItemId();
+        try {
+            int id = item.getItemId();
 
-        if (id == R.id.nav_new_event)
-        {
-            if (hasPermission())
+            if (id == R.id.nav_new_event)
             {
-                registerEvent();
+                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(BaseActivity.this, android.R.layout.select_dialog_singlechoice);
+                arrayAdapter.add( getResources().getString( R.string.qrcode ) );
+                arrayAdapter.add( getResources().getString( R.string.code ) );
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder( BaseActivity.this );
+                alertDialog.setAdapter( arrayAdapter, new AlertDialog.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i == 0) {
+                            if (hasPermission()) {
+                                registerEvent();
+                            } else {
+                                requestPermission();
+                            }
+                        } else {
+                            ViewController.showInputCode(BaseActivity.this, new EventListener() {
+                                @Override
+                                public void onEvent(Object source) throws Exception{
+                                    ViewController.redirectEvents(getFragmentManager(), getApplicationContext());
+                                }
+                            } );
+                        }
+                    }
+                } );
+
+                alertDialog.show();
             }
-            else
-            {
-                requestPermission();
+
+            else if (id == R.id.nav_my_events) {
+                ViewController.redirectEvents(getFragmentManager(), getApplicationContext());
+            } else if (id == R.id.nav_info) {
+                Intent intent = new Intent(BaseActivity.this, CreditsActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_talk_with_us) {
+                Intent intent = new Intent(BaseActivity.this, ContactActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_logout) {
+                Intent login = new Intent(BaseActivity.this, LoginActivity.class);
+                login.putExtra("logout", true);
+                login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(login);
             }
-        }
-        else if (id == R.id.nav_my_events)
-        {
-            getFragmentManager().beginTransaction().replace(R.id.fragment, new EventFragment()).commit();
-        }
-        else if (id == R.id.nav_info)
-        {
-            Intent intent = new Intent(BaseActivity.this, CreditsActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_talk_with_us)
-        {
-            Intent intent = new Intent(BaseActivity.this, ContactActivity.class);
-            startActivity(intent);
-        }
-        else if (id == R.id.nav_logout)
-        {
-            Intent login = new Intent(BaseActivity.this, LoginActivity.class);
-            login.putExtra("logout", true);
-            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(login);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+            Message.error(getApplicationContext(), R.string.error);
+
+            return false;
+        }
+
         return true;
     }
 

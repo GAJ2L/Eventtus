@@ -47,6 +47,7 @@ public class WelcomeActivity extends AppCompatActivity
             launchHomeScreen();
             finish();
         }
+        session.setFirstTimeLaunch(false);
 
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21)
@@ -133,7 +134,6 @@ public class WelcomeActivity extends AppCompatActivity
 
     private void launchHomeScreen()
     {
-        session.setFirstTimeLaunch(false);
         startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
         finish();
     }

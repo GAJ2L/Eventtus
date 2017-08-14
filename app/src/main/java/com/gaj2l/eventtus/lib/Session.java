@@ -30,6 +30,9 @@ public class Session {
 
     public void clear() {
         preferences.edit().clear().commit();
+
+        // não exibe WelcomeActivity
+        session.setFirstTimeLaunch(false);
     }
 
     public void put(String key, String value) {

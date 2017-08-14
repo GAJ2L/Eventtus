@@ -306,7 +306,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onError(FacebookException error)
     {
-        Message.show(getApplicationContext(), R.string.err_btn_facebook);
+            Message.show(getApplicationContext(), R.string.err_btn_facebook);
     }
 
     @Override

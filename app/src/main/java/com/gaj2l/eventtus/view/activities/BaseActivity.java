@@ -177,6 +177,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(login);
+                finish();
             }
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

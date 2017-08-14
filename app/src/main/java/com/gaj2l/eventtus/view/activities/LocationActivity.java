@@ -103,10 +103,11 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        myLocation = mLocationManager.getLastKnownLocation( LocationManager.GPS_PROVIDER);
+        myLocation = mLocationManager.getLastKnownLocation( LocationManager.NETWORK_PROVIDER );
 
-        if ( myLocation == null ) myLocation = mLocationManager.getLastKnownLocation( LocationManager.NETWORK_PROVIDER );
+        if ( myLocation == null ) myLocation = mLocationManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
         if ( myLocation == null ) myLocation = mLocationManager.getLastKnownLocation( LocationManager.PASSIVE_PROVIDER);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {return;}
 
         mLocationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 50, this );

@@ -51,10 +51,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
         viewHolder.setItemDate(Util.getAllDateFomatted(event.getDtStart()),Util.getAllDateFomatted(event.getDtEnd()));
         viewHolder.setItemState(Event.STATE_TITLE[event.getState()],Event.STATE_DRAWABLES[event.getState()],Event.STATE_COLORS[event.getState()]);
 
-        if( event.getLogo() == null && event.getCor() != null )
+        if( event.getLogo() == null )
         {
-            viewHolder.setTextLogo("X",event.getCor());
-
+            viewHolder.setTextLogo(String.valueOf(event.getContactName().toUpperCase().charAt(0)),event.getCor());
         }
         else
         {
@@ -131,8 +130,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
         public void setTextLogo(String textLogo, String color)
         {
-            txtLogo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
             txtLogo.setText(textLogo);
+            if( color != null )
+                txtLogo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
         }
 
         public void onClickCard(View v)

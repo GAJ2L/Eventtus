@@ -23,6 +23,8 @@ public class Event extends Entity {
     private String contactName;
     private String contactPhone;
     private String contactMail;
+    private String cor;
+    private String logo;
     private long userId;
     private long eventServiceId;
 
@@ -108,6 +110,14 @@ public class Event extends Entity {
     public void setUserId(long userId) {
         this.userId = userId;
     }
+
+    public String getCor() {return cor;}
+
+    public void setCor(String cor) {this.cor = cor;}
+
+    public String getLogo() {return logo;}
+
+    public void setLogo(String logo) {this.logo = logo;}
 
     public String getRangeTime() {
         String time = "";

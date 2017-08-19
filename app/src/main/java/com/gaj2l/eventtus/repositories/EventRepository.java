@@ -23,6 +23,8 @@ public class EventRepository extends Repository<Event> {
     public static final String COLUMN_DT_STORE = "dt_store";
     public static final String COLUMN_USER_ID = "user_id";
     public static final String COLUMN_EVENT_SERVICE_ID = "event_service_id";
+    public static final String COLUMN_COR = "cor";
+    public static final String COLUMN_LOGO = "logo";
     private int columnIndexName;
     private int columnIndexDescription;
     private int columnIndexBanner;
@@ -34,6 +36,8 @@ public class EventRepository extends Repository<Event> {
     private int columnIndexDtStore;
     private int columnIndexUserId;
     private int columnIndexEventServiceId;
+    private int columnIndexCor;
+    private int columnIndexLogo;
 
     public EventRepository(SQLiteDatabase database) {
         super(Event.class, database, "event");
@@ -54,6 +58,8 @@ public class EventRepository extends Repository<Event> {
         putDate(contentValues, COLUMN_DT_STORE, entity.getDtStore());
         contentValues.put(COLUMN_USER_ID, entity.getUserId());
         contentValues.put(COLUMN_EVENT_SERVICE_ID, entity.getEventServiceId());
+        contentValues.put(COLUMN_COR, entity.getCor());
+        contentValues.put(COLUMN_LOGO, entity.getLogo());
 
         return contentValues;
     }
@@ -73,6 +79,8 @@ public class EventRepository extends Repository<Event> {
         entity.setDtStore(getDate(cursor, this.columnIndexDtStore));
         entity.setEventServiceId(cursor.getInt(this.columnIndexEventServiceId));
         entity.setUserId(cursor.getLong(this.columnIndexUserId));
+        entity.setCor(cursor.getString(this.columnIndexCor));
+        entity.setLogo(cursor.getString(this.columnIndexLogo));
         return entity;
     }
 
@@ -91,5 +99,7 @@ public class EventRepository extends Repository<Event> {
         this.columnIndexDtStore = cursor.getColumnIndex(COLUMN_DT_STORE);
         this.columnIndexUserId = cursor.getColumnIndex(COLUMN_USER_ID);
         this.columnIndexEventServiceId = cursor.getColumnIndex(COLUMN_EVENT_SERVICE_ID);
+        this.columnIndexLogo = cursor.getColumnIndex(COLUMN_LOGO);
+        this.columnIndexCor = cursor.getColumnIndex(COLUMN_COR);
     }
 }

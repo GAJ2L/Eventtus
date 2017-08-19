@@ -71,7 +71,7 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
             super(itemView);
             itemName = (TextView) itemView.findViewById(R.id.txtNameFile);
             itemSize = (TextView) itemView.findViewById(R.id.txtSize);
-            itemType = (TextView) itemView.findViewById(R.id.icType);
+            itemType = (TextView) itemView.findViewById(R.id.logo);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

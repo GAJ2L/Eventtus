@@ -40,13 +40,13 @@
             android:layout_alignEnd="@+id/txtState"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:layout_toEndOf="@+id/icType"
+            android:layout_toEndOf="@+id/logo"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             tools:text="Activity Name" />
 
         <TextView
-            android:id="@+id/icType"
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"

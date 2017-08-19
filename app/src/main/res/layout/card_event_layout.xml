@@ -19,17 +19,30 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txtLocal"
-            android:layout_width="match_parent"
+            android:id="@+id/txtDtInicial"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/txtState"
-            android:layout_marginStart="11dp"
-            android:layout_toEndOf="@+id/icType"
-            android:drawableLeft="@drawable/mini_time"
+            android:layout_alignEnd="@+id/txtNameFile"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
             android:drawablePadding="5dp"
+            android:textAlignment="textEnd"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
-            tools:text="Prédio" />
+            android:textSize="10sp"
+            tools:text="15/03/1995 08:00" />
+
+        <TextView
+            android:id="@+id/txtDtFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/txtDtInicial"
+            android:layout_below="@+id/txtDtInicial"
+            android:layout_marginTop="1dp"
+            android:drawablePadding="5dp"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/black"
+            android:textSize="10sp"
+            tools:text="15/03/1995 08:00" />
 
         <TextView
             android:id="@+id/txtState"
@@ -49,30 +62,46 @@
             android:id="@+id/txtNameFile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="2dp"
+            android:layout_alignEnd="@+id/txtState"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/logo"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="24sp"
             tools:text="Event Name" />
 
-        <TextView
+            <!--android:layout_alignEnd="@+id/borda"-->
+        <!--<TextView
             android:id="@+id/borda"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
+            -android:layout_marginRight="7dp"
             android:layout_marginTop="27dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray" />-->
 
         <TextView
-            android:id="@+id/icType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtNameFile"
-            android:layout_below="@+id/borda"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:drawableLeft="@drawable/bubble" />
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/txtState"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingTop="13dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            tools:text="X" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/logo"
+            android:layout_alignTop="@+id/logo" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

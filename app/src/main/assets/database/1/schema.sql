@@ -39,6 +39,8 @@
     'contact_mail' TEXT NOT NULL,
     'user_id' INT NOT NULL,
     'event_service_id' INT NOT NULL,
+    'cor' TEXT,
+    'logo' TEXT,
     CONSTRAINT 'fk_event_user'
       FOREIGN KEY ('user_id')
       REFERENCES 'user' ('_id'));

@@ -89,6 +89,17 @@ public class EventWebService
             event.setContactName( response.getString("contact_name") );
             event.setContactPhone( response.getString("contact_phone") );
             event.setDescription( response.getString("description") );
+
+            if( response.has("cor"))
+                event.setCor( response.getString("cor") );
+
+            if( response.has("logo"))
+            {
+                Bitmap bitmapLogo = Util.getBitmap( response.getString("logo") );
+                String logo = Util.bitmap2base64( bitmapLogo );
+                event.setLogo( logo );
+            }
+
             event.setDtStart( Util.parse2OffsetDateTime( response.getString("dt_start") ) );
             event.setDtEnd( Util.parse2OffsetDateTime( response.getString("dt_end") ) );
             event.setUserId(Session.getInstance(null).getLong("user"));

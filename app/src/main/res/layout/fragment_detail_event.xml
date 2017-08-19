@@ -6,6 +6,12 @@
     android:background="@color/colorAccentWhite"
     tools:context="com.gaj2l.eventtus.view.activities.BaseActivity">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -20,10 +26,6 @@
                 android:id="@+id/card_view_details_activity"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="7dp"
                 android:clickable="true"
                 android:foreground="?selectableItemBackground"
                 card_view:cardBackgroundColor="@color/colorAccentWhite"
@@ -47,7 +49,7 @@
                         android:textColor="@android:color/holo_green_dark"
                         android:textSize="14sp" />
 
-                    <TextView
+            <!--        <TextView
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -69,91 +71,21 @@
                         android:text="Eventtus"
                         android:textColor="@android:color/black"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold" />-->
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
-            <Button
-                android:id="@+id/btnRefreshEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/btnContact"
-                android:layout_alignStart="@+id/btnContact"
-                android:layout_below="@+id/btnContact"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableLeft="@drawable/refresh"
-                android:paddingLeft="5dp"
-                android:paddingRight="35dp"
-                android:text="@string/btn_refresh_event"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/btnDeleteEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/btnRefreshEvent"
-                android:layout_alignStart="@+id/btnRefreshEvent"
-                android:layout_below="@+id/btnRefreshEvent"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableLeft="@drawable/delete"
-                android:paddingLeft="5dp"
-                android:paddingRight="35dp"
-                android:text="@string/btn_delete"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/btnContact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/btnActivitiesEvent"
-                android:layout_alignStart="@+id/btnActivitiesEvent"
-                android:layout_below="@+id/btnActivitiesEvent"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableLeft="@drawable/contact"
-                android:paddingLeft="5dp"
-                android:paddingRight="35dp"
-                android:text="@string/btn_contact"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/btnActivitiesEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/btnDetailsEvents"
-                android:layout_alignStart="@+id/btnDetailsEvents"
-                android:layout_below="@+id/btnDetailsEvents"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableLeft="@drawable/activity"
-                android:paddingLeft="5dp"
-                android:paddingRight="35dp"
-                android:text="@string/btn_activities_event"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/btnDetailsEvents"
-                style="@style/Widget.AppCompat.Button"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activities_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/card_view_details_activity"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/card_view_details_activity"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableLeft="@drawable/details"
-                android:elevation="10dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="35dp"
-                android:text="@string/card_details_activity"
-                android:textColor="@android:color/white" />
-
+                android:elevation="10dp" />
 
         </RelativeLayout>
     </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

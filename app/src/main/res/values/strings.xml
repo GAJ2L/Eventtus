@@ -43,6 +43,7 @@
     <string name="system">System</string>
     <string name="about">About</string>
     <string name="exit">Exit</string>
+    <string name="details">Details</string>
     <string name="title_details_activity">Details of activity</string>
     <string name="title_details_event">Details of event</string>
     <string name="title_create_event">Add event</string>

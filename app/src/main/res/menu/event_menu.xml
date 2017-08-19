@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/detailsEventAction"
+        android:title="@string/details"/>
+
+    <item
+        android:id="@+id/contactEventAction"
+        android:title="@string/btn_contact"/>
+
+    <item
+        android:id="@+id/refreshEventAction"
+        android:title="@string/btn_refresh_event"/>
+
+    <item
+        android:id="@+id/deleteEventAction"
+        android:title="@string/btn_delete"/>
+
+</menu>

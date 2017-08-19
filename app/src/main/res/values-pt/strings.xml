@@ -42,6 +42,7 @@
     <string name="system">Sistema</string>
     <string name="about">Sobre</string>
     <string name="exit">Sair</string>
+    <string name="details">Detalhes</string>
     <string name="title_details_activity">Detalhes da atividade</string>
     <string name="title_details_event">Detalhes do evento</string>
     <string name="title_to_rate_activity">Avaliar</string>

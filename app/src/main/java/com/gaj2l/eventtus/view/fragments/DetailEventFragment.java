@@ -1,16 +1,14 @@
 package com.gaj2l.eventtus.view.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,9 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
@@ -69,10 +65,15 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
 
         if( event != null ) {
             getActivity().setTitle(  event.getName() );
+            if( event.getCor() != null )
+                ( (BaseActivity)getActivity() ).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(event.getCor())));
+            else
+                ( (BaseActivity)getActivity() ).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getActivity().getResources().getColor(R.color.colorPrimary,null)));
         }
         else {
             getActivity().setTitle( R.string.details_event );
         }
+
 
         return inflater.inflate(R.layout.fragment_detail_event, container, false);
     }
@@ -89,7 +90,6 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
                 onDetails();
             }
         });
-
 
         Drawable drawable = new BitmapDrawable( getResources(),Util.base642bitmap( event.getBanner() ) );
         banner.setBackground( drawable );

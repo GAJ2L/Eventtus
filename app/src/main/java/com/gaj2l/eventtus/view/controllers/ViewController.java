@@ -30,7 +30,6 @@ public class ViewController
 {
     public static void redirectEvents(FragmentManager manager, Context context ) throws Exception
     {
-
         try
         {
             List<Event> events = ComponentProvider.getServiceComponent().getEventService()

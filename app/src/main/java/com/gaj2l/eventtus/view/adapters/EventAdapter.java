@@ -51,12 +51,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
     {
         Event event = getEvent(i);
         viewHolder.setItemTitle(event.getName());
-        viewHolder.setItemDate(Util.getAllDateFomatted(event.getDtStart()),Util.getAllDateFomatted(event.getDtEnd()));
+        viewHolder.setItemDate(Util.getDateFomatted(event.getDtStart()),Util.getDateFomatted(event.getDtEnd()));
         viewHolder.setItemState(Event.STATE_TITLE[event.getState()],Event.STATE_DRAWABLES[event.getState()],Event.STATE_COLORS[event.getState()]);
 
         if( event.getLogo() == null )
         {
-            viewHolder.setTextLogo(String.valueOf(event.getContactName().toUpperCase().charAt(0)),event.getCor());
+            viewHolder.setTextLogo(String.valueOf(event.getName().toUpperCase().charAt(0)),event.getCor());
         }
         else
         {

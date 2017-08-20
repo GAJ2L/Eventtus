@@ -12,80 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="horizontal|vertical">
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            <ImageView
                 android:id="@+id/card_view_details_activity"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:clickable="true"
-                android:foreground="?selectableItemBackground"
-                card_view:cardBackgroundColor="@color/colorAccentWhite"
-                card_view:cardElevation="3dp">
+                android:background="@drawable/calendar"
+                android:clickable="true" />
 
-                <RelativeLayout
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="130dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/activities_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/txtStateEvent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:drawableLeft="@drawable/runnig"
-                        android:drawablePadding="5dp"
-                        android:text="Em Andamento"
-                        android:textColor="@android:color/holo_green_dark"
-                        android:textSize="14sp" />
-
-            <!--        <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginStart="15dp"
-                        android:drawableLeft="@drawable/bubble"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/txtNameEvent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@+id/textView2"
-                        android:text="Eventtus"
-                        android:textColor="@android:color/black"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />-->
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/activities_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/card_view_details_activity"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/card_view_details_activity"
-                android:layout_marginTop="20dp"
-                android:elevation="10dp" />
-
+                    android:layout_height="match_parent"
+                    android:layout_alignEnd="@+id/card_view_details_activity"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/card_view_details_activity"
+                    android:elevation="10dp" />
+            </ScrollView>
         </RelativeLayout>
-    </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

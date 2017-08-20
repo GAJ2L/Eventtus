@@ -49,9 +49,8 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
 {
     private static Event event;
     private static List<Activity> activities;
-    private TextView txtStateEvent;
-    private CardView cardView;
     private SwipeRefreshLayout swipeRefresh;
+    private ImageView banner;
 
     public DetailEventFragment() {}
 
@@ -81,15 +80,10 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
-        txtStateEvent = (TextView) view.findViewById(R.id.txtStateEvent);
-        cardView  = (CardView) view.findViewById( R.id.card_view_details_activity);
+        banner       = ImageView.class.cast( view.findViewById( R.id.card_view_details_activity ) );
         swipeRefresh = SwipeRefreshLayout.class.cast( view.findViewById( R.id.swiperefresh ) );
 
-        txtStateEvent.setText(getResources().getString(Event.STATE_TITLE[event.getState()]) );
-        txtStateEvent.setCompoundDrawablesRelativeWithIntrinsicBounds( Event.STATE_DRAWABLES[event.getState()],0,0,0 );
-        txtStateEvent.setTextColor(getResources().getColor(Event.STATE_COLORS[event.getState()], null) );
-
-        cardView.setOnClickListener(new View.OnClickListener() {
+        banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDetails();
@@ -98,7 +92,7 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
 
 
         Drawable drawable = new BitmapDrawable( getResources(),Util.base642bitmap( event.getBanner() ) );
-        cardView.setBackground( drawable );
+        banner.setBackground( drawable );
 
         //swipe refresh
         swipeRefresh.setOnRefreshListener( this );

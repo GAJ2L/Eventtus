@@ -1,6 +1,7 @@
 package com.gaj2l.eventtus.models;
 
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Entity;
@@ -13,7 +14,13 @@ import org.threeten.bp.format.DateTimeFormatter;
  * Created by Jackson Majolo on 24/03/2017.
  */
 
-public class Event extends Entity {
+public class Event
+    extends
+        Entity
+            implements
+                Comparable<Event>
+
+{
     private String name;
     private String description;
     private String banner;
@@ -174,5 +181,10 @@ public class Event extends Entity {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(@NonNull Event event) {
+        return getDtStart().compareTo( event.getDtStart() );
     }
 }

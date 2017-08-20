@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.models;
 
+import android.support.annotation.NonNull;
+
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Entity;
 
@@ -7,7 +9,12 @@ import com.gaj2l.eventtus.lib.Entity;
  * Created by Jackson Majolo on 24/03/2017.
  */
 
-public class Attachment extends Entity {
+public class Attachment
+    extends
+        Entity
+            implements
+                Comparable<Attachment>
+{
     private String name;
     private String size;
     private String local;
@@ -68,5 +75,10 @@ public class Attachment extends Entity {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(@NonNull Attachment attachment) {
+        return attachment.getName().compareTo( getName() );
     }
 }

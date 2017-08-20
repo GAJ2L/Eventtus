@@ -1,16 +1,26 @@
 package com.gaj2l.eventtus.models;
 
+import android.support.annotation.NonNull;
+
 import com.gaj2l.eventtus.lib.Entity;
 import com.gaj2l.eventtus.lib.Util;
 
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.util.Comparator;
+
 /**
  * Created by Jackson Majolo on 24/03/2017.
  */
 
-public class Activity extends Entity {
+public class Activity
+    extends
+        Entity
+            implements
+                Comparable<Activity>
+
+{
     private String name;
     private OffsetDateTime dtStart;
     private OffsetDateTime dtEnd;
@@ -110,5 +120,10 @@ public class Activity extends Entity {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(@NonNull Activity activity) {
+        return getDtStart().compareTo( activity.getDtStart() );
     }
 }

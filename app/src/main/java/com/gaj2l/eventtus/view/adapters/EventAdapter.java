@@ -21,6 +21,7 @@ import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.fragments.DetailEventFragment;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,6 +34,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
     public EventAdapter(List<Event> list) {
         this.events = list;
+
+        Collections.sort( events );
     }
 
     @Override

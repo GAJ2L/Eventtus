@@ -13,6 +13,8 @@ import com.gaj2l.eventtus.view.fragments.DetailActivityFragment;
 
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -23,8 +25,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 {
     private List<Activity> activities;
 
-    public ActivityAdapter(List<Activity> list) {
+    public ActivityAdapter(List<Activity> list)
+    {
         this.activities = list;
+
+        Collections.sort( activities );
     }
 
     @Override
@@ -52,7 +57,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         }
         return activities.size();
     }
-
 
     public Activity getActivity(int i) {
         return this.activities.get(i);

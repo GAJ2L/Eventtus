@@ -16,6 +16,7 @@ import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.models.Attachment;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
 
     public AttachmentAdapter(List<Attachment> list) {
         this.attachments = list;
+
+        Collections.sort( this.attachments );
     }
 
     @Override

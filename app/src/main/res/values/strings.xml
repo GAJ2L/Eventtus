@@ -25,7 +25,7 @@
     <!-- START SOCIALS -->
     <string name="facebook_app_id">1129202023857983</string>
     <string name="fb_login_protocol_scheme">fb133977643868681</string>
-
+    <string name="site">https://github.com/GAJ2L</string>
     <string name="google_maps_key">AIzaSyDdgNJBepj0PlYgFmjOrbf7DZD1HQUJPwU</string>
     <!-- END SOCIALS -->
 
@@ -122,9 +122,9 @@
     <string name="details_contact">Contact</string>
     <string name="btn_refresh_event">Refresh</string>
     <string name="info_eventtus">Team:</string>
-    <string name="info">Eventtus Developed by GAJ2L, Eventtus is an application designed to make life easier for organizers and users of an event. With a simple and agile interface, we can visualize details of the events and activities in which it is registered, as well as its locations.</string>
-    <string name="action_credits">Credits</string>
-    <string name="title_credits">Credits</string>
+    <string name="info">Eventtus is an application that aims to make life easier for organizers and users of an event. With a simple and agile interface, we can visualize details of the events and activities in which we are registered, as well as their locations</string>
+    <string name="action_about">About</string>
+    <string name="title_about">About</string>
     <string name="evaluations">Evaluations</string>
     <string name="code">Code</string>
     <string name="message_code">Enter the event code</string>
@@ -133,6 +133,7 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="finish">Save</string>
+    <string name="developer_team">Developer team</string>
 
     <!-- START SLIDE-->
     <string name="slide_next">Next</string>

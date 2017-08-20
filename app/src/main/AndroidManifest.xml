@@ -34,8 +34,8 @@
             android:name=".view.activities.ActivityDetailsActivity"
             android:label="@string/title_details_activity" />
         <activity
-            android:name=".view.activities.CreditsActivity"
-            android:label="@string/title_credits" />
+            android:name=".view.activities.AboutActivity"
+            android:label="@string/title_about" />
         <activity
             android:name=".view.activities.CreateEventActivity"
             android:label="@string/app_name" />

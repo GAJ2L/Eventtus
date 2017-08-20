@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="22dp"
+        android:padding="15dp"
+        android:text="@string/info"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/developer_team"
+        android:layout_below="@+id/info"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp"
+        android:id="@+id/textView2" />
+
+    <RelativeLayout
+        android:id="@+id/card_artur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/photo_artur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/card_person"/>
+        <TextView
+            android:id="@+id/name_artur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/photo_artur"
+            android:textSize="30sp"
+            android:text="Artur Tomasi" />
+        <TextView
+            android:id="@+id/mail_artur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_artur"
+            android:layout_toRightOf="@+id/photo_artur"
+            android:text="tomasi.artur@gmail.com" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/card_jackson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_below="@+id/card_artur"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/photo_jackson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/card_person"/>
+        <TextView
+            android:id="@+id/name_jackson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/photo_jackson"
+            android:textSize="30sp"
+            android:text="Jackson D. Majolo" />
+        <TextView
+            android:id="@+id/mail_jackson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_jackson"
+            android:layout_toRightOf="@+id/photo_jackson"
+            android:text="jacksonmajolo@gmail.com" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/card_lucas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_below="@+id/card_jackson"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/photo_lucas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/card_person"/>
+        <TextView
+            android:id="@+id/name_lucas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/photo_lucas"
+            android:textSize="30sp"
+            android:text="Lucas Tomasi" />
+        <TextView
+            android:id="@+id/mail_lucas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_lucas"
+            android:layout_toRightOf="@+id/photo_lucas"
+            android:text="lcstomasi@gmail.com" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/site"
+        android:textAlignment="center" />
+</RelativeLayout>

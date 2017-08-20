@@ -11,13 +11,13 @@ import com.gaj2l.eventtus.R;
  * Created by lucas on 28/05/17.
  */
 
-public class CreditsActivity extends AppCompatActivity
+public class AboutActivity extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credits);
+        setContentView(R.layout.activity_about);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

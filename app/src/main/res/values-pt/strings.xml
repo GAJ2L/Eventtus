@@ -24,6 +24,7 @@
 
     <!-- START SOCIALS -->
     <string name="facebook_app_id">275462169543015</string>
+    <string name="site">https://github.com/GAJ2L</string>
     <string name="google_maps_key">AIzaSyDdgNJBepj0PlYgFmjOrbf7DZD1HQUJPwU</string>
     <!-- END SOCIALS -->
 
@@ -118,10 +119,10 @@
     <string name="details_date">Data</string>
     <string name="details_contact">Contato</string>
     <string name="btn_refresh_event">Atualizar</string>
-    <string name="info">Eventtus  Desenvolvido pela GAJ2L, Eventtus é um aplicativo com o objetivo de facilitar a vida dos organizadores e dos usuários de um evento.  Com uma interface simples e ágil, podemos visualizar detalhes dos eventos e atividades nos quais está inscrito, tanto quanto suas localizações.</string>
+    <string name="info">Eventtus é um aplicativo com o objetivo de facilitar a vida dos organizadores e dos usuários de um evento.  Com uma interface simples e ágil, podemos visualizar detalhes dos eventos e atividades nos quais estamos inscrito, tanto quanto suas localizações.</string>
     <string name="info_eventtus">Equipe:</string>
-    <string name="action_credits">Créditos</string>
-    <string name="title_credits">Créditos</string>
+    <string name="action_about">Sobre</string>
+    <string name="title_about">Sobre</string>
     <string name="evaluations">Avaliações</string>
     <string name="code">Código</string>
     <string name="message_code">Digite o código do evento</string>
@@ -131,6 +132,7 @@
     <string name="next">Próximo</string>
     <string name="finish">Finalizar</string>
     <string name="no_evaluations">Sem avaliações</string>
+    <string name="developer_team">Time de desenvolvimento</string>
 
     <!-- START SLIDE-->
     <string name="slide_next">Próximo</string>

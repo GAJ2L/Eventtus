@@ -166,7 +166,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             else if (id == R.id.nav_my_events) {
                 ViewController.redirectEvents(getFragmentManager(), getApplicationContext());
             } else if (id == R.id.nav_info) {
-                Intent intent = new Intent(BaseActivity.this, CreditsActivity.class);
+                Intent intent = new Intent(BaseActivity.this, AboutActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_talk_with_us) {
                 Intent intent = new Intent(BaseActivity.this, ContactActivity.class);

@@ -51,15 +51,16 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
     private static List<Activity> activities;
     private TextView txtStateEvent;
     private CardView cardView;
-
+    private SwipeRefreshLayout swipeRefresh;
 
     public DetailEventFragment() {}
 
     public void setEvent(Event event)
     {
-        this.event = event;
+        //refresh event
+        this.event = ComponentProvider.getServiceComponent().getEventService().getEventByServiceId( event.getEventServiceId() );
 
-        this.activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent( event.getId() );
+        this.activities = ComponentProvider.getServiceComponent().getActivityService().getActivitiesByEvent( this.event.getId() );
     }
 
     @Override
@@ -82,6 +83,7 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
     {
         txtStateEvent = (TextView) view.findViewById(R.id.txtStateEvent);
         cardView  = (CardView) view.findViewById( R.id.card_view_details_activity);
+        swipeRefresh = SwipeRefreshLayout.class.cast( view.findViewById( R.id.swiperefresh ) );
 
         txtStateEvent.setText(getResources().getString(Event.STATE_TITLE[event.getState()]) );
         txtStateEvent.setCompoundDrawablesRelativeWithIntrinsicBounds( Event.STATE_DRAWABLES[event.getState()],0,0,0 );
@@ -99,7 +101,7 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
         cardView.setBackground( drawable );
 
         //swipe refresh
-        SwipeRefreshLayout.class.cast( view.findViewById( R.id.swiperefresh ) ).setOnRefreshListener( this );
+        swipeRefresh.setOnRefreshListener( this );
 
         //Activities
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.activities_list);
@@ -108,13 +110,16 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
         recyclerView.setAdapter(new ActivityAdapter(activities));
     }
 
+    @Override
     public void onRefresh()
     {
         if( Internet.isConnect( getActivity() ) )
         {
-            final Preload p = new Preload( getActivity() );
+            final Preload p = new Preload(getActivity());
 
-            p.show();
+            if ( ! swipeRefresh.isRefreshing() ) {
+                p.show();
+            }
 
             final String email = Session.getInstance( getActivity().getApplicationContext() ).getString("email");
 
@@ -134,6 +139,7 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
                 }
             });
         }
+
         else
         {
             Message.show( getActivity(), R.string.err_conection);

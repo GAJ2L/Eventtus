@@ -168,10 +168,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             user.setMail(object.getString("email"));
             user.setMethodAutentication(User.METHOD_FACEBOOK);
             if (object.has("picture"))
-            {
-                user.setImage(object.getJSONObject("picture").getJSONObject("data").getString("url"));
-                user.setImage( Util.bitmap2base64(Util.getBitmap(user.getImage())) );
-            }
+                user.setImage( Util.bitmap2base64(Util.getBitmap(object.getJSONObject("picture").getJSONObject("data").getString("url"))) );
         }
         catch (Exception e)
         {
@@ -188,10 +185,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         user.setMail(acct.getEmail());
         user.setMethodAutentication(User.METHOD_GOOGLE);
         if (acct.getPhotoUrl() != null)
-        {
-            user.setImage(acct.getPhotoUrl().toString());
-            user.setImage( Util.bitmap2base64(Util.getBitmap(user.getImage())) );
-        }
+            user.setImage( Util.bitmap2base64(Util.getBitmap(acct.getPhotoUrl().toString())) );
 
         return user;
     }
@@ -306,7 +300,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onError(FacebookException error)
     {
-            Message.show(getApplicationContext(), R.string.err_btn_facebook);
+        Message.show(getApplicationContext(), R.string.err_btn_facebook);
     }
 
     @Override

@@ -89,7 +89,7 @@ public class Util
         paint.setShader(shader);
         c.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
 
-        return bitmap;
+        return circleBitmap;
     }
 
 

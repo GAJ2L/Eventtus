@@ -30,7 +30,8 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
     public AttachmentAdapter(List<Attachment> list) {
         this.attachments = list;
 
-        Collections.sort( this.attachments );
+        if ( this.attachments!= null )
+            Collections.sort( this.attachments );
     }
 
     @Override

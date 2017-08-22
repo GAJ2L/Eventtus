@@ -29,7 +29,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     {
         this.activities = list;
 
-        Collections.sort( activities );
+        if ( this.activities != null )
+            Collections.sort( activities );
     }
 
     @Override

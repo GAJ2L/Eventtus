@@ -12,7 +12,6 @@ public class Survey
 {
     private List<Question> questions;
     private String name;
-    private int index = 0;
     private HashMap<Integer, Answer> answers = new HashMap();
 
     public Survey( String name, List questions )
@@ -29,32 +28,24 @@ public class Survey
 
     public List<Question> questions() { return questions; }
 
-    public Question question() { return questions.get(index); }
+    public Question question( int index ) { return questions.get(index); }
 
-    public boolean hasNext() { return index < questions.size() - 1; }
-
-    public void next() { index++; }
-
-    public boolean hasPrevious() { return index > 0; }
-
-    public void previous() { index--; }
-
-    public String title() { return ( index + 1 ) + "/" +  questions().size(); }
+    public int size() { return questions().size(); }
 
     public boolean canFinish() { return questions().size() == answers().size(); }
 
     public HashMap<Integer, Answer> answers() { return answers; }
 
-    public Answer answer() {
-        if ( answers != null ) return answers.get( question().id() );
+    public Answer answer( int index ) {
+        if ( answers != null ) return answers.get( question( index ).id() );
 
         return null;
     }
 
-    public void answer( Answer a ) {
+    public void answer( Answer a, int index ) {
         if ( answers == null ) answers = new HashMap();
 
-        answers.put( question().id(), a );
+        answers.put( question( index).id(), a );
     }
 
     @Override

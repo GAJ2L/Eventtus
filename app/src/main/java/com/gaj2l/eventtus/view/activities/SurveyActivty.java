@@ -1,25 +1,27 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.Snackbar;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
+import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
@@ -28,26 +30,26 @@ import com.gaj2l.eventtus.models.Option;
 import com.gaj2l.eventtus.models.Survey;
 import com.gaj2l.eventtus.services.web.SurveyWebService;
 
-public class SurveyActivty extends AppCompatActivity implements View.OnTouchListener
+public class SurveyActivty extends AppCompatActivity
 {
-    private GestureDetector gestureDetector;
-
-    private ViewFlipper viewFlipper;
-
     private Activity activity;
     private Survey survey;
 
+    private Button btnBack, btnNext;
+
     private TextView txtSurvey;
-    private TextView txtQuestion;
-    private Button btnBack;
-    private Button btnNext;
-    private ScrollView paneOptions;
+
+    private ViewPager viewPager;
+    private MyViewPagerAdapter myViewPagerAdapter;
+    private LayoutInflater layoutInflater;
 
     private Preload preload;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_survey_activty);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,7 +68,6 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -75,10 +76,11 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
         return true;
     }
 
-    private void load() {
-        try {
-            preload = new Preload(this);
-            preload.show();
+    private void load()
+    {
+        try
+        {
+            preload = new Preload(this); preload.show();
 
             activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
 
@@ -86,43 +88,42 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
                 @Override
                 public void onEvent(Survey survey) {
 
-                    SurveyActivty.this.survey = survey;
+                SurveyActivty.this.survey = survey;
 
-                    if (SurveyActivty.this.survey != null && SurveyActivty.this.survey.hasQuestions()) {
-                        updateEditable();
-
-                        loadOptions();
-                    } else {
-                        setContentView(R.layout.no_survey);
-                    }
-
-                    preload.dismiss();
+                if ( SurveyActivty.this.survey != null && SurveyActivty.this.survey.hasQuestions() ){
+                    myViewPagerAdapter = new MyViewPagerAdapter();
+                    viewPager.setAdapter(myViewPagerAdapter);
+                    viewPager.addOnPageChangeListener( viewPagerPageChangeListener );
+                    updateEditable(0);
+                } else {
+                    setContentView(R.layout.no_survey);
                 }
-            });
+
+                preload.dismiss();
+            }
+            } );
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void loadOptions() {
+    private View composePane(ViewGroup container, final int position )
+    {
         try {
-            txtSurvey.setText(survey.title());
+            RelativeLayout layout = (RelativeLayout) layoutInflater.inflate(R.layout.survey_form, container, false);
 
-            txtQuestion.setText(survey.question().name());
+            TextView.class.cast(layout.findViewById(R.id.question_title)).setText(survey.question(position).name());
 
-            paneOptions.removeAllViews();
-
-            RadioGroup rg = new RadioGroup(paneOptions.getContext());
+            RadioGroup rg = new RadioGroup(layout.getContext());
 
             rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                    survey.answer(new Answer(survey.question(), checkedId));
-                    updateEditable();
+                    survey.answer( new Answer( survey.question( position ), checkedId ), position );
                 }
             });
 
-            for (Option opt : survey.question().options()) {
+            for (Option opt : survey.question( position ).options()) {
                 final RadioButton rd = new RadioButton(rg.getContext());
                 rd.setTextSize(18);
                 rd.setPadding(20, 20, 20, 20);
@@ -131,30 +132,36 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
                 rd.setText(opt.name());
                 rg.addView(rd);
 
-                if (survey.answer() != null && survey.answer().option() == opt.value()) {
+                if (survey.answer(position) != null && survey.answer(position).option() == opt.value()) {
                     rg.check(rd.getId());
                 }
             }
 
-            paneOptions.addView(rg);
-        } catch (Exception e) {
+            ScrollView.class.cast(layout.findViewById(R.id.paneOptions)).addView(rg);
+
+            return layout;
+
+        } catch(Exception e){
             e.printStackTrace();
+            Message.error(getApplicationContext(), R.string.error);
         }
+
+        return null;
     }
 
-    private void onSave(final View v) {
+    private void onSave() {
         try {
             if (survey.canFinish()) {
                 SurveyWebService.finish(survey, activity, Session.getInstance(getApplicationContext()).getString("email"), new SurveyWebService.ActionEvent<Boolean>() {
                     @Override
                     public void onEvent(Boolean survey) {
                         finish();
-                        Toast.makeText( getApplicationContext(), getString(R.string.success), Toast.LENGTH_LONG ).show();
+                        Message.show( getApplicationContext(), getString(R.string.success) );
                     }
                 });
 
             } else {
-                Snackbar.make(v, getString(R.string.message_error_survey), Snackbar.LENGTH_LONG).show();
+                Message.show( getApplicationContext(), getString(R.string.message_error_survey) );
             }
 
         } catch (Exception e) {
@@ -162,115 +169,95 @@ public class SurveyActivty extends AppCompatActivity implements View.OnTouchList
         }
     }
 
-    private void onBack() {
-        if (survey.hasPrevious()) {
-            showAnimation(true);
-            survey.previous();
-            loadOptions();
-        }
-        updateEditable();
-    }
-
-    private void onNext(View v) {
-        if (survey.hasNext()) {
-            showAnimation(false);
-            survey.next();
-            loadOptions();
-        } else if ( v != null ){
-            onSave(v);
-        }
-        updateEditable();
-    }
-
-    private void updateEditable() {
-        btnNext.setText(survey.hasNext() ? getString(R.string.next) : getString(R.string.finish));
-
-        btnBack.setVisibility(survey.hasPrevious() ? View.VISIBLE : View.INVISIBLE);
-    }
-
-    private void showAnimation( boolean back )
+    private void updateEditable( int position )
     {
-        if ( back ) {
-            viewFlipper.setInAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.in_left));
-            viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.out_left));
-        } else {
-            viewFlipper.setInAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.in_right));
-            viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(SurveyActivty.this, R.anim.out_right));
-        }
+        txtSurvey.setText( (position + 1) + "/" + survey.size() );
 
-        viewFlipper.showNext();
+        btnNext.setText( position == survey.size() - 1 ? getString(R.string.finish): getString(R.string.next) );
 
+        btnBack.setVisibility( position == 0 ? View.INVISIBLE : View.VISIBLE );
     }
 
-    private void initComponents() {
-        gestureDetector = new GestureDetector(this, new GestureListener());
-
-        viewFlipper = (ViewFlipper) this.findViewById(R.id.view_flipper);
-
-        txtQuestion = (TextView) findViewById(R.id.question_title);
+    private void initComponents()
+    {
         txtSurvey = (TextView) findViewById(R.id.survey_text);
 
         btnBack = (Button) findViewById(R.id.btnBack);
         btnNext = (Button) findViewById(R.id.btnNext);
 
-        paneOptions = (ScrollView) findViewById(R.id.paneOptions);
+        viewPager = (ViewPager) findViewById( R.id.pager_survey );
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBack();
+                int current = viewPager.getCurrentItem() + 1;
+                if (current > 0 ) {
+                    viewPager.setCurrentItem(current -2);
+                }
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onNext(v);
+            int current = viewPager.getCurrentItem() + 1;
+            if (current < survey.size() ) {
+                viewPager.setCurrentItem(current);
+            } else {
+                onSave();
+            }
             }
         });
 
-        paneOptions.setOnTouchListener( this );
+
+        layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return gestureDetector.onTouchEvent(event);
-    }
 
-    private final class GestureListener extends GestureDetector.SimpleOnGestureListener
+    //  viewpager change listener
+    private ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener()
     {
-        private static final int SWIPE_THRESHOLD = 100;
-        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-
         @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        public void onPageSelected(int position)
         {
-            boolean result = false;
-            try
-            {
-                float diffY = e2.getY() - e1.getY();
-                float diffX = e2.getX() - e1.getX();
-
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-
-                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-
-                        if (diffX > 0) {
-                            onBack();
-                        } else {
-                            onNext(null);
-                        }
-                        result = true;
-                    }
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-            return result;
+            updateEditable( position );
         }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {}
+    };
+
+    /**
+     * View pager adapter
+     */
+    public class MyViewPagerAdapter extends PagerAdapter
+    {
+        public MyViewPagerAdapter() {}
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position)
+        {
+            View view = composePane( container, position );
+
+            container.addView( view );
+
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return survey.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) { container.removeView((View) object);}
     }
 }

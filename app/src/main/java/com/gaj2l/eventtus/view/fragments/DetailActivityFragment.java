@@ -21,6 +21,7 @@ import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
+import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.ActivityDetailsActivity;
 import com.gaj2l.eventtus.view.activities.AttachmentActivity;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
@@ -83,6 +84,21 @@ public class DetailActivityFragment extends Fragment
 
         txtDateIni.setText(Util.getAllDateFomatted(activity.getDtStart()));
         txtDateFin.setText(Util.getAllDateFomatted(activity.getDtEnd()));
+
+        Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
+
+        if( event.getCor() !=null )
+        {
+            int color = Color.parseColor( event.getCor() );
+
+            btnDetails.setBackgroundColor( color );
+            btnAttachments.setBackgroundColor( color );
+            btnToRate.setBackgroundColor( color );
+            btnLocation.setBackgroundColor( color );
+            btnSendQuestion.setBackgroundColor( color );
+            btnSurvey.setBackgroundColor( color );
+        }
+
 
         // clica somente se a atividade começou e não foi avaliada
         if(  hasToRate() || !isStarted() )

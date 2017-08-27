@@ -1,8 +1,17 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.RequiresApi;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -26,6 +36,7 @@ import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Answer;
+import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.models.Option;
 import com.gaj2l.eventtus.models.Survey;
 import com.gaj2l.eventtus.services.web.SurveyWebService;
@@ -45,6 +56,8 @@ public class SurveyActivty extends AppCompatActivity
 
     private Preload preload;
 
+    private int color;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,9 +69,20 @@ public class SurveyActivty extends AppCompatActivity
 
         setTitle(R.string.survey);
 
+        activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
+
+        Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
+
+        if( event.getCor() !=null )
+            color = Color.parseColor( event.getCor() );
+        else
+            color = getResources().getColor( R.color.colorPrimaryDark, null );
+
         initComponents();
 
         load();
+
+        updateColors();
     }
 
     @Override
@@ -82,8 +106,6 @@ public class SurveyActivty extends AppCompatActivity
         {
             preload = new Preload(this); preload.show();
 
-            activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
-
             SurveyWebService.getSurvey(activity, new SurveyWebService.ActionEvent<Survey>() {
                 @Override
                 public void onEvent(Survey survey) {
@@ -96,7 +118,13 @@ public class SurveyActivty extends AppCompatActivity
                     viewPager.addOnPageChangeListener( viewPagerPageChangeListener );
                     updateEditable(0);
                 } else {
+
                     setContentView(R.layout.no_survey);
+
+                    TextView.class.cast( findViewById( R.id.no_survey_info ) ).setTextColor( color );
+                    TextView.class.cast( findViewById( R.id.no_survey_title ) ).setTextColor( color );
+
+                    DrawableCompat.setTint( ImageView.class.cast( findViewById( R.id.no_survey_image ) ).getDrawable(), color );
                 }
 
                 preload.dismiss();
@@ -107,6 +135,22 @@ public class SurveyActivty extends AppCompatActivity
         }
     }
 
+    private void updateColors()
+    {
+        ColorDrawable drawable = new ColorDrawable( color );
+
+        getSupportActionBar().setBackgroundDrawable( drawable );
+
+        RelativeLayout container = (RelativeLayout) findViewById( R.id.survey_pane );
+
+        ColorDrawable background = new ColorDrawable( color );
+
+        background.setAlpha(30);
+
+        container.setBackground( background );
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private View composePane(ViewGroup container, final int position )
     {
         try {
@@ -123,13 +167,18 @@ public class SurveyActivty extends AppCompatActivity
                 }
             });
 
+            ColorStateList colorStateList = new ColorStateList(
+                    new int[][]{ new int[]{-android.R.attr.state_enabled}, new int[]{android.R.attr.state_enabled} },
+                    new int[] { Color.BLACK , color } );
+
             for (Option opt : survey.question( position ).options()) {
                 final RadioButton rd = new RadioButton(rg.getContext());
-                rd.setTextSize(18);
+                rd.setTextSize(20);
                 rd.setPadding(20, 20, 20, 20);
-                rd.setTextColor(getResources().getColor(R.color.colorPrimaryDark, null));
                 rd.setId(opt.value());
                 rd.setText(opt.name());
+                rd.setButtonTintList(colorStateList);
+
                 rg.addView(rd);
 
                 if (survey.answer(position) != null && survey.answer(position).option() == opt.value()) {

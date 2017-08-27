@@ -14,28 +14,26 @@
         android:layout_marginBottom="50dp" />
 
 
-        <Button
-            android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
-            android:background="@color/white"
-            android:textColor="@color/colorPrimary"
-            style="?android:attr/borderlessButtonStyle"/>
+    <Button
+        android:id="@+id/btnNext"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:textColor="#000" />
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:background="@color/white"
-            android:text="@string/back"
-            android:textColor="@color/colorPrimary"
-            style="?android:attr/borderlessButtonStyle"/>
+    <Button
+        android:id="@+id/btnBack"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:text="@string/back"
+        android:textColor="#000" />
 
 
     <TextView
@@ -45,18 +43,17 @@
         android:layout_alignBaseline="@+id/btnNext"
         android:layout_alignBottom="@+id/btnNext"
         android:layout_centerHorizontal="true"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#000"
         android:textSize="18dp"
         tools:text="TextView" />
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_above="@+id/btnNext"
-            android:layout_alignParentStart="true"
-            android:background="@color/colorPrimary"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/survey_bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/btnNext"
+        android:layout_alignParentStart="true"
+        android:background="#000"
+        android:text="TextView" />
 
 </RelativeLayout>

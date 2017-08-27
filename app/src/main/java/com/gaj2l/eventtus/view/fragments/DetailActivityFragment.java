@@ -2,7 +2,10 @@ package com.gaj2l.eventtus.view.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -51,7 +54,6 @@ public class DetailActivityFragment extends Fragment
     private Button btnLocation;
     private Button btnSendQuestion;
     private Button btnSurvey;
-    private CardView view;
 
     public DetailActivityFragment(){}
 
@@ -77,26 +79,22 @@ public class DetailActivityFragment extends Fragment
         btnLocation     = (Button) view.findViewById(R.id.btnDeleteEvent);
         btnSendQuestion = (Button) view.findViewById(R.id.btnSendQuestionActivity);
         btnSurvey       = (Button) view.findViewById( R.id.btnShowSurvey );
-        view            = (CardView) view.findViewById(R.id.card_view_details_activity);
 
-        String val = (activity.getName().length() > 27)? activity.getName().substring(0,27) + "..." : activity.getName();
-        txtName.setText( val );
-
+        txtName.setText( activity.getName() );
         txtDateIni.setText(Util.getAllDateFomatted(activity.getDtStart()));
         txtDateFin.setText(Util.getAllDateFomatted(activity.getDtEnd()));
 
         Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
 
-        if( event.getCor() !=null )
+        if( event.getCor() != null )
         {
             int color = Color.parseColor( event.getCor() );
-
-            btnDetails.setBackgroundColor( color );
-            btnAttachments.setBackgroundColor( color );
-            btnToRate.setBackgroundColor( color );
-            btnLocation.setBackgroundColor( color );
-            btnSendQuestion.setBackgroundColor( color );
-            btnSurvey.setBackgroundColor( color );
+            btnDetails.setBackgroundTintList( ColorStateList.valueOf(color) );
+            btnAttachments.setBackgroundTintList( ColorStateList.valueOf(color) );
+            btnToRate.setBackgroundTintList( ColorStateList.valueOf(color) );
+            btnLocation.setBackgroundTintList( ColorStateList.valueOf(color) );
+            btnSendQuestion.setBackgroundTintList( ColorStateList.valueOf(color) );
+            btnSurvey.setBackgroundTintList( ColorStateList.valueOf(color) );
         }
 
 
@@ -105,18 +103,18 @@ public class DetailActivityFragment extends Fragment
         {
             btnToRate.setEnabled( false );
             btnToRate.setClickable( false );
-            btnToRate.setBackgroundColor( Color.rgb(170,170,170) );
+            btnToRate.setBackgroundTintList( ColorStateList.valueOf(Color.rgb(170,170,170)) );
         }
 
         if( !isStarted() || isFinished() )
         {
             btnSendQuestion.setEnabled( false );
             btnSendQuestion.setClickable( false );
-            btnSendQuestion.setBackgroundColor( Color.rgb(170,170,170) );
+            btnSendQuestion.setBackgroundTintList( ColorStateList.valueOf(Color.rgb(170,170,170)) );
 
             btnSurvey.setEnabled( false );
             btnSurvey.setClickable( false );
-            btnSurvey.setBackgroundColor( Color.rgb(170,170,170) );
+            btnSurvey.setBackgroundTintList( ColorStateList.valueOf(Color.rgb(170,170,170)) );
         }
 
         btnToRate.setOnClickListener(new View.OnClickListener() {

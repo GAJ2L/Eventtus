@@ -13,6 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
             android:scrollbars="horizontal|vertical">
 
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,9 +43,10 @@
                         android:id="@+id/txtDateIniActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/textView"
-                        android:layout_alignBottom="@+id/textView"
-                        android:layout_alignEnd="@+id/txtNameActivityAttachments"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:drawableLeft="@drawable/mini_calendar"
                         android:drawablePadding="5dp"
                         android:textColor="@android:color/black"
@@ -55,25 +57,15 @@
                         android:id="@+id/txtDateFinActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/textView"
-                        android:layout_alignEnd="@+id/txtNameActivityAttachments"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:drawableLeft="@drawable/mini_calendar"
                         android:drawablePadding="5dp"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"
                         tools:text="25-05-2017 99:00:00" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:drawableLeft="@drawable/time"
-                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/txtNameActivityAttachments"
@@ -101,7 +93,8 @@
                 android:layout_below="@+id/btnDeleteEvent"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_activities"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableLeft="@drawable/question"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
@@ -116,7 +109,8 @@
                 android:layout_alignStart="@+id/btnContact"
                 android:layout_below="@+id/btnContact"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_activities"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableLeft="@drawable/location"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
@@ -131,7 +125,8 @@
                 android:layout_alignStart="@+id/btnActivitiesEvent"
                 android:layout_below="@+id/btnActivitiesEvent"
                 android:layout_marginTop="20dp"
-                android:background="?attr/colorPrimary"
+                android:background="@drawable/btn_activities"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableLeft="@drawable/star"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
@@ -146,7 +141,8 @@
                 android:layout_alignStart="@+id/btnDetailsEvents"
                 android:layout_below="@+id/btnDetailsEvents"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_activities"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableLeft="@drawable/attachment"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
@@ -164,13 +160,14 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_activities"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableLeft="@drawable/details"
                 android:elevation="10dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
                 android:text="@string/card_details_activity"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btnShowSurvey"
@@ -180,12 +177,14 @@
                 android:layout_alignEnd="@+id/btnSendQuestionActivity"
                 android:layout_alignStart="@+id/btnSendQuestionActivity"
                 android:layout_below="@+id/btnSendQuestionActivity"
-                android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_activities"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableLeft="@drawable/survey"
                 android:paddingLeft="5dp"
                 android:paddingRight="35dp"
-                android:text="@string/survey" />
+                android:text="@string/survey"
+                android:textColor="@android:color/white" />
 
         </RelativeLayout>
     </ScrollView>

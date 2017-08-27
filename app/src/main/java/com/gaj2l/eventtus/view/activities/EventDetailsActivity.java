@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -21,6 +23,12 @@ public class EventDetailsActivity extends AppCompatActivity
     private TextView txtInfo;
     private TextView txtContact;
     private TextView txtDt;
+
+    private TextView lblName;
+    private TextView lblInfo;
+    private TextView lblContact;
+    private TextView lblDt;
+
     private ImageView imageView;
 
     @Override
@@ -36,6 +44,9 @@ public class EventDetailsActivity extends AppCompatActivity
         initComponents();
 
         load();
+
+        if( event.getCor() != null )
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(event.getCor())));
     }
 
     private void load()
@@ -51,6 +62,15 @@ public class EventDetailsActivity extends AppCompatActivity
             imageView.setImageBitmap( Util.base642bitmap( event.getBanner() ));
             imageView.setAdjustViewBounds( true );
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            if( event.getCor() != null )
+            {
+                int cor = Color.parseColor(event.getCor());
+                lblContact.setTextColor(cor);
+                lblDt.setTextColor(cor);
+                lblInfo.setTextColor(cor);
+                lblName.setTextColor(cor);
+            }
         }
         catch ( Exception e )
         {
@@ -78,6 +98,12 @@ public class EventDetailsActivity extends AppCompatActivity
         txtInfo     = (TextView) findViewById( R.id.textEvtInfo);
         txtContact  = (TextView) findViewById( R.id.textEvtContact);
         txtDt       = (TextView) findViewById( R.id.textEvtDate);
+
+        lblName     = (TextView) findViewById( R.id.lblName);
+        lblInfo     = (TextView) findViewById( R.id.lblDescription);
+        lblContact  = (TextView) findViewById( R.id.lblContact);
+        lblDt       = (TextView) findViewById( R.id.lblDate);
+
         imageView   = (ImageView) findViewById( R.id.eventImageView);
     }
 }

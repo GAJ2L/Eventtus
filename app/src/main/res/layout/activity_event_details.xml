@@ -34,10 +34,10 @@
                 android:background="@color/com_facebook_button_login_silver_background_color_pressed">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/lblName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                    android:background="@android:color/white"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
@@ -70,10 +70,10 @@
                 android:background="@color/com_facebook_button_login_silver_background_color_pressed">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/lblDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                    android:background="@android:color/white"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
@@ -105,10 +105,10 @@
                 android:background="@color/com_facebook_button_login_silver_background_color_pressed">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/lblContact"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                    android:background="@android:color/white"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
@@ -140,10 +140,10 @@
                 android:background="@color/com_facebook_button_login_silver_background_color_pressed">
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/lblDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                    android:background="@android:color/white"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"

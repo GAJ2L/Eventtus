@@ -23,6 +23,7 @@ import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
 import com.gaj2l.eventtus.models.Activity;
+import com.gaj2l.eventtus.models.Attachment;
 import com.gaj2l.eventtus.models.Evaluation;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.ActivityDetailsActivity;
@@ -45,7 +46,7 @@ public class DetailActivityFragment extends Fragment
 {
     private static Activity activity;
     private static String color;
-    
+
     private TextView txtName;
     private TextView txtDateIni;
     private TextView txtDateFin;
@@ -112,6 +113,13 @@ public class DetailActivityFragment extends Fragment
             btnToRate.setBackgroundTintList( ColorStateList.valueOf(Color.rgb(170,170,170)) );
         }
 
+        if( !hasAttachments() )
+        {
+            btnAttachments.setEnabled( false );
+            btnAttachments.setClickable( false );
+            btnAttachments.setBackgroundTintList( ColorStateList.valueOf(Color.rgb(170,170,170)) );
+        }
+
         if( !isStarted() || isFinished() )
         {
             btnSendQuestion.setEnabled( false );
@@ -172,6 +180,13 @@ public class DetailActivityFragment extends Fragment
         List<Evaluation> l = ComponentProvider.getServiceComponent().getEvaluationService().getEvaluationsByActivity(activity.getId(), Session.getInstance(getContext()).getString("email"));
 
         return l != null && !l.isEmpty();
+    }
+
+    private boolean hasAttachments()
+    {
+        List<Attachment> l = ComponentProvider.getServiceComponent().getAttachmentService().getAttachmentsByActivity(activity.getId());
+
+        return  l!=null && !l.isEmpty();
     }
 
     private boolean isStarted()

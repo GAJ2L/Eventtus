@@ -44,7 +44,8 @@ import java.util.List;
 public class DetailActivityFragment extends Fragment
 {
     private static Activity activity;
-
+    private static String color;
+    
     private TextView txtName;
     private TextView txtDateIni;
     private TextView txtDateFin;
@@ -59,10 +60,15 @@ public class DetailActivityFragment extends Fragment
 
     public void setActivity(Activity activity){ this.activity = activity; }
 
+    public void setColor(String color){ this.color = color; }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ((BaseActivity) getContext()).setTitle(R.string.title_details_activity);
+
+        if( color != null )
+            ((BaseActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
 
         return inflater.inflate(R.layout.fragment_detail_activity, container, false);
     }

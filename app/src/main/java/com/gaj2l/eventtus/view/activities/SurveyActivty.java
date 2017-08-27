@@ -150,7 +150,6 @@ public class SurveyActivty extends AppCompatActivity
         container.setBackground( background );
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private View composePane(ViewGroup container, final int position )
     {
         try {

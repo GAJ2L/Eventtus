@@ -1,5 +1,7 @@
 package com.gaj2l.eventtus.view.adapters;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +26,12 @@ import java.util.List;
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder>
 {
     private List<Activity> activities;
+    private String color;
 
-    public ActivityAdapter(List<Activity> list)
+    public ActivityAdapter(List<Activity> list,String color)
     {
         this.activities = list;
+        this.color = color;
 
         if ( this.activities != null )
             Collections.sort( activities );
@@ -41,12 +45,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         return viewHolder;
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i)
     {
         viewHolder.setItemTitle(getActivity(i).getName());
         viewHolder.setItemDateStart(getActivity(i).getDtStart().format(DateTimeFormatter.ofPattern("dd-MM-y HH:mm")));
+        viewHolder.setItemLogo(String.valueOf(getActivity(i).getName().charAt(0)),color);
     }
 
     @Override
@@ -67,13 +71,14 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     {
         public TextView itemTitle;
         public TextView itemDateStart;
+        public TextView itemLogo;
 
         public ViewHolder(View itemView)
         {
             super(itemView);
-            itemTitle = (TextView) itemView.findViewById(R.id.txtNameFile);
+            itemTitle     = (TextView) itemView.findViewById(R.id.txtNameFile);
             itemDateStart = (TextView) itemView.findViewById(R.id.txtState);
-
+            itemLogo      = (TextView) itemView.findViewById(R.id.logo);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,6 +94,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         public void setItemDateStart(String date) {
             itemDateStart.setText(date);
+        }
+
+        public void setItemLogo(String letter, String color)
+        {
+            itemLogo.setText(letter);
+            if( color != null )
+                itemLogo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
         }
 
         public void onClickCard(View v)

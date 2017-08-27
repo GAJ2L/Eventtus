@@ -101,7 +101,7 @@ public class DetailEventFragment extends Fragment implements SwipeRefreshLayout.
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.activities_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new ActivityAdapter(activities));
+        recyclerView.setAdapter(new ActivityAdapter(activities,event.getCor()));
     }
 
     @Override

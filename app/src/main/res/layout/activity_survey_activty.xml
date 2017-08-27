@@ -14,6 +14,16 @@
         android:layout_marginBottom="50dp" />
 
 
+    <RelativeLayout
+        android:id="@+id/survey_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/btnNext"
+        android:background="@color/colorPrimaryDark">
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btnNext"
         style="?android:attr/borderlessButtonStyle"
@@ -22,7 +32,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
-        android:textColor="#000" />
+        android:background="@android:color/transparent"
+        android:textColor="#FFF" />
 
     <Button
         android:id="@+id/btnBack"
@@ -32,8 +43,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
         android:text="@string/back"
-        android:textColor="#000" />
+        android:textColor="#FFF" />
 
 
     <TextView
@@ -43,17 +55,8 @@
         android:layout_alignBaseline="@+id/btnNext"
         android:layout_alignBottom="@+id/btnNext"
         android:layout_centerHorizontal="true"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:textSize="18dp"
         tools:text="TextView" />
-
-    <TextView
-        android:id="@+id/survey_bottom_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/btnNext"
-        android:layout_alignParentStart="true"
-        android:background="#000"
-        android:text="TextView" />
 
 </RelativeLayout>

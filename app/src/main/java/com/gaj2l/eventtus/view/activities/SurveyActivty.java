@@ -141,13 +141,7 @@ public class SurveyActivty extends AppCompatActivity
 
         getSupportActionBar().setBackgroundDrawable( drawable );
 
-        RelativeLayout container = (RelativeLayout) findViewById( R.id.survey_pane );
-
-        ColorDrawable background = new ColorDrawable( color );
-
-        background.setAlpha(30);
-
-        container.setBackground( background );
+        findViewById( R.id.survey_bottom ).setBackground( drawable );
     }
 
     private View composePane(ViewGroup container, final int position )

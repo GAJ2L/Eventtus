@@ -46,6 +46,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
     private GoogleMap mMap;
     private Activity activity;
+    private Event event;
     private LocationManager mLocationManager;
     private Preload preload;
     private Location myLocation;
@@ -96,7 +97,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
     private void initComponents()
     {
-        preload = new Preload(this);
+        preload = new Preload( this );
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -104,7 +105,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
 
         activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
 
-        Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
+        event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
 
         if ( event.getCor() != null )
             getSupportActionBar().setBackgroundDrawable( new ColorDrawable(Color.parseColor( event.getCor() ) ) );
@@ -217,6 +218,7 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         try
         {
             preload.show();
+
             if (originMarkers != null)
             {
                 for (Marker marker : originMarkers)
@@ -263,7 +265,9 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
             {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 18));
 
-                PolylineOptions polylineOptions = new PolylineOptions().geodesic(true).color( getResources().getColor( R.color.colorPrimaryDark, null ) ).width(18);
+                int color = event.getCor() != null ?  Color.parseColor( event.getCor() ) : getResources().getColor( R.color.colorPrimaryDark, null );
+
+                PolylineOptions polylineOptions = new PolylineOptions().geodesic(true).color( color ).width(18);
 
                 for (int i = 0; i < route.points.size(); i++)
                 {

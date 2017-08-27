@@ -1,5 +1,10 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -15,7 +20,9 @@ import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
+import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Evaluation;
+import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.services.web.EvaluationWebService;
 
 import org.threeten.bp.OffsetDateTime;
@@ -29,7 +36,8 @@ public class ToRateActivity extends AppCompatActivity
     private Button btnToRate;
     private RatingBar rtbStar;
     private TextView txtComment;
-    private long activity;
+    private Activity activity;
+    private Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,12 +49,13 @@ public class ToRateActivity extends AppCompatActivity
         setTitle(R.string.title_to_rate_activity);
         setContentView(R.layout.activity_to_rate);
 
-        activity = getIntent().getExtras().getLong("activity");
+        activity = ComponentProvider.getServiceComponent().getActivityService().get( getIntent().getExtras().getLong("activity") );
+
+        event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
 
         btnToRate = (Button) findViewById(R.id.btnSendRate);
         txtComment = (TextView) findViewById(R.id.txtComment);
         rtbStar = (RatingBar) findViewById(R.id.rtbStar);
-
 
         btnToRate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +63,16 @@ public class ToRateActivity extends AppCompatActivity
                 onSaveEvaluation(v);
             }
         });
+
+        if ( event.getCor() != null ) {
+            int color = Color.parseColor(event.getCor() );
+
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+
+            btnToRate.setBackgroundTintList( ColorStateList.valueOf( color ) );
+            LayerDrawable stars = (LayerDrawable) rtbStar.getProgressDrawable();
+            stars.getDrawable(2).setColorFilter( color, PorterDuff.Mode.SRC_ATOP);
+        }
     }
 
     @Override
@@ -99,7 +118,7 @@ public class ToRateActivity extends AppCompatActivity
                 e.setStars(rtbStar.getRating());
                 e.setDtStore(OffsetDateTime.now());
                 e.setEmail(Session.getInstance(getApplicationContext()).getString("email"));
-                e.setActivity(activity);
+                e.setActivity(activity.getId());
 
                 EvaluationWebService.sendServer(e, new EvaluationWebService.Action()
                 {

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -15,6 +16,7 @@ import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.services.web.EventWebService;
+import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.fragments.DetailEventFragment;
 import com.gaj2l.eventtus.view.fragments.EventFragment;
 
@@ -39,8 +41,11 @@ public class ViewController
 
             if ( events != null && events.size() == 1 )
             {
+                Event e = events.get(0);
                 DetailEventFragment fragment = new DetailEventFragment();
-                fragment.setEvent( events.get(0) );
+                fragment.setEvent( e );
+                Session.getInstance(context).put("color", e.getCor());
+                ((BaseActivity) context).getNavigationView().getHeaderView(0).findViewById(R.id.background_menu).setBackgroundColor(Color.parseColor(e.getCor()));
                 manager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
             }
 

@@ -45,7 +45,10 @@ public class ViewController
                 DetailEventFragment fragment = new DetailEventFragment();
                 fragment.setEvent( e );
                 Session.getInstance(context).put("color", e.getCor());
-                ((BaseActivity) context).getNavigationView().getHeaderView(0).findViewById(R.id.background_menu).setBackgroundColor(Color.parseColor(e.getCor()));
+
+                if( context instanceof  BaseActivity )
+                    ((BaseActivity) context).getNavigationView().getHeaderView(0).findViewById(R.id.background_menu).setBackgroundColor(Color.parseColor(e.getCor()));
+
                 manager.beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
             }
 

@@ -2,6 +2,8 @@ package com.gaj2l.eventtus.view.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Attachment;
 import com.gaj2l.eventtus.view.adapters.AttachmentAdapter;
 
@@ -31,6 +34,11 @@ public class AttachmentActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String color = Session.getInstance(getApplicationContext()).getString("color");
+
+        if( color != null && !color.equalsIgnoreCase("") )
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
 
         setTitle(R.string.title_attachments_activity);
         setContentView(R.layout.attachment_activity);

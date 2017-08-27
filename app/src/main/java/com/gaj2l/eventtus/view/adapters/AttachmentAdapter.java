@@ -1,18 +1,24 @@
 package com.gaj2l.eventtus.view.adapters;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.StrictMode;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.lib.Download;
 import com.gaj2l.eventtus.lib.Message;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Attachment;
 
 import java.io.File;
@@ -69,6 +75,7 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
         public TextView itemName;
         public TextView itemSize;
         public TextView itemType;
+        private Context context;
 
         public ViewHolder(View itemView)
         {
@@ -76,6 +83,7 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
             itemName = (TextView) itemView.findViewById(R.id.txtNameFile);
             itemSize = (TextView) itemView.findViewById(R.id.txtSize);
             itemType = (TextView) itemView.findViewById(R.id.logo);
+            context = itemView.getContext();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,7 +103,13 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
 
         public void setItemType(int type)
         {
-            itemType.setCompoundDrawablesWithIntrinsicBounds(Attachment.TYPES_DRAWABLES[type], 0, 0, 0);
+            String color = Session.getInstance(context).getString("color");
+            Drawable d =  context.getResources().getDrawable(Attachment.TYPES_DRAWABLES[type],null);
+
+            if( color != null && !color.equalsIgnoreCase("") )
+                d.setTint(Color.parseColor(color));
+
+            itemType.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
         }
 
         public void onClickCard(final View v)

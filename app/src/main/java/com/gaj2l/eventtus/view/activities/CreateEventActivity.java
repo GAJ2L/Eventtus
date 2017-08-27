@@ -1,6 +1,9 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -42,6 +45,11 @@ public class CreateEventActivity extends AppCompatActivity implements ZXingScann
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setTitle(R.string.title_create_event);
+
+        String color = Session.getInstance(getApplicationContext()).getString("color");
+
+        if( color != null && !color.equalsIgnoreCase("")  )
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
     }
 
     @Override

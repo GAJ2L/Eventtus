@@ -86,6 +86,7 @@ public class DetailActivityFragment extends Fragment
         btnLocation     = (Button) view.findViewById(R.id.btnDeleteEvent);
         btnSendQuestion = (Button) view.findViewById(R.id.btnSendQuestionActivity);
         btnSurvey       = (Button) view.findViewById( R.id.btnShowSurvey );
+        CardView card   = (CardView) view.findViewById(R.id.card_view_details_activity);
 
         txtName.setText( activity.getName() );
         txtDateIni.setText(Util.getAllDateFomatted(activity.getDtStart()));
@@ -167,7 +168,7 @@ public class DetailActivityFragment extends Fragment
                 onSurvey(v);
             }
         });
-        view.setOnClickListener(new View.OnClickListener() {
+        card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDetails(v);

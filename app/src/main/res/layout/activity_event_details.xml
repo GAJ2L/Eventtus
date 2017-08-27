@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#fff">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -56,6 +57,7 @@
                     android:id="@+id/textEvtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#FFF"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
@@ -85,12 +87,15 @@
 
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#FFF">
 
                 <TextView
                     android:id="@+id/textEvtInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#FFF"
+                    android:lineSpacingExtra="3sp"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
@@ -126,6 +131,7 @@
                     android:id="@+id/textEvtContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#FFF"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"
@@ -161,6 +167,7 @@
                     android:id="@+id/textEvtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#FFF"
                     android:paddingBottom="7dp"
                     android:paddingLeft="15dp"
                     android:paddingTop="7dp"

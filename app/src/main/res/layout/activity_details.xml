@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.gaj2l.eventtus.view.activities.ActivityDetailsActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.gaj2l.eventtus.view.activities.ActivityDetailsActivity">
 
     <TableLayout
         android:id="@+id/table"
@@ -16,12 +17,13 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+            android:background="#fff">
 
             <TextView
+                android:id="@+id/lblName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -34,12 +36,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/textActivityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -51,12 +55,13 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+            android:background="#fff">
 
             <TextView
+                android:id="@+id/lblEvent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -69,12 +74,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/textActivityEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -86,12 +93,13 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+            android:background="#fff">
 
             <TextView
+                android:id="@+id/lblLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -103,12 +111,14 @@
 
         <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/textActivityLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -120,12 +130,13 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+            android:background="#fff">
 
             <TextView
+                android:id="@+id/lblDate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -137,12 +148,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/textActivityDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -154,12 +167,13 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/com_facebook_button_login_silver_background_color_pressed">
+            android:background="#fff">
 
             <TextView
+                android:id="@+id/lblEvaluations"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/com_facebook_button_login_silver_background_color_pressed"
+                android:background="#fff"
                 android:paddingBottom="7dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="7dp"
@@ -171,12 +185,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/txtTotalEvaluation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#fff"
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:text="@string/no_evaluations"

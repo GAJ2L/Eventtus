@@ -1,5 +1,9 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -19,12 +23,11 @@ import com.gaj2l.eventtus.services.web.EvaluationWebService;
 public class ActivityDetailsActivity extends AppCompatActivity
 {
     private Activity activity;
+    private Event event;
 
-    private TextView  txtName;
-    private TextView  txtDt;
-    private TextView  txtLocation;
-    private TextView  txtEvt;
-    private TextView  ttEvals;
+    private TextView  txtName, txtDt, txtLocation, txtEvt, ttEvals,
+                      lblName, lblEvent, lblLocation, lblDate, lblEvaluation;
+
     private RatingBar avgStars;
 
     @Override
@@ -40,12 +43,14 @@ public class ActivityDetailsActivity extends AppCompatActivity
         initComponents();
 
         load();
+
+        updateColors();
     }
 
     private void load()
     {
         activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
-        Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
+        event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
 
         txtName.setText(activity.getName());
         txtLocation.setText(activity.getLocalName());
@@ -86,7 +91,25 @@ public class ActivityDetailsActivity extends AppCompatActivity
             avgStars.setClickable(false);
             avgStars.setIsIndicator(true);
         }
+    }
 
+    private void updateColors()
+    {
+        if ( event.getCor() != null ) {
+
+            int color = Color.parseColor( event.getCor() );
+
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable( color ));
+
+            lblLocation.setTextColor( color );
+            lblEvaluation.setTextColor( color );
+            lblEvent.setTextColor( color );
+            lblDate.setTextColor( color );
+            lblName.setTextColor( color );
+
+            LayerDrawable stars = (LayerDrawable) avgStars.getProgressDrawable();
+            stars.getDrawable(2).setColorFilter( color, PorterDuff.Mode.SRC_ATOP);
+        }
     }
 
     @Override
@@ -109,11 +132,16 @@ public class ActivityDetailsActivity extends AppCompatActivity
 
     private void initComponents()
     {
-        txtName     = (TextView) findViewById( R.id.textActivityName);
-        txtDt       = (TextView) findViewById( R.id.textActivityDate);
-        txtLocation = (TextView) findViewById( R.id.textActivityLocation);
-        txtEvt      = (TextView) findViewById( R.id.textActivityEvent);
-        ttEvals     = (TextView) findViewById(R.id.txtTotalEvaluation);
+        txtName       = (TextView) findViewById( R.id.textActivityName);
+        txtDt         = (TextView) findViewById( R.id.textActivityDate);
+        txtLocation   = (TextView) findViewById( R.id.textActivityLocation);
+        txtEvt        = (TextView) findViewById( R.id.textActivityEvent);
+        ttEvals       = (TextView) findViewById(R.id.txtTotalEvaluation);
+        lblName       = (TextView) findViewById(R.id.lblName );
+        lblEvent      = (TextView) findViewById(R.id.lblEvent );
+        lblLocation   = (TextView) findViewById(R.id.lblLocation );
+        lblDate       = (TextView) findViewById(R.id.lblDate );
+        lblEvaluation = (TextView) findViewById(R.id.lblEvaluations );
         avgStars    = (RatingBar) findViewById(R.id.avgStars);
     }
 }

@@ -3,6 +3,8 @@ package com.gaj2l.eventtus.view.activities;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,6 +25,7 @@ import com.gaj2l.eventtus.lib.Internet;
 import com.gaj2l.eventtus.lib.Message;
 import com.gaj2l.eventtus.lib.Preload;
 import com.gaj2l.eventtus.models.Activity;
+import com.gaj2l.eventtus.models.Event;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -100,6 +103,11 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         mapFragment.getMapAsync(this);
 
         activity = ComponentProvider.getServiceComponent().getActivityService().get(getIntent().getExtras().getLong("activity"));
+
+        Event event = ComponentProvider.getServiceComponent().getEventService().get( activity.getEventId() );
+
+        if ( event.getCor() != null )
+            getSupportActionBar().setBackgroundDrawable( new ColorDrawable(Color.parseColor( event.getCor() ) ) );
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 

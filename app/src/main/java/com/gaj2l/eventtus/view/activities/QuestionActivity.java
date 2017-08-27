@@ -1,7 +1,10 @@
 package com.gaj2l.eventtus.view.activities;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +16,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.gaj2l.eventtus.R;
 import com.gaj2l.eventtus.busines.socket.ClientSocket;
 import com.gaj2l.eventtus.ioc.ComponentProvider;
 import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.models.Activity;
+import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.models.Message;
 import com.gaj2l.eventtus.view.adapters.QuestionAdapter;
 
@@ -75,6 +80,18 @@ public class QuestionActivity extends AppCompatActivity
 
         activity_id = getIntent().getExtras().getLong("activity");
         user_id = Session.getInstance(getApplicationContext()).getLong("user");
+
+        Activity activity = ComponentProvider.getServiceComponent().getActivityService().get(activity_id);
+
+        Event event = ComponentProvider.getServiceComponent().getEventService().get(activity.getEventId());
+
+        if ( event.getCor() != null )
+        {
+            getSupportActionBar().setBackgroundDrawable( new ColorDrawable(Color.parseColor( event.getCor() ) ) );
+
+            DrawableCompat.setTint( Button.class.cast( findViewById( R.id.btnSendMsg ) ).getCompoundDrawables()[0], Color.parseColor( event.getCor() ) );
+        }
+
         messages = getMessages();
 
         Button fab = (Button) findViewById(R.id.btnSendMsg);

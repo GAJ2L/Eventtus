@@ -5,8 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -32,6 +30,7 @@ import com.gaj2l.eventtus.view.controllers.ViewController;
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private static int ID_CAMERA_REQUEST = 1;
+    private static NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,10 +66,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
-
             //PERFIL
-            NavigationView navigationView = NavigationView.class.cast(findViewById(R.id.nav_view));
-
+            navigationView = NavigationView.class.cast(findViewById(R.id.nav_view));
             navigationView.setNavigationItemSelectedListener(this);
 
             TextView lblName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.lblName);
@@ -94,6 +91,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             Message.error(getApplicationContext(),e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public NavigationView getNavigationView()
+    {
+        return navigationView;
     }
 
     public boolean hasPermission()

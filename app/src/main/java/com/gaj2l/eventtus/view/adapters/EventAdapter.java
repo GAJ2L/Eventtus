@@ -2,10 +2,7 @@ package com.gaj2l.eventtus.view.adapters;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaj2l.eventtus.R;
-import com.gaj2l.eventtus.ioc.ComponentProvider;
+import com.gaj2l.eventtus.lib.Session;
 import com.gaj2l.eventtus.lib.Util;
-import com.gaj2l.eventtus.models.Activity;
 import com.gaj2l.eventtus.models.Event;
 import com.gaj2l.eventtus.view.activities.BaseActivity;
 import com.gaj2l.eventtus.view.fragments.DetailEventFragment;
@@ -141,9 +137,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>
 
         public void onClickCard(View v)
         {
+            Event e = events.get(getAdapterPosition());
             DetailEventFragment fragment = new DetailEventFragment();
-            fragment.setEvent(events.get(getAdapterPosition()));
-            ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
+            fragment.setEvent(e);
+            if( e.getCor() != null )
+            {
+                Session.getInstance(v.getContext()).put("color", e.getCor());
+                ((BaseActivity) v.getContext()).getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack("DetailEventFragment").commit();
+                ((BaseActivity) v.getContext()).getNavigationView().getHeaderView(0).findViewById(R.id.background_menu).setBackgroundColor(Color.parseColor(e.getCor()));
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ public class Session {
     }
 
     public void remove(String key) {
-        preferences.edit().remove(key);
+        preferences.edit().remove(key).commit();
     }
 
     public void clear() {

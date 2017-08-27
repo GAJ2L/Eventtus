@@ -37,15 +37,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
 
-        try {
-            if (getFragmentManager().getBackStackEntryCount() <= 0)
-            {
-                ViewController.redirectEvents( getFragmentManager(), getApplicationContext() );
-            }
-
+        try
+        {
             setContentView(R.layout.activity_base);
 
             initComponents();
+
+            if (getFragmentManager().getBackStackEntryCount() <= 0)
+            {
+                ViewController.redirectEvents( getFragmentManager(), this );
+            }
         }
 
         catch ( Exception e )

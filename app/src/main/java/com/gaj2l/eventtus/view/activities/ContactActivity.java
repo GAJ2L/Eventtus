@@ -1,5 +1,8 @@
 package com.gaj2l.eventtus.view.activities;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -24,6 +27,7 @@ public class ContactActivity extends AppCompatActivity
     private String to_email;
     private String from_name;
     private String from_email;
+    private String color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,9 +40,10 @@ public class ContactActivity extends AppCompatActivity
         setContentView(R.layout.activity_contact);
 
         from_email = Session.getInstance(getApplicationContext()).getString("email");
-        from_name = Session.getInstance(getApplicationContext()).getString("username");
-        to_email = (getIntent().getStringExtra("to") != null) ? getIntent().getStringExtra("to") : MyApplication.EMAIL_APPLICATION;
-        to_name = (getIntent().getStringExtra("name") != null) ? getIntent().getStringExtra("name") : MyApplication.EMAIL_NAME;
+        from_name  = Session.getInstance(getApplicationContext()).getString("username");
+        color      = Session.getInstance(getApplicationContext()).getString("color");
+        to_email   = (getIntent().getStringExtra("to")   != null) ? getIntent().getStringExtra("to")   : MyApplication.EMAIL_APPLICATION;
+        to_name    = (getIntent().getStringExtra("name") != null) ? getIntent().getStringExtra("name") : MyApplication.EMAIL_NAME;
 
         this.fieldSubject = (EditText) findViewById(R.id.txtSubject);
         this.fieldSubject.requestFocus();
@@ -51,6 +56,13 @@ public class ContactActivity extends AppCompatActivity
                 send(v);
             }
         });
+
+        if( color != null && !color.equalsIgnoreCase("")  )
+        {
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
+            btnSend.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
+        }
+
     }
 
     private void send(final View v)

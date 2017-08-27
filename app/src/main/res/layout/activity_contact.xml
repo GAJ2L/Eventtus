@@ -17,12 +17,13 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/txtMessage"
             android:layout_marginBottom="35dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/btn_activities"
+            android:backgroundTint="@color/colorPrimary"
             android:drawableLeft="@drawable/send_white"
             android:paddingLeft="5dp"
             android:paddingRight="35dp"
-            android:textColor="@android:color/white"
             android:text="@string/lbl_btn_send"
+            android:textColor="@android:color/white"
             android:textSize="18sp" />
 
         <EditText
